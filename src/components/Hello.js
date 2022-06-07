@@ -1,4 +1,4 @@
-const Hello = ({ children = 'Jiwon' }) => {
+const Hello = ({ children = 'Time Divider' }) => {
 	const helloStyle = {
 		textAlign: 'center',
 	}
