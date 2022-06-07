@@ -17,5 +17,5 @@ chore | 그 외 모든 수정 | 유형이 혼재된 경우, 되도록이면 커�
 - release : 배포를 위해 master 브랜치로 보내기 전에 먼저 QA(품질검사)를 하기위한 브랜치 입니다.
 ### prefix branch
 아래의 단어를 prefix로 사용합니다. 예시) feature-timer, hotfix-tokenRevealed
-feature : 단위 기능을 개발하는 브랜치로 기능 개발이 완료되면 develop 브랜치에 합칩니다.
-hotfix : master 브랜치로 배포를 했는데 버그가 생겼을 떄 긴급 수정하는 브랜치 입니다.
+- feature : 단위 기능을 개발하는 브랜치로 기능 개발이 완료되면 develop 브랜치에 합칩니다.
+- hotfix : master 브랜치로 배포를 했는데 버그가 생겼을 떄 긴급 수정하는 브랜치 입니다.
