@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 import { currentTimerState, timerState } from '../atom'
 import { useEffect } from 'react'
 
-function TimeCalculate({ expiryTimestamp, autoStart, id, name }) {
+function TimeCalculate({ expiryTimestamp, autoStart = false, id, name }) {
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
 		onExpire: () => console.warn('onExpire called'),
