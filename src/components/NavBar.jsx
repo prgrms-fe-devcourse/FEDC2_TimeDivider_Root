@@ -20,9 +20,9 @@ const GoBackIcon = styled.a`
 	cursor: pointer;
 `
 
-const NavBar = ({ children = '시간 분배', backIcon, href }) => {
+const NavBar = ({ children = '시간 분배', backIcon, href, ...props }) => {
 	return (
-		<NavBarContainer>
+		<NavBarContainer {...props}>
 			{backIcon && (
 				<GoBackIcon href={href}>
 					<IoIosArrowBack />

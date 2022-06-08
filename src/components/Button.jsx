@@ -27,9 +27,9 @@ const StyledButton = styled.button`
 	}
 `
 
-const Button = ({ disabled = false, children = 'Button', onClick }) => {
+const Button = ({ disabled = false, children = 'Button', onClick, ...props }) => {
 	return (
-		<StyledButton disabled={disabled} onClick={onClick}>
+		<StyledButton {...props} disabled={disabled} onClick={onClick}>
 			{children}
 		</StyledButton>
 	)
