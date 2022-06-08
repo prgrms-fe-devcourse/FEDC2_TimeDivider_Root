@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const updateTimeDivider = () => {
+const UpdateTimeDivider = () => {
 	return (
 		<>
 			<h2>모래시계 편집하기</h2>
@@ -11,4 +11,4 @@ const updateTimeDivider = () => {
 	)
 }
 
-export default updateTimeDivider
+export default UpdateTimeDivider

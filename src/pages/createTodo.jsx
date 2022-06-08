@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const createTodo = () => {
+export const CreateTodo = () => {
 	return (
 		<>
 			<h2>해야 할 일을 적어요</h2>
@@ -10,4 +10,4 @@ export const createTodo = () => {
 	)
 }
 
-export default createTodo
+export default CreateTodo

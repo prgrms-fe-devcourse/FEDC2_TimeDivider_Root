@@ -1,11 +1,11 @@
 import React from 'react'
 
-const doneToDoTimeDivider = () => {
+const DoneToDoTimeDivider = () => {
 	return (
 		<>
-			<h2>doneToDoTimeDivider</h2>
+			<h2>DoneToDoTimeDivider</h2>
 		</>
 	)
 }
 
-export default doneToDoTimeDivider
+export default DoneToDoTimeDivider
