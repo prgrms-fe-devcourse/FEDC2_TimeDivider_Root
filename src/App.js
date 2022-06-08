@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
+import AppRouter from './routes/router'
+
 const App = () => {
 	return (
 		<>
 			<GlobalStyle />
 			<Container>
-				<div className="App">
-					<h2>Hello Time Divider</h2>
-				</div>
+				<AppRouter />
 			</Container>
 		</>
 	)
