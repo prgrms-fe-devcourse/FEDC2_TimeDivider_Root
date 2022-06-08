@@ -10,8 +10,8 @@ const StyledInput = styled.input`
 	text-align: center;
 `
 
-const Input = () => {
-	return <StyledInput />
+const Input = ({ ...props }) => {
+	return <StyledInput {...props} />
 }
 
 export default Input
