@@ -45,12 +45,10 @@ const CreateTime = () => {
 
 	return (
 		<>
-			<NavBar>오늘의 시간</NavBar>
-
+			<NavBar backIcon>오늘의 시간</NavBar>
 			<SubTitleArea>
-				<Text style={{ fontSize: '1.3rem' }}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>
+				<Text size={1.3}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>
 			</SubTitleArea>
-
 			<InputBox>
 				<Label>시간(hour)</Label>
 				<Input
@@ -63,7 +61,6 @@ const CreateTime = () => {
 					onChange={e => handleSpareTime(TIME_TYPE.HOUR, e.target.value)}
 				></Input>
 			</InputBox>
-
 			<InputBox>
 				<Label>분(minutes)</Label>
 				<Input
@@ -74,7 +71,6 @@ const CreateTime = () => {
 					onChange={e => handleSpareTime(TIME_TYPE.MINUTE, e.target.value)}
 				></Input>
 			</InputBox>
-
 			<ButtonArea>
 				<Link to="/createTask">
 					<Button disabled={!isValidSpareTime}>

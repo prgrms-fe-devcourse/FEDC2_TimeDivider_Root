@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import Text from '../components/Text'
 import Button from '../components/Button'
+import Input from '../components/Input'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -43,10 +44,10 @@ export const CreateTask = () => {
 
 	return (
 		<>
-			<NavBar>해야 할 일을 적어요</NavBar>
+			<NavBar backIcon>오늘의 시간</NavBar>
 
 			<SubTitleArea>
-				<Text style={{ fontSize: '1rem' }}>추가된 할 일들</Text>
+				<Text size={1.5}>추가된 할 일들</Text>
 			</SubTitleArea>
 
 			<TaskArea>
@@ -66,7 +67,7 @@ export const CreateTask = () => {
 					autoFocus={true}
 					required
 				/>
-				<SubmitButton>추가</SubmitButton>
+				<Button size="md">추가</Button>
 			</Form>
 
 			<ButtonArea>
@@ -87,8 +88,7 @@ const SubTitleArea = styled.div`
 	justify-content: flex-start;
 	height: 3vh;
 	width: 100%;
-	margin-top: 2rem;
-	margin-left: 2rem;
+	margin: 2rem 1rem 0 2rem;
 `
 
 const TaskArea = styled.div`
@@ -98,6 +98,7 @@ const TaskArea = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
+	margin: 2rem 1rem 1rem 2rem;
 	margin-bottom: 2rem;
 `
 
@@ -132,30 +133,7 @@ const ButtonArea = styled.div`
 	bottom: 1rem;
 `
 
-const SubmitButton = styled.button`
-	width: 5rem;
-	height: 2rem;
-	color: white;
-	border-radius: 8px;
-	border: none;
-	background-color: #00dfabed;
-	box-sizing: border-box;
-	cursor: pointer;
-`
-
 const Form = styled.form`
 	display: flex;
-	width: 100%;
-	justify-content: space-around;
-	align-items: center;
-`
-
-const Input = styled.input`
-	width: 13rem;
-	height: 2rem;
-	font-size: 1.5rem;
-	border: none;
-	border-bottom: 1px solid #00dfabed;
-	outline: none;
-	text-align: center;
+	gap: 2rem;
 `
