@@ -13,7 +13,9 @@ const CreateTime = () => {
 
 	return (
 		<>
-			<NavBar>오늘의 시간</NavBar>
+			<NavBar backIcon href="/">
+				오늘의 시간
+			</NavBar>
 
 			<SubTitleArea>
 				<Text style={{ fontSize: '1rem' }}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>

@@ -1,8 +1,10 @@
-const Text = ({ children, block, paragraph, size, strong, color, ...props }) => {
-	const Tag = block ? 'div' : paragraph ? 'p' : 'span'
+import PropTypes from 'prop-types'
+
+const Text = ({ children, block, size, strong, color, ...props }) => {
+	const Tag = block ? 'div' : 'span'
 	const fontStyle = {
 		fontWeight: strong ? 'bold' : undefined,
-		fontSize: `${size}rem`,
+		fontSize: `${typeof size === 'number' ? `${size}rem` : size}`,
 		color: color,
 	}
 
@@ -11,6 +13,13 @@ const Text = ({ children, block, paragraph, size, strong, color, ...props }) => 
 			{children}
 		</Tag>
 	)
+}
+
+Text.propTypes = {
+	children: PropTypes.node.isRequired,
+	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	block: PropTypes.bool,
+	color: PropTypes.string,
 }
 
 export default Text
