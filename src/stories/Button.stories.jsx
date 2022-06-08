@@ -2,7 +2,7 @@ import Button from '../components/Button'
 
 export default {
 	title: 'Component/Button',
-	component: <Button></Button>,
+	component: Button,
 	argTypes: {
 		children: {
 			control: { type: 'text' },
