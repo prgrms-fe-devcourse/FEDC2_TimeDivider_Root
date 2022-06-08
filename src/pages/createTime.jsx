@@ -76,7 +76,7 @@ const CreateTime = () => {
 			</InputBox>
 
 			<ButtonArea>
-				<Link to="/createTodo">
+				<Link to="/createTask">
 					<Button disabled={!isValidSpareTime}>
 						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
