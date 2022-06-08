@@ -1,14 +1,37 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const StyledButton = styled.button`
-	display: block;
+	display: ${props => (props.inline ? 'inline' : 'block')};
+	${props => {
+		switch (props.size) {
+			case 'sm':
+				return css`
+					width: 3.5rem;
+					hegiht: 1.25rem;
+				`
+			case 'md':
+				return css`
+					width: 6.5rem;
+					height: 2rem;
+				`
+			case 'lg':
+				return css`
+					width: 13rem;
+					height: 2.25rem;
+				`
+			default:
+				return css`
+					width: 100%;
+					hegiht: 2rem;
+				`
+		}
+	}}
 	padding: 0.5rem 0.5rem;
-	width: 100%;
-	height: 2rem;
 	background-color: #10d0a3;
 	border: none;
 	outline: none;
-	border-radius: 1rem;
+	text-align: center;
+	border-radius: ${props => (props.rect ? '0.5rem' : '1rem')};
 	color: white;
 	box-sizing: border-box;
 	cursor: pointer;
@@ -27,12 +50,8 @@ const StyledButton = styled.button`
 	}
 `
 
-const Button = ({ disabled = false, children = 'Button', onClick, ...props }) => {
-	return (
-		<StyledButton {...props} disabled={disabled} onClick={onClick}>
-			{children}
-		</StyledButton>
-	)
+const Button = ({ rect = false, size, inline = false, ...props }) => {
+	return <StyledButton {...props} inline={inline} size={size} rect={rect} />
 }
 
 export default Button

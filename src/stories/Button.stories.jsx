@@ -4,16 +4,19 @@ export default {
 	title: 'Component/Button',
 	component: Button,
 	argTypes: {
-		children: {
-			control: { type: 'text' },
-		},
-		disabled: {
-			control: { type: 'boolean' },
-		},
-		onClick: { action: 'onClick' },
+		children: { defaultValue: 'Button', control: { type: 'text' } },
+		size: { control: { type: 'text' } },
+		disabled: { control: { type: 'boolean' } },
+		inline: { control: { type: 'boolean' } },
+		rect: { control: { type: 'boolean' } },
 	},
 }
 
 export const Default = args => {
-	return <Button {...args}>{args.children}</Button>
+	return (
+		<div>
+			<Button {...args}></Button>
+			<Button {...args}></Button>
+		</div>
+	)
 }

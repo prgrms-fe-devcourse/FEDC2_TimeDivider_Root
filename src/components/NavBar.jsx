@@ -28,7 +28,7 @@ const NavBar = ({ children = '시간 분배', backIcon, href, ...props }) => {
 					<IoIosArrowBack />
 				</GoBackIcon>
 			)}
-			<Text size="2">{children}</Text>
+			<Text size={2}>{children}</Text>
 		</NavBarContainer>
 	)
 }

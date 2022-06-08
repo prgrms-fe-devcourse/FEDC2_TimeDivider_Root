@@ -11,8 +11,6 @@ export default {
 		color: { control: 'color' },
 		block: { control: 'boolean' },
 		paragraph: { control: 'boolean' },
-		code: { control: 'boolean' },
-		mark: { control: 'boolean' },
 	},
 }
 
