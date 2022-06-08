@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
+import AppRouter from './routes/router'
+
 const App = () => {
 	return (
 		<>
 			<GlobalStyle />
 			<Container>
-				<div className="App">
-					<h2>Hello Time Divider</h2>
-				</div>
+				<AppRouter />
 			</Container>
 		</>
 	)
@@ -16,6 +16,11 @@ const App = () => {
 export default App
 
 const Container = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	align-items: center;
 	width: 100%;
 	max-width: 420px;
 	height: 100vh;
