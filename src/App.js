@@ -16,6 +16,11 @@ const App = () => {
 export default App
 
 const Container = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	align-items: center;
 	width: 100%;
 	max-width: 420px;
 	height: 100vh;
