@@ -1,6 +1,6 @@
 import Home from '../pages/home'
 import CreateTime from '../pages/createTime'
-import CreateTodo from '../pages/createTodo'
+import CreateTask from '../pages/createTask'
 import CreateTimeDivider from '../pages/createTimeDivider'
 import UpdateTimeDivider from '../pages/updateTimeDivider'
 import DoneToDoTimeDivider from '../pages/doneToDoTimeDivider'
@@ -19,8 +19,8 @@ const routes = [
 		title: '오늘의 시간',
 	},
 	{
-		path: 'createTodo',
-		view: CreateTodo,
+		path: 'CreateTask',
+		view: CreateTask,
 		title: '해야 할 일을 적어요',
 	},
 	{
