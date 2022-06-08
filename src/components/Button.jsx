@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 const StyledButton = styled.button`
@@ -52,6 +53,12 @@ const StyledButton = styled.button`
 
 const Button = ({ rect = false, size, inline = false, ...props }) => {
 	return <StyledButton {...props} inline={inline} size={size} rect={rect} />
+}
+
+Text.propTypes = {
+	rect: PropTypes.bool,
+	size: PropTypes.string,
+	inline: PropTypes.bool,
 }
 
 export default Button
