@@ -1,20 +1,21 @@
 import TimeCalculate from './components/TimeCalculate'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { currentTimerState, timerState } from './atom'
+import { currentTimerState, nameState, taskState, timeState } from './atom'
 import { useEffect, useState } from 'react'
 
 function App() {
 	const dummyTime = new Date()
 	dummyTime.setSeconds(dummyTime.getSeconds() + 600)
 
-	const [timers] = useRecoilState(timerState)
+	const [times, setTimes] = useRecoilState(timeState)
+	const [names, setNames] = useRecoilState(nameState)
 	const [currentTimer] = useRecoilState(currentTimerState)
+
 	const [totalTime, setTotalTime] = useState(0)
-	const [tasks, setTasks] = useState([])
 
 	useEffect(() => {
-		setTotalTime(Object.values(timers).reduce((acc, curr) => acc + curr, 0))
-	}, [timers])
+		setTotalTime(Object.values(times).reduce((acc, curr) => acc + curr, 0))
+	}, [times])
 
 	return (
 		<div className="App">
@@ -23,13 +24,13 @@ function App() {
 			<form
 				onSubmit={e => {
 					e.preventDefault()
-					setTasks([
-						...tasks,
-						{
-							name: e.target.task.value,
-							time: e.target.hour.value * 60 * 60 + e.target.minute.value * 60,
-						},
-					])
+					const [name, time, id] = [
+						e.target.task.value,
+						e.target.hour.value * 60 * 60 + e.target.minute.value * 60,
+						'' + Date.now(),
+					]
+					setTimes({ ...times, [id]: time })
+					setNames({ ...names, [id]: name })
 				}}
 			>
 				할 일: <input name={'task'} required={true} type={'text'} maxLength={10} />
@@ -37,17 +38,16 @@ function App() {
 				몇 분: <input name={'minute'} required={true} type={'number'} maxLength={2} max={59} />
 				<button>생성하기</button>
 			</form>
-			<TimeCalculate expiryTimestamp={dummyTime} autoStart={false} id={'first'} name={'코딩하기'} />
-			{tasks.map(({ name, time }, index) => {
-				const tempTime = new Date()
-				tempTime.setSeconds(tempTime.getSeconds() + time)
-				return <TimeCalculate key={index} expiryTimestamp={tempTime} id={index} name={name} />
+			{Object.entries(names).map(([id, name]) => {
+				//리팩토링 필요: names 와 times 종속됨
+				const expiryTime = new Date(new Date().getTime() + times[id] * 1000)
+				return <TimeCalculate key={id} expiryTimestamp={expiryTime} id={id} name={name} />
 			})}
 		</div>
 	)
 }
 
-const formattedTime = totalTime => {
+export const formattedTime = totalTime => {
 	return {
 		hours: Math.floor(totalTime / 3600),
 		minutes: Math.floor((totalTime % 3600) / 60),
