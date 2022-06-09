@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import NavBar from '../components/NavBar'
+import { useRecoilState } from 'recoil'
+import { currentTimerState, nameState, timerState, timeState } from '../atom'
 const UpdateTimeDivider = () => {
 	const dummyData = [
 		{ id: '123', name: '밥 묵자', time: 1234 },
@@ -11,13 +13,22 @@ const UpdateTimeDivider = () => {
 		{ id: '567', name: '홍차 마시자', time: 14432 },
 		{ id: '678', name: '잠이나 자자', time: 44322 },
 	]
+	const [timers, setTimers] = useRecoilState(timerState)
+	const [currentTimer] = useRecoilState(currentTimerState)
+
+	useEffect(() => {
+		const newTimers = {}
+		dummyData.forEach(({ id, name, time }) => (newTimers[id] = { name, time }))
+		setTimers(newTimers)
+	}, [])
+
 	return (
 		<>
 			<NavBar backIcon>모래시계 편집하기</NavBar>
 			<Link to="/doneTodo">완료하기</Link>
 			<Link to="/addTodo">추가하기</Link>
 			<TimerArea>
-				{dummyData.map(({ id, name, time }, index) => (
+				{Object.entries(timers).map(([id, { time, name }], index) => (
 					<Timer
 						key={index}
 						id={id}

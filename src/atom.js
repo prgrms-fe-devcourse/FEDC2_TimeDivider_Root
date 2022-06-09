@@ -1,12 +1,8 @@
 import { atom } from 'recoil'
 
-export const timeState = atom({
+export const timerState = atom({
 	key: 'time',
-	default: {}, //{id:time, anotherId: time}
-})
-export const nameState = atom({
-	key: 'name',
-	default: {}, //{id:name}
+	default: {}, //{id:{time, name}}, anotherId: {time,name}}
 })
 
 export const currentTimerState = atom({
