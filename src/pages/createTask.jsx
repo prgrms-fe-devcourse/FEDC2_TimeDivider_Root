@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useMemo } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import styled from 'styled-components'
 import NavBar from '../components/NavBar'
@@ -13,20 +13,27 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 export const CreateTask = () => {
+	const navigate = useNavigate()
+	const location = useLocation()
+
+	const [spareTime, setSpareTime] = useState({ hours: 0, minutes: 0 })
 	const [task, setTask] = useState('')
 	const [tasks, setTasks] = useState([])
 	const [isValidTasks, setIsValidTasks] = useState(false)
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		setTasks([...tasks, task])
+		const trimmedTask = task.trim()
+
+		if (trimmedTask) {
+			setTasks([...tasks, { id: `${Date.now()}${tasks.length}`, task: trimmedTask }])
+		}
+
 		setTask('')
 	}
 
-	// TODO: index 외 유일키가 될 id 필터링 방식으로 수정 필요
-	// => id 생성 방식 팀원들과 논의 후, 진행
-	const removeTask = index => {
-		const filteredTasks = tasks.filter((_, taskIndex) => taskIndex !== index)
+	const removeTask = removeId => {
+		const filteredTasks = tasks.filter(({ id }) => removeId !== id)
 		setTasks(filteredTasks)
 	}
 
@@ -39,6 +46,15 @@ export const CreateTask = () => {
 	}
 
 	useEffect(() => {
+		try {
+			const { spareTime } = location.state
+			setSpareTime(spareTime)
+		} catch {
+			navigate('/home')
+		}
+	}, [location])
+
+	useMemo(() => {
 		handleIsValidTask()
 	}, [tasks])
 
@@ -51,10 +67,10 @@ export const CreateTask = () => {
 			</SubTitleArea>
 
 			<TaskArea>
-				{tasks.map((task, i) => (
-					<Task key={i}>
+				{tasks.map(({ id, task }) => (
+					<Task key={id}>
 						<span>{task}</span>
-						<DelBtn onClick={() => removeTask(i)} />
+						<DelBtn onClick={() => removeTask(id)} />
 					</Task>
 				))}
 			</TaskArea>
@@ -71,7 +87,7 @@ export const CreateTask = () => {
 			</Form>
 
 			<ButtonArea>
-				<Link to="/createTimeDivider">
+				<Link to="/createTimeDivider" state={{ spareTime, tasks }}>
 					<Button disabled={!isValidTasks}>
 						{!isValidTasks ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
