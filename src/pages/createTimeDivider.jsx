@@ -3,8 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import NavBar from '../components/NavBar'
-import Input from '../components/Input'
-import Text from '../components/Text'
+import TaskTimeForm from '../components/TaskTimeForm'
 import TaskBox from '../components/TaskBox'
 
 const BUTTON_TEXT = Object.freeze({
@@ -25,12 +24,6 @@ const BoxContainer = styled.div`
 	flex-wrap: wrap;
 `
 
-const TaskTimeForm = styled.form`
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-`
-
 export const CreateTimeDivider = () => {
 	const location = useLocation()
 
@@ -39,8 +32,20 @@ export const CreateTimeDivider = () => {
 			return { ...task, hour: '00', minute: '00' }
 		}),
 	)
-
 	const [selectedTask, setSelectedTask] = useState('')
+
+	const handleSubmit = selectedTask => {
+		setTasks(
+			tasks.map(task => {
+				if (task.id === selectedTask.id) {
+					task.hour = selectedTask.hour
+					task.minute = selectedTask.minute
+				}
+				return task
+			}),
+		)
+		setSelectedTask('')
+	}
 
 	return (
 		<>
@@ -57,49 +62,7 @@ export const CreateTimeDivider = () => {
 					/>
 				))}
 			</BoxContainer>
-			{selectedTask && (
-				<TaskTimeForm
-					id={selectedTask.id}
-					onSubmit={e => {
-						e.preventDefault()
-						setTasks(
-							tasks.map(task => {
-								if (task.id === selectedTask.id) {
-									task.hour = selectedTask.hour
-									task.minute = selectedTask.minute
-								}
-								return task
-							}),
-						)
-						setSelectedTask('')
-					}}
-				>
-					<Text>{selectedTask.task}</Text>
-					<Input
-						style={{ width: '4rem' }}
-						type="text"
-						value={`${selectedTask.hour}`}
-						onChange={e => {
-							setSelectedTask({ ...selectedTask, hour: e.target.value })
-						}}
-						autoFocus={true}
-						required
-					/>
-					<Input
-						type="text"
-						style={{ width: '4rem' }}
-						value={`${selectedTask.minute}`}
-						onChange={e => {
-							setSelectedTask({ ...selectedTask, minute: e.target.value })
-						}}
-						required
-					/>
-
-					<Button size="sm" rect>
-						설정
-					</Button>
-				</TaskTimeForm>
-			)}
+			{selectedTask && <TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			<ButtonArea>
 				<Link to="/updateDivider">
 					<Button>{BUTTON_TEXT.VALID}</Button>
