@@ -26,13 +26,12 @@ const BoxContainer = styled.div`
 
 export const CreateTimeDivider = () => {
 	const location = useLocation()
-
 	const [tasks, setTasks] = useState(
 		location.state.tasks.map(task => {
 			return { ...task, hour: '00', minute: '00' }
 		}),
 	)
-	const [selectedTask, setSelectedTask] = useState('')
+	const [selectedTask, setSelectedTask] = useState(null)
 
 	const handleSubmit = selectedTask => {
 		setTasks(
@@ -44,13 +43,12 @@ export const CreateTimeDivider = () => {
 				return task
 			}),
 		)
-		setSelectedTask('')
+		setSelectedTask(null)
 	}
 
 	return (
 		<>
 			<NavBar backIcon>시간을 분배해요</NavBar>
-
 			<BoxContainer>
 				{tasks.map(task => (
 					<TaskBox
@@ -64,7 +62,7 @@ export const CreateTimeDivider = () => {
 			</BoxContainer>
 			{selectedTask && <TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			<ButtonArea>
-				<Link to="/updateDivider">
+				<Link to="/updateDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>
 				</Link>
 			</ButtonArea>

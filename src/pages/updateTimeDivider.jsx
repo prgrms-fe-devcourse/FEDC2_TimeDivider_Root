@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const UpdateTimeDivider = () => {
+	const location = useLocation()
+	console.log(location)
 	return (
 		<>
 			<h2>모래시계 편집하기</h2>
