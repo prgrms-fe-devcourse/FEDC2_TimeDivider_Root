@@ -1,29 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import NavBar from '../components/NavBar'
 import Input from '../components/Input'
 import Text from '../components/Text'
-
-const dummyTasks = [
-	{
-		id: '1',
-		task: '일하기',
-	},
-	{
-		id: '2',
-		task: '놀기',
-	},
-	{
-		id: '3',
-		task: '뛰기',
-	},
-	{
-		id: '4',
-		task: '걷기',
-	},
-]
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -48,6 +29,7 @@ const BoxWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 	border: 1px solid;
 	overflow: hidden;
 	width: 8.6rem;
@@ -55,6 +37,7 @@ const BoxWrapper = styled.div`
 
 const Form = styled.form`
 	display: flex;
+	align-items: center;
 	gap: 1rem;
 `
 
@@ -70,11 +53,14 @@ const TaskInputBox = ({ task, ...props }) => {
 }
 
 export const CreateTimeDivider = () => {
+	const location = useLocation()
+
 	const [tasks, setTasks] = useState(
-		dummyTasks.map(task => {
+		location.state.tasks.map(task => {
 			return { ...task, hour: '00', minute: '00' }
 		}),
 	)
+
 	const [selectedTask, setSelectedTask] = useState('')
 
 	return (
@@ -109,6 +95,7 @@ export const CreateTimeDivider = () => {
 						setSelectedTask('')
 					}}
 				>
+					<Text>{selectedTask.task}</Text>
 					<Input
 						style={{ width: '4rem' }}
 						type="text"
