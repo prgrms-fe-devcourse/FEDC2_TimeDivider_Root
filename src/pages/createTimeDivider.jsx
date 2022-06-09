@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import NavBar from '../components/NavBar'
 import Input from '../components/Input'
 import Text from '../components/Text'
+import TaskBox from '../components/TaskBox'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -24,33 +25,11 @@ const BoxContainer = styled.div`
 	flex-wrap: wrap;
 `
 
-const BoxWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-	border: 1px solid;
-	overflow: hidden;
-	width: 8.6rem;
-`
-
-const Form = styled.form`
+const TaskTimeForm = styled.form`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 `
-
-const TaskInputBox = ({ task, ...props }) => {
-	return (
-		<BoxWrapper {...props}>
-			<div>{task.task}</div>
-			<Text>
-				{task.hour} : {task.minute}
-			</Text>
-		</BoxWrapper>
-	)
-}
 
 export const CreateTimeDivider = () => {
 	const location = useLocation()
@@ -69,7 +48,7 @@ export const CreateTimeDivider = () => {
 
 			<BoxContainer>
 				{tasks.map(task => (
-					<TaskInputBox
+					<TaskBox
 						key={task.id}
 						task={task}
 						onClick={() => {
@@ -79,7 +58,7 @@ export const CreateTimeDivider = () => {
 				))}
 			</BoxContainer>
 			{selectedTask && (
-				<Form
+				<TaskTimeForm
 					id={selectedTask.id}
 					onSubmit={e => {
 						e.preventDefault()
@@ -119,7 +98,7 @@ export const CreateTimeDivider = () => {
 					<Button size="sm" rect>
 						설정
 					</Button>
-				</Form>
+				</TaskTimeForm>
 			)}
 			<ButtonArea>
 				<Link to="/updateDivider">
