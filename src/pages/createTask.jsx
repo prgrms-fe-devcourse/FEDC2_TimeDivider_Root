@@ -23,7 +23,12 @@ export const CreateTask = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		setTasks([...tasks, { id: `${Date.now()}${tasks.length}`, task }])
+		const trimmedTask = task.trim()
+
+		if (trimmedTask) {
+			setTasks([...tasks, { id: `${Date.now()}${tasks.length}`, task: trimmedTask }])
+		}
+
 		setTask('')
 	}
 
