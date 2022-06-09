@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { convertToHourMinute } from '../pages/createTimeDivider'
 import Text from './Text'
 
 const BoxWrapper = styled.div`
@@ -13,11 +14,12 @@ const BoxWrapper = styled.div`
 `
 
 const TaskBox = ({ task, ...props }) => {
+	const { hour, minute } = convertToHourMinute(task.time)
 	return (
 		<BoxWrapper {...props}>
 			<div>{task.task}</div>
 			<Text>
-				{task.hour} : {task.minute}
+				{hour} : {minute}
 			</Text>
 		</BoxWrapper>
 	)
