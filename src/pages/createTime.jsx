@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -39,7 +38,7 @@ const CreateTime = () => {
 		setIsValidSpareTime(false)
 	}
 
-	useEffect(() => {
+	useMemo(() => {
 		handleIsValidSpareTime(spareTime)
 	}, [spareTime])
 
@@ -72,7 +71,7 @@ const CreateTime = () => {
 				></Input>
 			</InputBox>
 			<ButtonArea>
-				<Link to="/createTask">
+				<Link to="/createTask" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>
 						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
