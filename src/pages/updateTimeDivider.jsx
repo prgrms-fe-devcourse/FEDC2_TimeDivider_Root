@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import { useRecoilState } from 'recoil'
 import { currentTimerState, nameState, timerState, timeState } from '../atom'
+import { useTimer } from 'react-timer-hook'
 const UpdateTimeDivider = () => {
 	const dummyData = [
 		{ id: '123', name: '밥 묵자', time: 1234 },
@@ -14,7 +15,6 @@ const UpdateTimeDivider = () => {
 		{ id: '678', name: '잠이나 자자', time: 44322 },
 	]
 	const [timers, setTimers] = useRecoilState(timerState)
-	const [currentTimer] = useRecoilState(currentTimerState)
 
 	useEffect(() => {
 		const newTimers = {}
@@ -32,13 +32,9 @@ const UpdateTimeDivider = () => {
 					<Timer
 						key={index}
 						id={id}
-						onClick={() => {
-							console.log(id)
-						}}
-					>
-						<Name>{name}</Name>
-						<Time>{time}</Time>
-					</Timer>
+						name={name}
+						expiryTimestamp={new Date(new Date().getTime() + time * 1000)}
+					/>
 				))}
 			</TimerArea>
 		</>
@@ -47,6 +43,39 @@ const UpdateTimeDivider = () => {
 
 export default UpdateTimeDivider
 
+function Timer({ expiryTimestamp, autoStart = false, id, name }) {
+	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
+		expiryTimestamp,
+		onExpire: () => console.warn('onExpire called'),
+		autoStart,
+	})
+	const [timers, setTimers] = useRecoilState(timerState)
+	const [currentTimer, setCurrentTimer] = useRecoilState(currentTimerState)
+	useEffect(() => {
+		setTimers({ ...timers, [id]: { time: hours * 60 * 60 + minutes * 60 + seconds, name } })
+	}, [seconds])
+
+	useEffect(() => {
+		if (currentTimer.id !== id) pause()
+	}, [currentTimer])
+
+	return (
+		<TimerWrapper
+			id={id}
+			onClick={() => {
+				resume()
+				setCurrentTimer({ id, name })
+			}}
+			isRunning={isRunning}
+		>
+			<Name>{name}</Name>
+			<Time>
+				<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+			</Time>
+		</TimerWrapper>
+	)
+}
+
 const TimerArea = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -54,10 +83,10 @@ const TimerArea = styled.div`
 	width: 100%;
 	height: 30rem;
 `
-const Timer = styled.div`
+const TimerWrapper = styled.div`
 	width: 8rem;
 	height: 8rem;
-	background-color: antiquewhite;
+	background-color: ${props => (props.isRunning ? 'orange' : 'antiquewhite')};
 	border: 1px solid black;
 	text-align: center;
 `
