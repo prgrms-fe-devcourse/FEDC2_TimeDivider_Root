@@ -63,8 +63,13 @@ function Timer({ expiryTimestamp, autoStart = false, id, name }) {
 		<TimerWrapper
 			id={id}
 			onClick={() => {
-				resume()
-				setCurrentTimer({ id, name })
+				if (!isRunning) {
+					resume()
+					setCurrentTimer({ id, name })
+				} else {
+					pause()
+					setCurrentTimer({ id: null, name: null })
+				}
 			}}
 			isRunning={isRunning}
 		>
