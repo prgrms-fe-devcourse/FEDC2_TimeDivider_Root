@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import AppRouter from './routes/router'
+import { RecoilRoot } from 'recoil'
 
 const App = () => {
 	return (
-		<>
+		<RecoilRoot>
 			<GlobalStyle />
 			<Container>
 				<AppRouter />
 			</Container>
-		</>
+		</RecoilRoot>
 	)
 }
 
