@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar'
 import TaskTimeForm from '../components/TaskTimeForm'
 import TaskBox from '../components/TaskBox'
 import Text from '../components/Text'
+import TimeSelectForm from '../components/TimeSelectForm'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -38,7 +39,7 @@ export const convertToHourMinute = time => {
 
 export const CreateTimeDivider = () => {
 	const location = useLocation()
-	const initalTotal = convertToSeconds(location.state.spareTime)
+	const initialTotal = convertToSeconds(location.state.spareTime)
 	const [totalTime, setTotalTime] = useState(convertToSeconds(location.state.spareTime))
 	const [tasks, setTasks] = useState(
 		location.state.tasks.map(task => {
@@ -48,7 +49,7 @@ export const CreateTimeDivider = () => {
 	const [selectedTask, setSelectedTask] = useState(null)
 
 	const handleSubmit = selectedTask => {
-		const usedTime = convertToSeconds({ hours: selectedTask.hour, minutes: selectedTask.minute })
+		const usedTime = convertToSeconds({ hour: selectedTask.hour, minute: selectedTask.minute })
 		if (totalTime - usedTime < 0) {
 			setSelectedTask(null)
 			return
@@ -59,7 +60,7 @@ export const CreateTimeDivider = () => {
 					task.hour = selectedTask.hour
 					task.minute = selectedTask.minute
 					task.time = usedTime
-					setTotalTime(initalTotal - tasks.reduce((acc, task) => acc + task.time, 0))
+					setTotalTime(initialTotal - tasks.reduce((acc, task) => acc + task.time, 0))
 				}
 				return task
 			}),
@@ -85,7 +86,7 @@ export const CreateTimeDivider = () => {
 					/>
 				))}
 			</BoxContainer>
-			{selectedTask && <TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			<ButtonArea>
 				<Link to="/updateDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>
