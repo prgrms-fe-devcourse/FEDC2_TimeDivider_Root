@@ -12,18 +12,19 @@ export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick })
 	})
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [currentTimer, setCurrentTimer] = useRecoilState(currentTimerState)
-	const [combine, setCombine] = useRecoilState(combineState)
 
 	useEffect(() => {
-		setTimers({ ...timers, [id]: { time: hours * 60 * 60 + minutes * 60 + seconds, name } })
-	}, [seconds])
+		restart(expiryTimestamp, false)
+	}, [expiryTimestamp])
+
+	useEffect(() => {
+		setTimers({ ...timers, [id]: { name, time: hours * 60 * 60 + minutes * 60 + seconds } })
+	}, [hours, minutes, seconds])
 
 	useEffect(() => {
 		if (currentTimer.id !== id) pause()
 	}, [currentTimer])
-	useEffect(() => {
-		if (combine.id === id) restart(combine.newExpiryTimestamp, false)
-	}, [combine])
+
 	return (
 		<TimerWrapper
 			id={id}

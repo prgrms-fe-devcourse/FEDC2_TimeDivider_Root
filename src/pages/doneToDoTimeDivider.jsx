@@ -10,10 +10,8 @@ import { Timer } from '../components/Timer'
 
 const DoneToDoTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
-	const [showModal, setShowModal] = useState(false)
-	const [clickedId, setSelectedId] = useState(null)
-	const [combine, setCombine] = useRecoilState(combineState)
-	const showCombineModal = () => {}
+
+	const [originId, setOriginId] = useState(null)
 
 	return (
 		<>
@@ -21,48 +19,56 @@ const DoneToDoTimeDivider = () => {
 			<Link to="/doneTodo">완료하기</Link>
 			<Link to="/addTodo">추가하기</Link>
 			<TimerArea>
-				{Object.entries(timers).map(([id, { time, name }], index) => (
-					<Timer
-						onClick={() => {
-							setSelectedId(id)
-							setShowModal(true)
-						}}
-						key={index}
-						id={id}
-						name={name}
-						expiryTimestamp={new Date(new Date().getTime() + time * 1000)}
-					/>
-				))}
+				{Object.entries(timers).map(([id, { time, name }], index) => {
+					return (
+						<Timer
+							onClick={() => {
+								setOriginId(id)
+							}}
+							key={id}
+							id={id}
+							name={name}
+							expiryTimestamp={new Date(new Date().getTime() + time * 1000)}
+						/>
+					)
+				})}
 			</TimerArea>
-			{showModal && (
-				<Modal>
-					<form
-						onSubmit={e => {
-							e.preventDefault()
-							const targetId = e.target.targetId.value
-							const newExpiryTimestamp = new Date(
-								new Date().getTime() + timers[targetId].time * 1000 + timers[clickedId].time * 1000,
-							)
+			<div>
+				{Object.entries(timers).map(([id, { time, name }], index) => (
+					<div>
+						{id}: {time}, {name}
+					</div>
+				))}
+			</div>
 
-							setCombine({ id: targetId, newExpiryTimestamp })
-							const newTimers = Object.assign({}, timers)
-							delete newTimers[clickedId]
-							setTimers(newTimers)
-							setShowModal(false)
-						}}
-					>
-						<div>합칠 시간: {clickedId ? formattedTime(timers[clickedId].time) : null}</div>
-						<div>{timers[clickedId]?.name} 에서</div>
-						<select name={'targetId'}>
-							{Object.entries(timers).map(
-								([optionId, { time, name }]) =>
-									optionId !== clickedId && <option value={optionId}>{name}</option>,
-							)}
-						</select>
-						으로<button>시간합치기</button>
-					</form>
-				</Modal>
-			)}
+			<Modal>
+				<form
+					onSubmit={e => {
+						e.preventDefault()
+						const targetId = e.target.targetId.value
+						const newTimers = {
+							...timers,
+							[targetId]: {
+								...timers[targetId],
+								time: timers[targetId].time + timers[originId].time,
+							},
+						}
+						delete newTimers[originId]
+						setOriginId(null)
+						setTimers(newTimers)
+					}}
+				>
+					{originId ? timers[originId].name : '선택하세요'}
+					에서
+					<select name={'targetId'}>
+						{Object.entries(timers).map(
+							([optionId, { time, name }]) =>
+								optionId !== originId && <option value={optionId}>{name}</option>,
+						)}
+					</select>
+					으로<button>시간합치기</button>
+				</form>
+			</Modal>
 		</>
 	)
 }
