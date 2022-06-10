@@ -1,4 +1,8 @@
 import Home from '../pages/home'
+
+import Login from '../pages/login'
+import Signup from '../pages/signUp'
+
 import CreateTime from '../pages/createTime'
 import CreateTask from '../pages/createTask'
 import CreateTimeDivider from '../pages/createTimeDivider'
@@ -8,6 +12,8 @@ import AddToDoTimeDivider from '../pages/addToDoTimeDivider'
 import NotFound from '../pages/notFound'
 
 const routes = [
+	{ path: 'login', view: Login },
+	{ path: 'signup', view: Signup },
 	{
 		path: 'home',
 		view: Home,
