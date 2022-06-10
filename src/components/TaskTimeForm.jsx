@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import Input from '../components/Input'
@@ -11,13 +11,17 @@ const Form = styled.form`
 `
 
 const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
-	const [selectedTask, setSelectedTask] = useState(targetTask)
+	const [selectedTask, setSelectedTask] = useState({})
 
 	const handleSubmit = e => {
 		e.preventDefault()
 		onSubmit(selectedTask)
 		setSelectedTask('')
 	}
+
+	useEffect(() => {
+		setSelectedTask(targetTask)
+	}, [targetTask])
 
 	return (
 		<Form {...props} id={selectedTask.id} onSubmit={handleSubmit}>
