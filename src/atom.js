@@ -24,6 +24,6 @@ export const currentTimerState = atom({
 })
 export const combineState = atom({
 	key: 'combine',
-	default: { id: '', newExpiryTimestamp: undefined },
+	default: { id: null, newExpiryTimestamp: undefined },
 	effects: [localStorageEffect('combine')],
 })
