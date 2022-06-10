@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
@@ -26,7 +26,7 @@ const BoxContainer = styled.div`
 `
 
 const convertToSeconds = time => {
-	return parseInt(time.hours) * 3600 + parseInt(time.minutes) * 60
+	return parseInt(time.hour) * 3600 + parseInt(time.minute) * 60
 }
 
 export const convertToHourMinute = time => {
@@ -85,9 +85,7 @@ export const CreateTimeDivider = () => {
 					/>
 				))}
 			</BoxContainer>
-			{selectedTask && (
-				<TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit}></TaskTimeForm>
-			)}
+			{selectedTask && <TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			<ButtonArea>
 				<Link to="/updateDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>

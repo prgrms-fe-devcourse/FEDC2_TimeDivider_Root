@@ -16,7 +16,7 @@ export const CreateTask = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
 
-	const [spareTime, setSpareTime] = useState({ hours: 0, minutes: 0 })
+	const [spareTime, setSpareTime] = useState({ hour: 0, minute: 0 })
 	const [task, setTask] = useState('')
 	const [tasks, setTasks] = useState([])
 	const [isValidTasks, setIsValidTasks] = useState(false)
