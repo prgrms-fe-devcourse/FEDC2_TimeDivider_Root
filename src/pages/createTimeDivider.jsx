@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
@@ -40,7 +40,6 @@ export const CreateTimeDivider = () => {
 	const location = useLocation()
 	const initalTotal = convertToSeconds(location.state.spareTime)
 	const [totalTime, setTotalTime] = useState(convertToSeconds(location.state.spareTime))
-
 	const [tasks, setTasks] = useState(
 		location.state.tasks.map(task => {
 			return { ...task, time: 0, hour: '0', minute: '0' }
@@ -86,7 +85,9 @@ export const CreateTimeDivider = () => {
 					/>
 				))}
 			</BoxContainer>
-			{selectedTask && <TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+			{selectedTask && (
+				<TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit}></TaskTimeForm>
+			)}
 			<ButtonArea>
 				<Link to="/updateDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>
