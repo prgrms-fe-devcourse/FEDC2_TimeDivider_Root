@@ -35,7 +35,7 @@ const routes = [
 		title: '시간을 분배해요',
 	},
 	{
-		path: 'updateDivider',
+		path: 'updateTimeDivider',
 		view: UpdateTimeDivider,
 		title: '모래시계 편집하기',
 	},
