@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useRef, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -23,6 +22,9 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 const CreateTime = () => {
+	const hourInput = useRef()
+	const minuteInput = useRef()
+
 	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '', [TIME_TYPE.MINUTE]: '' })
 	const [isValidSpareTime, setIsValidSpareTime] = useState(false)
 
@@ -31,16 +33,22 @@ const CreateTime = () => {
 		setSpareTime(newSpareTime)
 	}
 
-	const handleIsValidSpareTime = newSpareTime => {
-		if (newSpareTime[TIME_TYPE.HOUR] > 0 || newSpareTime[TIME_TYPE.MINUTE] > 0) {
-			setIsValidSpareTime(true)
+	const handleIsValidSpareTime = () => {
+		if (!hourInput.current || !minuteInput.current) {
 			return
 		}
-		setIsValidSpareTime(false)
+
+		const isValidHour = hourInput.current.checkValidity()
+		const isValidMinute = minuteInput.current.checkValidity()
+		if (!isValidHour || !isValidMinute) {
+			setIsValidSpareTime(false)
+			return
+		}
+		setIsValidSpareTime(true)
 	}
 
-	useEffect(() => {
-		handleIsValidSpareTime(spareTime)
+	useMemo(() => {
+		handleIsValidSpareTime()
 	}, [spareTime])
 
 	return (
@@ -59,6 +67,7 @@ const CreateTime = () => {
 					autoFocus={true}
 					pattern={TIME_REGEX.HOUR}
 					onChange={e => handleSpareTime(TIME_TYPE.HOUR, e.target.value)}
+					ref={hourInput}
 				></Input>
 			</InputBox>
 			<InputBox>
@@ -69,10 +78,11 @@ const CreateTime = () => {
 					value={spareTime[TIME_TYPE.MINUTE]}
 					pattern={TIME_REGEX.MINUTE}
 					onChange={e => handleSpareTime(TIME_TYPE.MINUTE, e.target.value)}
+					ref={minuteInput}
 				></Input>
 			</InputBox>
 			<ButtonArea>
-				<Link to="/createTask">
+				<Link to="/createTask" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>
 						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>

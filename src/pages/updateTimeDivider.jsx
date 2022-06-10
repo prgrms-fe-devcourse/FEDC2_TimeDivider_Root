@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import { useRecoilState } from 'recoil'
-import { currentTimerState, nameState, timerState, timeState } from '../atom'
-import { useTimer } from 'react-timer-hook'
+import { timerState } from '../atom'
 import { Timer } from '../components/Timer'
 const UpdateTimeDivider = () => {
 	const dummyData = [
