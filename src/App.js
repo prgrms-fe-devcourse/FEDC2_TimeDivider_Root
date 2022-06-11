@@ -2,10 +2,13 @@ import styled from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import AppRouter from './routes/router'
 import { RecoilRoot } from 'recoil'
+import { StateObserver } from './pages/stateObserver'
 
 const App = () => {
 	return (
 		<RecoilRoot>
+			<StateObserver />
+			{/*<== StateObserver는 state log 용, TODO: 삭제예정*/}
 			<GlobalStyle />
 			<Container>
 				<AppRouter />
