@@ -30,6 +30,7 @@ export const CreateTimeDivider = () => {
 	const location = useLocation()
 	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
 	const [totalTime, setTotalTime] = useState(convertHourMinuteToSeconds(location.state.spareTime))
+	const [isTimeOver, setIsTimeOver] = useState(false)
 	const [tasks, setTasks] = useState(
 		location.state.tasks.map(task => {
 			return { ...task, time: 0, hour: '0', minute: '0' }
@@ -43,7 +44,7 @@ export const CreateTimeDivider = () => {
 			minute: selectedTask.minute,
 		})
 		if (totalTime - usedTime < 0) {
-			setSelectedTask(null)
+			setIsTimeOver(true)
 			return
 		}
 		setTasks(
@@ -57,14 +58,14 @@ export const CreateTimeDivider = () => {
 				return task
 			}),
 		)
-
+		setIsTimeOver(false)
 		setSelectedTask(null)
 	}
 
 	return (
 		<>
 			<NavBar backIcon>시간을 분배해요</NavBar>
-			<Text>
+			<Text size={3.5}>
 				{convertSecondsToHourMinute(totalTime).hour} :{' '}
 				{convertSecondsToHourMinute(totalTime).minute}
 			</Text>
@@ -80,6 +81,7 @@ export const CreateTimeDivider = () => {
 				))}
 			</BoxContainer>
 			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+			{isTimeOver && <Text color={'red'}>남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
 				<Link to="/updateDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>

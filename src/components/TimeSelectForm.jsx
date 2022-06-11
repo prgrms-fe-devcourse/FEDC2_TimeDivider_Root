@@ -29,7 +29,6 @@ const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		onSubmit(selectedTask)
-		setSelectedTask({})
 	}
 
 	useEffect(() => {
