@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { convertToHourMinute } from '../pages/createTimeDivider'
+import { convertSecondsToHourMinute } from '../utils/convertTime'
 import Text from './Text'
 
 const BoxWrapper = styled.div`
@@ -14,7 +14,7 @@ const BoxWrapper = styled.div`
 `
 
 const TaskBox = ({ task, ...props }) => {
-	const { hour, minute } = convertToHourMinute(task.time)
+	const { hour, minute } = convertSecondsToHourMinute(task.time)
 	return (
 		<BoxWrapper {...props}>
 			<div>{task.task}</div>

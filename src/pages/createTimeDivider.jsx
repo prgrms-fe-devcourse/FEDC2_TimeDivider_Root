@@ -3,10 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import NavBar from '../components/NavBar'
-import TaskTimeForm from '../components/TaskTimeForm'
 import TaskBox from '../components/TaskBox'
 import Text from '../components/Text'
 import TimeSelectForm from '../components/TimeSelectForm'
+import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from '../utils/convertTime'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -26,21 +26,10 @@ const BoxContainer = styled.div`
 	flex-wrap: wrap;
 `
 
-const convertToSeconds = time => {
-	return parseInt(time.hour) * 3600 + parseInt(time.minute) * 60
-}
-
-export const convertToHourMinute = time => {
-	const hour = String(parseInt(time / 3600))
-	const minute = String(parseInt((time % 3600) / 60))
-
-	return { hour, minute }
-}
-
 export const CreateTimeDivider = () => {
 	const location = useLocation()
-	const initialTotal = convertToSeconds(location.state.spareTime)
-	const [totalTime, setTotalTime] = useState(convertToSeconds(location.state.spareTime))
+	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
+	const [totalTime, setTotalTime] = useState(convertHourMinuteToSeconds(location.state.spareTime))
 	const [tasks, setTasks] = useState(
 		location.state.tasks.map(task => {
 			return { ...task, time: 0, hour: '0', minute: '0' }
@@ -49,7 +38,10 @@ export const CreateTimeDivider = () => {
 	const [selectedTask, setSelectedTask] = useState(null)
 
 	const handleSubmit = selectedTask => {
-		const usedTime = convertToSeconds({ hour: selectedTask.hour, minute: selectedTask.minute })
+		const usedTime = convertHourMinuteToSeconds({
+			hour: selectedTask.hour,
+			minute: selectedTask.minute,
+		})
 		if (totalTime - usedTime < 0) {
 			setSelectedTask(null)
 			return
@@ -73,7 +65,8 @@ export const CreateTimeDivider = () => {
 		<>
 			<NavBar backIcon>시간을 분배해요</NavBar>
 			<Text>
-				{convertToHourMinute(totalTime).hour} : {convertToHourMinute(totalTime).minute}
+				{convertSecondsToHourMinute(totalTime).hour} :{' '}
+				{convertSecondsToHourMinute(totalTime).minute}
 			</Text>
 			<BoxContainer>
 				{tasks.map(task => (
