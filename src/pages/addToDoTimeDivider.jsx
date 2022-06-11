@@ -5,7 +5,8 @@ import NavBar from '../components/NavBar'
 import { Timer } from '../components/Timer'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import TimeSelectForm from '../components/TimeSelectForm'
+import TimeSelectForm, { HOUR_NUMBERS, MINUTE_NUMBERS } from '../components/TimeSelectForm'
+import Select from '../components/Select'
 
 export const AddToDoTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -40,8 +41,8 @@ export const AddToDoTimeDivider = () => {
 					}}
 				>
 					할 일: <input name={'name'} required={true} type={'text'} maxLength={10} />
-					몇 시간 : <input name={'hour'} required={true} type={'number'} maxLength={2} max={23} />
-					몇 분: <input name={'minute'} required={true} type={'number'} maxLength={2} max={59} />
+					몇 시간 : <Select name={'hour'} data={HOUR_NUMBERS} />
+					몇 분: <Select name={'minute'} data={MINUTE_NUMBERS} />
 					<button>생성하기</button>
 				</form>
 			</Modal>

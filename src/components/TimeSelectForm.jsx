@@ -5,10 +5,10 @@ import Button from './Button'
 import Select from './Select'
 import Text from './Text'
 
-const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
+export const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
 	return { label: `${i}`, value: i }
 })
-const MINUTE_NUMBERS = Array.from({ length: 6 }, (_, i) => {
+export const MINUTE_NUMBERS = Array.from({ length: 6 }, (_, i) => {
 	return { label: `${i * 10}`, value: i * 10 }
 })
 
