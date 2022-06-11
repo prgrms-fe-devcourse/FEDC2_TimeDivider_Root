@@ -13,12 +13,12 @@ const localStorageEffect =
 	}
 export const timerState = atom({
 	key: 'timer',
-	default: {}, //{id:{time, name}}, anotherId: {time,name}}
+	default: {}, //{id:{time, name, isRunning}}, anotherId: {time,name, isRunning}}
 	effects: [localStorageEffect('timer')],
 })
 
-export const currentTimerState = atom({
-	key: 'currentTimer',
-	default: { id: 'root', name: '' },
-	effects: [localStorageEffect('currentTimer')],
-})
+// export const currentTimerState = atom({
+// 	key: 'currentTimerId',
+// 	default: { id: null, isRunning: false }, //id
+// 	effects: [localStorageEffect('currentTimer')],
+// })

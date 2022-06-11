@@ -93,7 +93,8 @@ export const CreateTimeDivider = () => {
 						onClick={() => {
 							const newTimers = {}
 							tasks.forEach(
-								({ id, task, time, hour, minute }) => (newTimers[id] = { name: task, time }),
+								({ id, task, time, hour, minute }) =>
+									(newTimers[id] = { name: task, time, isRunning: false }),
 							)
 							setTimers(newTimers)
 						}}

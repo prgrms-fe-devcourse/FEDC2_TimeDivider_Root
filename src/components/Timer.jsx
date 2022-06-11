@@ -1,6 +1,6 @@
 import { useTimer } from 'react-timer-hook'
 import { useRecoilState } from 'recoil'
-import { combineState, currentTimerState, timerState } from '../atom'
+import { combineState, currentTimerIdState, currentTimerState, timerState } from '../atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
@@ -11,41 +11,31 @@ export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick })
 		autoStart,
 	})
 	const [timers, setTimers] = useRecoilState(timerState)
-	const [currentTimer, setCurrentTimer] = useRecoilState(currentTimerState)
 
 	useEffect(() => {
 		restart(expiryTimestamp, false)
 	}, [expiryTimestamp])
 
 	useEffect(() => {
-		setTimers({ ...timers, [id]: { name, time: hours * 60 * 60 + minutes * 60 + seconds } })
+		setTimers({
+			...timers,
+			[id]: { ...timers[id], time: hours * 60 * 60 + minutes * 60 + seconds },
+		})
 	}, [hours, minutes, seconds])
 
 	useEffect(() => {
-		if (currentTimer.id !== id) pause()
-	}, [currentTimer])
-
+		if (timers[id].isRunning) {
+			resume()
+		} else {
+			pause()
+		}
+	}, [timers])
 	return (
-		<TimerWrapper
-			id={id}
-			onClick={() => {
-				if (onClick === undefined) {
-					if (!isRunning) {
-						resume()
-						setCurrentTimer({ id, name })
-					} else {
-						pause()
-						setCurrentTimer({ id: null, name: null })
-					}
-				} else {
-					onClick()
-				}
-			}}
-			isRunning={isRunning}
-		>
+		<TimerWrapper id={id} onClick={onClick} isRunning={isRunning}>
 			<Name>{name}</Name>
 			<Time>
 				<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+				<div>{isRunning ? '실행중' : '정지'}</div>
 			</Time>
 		</TimerWrapper>
 	)
