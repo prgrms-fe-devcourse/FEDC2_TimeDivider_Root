@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import NavBar from '../components/NavBar'
-import TaskTimeForm from '../components/TaskTimeForm'
 import TaskBox from '../components/TaskBox'
 import Text from '../components/Text'
+import TimeSelectForm from '../components/TimeSelectForm'
+import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from '../utils/convertTime'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -25,21 +26,11 @@ const BoxContainer = styled.div`
 	flex-wrap: wrap;
 `
 
-const convertToSeconds = time => {
-	return parseInt(time.hours) * 3600 + parseInt(time.minutes) * 60
-}
-
-export const convertToHourMinute = time => {
-	const hour = String(parseInt(time / 3600))
-	const minute = String(parseInt((time % 3600) / 60))
-
-	return { hour, minute }
-}
-
 export const CreateTimeDivider = () => {
 	const location = useLocation()
-	const initalTotal = convertToSeconds(location.state.spareTime)
-	const [totalTime, setTotalTime] = useState(convertToSeconds(location.state.spareTime))
+	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
+	const [totalTime, setTotalTime] = useState(convertHourMinuteToSeconds(location.state.spareTime))
+	const [isTimeOver, setIsTimeOver] = useState(false)
 	const [tasks, setTasks] = useState(
 		location.state.tasks.map(task => {
 			return { ...task, time: 0, hour: '0', minute: '0' }
@@ -48,9 +39,12 @@ export const CreateTimeDivider = () => {
 	const [selectedTask, setSelectedTask] = useState(null)
 
 	const handleSubmit = selectedTask => {
-		const usedTime = convertToSeconds({ hours: selectedTask.hour, minutes: selectedTask.minute })
+		const usedTime = convertHourMinuteToSeconds({
+			hour: selectedTask.hour,
+			minute: selectedTask.minute,
+		})
 		if (totalTime - usedTime < 0) {
-			setSelectedTask(null)
+			setIsTimeOver(true)
 			return
 		}
 		setTasks(
@@ -59,20 +53,21 @@ export const CreateTimeDivider = () => {
 					task.hour = selectedTask.hour
 					task.minute = selectedTask.minute
 					task.time = usedTime
-					setTotalTime(initalTotal - tasks.reduce((acc, task) => acc + task.time, 0))
+					setTotalTime(initialTotal - tasks.reduce((acc, task) => acc + task.time, 0))
 				}
 				return task
 			}),
 		)
-
+		setIsTimeOver(false)
 		setSelectedTask(null)
 	}
 
 	return (
 		<>
 			<NavBar backIcon>시간을 분배해요</NavBar>
-			<Text>
-				{convertToHourMinute(totalTime).hour} : {convertToHourMinute(totalTime).minute}
+			<Text size={3.5}>
+				{convertSecondsToHourMinute(totalTime).hour} :{' '}
+				{convertSecondsToHourMinute(totalTime).minute}
 			</Text>
 			<BoxContainer>
 				{tasks.map(task => (
@@ -85,11 +80,10 @@ export const CreateTimeDivider = () => {
 					/>
 				))}
 			</BoxContainer>
-			{selectedTask && (
-				<TaskTimeForm targetTask={selectedTask} onSubmit={handleSubmit}></TaskTimeForm>
-			)}
+			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+			{isTimeOver && <Text color={'red'}>남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
-				<Link to="/updateDivider" state={{ tasks }}>
+				<Link to="/updateTimeDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>
 				</Link>
 			</ButtonArea>

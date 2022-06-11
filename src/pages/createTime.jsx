@@ -5,15 +5,19 @@ import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import Text from '../components/Text'
 import Button from '../components/Button'
+import Select from '../components/Select'
 
-const TIME_REGEX = Object.freeze({
-	HOUR: '(([1-2][0-4])|([1][5-9])|[0-9])',
-	MINUTE: '(([1-5][0-9])|([2][0-9])|[0-9])',
+const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
+	return { label: `${i}`, value: i }
+})
+
+const MINUTE_NUMBERS = Array.from({ length: 6 }, (_, i) => {
+	return { label: `${i * 10}`, value: i * 10 }
 })
 
 const TIME_TYPE = Object.freeze({
-	HOUR: 'hours',
-	MINUTE: 'minutes',
+	HOUR: 'hour',
+	MINUTE: 'minute',
 })
 
 const BUTTON_TEXT = Object.freeze({
@@ -25,22 +29,17 @@ const CreateTime = () => {
 	const hourInput = useRef()
 	const minuteInput = useRef()
 
-	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '', [TIME_TYPE.MINUTE]: '' })
+	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '0', [TIME_TYPE.MINUTE]: '0' })
 	const [isValidSpareTime, setIsValidSpareTime] = useState(false)
 
-	const handleSpareTime = (name, value) => {
+	const handleSpareTime = e => {
+		const { name, value } = e.target
 		const newSpareTime = { ...spareTime, [name]: value }
 		setSpareTime(newSpareTime)
 	}
 
 	const handleIsValidSpareTime = () => {
-		if (!hourInput.current || !minuteInput.current) {
-			return
-		}
-
-		const isValidHour = hourInput.current.checkValidity()
-		const isValidMinute = minuteInput.current.checkValidity()
-		if (!isValidHour || !isValidMinute) {
+		if (spareTime.hour === '0' && spareTime.minute === '0') {
 			setIsValidSpareTime(false)
 			return
 		}
@@ -57,30 +56,20 @@ const CreateTime = () => {
 			<SubTitleArea>
 				<Text size={1.3}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>
 			</SubTitleArea>
-			<InputBox>
-				<Label>시간(hour)</Label>
-				<Input
-					type="text"
-					maxLength={2}
-					name="hours"
-					value={spareTime[TIME_TYPE.HOUR]}
-					autoFocus={true}
-					pattern={TIME_REGEX.HOUR}
-					onChange={e => handleSpareTime(TIME_TYPE.HOUR, e.target.value)}
-					ref={hourInput}
-				></Input>
-			</InputBox>
-			<InputBox>
-				<Label>분(minutes)</Label>
-				<Input
-					type="text"
-					maxLength={2}
-					value={spareTime[TIME_TYPE.MINUTE]}
-					pattern={TIME_REGEX.MINUTE}
-					onChange={e => handleSpareTime(TIME_TYPE.MINUTE, e.target.value)}
-					ref={minuteInput}
-				></Input>
-			</InputBox>
+			<Select
+				ref={hourInput}
+				name={'hour'}
+				data={HOUR_NUMBERS}
+				label={'시간'}
+				onChange={handleSpareTime}
+			/>
+			<Select
+				ref={minuteInput}
+				name={'minute'}
+				data={MINUTE_NUMBERS}
+				label={'분'}
+				onChange={handleSpareTime}
+			/>
 			<ButtonArea>
 				<Link to="/createTask" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>
@@ -107,31 +96,4 @@ const ButtonArea = styled.div`
 	margin: 2rem 2rem;
 	width: 100%;
 	bottom: 1rem;
-`
-
-const InputBox = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	margin: 1rem;
-`
-
-const Label = styled.label`
-	font-size: 1.2rem;
-`
-
-const Input = styled.input`
-	width: 13rem;
-	height: 2rem;
-	font-size: 1.5rem;
-	border: none;
-	border-bottom: 1px solid #00dfabed;
-	outline: none;
-	text-align: center;
-	:valid {
-		border: #00dfabed solid 3px;
-	}
-	:invalid {
-		border: #ff0000 solid 3px;
-	}
 `
