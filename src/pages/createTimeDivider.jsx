@@ -7,6 +7,8 @@ import TaskBox from '../components/TaskBox'
 import Text from '../components/Text'
 import TimeSelectForm from '../components/TimeSelectForm'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from '../utils/convertTime'
+import { useRecoilState } from 'recoil'
+import { timerState } from '../atom'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -28,6 +30,9 @@ const BoxContainer = styled.div`
 
 export const CreateTimeDivider = () => {
 	const location = useLocation()
+
+	const [timers, setTimers] = useRecoilState(timerState)
+
 	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
 	const [totalTime, setTotalTime] = useState(convertHourMinuteToSeconds(location.state.spareTime))
 	const [isTimeOver, setIsTimeOver] = useState(false)
@@ -84,7 +89,17 @@ export const CreateTimeDivider = () => {
 			{isTimeOver && <Text color={'red'}>남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
 				<Link to="/updateTimeDivider" state={{ tasks }}>
-					<Button>{BUTTON_TEXT.VALID}</Button>
+					<Button
+						onClick={() => {
+							const newTimers = {}
+							tasks.forEach(
+								({ id, task, time, hour, minute }) => (newTimers[id] = { name: task, time }),
+							)
+							setTimers(newTimers)
+						}}
+					>
+						{BUTTON_TEXT.VALID}
+					</Button>
 				</Link>
 			</ButtonArea>
 		</>
