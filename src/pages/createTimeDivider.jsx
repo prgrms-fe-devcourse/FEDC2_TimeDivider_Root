@@ -83,7 +83,7 @@ export const CreateTimeDivider = () => {
 			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			{isTimeOver && <Text color={'red'}>남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
-				<Link to="/updateDivider" state={{ tasks }}>
+				<Link to="/updateTimeDivider" state={{ tasks }}>
 					<Button>{BUTTON_TEXT.VALID}</Button>
 				</Link>
 			</ButtonArea>
