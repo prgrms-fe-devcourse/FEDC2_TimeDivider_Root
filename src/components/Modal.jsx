@@ -24,15 +24,22 @@ const ModalContainer = styled.div`
 	box-sizing: border-box;
 `
 
-const Modal = ({ children, width = '20rem', height, visible = false, onClose, ...props }) => {
+const CloseButton = styled.div`
+	position: fixed;
+	top: 0;
+	right: 1rem;
+	cursor: pointer;
+`
+
+const Modal = ({ children, width = 18.75, height, visible = false, onClose, ...props }) => {
 	const ref = useClickAway(() => {
 		onClose && onClose()
 	})
 
 	const containerStyle = useMemo(
 		() => ({
-			width,
-			height,
+			width: `${width}rem`,
+			height: `${height}rem`,
 		}),
 		[width, height],
 	)
@@ -49,6 +56,7 @@ const Modal = ({ children, width = '20rem', height, visible = false, onClose, ..
 	return ReactDOM.createPortal(
 		<BackgroundDim style={{ display: visible ? 'block' : 'none' }}>
 			<ModalContainer ref={ref} {...props} style={{ ...props.style, ...containerStyle }}>
+				<CloseButton onClick={onClose}>x</CloseButton>
 				{children}
 			</ModalContainer>
 		</BackgroundDim>,

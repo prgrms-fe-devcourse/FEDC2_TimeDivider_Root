@@ -4,15 +4,20 @@ import Modal from '../components/Modal'
 export default {
 	title: 'Component/Modal',
 	component: Modal,
+	argTypes: {
+		width: { defaultValue: 18.75, control: { type: 'number' } },
+		height: { control: { type: 'number' } },
+	},
 }
 
-export const Default = () => {
+export const Default = args => {
 	const [visible, setVisible] = useState(false)
 
 	return (
 		<div>
 			<button onClick={() => setVisible(true)}>show modal</button>
 			<Modal
+				{...args}
 				visible={visible}
 				onClose={() => {
 					setVisible(false)
