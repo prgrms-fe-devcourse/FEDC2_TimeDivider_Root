@@ -148,6 +148,7 @@ const timeToExpiryTime = time => {
 const hmsToTime = (hour = 0, minute = 0, seconds = 0) => {
 	return hour * 60 * 60 + minute * 60 + seconds
 }
+
 const TimerArea = styled.div`
 	display: flex;
 	justify-content: space-between;
