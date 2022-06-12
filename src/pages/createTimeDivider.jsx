@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
@@ -17,41 +17,54 @@ const BUTTON_TEXT = Object.freeze({
 
 export const CreateTimeDivider = () => {
 	const location = useLocation()
+	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
 
 	const [timers, setTimers] = useRecoilState(timerState)
 
-	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
-	const [totalTime, setTotalTime] = useState(convertHourMinuteToSeconds(location.state.spareTime))
+	const [totalTime, setTotalTime] = useState(0)
 	const [isTimeOver, setIsTimeOver] = useState(false)
-	const [tasks, setTasks] = useState(
-		location.state.tasks.map(task => {
-			return { ...task, time: 0, hour: '0', minute: '0' }
-		}),
-	)
+	const [tasks, setTasks] = useState([])
 	const [selectedTask, setSelectedTask] = useState(null)
 
+	useEffect(() => {
+		const { tasks, spareTime } = location.state
+		setTasks(
+			tasks.map(task => {
+				return { ...task, time: 0, hour: '0', minute: '0' }
+			}),
+		)
+		setTotalTime(convertHourMinuteToSeconds(spareTime))
+	}, [location])
+
+	const checkTimeValidation = (inputTime, currentTime) => {
+		const availableTime = totalTime + currentTime
+		if (availableTime - inputTime < 0) {
+			setIsTimeOver(true)
+			return false
+		}
+		return true
+	}
+
 	const handleSubmit = selectedTask => {
-		const usedTime = convertHourMinuteToSeconds({
+		const inputTime = convertHourMinuteToSeconds({
 			hour: selectedTask.hour,
 			minute: selectedTask.minute,
 		})
-		const findTask = tasks.find(({ id }) => id === selectedTask.id)
-		const availableTime = totalTime + findTask.time
-		if (availableTime - usedTime < 0) {
-			setIsTimeOver(true)
-			return
-		}
+		const currentTime = selectedTask.time
+
+		if (!checkTimeValidation(inputTime, currentTime)) return
+
 		setTasks(
 			tasks.map(task => {
 				if (task.id === selectedTask.id) {
 					task.hour = selectedTask.hour
 					task.minute = selectedTask.minute
-					task.time = usedTime
-					setTotalTime(initialTotal - tasks.reduce((acc, task) => acc + task.time, 0))
+					task.time = inputTime
 				}
 				return task
 			}),
 		)
+		setTotalTime(initialTotal - tasks.reduce((acc, task) => acc + task.time, 0))
 		setIsTimeOver(false)
 		setSelectedTask(null)
 	}
@@ -76,11 +89,17 @@ export const CreateTimeDivider = () => {
 			</Text>
 			<BoxContainer>
 				{tasks.map(task => (
-					<TaskBox key={task.id} task={task} onClick={() => handleTaskBoxClick(task)} />
+					<TaskBox
+						key={task.id}
+						task={task}
+						onClick={() => {
+							handleTaskBoxClick(task)
+						}}
+					/>
 				))}
 			</BoxContainer>
 			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
-			{isTimeOver && <Text color={'red'}>남은 시간이 부족합니다.</Text>}
+			{isTimeOver && <Text color="red">남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
 				<Link to="/updateTimeDivider" state={{ tasks }}>
 					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
