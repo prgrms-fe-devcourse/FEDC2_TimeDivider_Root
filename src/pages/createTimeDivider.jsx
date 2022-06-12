@@ -15,19 +15,6 @@ const BUTTON_TEXT = Object.freeze({
 	INVALID: '시간을 입력해주세요',
 })
 
-const ButtonArea = styled.div`
-	position: absolute;
-	margin: 2rem 2rem;
-	width: 100%;
-	bottom: 1rem;
-`
-
-const BoxContainer = styled.div`
-	display: flex;
-	width: 100%;
-	flex-wrap: wrap;
-`
-
 export const CreateTimeDivider = () => {
 	const location = useLocation()
 
@@ -109,3 +96,16 @@ export const CreateTimeDivider = () => {
 }
 
 export default CreateTimeDivider
+
+const ButtonArea = styled.div`
+	position: absolute;
+	margin: 2rem 2rem;
+	width: 100%;
+	bottom: 1rem;
+`
+
+const BoxContainer = styled.div`
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+`
