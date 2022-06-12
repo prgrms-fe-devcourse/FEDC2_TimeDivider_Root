@@ -28,17 +28,7 @@ const UpdateTimeDivider = () => {
 	const [mode, setMode] = useState(updateMode)
 	const [originId, setOriginId] = useState(null)
 
-	const stopAllTimers = () => {
-		const newTimers = Object.assign({}, timers)
-		for (const timerId in newTimers) {
-			newTimers[timerId] = {
-				...newTimers[timerId],
-				isRunning: false,
-			}
-		}
-		setTimers(newTimers)
-	}
-	const playOrPauseTimer = id => {
+	const playOrPauseTimer = (id = '') => {
 		const newTimers = Object.assign({}, timers)
 		for (const timerId in newTimers) {
 			newTimers[timerId] = {
@@ -73,6 +63,7 @@ const UpdateTimeDivider = () => {
 	}
 	const onDeleteEvent = e => {
 		const newTimers = Object.assign({}, timers)
+		if (originId === null) return
 		delete newTimers[originId]
 		setOriginId(null)
 		setTimers(newTimers)
@@ -84,7 +75,7 @@ const UpdateTimeDivider = () => {
 				<Button
 					size={'md'}
 					onClick={() => {
-						stopAllTimers()
+						playOrPauseTimer()
 						setMode(addMode)
 					}}
 				>
@@ -93,7 +84,7 @@ const UpdateTimeDivider = () => {
 				<Button
 					size={'md'}
 					onClick={() => {
-						stopAllTimers()
+						playOrPauseTimer()
 						mode === doneMode ? setMode(updateMode) : setMode(doneMode)
 					}}
 				>
@@ -130,7 +121,6 @@ const UpdateTimeDivider = () => {
 					}
 					if (mode === doneMode) {
 						onMergeEvent(e)
-						setOriginId(null)
 					}
 				}}
 				onCancel={e => {
