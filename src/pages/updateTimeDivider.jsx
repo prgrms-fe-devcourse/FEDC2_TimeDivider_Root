@@ -7,7 +7,7 @@ import { Timer } from '../components/Timer'
 import Button from '../components/Button'
 import Select from '../components/Select'
 import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../components/TimeSelectForm'
-import { FormModal } from '../components/FormModal'
+import FormModal from '../components/FormModal'
 
 const UpdateTimeDivider = () => {
 	const [updateMode, addMode, doneMode] = ['updateMode', 'addMode', 'doneMode']
@@ -22,6 +22,11 @@ const UpdateTimeDivider = () => {
 			cancelText: '시간버리기',
 			confirmText: '합치기',
 		},
+	}
+	const modeButtonText = {
+		addMode: '추가하기',
+		doneMode: '완료하기',
+		doneModeToggled: '취소',
 	}
 
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -79,7 +84,7 @@ const UpdateTimeDivider = () => {
 						setMode(addMode)
 					}}
 				>
-					추가하기
+					{modeButtonText.addMode}
 				</Button>
 				<Button
 					size={'md'}
@@ -88,7 +93,7 @@ const UpdateTimeDivider = () => {
 						mode === doneMode ? setMode(updateMode) : setMode(doneMode)
 					}}
 				>
-					{mode === doneMode ? '취소' : '완료하기'}
+					{mode === doneMode ? modeButtonText.doneModeToggled : modeButtonText.doneMode}
 				</Button>
 			</ToolBar>
 			<TimerArea mode={mode}>
@@ -105,59 +110,50 @@ const UpdateTimeDivider = () => {
 				))}
 			</TimerArea>
 			<FormModal
-				visible={mode === addMode || (mode === doneMode && originId)}
-				onClose={() => {
-					if (mode === addMode) {
-						setMode(updateMode)
-					}
-					if (mode === doneMode) {
-						setOriginId(null)
-					}
-				}}
+				id={'addForm'}
+				visible={mode === addMode}
+				onClose={() => setMode(updateMode)}
 				onSubmit={e => {
-					if (mode === addMode) {
-						onAddEvent(e)
-						setMode(updateMode)
-					}
-					if (mode === doneMode) {
-						onMergeEvent(e)
-					}
+					onAddEvent(e)
+					setMode(updateMode)
 				}}
 				onCancel={e => {
-					if (mode === addMode) {
-						setMode(updateMode)
-					}
-					if (mode === doneMode) {
-						onDeleteEvent(e)
-					}
+					setMode(updateMode)
 				}}
-				titleText={formModalText[mode]?.titleText}
-				cancelText={formModalText[mode]?.cancelText}
-				confirmText={formModalText[mode]?.confirmText}
+				titleText={formModalText.addMode.titleText}
+				cancelText={formModalText.addMode.cancelText}
+				confirmText={formModalText.addMode.confirmText}
 			>
-				{mode === addMode && (
-					<>
-						할 일: <input name={'name'} required={true} type={'text'} maxLength={10} />
-						몇 시간 : <Select name={'hour'} data={HOUR_NUMBERS} />
-						몇 분: <Select name={'minute'} data={MINUTE_NUMBERS} />
-					</>
-				)}
-				{mode === doneMode && originId && (
-					<>
-						{timers[originId]?.name}
-						에서
-						<select name={'targetId'}>
-							{Object.entries(timers).map(
-								([optionId, { time, name }]) =>
-									optionId !== originId && (
-										<option key={optionId} value={optionId}>
-											{name}
-										</option>
-									),
-							)}
-						</select>
-					</>
-				)}
+				<>
+					할 일: <input name={'name'} required={true} type={'text'} maxLength={10} />
+					몇 시간 : <Select name={'hour'} data={HOUR_NUMBERS} />
+					몇 분: <Select name={'minute'} data={MINUTE_NUMBERS} />
+				</>
+			</FormModal>
+			<FormModal
+				id={'doneForm'}
+				visible={mode === doneMode && originId}
+				onClose={() => setOriginId(null)}
+				onSubmit={e => onMergeEvent(e)}
+				onCancel={e => onDeleteEvent(e)}
+				titleText={formModalText.doneMode.titleText}
+				cancelText={formModalText.doneMode.cancelText}
+				confirmText={formModalText.doneMode.confirmText}
+			>
+				<>
+					{originId && timers[originId].name}
+					에서
+					<select name={'targetId'}>
+						{Object.entries(timers).map(
+							([optionId, { time, name }]) =>
+								optionId !== originId && (
+									<option key={optionId} value={optionId}>
+										{name}
+									</option>
+								),
+						)}
+					</select>
+				</>
 			</FormModal>
 		</Wrapper>
 	)
