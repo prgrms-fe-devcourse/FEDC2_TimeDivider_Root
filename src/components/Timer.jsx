@@ -1,10 +1,10 @@
 import { useTimer } from 'react-timer-hook'
 import { useRecoilState } from 'recoil'
-import { combineState, currentTimerIdState, currentTimerState, timerState } from '../atom'
+import { timerState } from '../atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
-export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick }) {
+export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) {
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
 		onExpire: () => console.warn('onExpire called'),

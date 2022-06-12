@@ -1,4 +1,5 @@
 import { atom } from 'recoil'
+
 const localStorageEffect =
 	key =>
 	({ setSelf, onSet }) => {
@@ -16,9 +17,3 @@ export const timerState = atom({
 	default: {}, //{id:{time, name, isRunning}}, anotherId: {time,name, isRunning}}
 	effects: [localStorageEffect('timer')],
 })
-
-// export const currentTimerState = atom({
-// 	key: 'currentTimerId',
-// 	default: { id: null, isRunning: false }, //id
-// 	effects: [localStorageEffect('currentTimer')],
-// })
