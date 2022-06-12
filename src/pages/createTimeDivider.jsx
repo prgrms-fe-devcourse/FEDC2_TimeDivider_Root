@@ -7,7 +7,7 @@ import TaskBox from '../components/TaskBox'
 import Text from '../components/Text'
 import TimeSelectForm from '../components/TimeSelectForm'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from '../utils/convertTime'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { timerState } from '../atom'
 
 const BUTTON_TEXT = Object.freeze({
@@ -19,7 +19,7 @@ export const CreateTimeDivider = () => {
 	const location = useLocation()
 	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
 
-	const [timers, setTimers] = useRecoilState(timerState)
+	const setTimers = useSetRecoilState(timerState)
 
 	const [totalTime, setTotalTime] = useState(0)
 	const [isTimeOver, setIsTimeOver] = useState(false)
@@ -42,20 +42,18 @@ export const CreateTimeDivider = () => {
 	}, [initialTotal, tasks])
 
 	const checkTimeValidation = (inputTime, currentTime) => {
-		const availableTime = totalTime + currentTime
-		if (availableTime - inputTime < 0) {
-			setIsTimeOver(true)
-			return false
-		}
-		return true
+		return totalTime + currentTime - inputTime >= 0 ? true : false
 	}
 
 	const handleSubmit = time => {
-		const { hour, minute } = time // 타임에서 아워미닛 빼주고
+		const { hour, minute } = time
 		const inputTime = convertHourMinuteToSeconds(time)
 		const currentTime = selectedTask.time
 
-		if (!checkTimeValidation(inputTime, currentTime)) return
+		if (!checkTimeValidation(inputTime, currentTime)) {
+			setIsTimeOver(true)
+			return
+		}
 
 		const nextTasks = tasks.map(task =>
 			task.id === selectedTask.id ? { ...task, hour, minute, time: inputTime } : task,
