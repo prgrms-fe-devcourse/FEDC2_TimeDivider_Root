@@ -1,6 +1,18 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
+const Button = ({ rect = false, size, inline = false, ...props }) => {
+	return <StyledButton {...props} inline={inline} size={size} rect={rect} />
+}
+
+Text.propTypes = {
+	rect: PropTypes.bool,
+	size: PropTypes.string,
+	inline: PropTypes.bool,
+}
+
+export default Button
+
 const StyledButton = styled.button`
 	display: ${props => (props.inline ? 'inline' : 'block')};
 	${props => {
@@ -50,15 +62,3 @@ const StyledButton = styled.button`
 		cursor: default;
 	}
 `
-
-const Button = ({ rect = false, size, inline = false, ...props }) => {
-	return <StyledButton {...props} inline={inline} size={size} rect={rect} />
-}
-
-Text.propTypes = {
-	rect: PropTypes.bool,
-	size: PropTypes.string,
-	inline: PropTypes.bool,
-}
-
-export default Button

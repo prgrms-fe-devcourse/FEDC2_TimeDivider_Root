@@ -3,6 +3,14 @@ import styled from 'styled-components'
 import { IoIosArrowBack } from 'react-icons/io'
 import Text from './Text'
 
+Text.propTypes = {
+	children: PropTypes.node,
+	backIcon: PropTypes.bool,
+	link: PropTypes.string,
+}
+
+export default NavBar
+
 const NavBarContainer = styled.div`
 	display: flex;
 	align-items: center;
@@ -33,11 +41,3 @@ const NavBar = ({ children = '시간 분배', backIcon, ...props }) => {
 		</NavBarContainer>
 	)
 }
-
-Text.propTypes = {
-	children: PropTypes.node,
-	backIcon: PropTypes.bool,
-	link: PropTypes.string,
-}
-
-export default NavBar

@@ -4,12 +4,6 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import Text from './Text'
 
-const Form = styled.form`
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-`
-
 const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 	const [time, setTime] = useState({ hour: '0', minute: '0' })
 
@@ -57,3 +51,9 @@ const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 }
 
 export default TaskTimeForm
+
+const Form = styled.form`
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+`
