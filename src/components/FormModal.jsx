@@ -2,8 +2,10 @@ import Modal from './Modal'
 import Button from './Button'
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-export const FormModal = ({
+const FormModal = ({
+	id,
 	children,
 	titleText,
 	cancelText = '닫기',
@@ -17,12 +19,12 @@ export const FormModal = ({
 		<Modal visible={visible} onClose={onClose} height={18.75}>
 			<Wrapper>
 				<Title>{titleText}</Title>
-				<Form id={'formModal'} onSubmit={onSubmit}>
+				<Form id={id} onSubmit={onSubmit}>
 					{children}
 				</Form>
 				<Buttons>
 					<Button onClick={onCancel}>{cancelText}</Button>
-					<Button form={'formModal'} type={'submit'}>
+					<Button form={id} type={'submit'}>
 						{confirmText}
 					</Button>
 				</Buttons>
@@ -30,6 +32,21 @@ export const FormModal = ({
 		</Modal>
 	)
 }
+
+export default FormModal
+
+FormModal.propTypes = {
+	id: PropTypes.string.isRequired,
+	children: PropTypes.node,
+	titleText: PropTypes.string,
+	cancelText: PropTypes.string,
+	confirmText: PropTypes.string,
+	visible: PropTypes.bool.isRequired,
+	onCancel: PropTypes.func,
+	onClose: PropTypes.func,
+	onSubmit: PropTypes.func,
+}
+
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
