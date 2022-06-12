@@ -48,7 +48,9 @@ export const CreateTimeDivider = () => {
 			hour: selectedTask.hour,
 			minute: selectedTask.minute,
 		})
-		if (totalTime - usedTime < 0) {
+		const findTask = tasks.find(({ id }) => id === selectedTask.id)
+		const availableTime = totalTime + findTask.time
+		if (availableTime - usedTime < 0) {
 			setIsTimeOver(true)
 			return
 		}
