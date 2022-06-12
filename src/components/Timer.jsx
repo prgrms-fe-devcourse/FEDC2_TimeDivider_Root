@@ -1,13 +1,22 @@
 import { useTimer } from 'react-timer-hook'
 import { useRecoilState } from 'recoil'
-import { combineState, currentTimerIdState, currentTimerState, timerState } from '../atom'
+import { timerState } from '../atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import Text from './Text'
+import PropTypes from 'prop-types'
 
-export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick }) {
+const Timer = ({
+	expiryTimestamp,
+	autoStart = false,
+	id,
+	name,
+	onClick = () => {},
+	onExpire = () => console.warn('onExpire called'),
+}) => {
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
-		onExpire: () => console.warn('onExpire called'),
+		onExpire,
 		autoStart,
 	})
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -32,20 +41,30 @@ export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick })
 	}, [timers])
 	return (
 		<TimerWrapper id={id} onClick={onClick} isRunning={isRunning}>
-			<Name>{name}</Name>
+			<Name>
+				<Text>{name}</Text>
+			</Name>
 			<Time>
 				<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-				<div>{isRunning ? '실행중' : '정지'}</div>
 			</Time>
 		</TimerWrapper>
 	)
 }
 
+export default Timer
+Timer.propType = {
+	expiryTimestamp: PropTypes.object.isRequired,
+	autoStart: PropTypes.bool,
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string,
+	onClick: PropTypes.func,
+	onExpire: PropTypes.func,
+}
 const TimerWrapper = styled.div`
 	width: 8rem;
 	height: 8rem;
-	background-color: ${props => (props.isRunning ? 'orange' : 'antiquewhite')};
-	border: 1px solid black;
+	background-color: ${props => (props.isRunning ? '#94B49F' : '#FCF8E8')};
+	border: 1px solid #94b49f;
 	text-align: center;
 `
 const Time = styled.div`

@@ -5,7 +5,7 @@ import useClickAway from '../hooks/useClickAway'
 
 const Modal = ({ children, width = 18.75, height, visible = false, onClose, ...props }) => {
 	const ref = useClickAway(() => {
-		onClose && onClose()
+		if (visible) onClose && onClose()
 	})
 
 	const containerStyle = useMemo(
