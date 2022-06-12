@@ -4,15 +4,16 @@ import { timerState } from '../atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Text from './Text'
+import PropTypes from 'prop-types'
 
-export function Timer({
+const Timer = ({
 	expiryTimestamp,
 	autoStart = false,
 	id,
 	name,
 	onClick = () => {},
 	onExpire = () => console.warn('onExpire called'),
-}) {
+}) => {
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
 		onExpire,
@@ -50,6 +51,15 @@ export function Timer({
 	)
 }
 
+export default Timer
+Timer.propType = {
+	expiryTimestamp: PropTypes.object.isRequired,
+	autoStart: PropTypes.bool,
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string,
+	onClick: PropTypes.func,
+	onExpire: PropTypes.func,
+}
 const TimerWrapper = styled.div`
 	width: 8rem;
 	height: 8rem;
