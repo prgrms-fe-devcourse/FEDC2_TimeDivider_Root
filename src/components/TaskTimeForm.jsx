@@ -18,6 +18,11 @@ const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 		setTime({ ...time, hour, minute })
 	}, [time, targetTask])
 
+	const handleChange = e => {
+		const { name, value } = e.target
+		setTime({ ...time, [name]: value })
+	}
+
 	return (
 		<Form {...props} onSubmit={handleSubmit}>
 			<Text>{targetTask.task}</Text>
@@ -26,9 +31,7 @@ const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 				type="text"
 				name="hour"
 				value={`${time.hour}`}
-				onChange={e => {
-					setTime({ ...time, [e.target.name]: e.target.value })
-				}}
+				onChange={handleChange}
 				autoFocus={true}
 				required
 			/>
@@ -37,9 +40,7 @@ const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 				name="minute"
 				style={{ width: '4rem' }}
 				value={`${time.minute}`}
-				onChange={e => {
-					setTime({ ...time, [e.target.name]: e.target.value })
-				}}
+				onChange={handleChange}
 				required
 			/>
 
