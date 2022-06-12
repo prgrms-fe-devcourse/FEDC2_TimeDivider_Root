@@ -11,37 +11,40 @@ const Form = styled.form`
 `
 
 const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
-	const [selectedTask, setSelectedTask] = useState({})
+	const [time, setTime] = useState({ hour: '0', minute: '0' })
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		onSubmit(selectedTask)
-		setSelectedTask('')
+		onSubmit(time)
+		setTime({ hour: '0', minute: '0' })
 	}
 
 	useEffect(() => {
-		setSelectedTask(targetTask)
-	}, [targetTask])
+		const { hour, minute } = targetTask
+		setTime({ ...time, hour, minute })
+	}, [time, targetTask])
 
 	return (
-		<Form {...props} id={selectedTask.id} onSubmit={handleSubmit}>
-			<Text>{selectedTask.task}</Text>
+		<Form {...props} onSubmit={handleSubmit}>
+			<Text>{targetTask.task}</Text>
 			<Input
 				style={{ width: '4rem' }}
 				type="text"
-				value={`${selectedTask.hour}`}
+				name="hour"
+				value={`${time.hour}`}
 				onChange={e => {
-					setSelectedTask({ ...selectedTask, hour: e.target.value })
+					setTime({ ...time, [e.target.name]: e.target.value })
 				}}
 				autoFocus={true}
 				required
 			/>
 			<Input
 				type="text"
+				name="minute"
 				style={{ width: '4rem' }}
-				value={`${selectedTask.minute}`}
+				value={`${time.minute}`}
 				onChange={e => {
-					setSelectedTask({ ...selectedTask, minute: e.target.value })
+					setTime({ ...time, [e.target.name]: e.target.value })
 				}}
 				required
 			/>

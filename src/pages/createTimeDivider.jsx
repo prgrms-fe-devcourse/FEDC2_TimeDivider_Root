@@ -36,6 +36,11 @@ export const CreateTimeDivider = () => {
 		setTotalTime(convertHourMinuteToSeconds(spareTime))
 	}, [location])
 
+	useEffect(() => {
+		const nextTotalTime = initialTotal - tasks.reduce((acc, task) => acc + task.time, 0)
+		setTotalTime(nextTotalTime)
+	}, [initialTotal, tasks])
+
 	const checkTimeValidation = (inputTime, currentTime) => {
 		const availableTime = totalTime + currentTime
 		if (availableTime - inputTime < 0) {
@@ -45,26 +50,18 @@ export const CreateTimeDivider = () => {
 		return true
 	}
 
-	const handleSubmit = selectedTask => {
-		const inputTime = convertHourMinuteToSeconds({
-			hour: selectedTask.hour,
-			minute: selectedTask.minute,
-		})
+	const handleSubmit = time => {
+		const { hour, minute } = time // 타임에서 아워미닛 빼주고
+		const inputTime = convertHourMinuteToSeconds(time)
 		const currentTime = selectedTask.time
 
 		if (!checkTimeValidation(inputTime, currentTime)) return
 
-		setTasks(
-			tasks.map(task => {
-				if (task.id === selectedTask.id) {
-					task.hour = selectedTask.hour
-					task.minute = selectedTask.minute
-					task.time = inputTime
-				}
-				return task
-			}),
+		const nextTasks = tasks.map(task =>
+			task.id === selectedTask.id ? { ...task, hour, minute, time: inputTime } : task,
 		)
-		setTotalTime(initialTotal - tasks.reduce((acc, task) => acc + task.time, 0))
+
+		setTasks(nextTasks)
 		setIsTimeOver(false)
 		setSelectedTask(null)
 	}
