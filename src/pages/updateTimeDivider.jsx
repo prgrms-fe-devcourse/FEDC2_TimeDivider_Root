@@ -33,7 +33,7 @@ const UpdateTimeDivider = () => {
 	const [mode, setMode] = useState(updateMode)
 	const [originId, setOriginId] = useState(null)
 
-	const playOrPauseTimer = (id = '') => {
+	const toggleTimerRunning = (id = '') => {
 		const newTimers = Object.assign({}, timers)
 		for (const timerId in newTimers) {
 			newTimers[timerId] = {
@@ -43,25 +43,15 @@ const UpdateTimeDivider = () => {
 		}
 		setTimers(newTimers)
 	}
-
 	const deleteTimer = id => {
 		const newTimers = Object.assign({}, timers)
 		delete newTimers[id]
 		setTimers(newTimers)
 	}
-
-	const onAddEvent = e => {
-		e.preventDefault()
-		const [name, time, id] = [
-			e.target.name.value,
-			hmsToTime(e.target.hour.value, e.target.minute.value),
-			'' + Date.now(),
-		]
+	const addTimer = (name, time, id) => {
 		setTimers({ ...timers, [id]: { time, name } })
 	}
-	const onMergeEvent = e => {
-		e.preventDefault()
-		const targetId = e.target.targetId.value
+	const mergeTimer = (originId, targetId) => {
 		const newTimers = {
 			...timers,
 			[targetId]: {
@@ -73,12 +63,25 @@ const UpdateTimeDivider = () => {
 		setOriginId(null)
 		setTimers(newTimers)
 	}
+
+	const onAddEvent = e => {
+		e.preventDefault()
+		const [name, time, id] = [
+			e.target.name.value,
+			hmsToTime(e.target.hour.value, e.target.minute.value),
+			'' + Date.now(),
+		]
+		addTimer(name, time, id)
+	}
+	const onMergeEvent = e => {
+		e.preventDefault()
+		if (!originId) return
+		mergeTimer(originId, e.target.targetId.value)
+	}
 	const onDeleteEvent = e => {
-		const newTimers = Object.assign({}, timers)
-		if (originId === null) return
-		delete newTimers[originId]
+		if (!originId) return
+		deleteTimer(originId)
 		setOriginId(null)
-		setTimers(newTimers)
 	}
 	return (
 		<Wrapper>
@@ -87,7 +90,7 @@ const UpdateTimeDivider = () => {
 				<Button
 					size={'md'}
 					onClick={() => {
-						playOrPauseTimer()
+						toggleTimerRunning()
 						setMode(addMode)
 					}}
 				>
@@ -96,7 +99,7 @@ const UpdateTimeDivider = () => {
 				<Button
 					size={'md'}
 					onClick={() => {
-						playOrPauseTimer()
+						toggleTimerRunning()
 						mode === doneMode ? setMode(updateMode) : setMode(doneMode)
 					}}
 				>
@@ -111,7 +114,7 @@ const UpdateTimeDivider = () => {
 						name={name}
 						expiryTimestamp={timeToExpiryTime(time)}
 						onClick={() => {
-							mode === doneMode ? setOriginId(id) : playOrPauseTimer(id)
+							mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
 						}}
 						onExpire={() => deleteTimer(id)}
 					/>
