@@ -59,8 +59,8 @@ const UpdateTimeDivider = () => {
 		setTimers(newTimers)
 	}
 	return (
-		<>
-			<NavBar backIcon>모래시계 편집하기</NavBar>
+		<Wrapper>
+			<NavBar>모래시계 편집하기</NavBar>
 			<ToolBar>
 				<Button
 					size={'md'}
@@ -136,7 +136,7 @@ const UpdateTimeDivider = () => {
 					</form>
 				)}
 			</Modal>
-		</>
+		</Wrapper>
 	)
 }
 
@@ -148,14 +148,20 @@ const timeToExpiryTime = time => {
 const hmsToTime = (hour = 0, minute = 0, seconds = 0) => {
 	return hour * 60 * 60 + minute * 60 + seconds
 }
-
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+`
 const TimerArea = styled.div`
 	display: flex;
-	justify-content: space-between;
 	background-color: ${props => (props.mode === 'doneMode' ? 'skyblue' : 'none')};
 	flex-wrap: wrap;
 	width: 100%;
-	height: 30rem;
+	margin-left: 1rem;
+	gap: 0.5rem;
 `
 const ToolBar = styled.div`
 	display: flex;
