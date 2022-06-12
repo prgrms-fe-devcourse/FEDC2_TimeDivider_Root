@@ -69,6 +69,11 @@ export const CreateTimeDivider = () => {
 		setSelectedTask(null)
 	}
 
+	const handleClick = task => {
+		setIsTimeOver(false)
+		setSelectedTask(task)
+	}
+
 	return (
 		<>
 			<NavBar backIcon>시간을 분배해요</NavBar>
@@ -78,13 +83,7 @@ export const CreateTimeDivider = () => {
 			</Text>
 			<BoxContainer>
 				{tasks.map(task => (
-					<TaskBox
-						key={task.id}
-						task={task}
-						onClick={() => {
-							setSelectedTask(task)
-						}}
-					/>
+					<TaskBox key={task.id} task={task} onClick={() => handleClick(task)} />
 				))}
 			</BoxContainer>
 			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
