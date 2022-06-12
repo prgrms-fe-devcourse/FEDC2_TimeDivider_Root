@@ -5,10 +5,17 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Text from './Text'
 
-export function Timer({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) {
+export function Timer({
+	expiryTimestamp,
+	autoStart = false,
+	id,
+	name,
+	onClick = () => {},
+	onExpire = () => console.warn('onExpire called'),
+}) {
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
-		onExpire: () => console.warn('onExpire called'),
+		onExpire,
 		autoStart,
 	})
 	const [timers, setTimers] = useRecoilState(timerState)

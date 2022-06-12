@@ -43,6 +43,13 @@ const UpdateTimeDivider = () => {
 		}
 		setTimers(newTimers)
 	}
+
+	const deleteTimer = id => {
+		const newTimers = Object.assign({}, timers)
+		delete newTimers[id]
+		setTimers(newTimers)
+	}
+
 	const onAddEvent = e => {
 		e.preventDefault()
 		const [name, time, id] = [
@@ -106,6 +113,7 @@ const UpdateTimeDivider = () => {
 						onClick={() => {
 							mode === doneMode ? setOriginId(id) : playOrPauseTimer(id)
 						}}
+						onExpire={() => deleteTimer(id)}
 					/>
 				))}
 			</TimerArea>
