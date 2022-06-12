@@ -56,9 +56,15 @@ export const CreateTimeDivider = () => {
 		setSelectedTask(null)
 	}
 
-	const handleClick = task => {
+	const handleTaskBoxClick = task => {
 		setIsTimeOver(false)
 		setSelectedTask(task)
+	}
+
+	const handleNextPageClick = () => {
+		const newTimers = {}
+		tasks.forEach(({ id, task, time }) => (newTimers[id] = { name: task, time, isRunning: false }))
+		setTimers(newTimers)
 	}
 
 	return (
@@ -70,25 +76,14 @@ export const CreateTimeDivider = () => {
 			</Text>
 			<BoxContainer>
 				{tasks.map(task => (
-					<TaskBox key={task.id} task={task} onClick={() => handleClick(task)} />
+					<TaskBox key={task.id} task={task} onClick={() => handleTaskBoxClick(task)} />
 				))}
 			</BoxContainer>
 			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			{isTimeOver && <Text color={'red'}>남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
 				<Link to="/updateTimeDivider" state={{ tasks }}>
-					<Button
-						onClick={() => {
-							const newTimers = {}
-							tasks.forEach(
-								({ id, task, time, hour, minute }) =>
-									(newTimers[id] = { name: task, time, isRunning: false }),
-							)
-							setTimers(newTimers)
-						}}
-					>
-						{BUTTON_TEXT.VALID}
-					</Button>
+					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
 				</Link>
 			</ButtonArea>
 		</>
