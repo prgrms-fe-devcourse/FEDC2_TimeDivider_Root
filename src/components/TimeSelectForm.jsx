@@ -12,44 +12,40 @@ export const MINUTE_NUMBERS = Array.from({ length: 6 }, (_, i) => {
 	return { label: `${i * 10}`, value: i * 10 }
 })
 
-const Form = styled.form`
-	display: flex;
-	align-items: flex-end;
-	gap: 1rem;
-`
-
 const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
-	const [selectedTask, setSelectedTask] = useState({ hour: '0', minute: '0' })
+	const [time, setTime] = useState({ hour: '0', minute: '0' })
 
 	const handleChange = e => {
 		const { name, value } = e.target
-		setSelectedTask({ ...selectedTask, [name]: value })
+		setTime({ ...time, [name]: value })
 	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		onSubmit(selectedTask)
+		onSubmit(time)
+		setTime({ hour: '0', minute: '0' })
 	}
 
 	useEffect(() => {
-		setSelectedTask(targetTask)
+		const { hour, minute } = targetTask
+		setTime({ hour, minute })
 	}, [targetTask])
 
 	return (
 		<Form {...props} onSubmit={handleSubmit}>
-			<Text>{selectedTask.task}</Text>
+			<Text>{targetTask.task}</Text>
 			<Select
-				name={'hour'}
-				value={selectedTask.hour}
+				name="hour"
+				value={time.hour}
 				data={HOUR_NUMBERS}
-				label={'시간'}
+				label="시간"
 				onChange={handleChange}
 			/>
 			<Select
-				name={'minute'}
-				value={selectedTask.minute}
+				name="minute"
+				value={time.minute}
 				data={MINUTE_NUMBERS}
-				label={'분'}
+				label="분"
 				onChange={handleChange}
 			/>
 			<Button size="sm" rect style={{ height: '1.75rem' }}>
@@ -60,3 +56,9 @@ const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
 }
 
 export default TimeSelectForm
+
+const Form = styled.form`
+	display: flex;
+	align-items: flex-end;
+	gap: 1rem;
+`

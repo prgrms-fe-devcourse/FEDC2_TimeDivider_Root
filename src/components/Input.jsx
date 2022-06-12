@@ -1,5 +1,11 @@
 import styled from 'styled-components'
 
+const Input = ({ ...props }) => {
+	return <StyledInput {...props} />
+}
+
+export default Input
+
 const StyledInput = styled.input`
 	width: 13rem;
 	height: 2rem;
@@ -9,9 +15,3 @@ const StyledInput = styled.input`
 	outline: none;
 	text-align: center;
 `
-
-const Input = ({ ...props }) => {
-	return <StyledInput {...props} />
-}
-
-export default Input

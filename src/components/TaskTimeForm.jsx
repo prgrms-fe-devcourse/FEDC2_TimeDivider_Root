@@ -4,45 +4,43 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import Text from './Text'
 
-const Form = styled.form`
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-`
-
 const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
-	const [selectedTask, setSelectedTask] = useState({})
+	const [time, setTime] = useState({ hour: '0', minute: '0' })
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		onSubmit(selectedTask)
-		setSelectedTask('')
+		onSubmit(time)
+		setTime({ hour: '0', minute: '0' })
 	}
 
 	useEffect(() => {
-		setSelectedTask(targetTask)
-	}, [targetTask])
+		const { hour, minute } = targetTask
+		setTime({ ...time, hour, minute })
+	}, [time, targetTask])
+
+	const handleChange = e => {
+		const { name, value } = e.target
+		setTime({ ...time, [name]: value })
+	}
 
 	return (
-		<Form {...props} id={selectedTask.id} onSubmit={handleSubmit}>
-			<Text>{selectedTask.task}</Text>
+		<Form {...props} onSubmit={handleSubmit}>
+			<Text>{targetTask.task}</Text>
 			<Input
 				style={{ width: '4rem' }}
 				type="text"
-				value={`${selectedTask.hour}`}
-				onChange={e => {
-					setSelectedTask({ ...selectedTask, hour: e.target.value })
-				}}
+				name="hour"
+				value={`${time.hour}`}
+				onChange={handleChange}
 				autoFocus={true}
 				required
 			/>
 			<Input
 				type="text"
+				name="minute"
 				style={{ width: '4rem' }}
-				value={`${selectedTask.minute}`}
-				onChange={e => {
-					setSelectedTask({ ...selectedTask, minute: e.target.value })
-				}}
+				value={`${time.minute}`}
+				onChange={handleChange}
 				required
 			/>
 
@@ -54,3 +52,9 @@ const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 }
 
 export default TaskTimeForm
+
+const Form = styled.form`
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+`
