@@ -36,6 +36,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 a{
   color: inherit;
@@ -55,6 +56,20 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+#root{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f1f0f7;
 }
 `
 

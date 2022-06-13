@@ -9,6 +9,7 @@ import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
 import DoneFormModal from 'shared/components/DoneFormModal'
+import Text from '../shared/components/Text'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -49,6 +50,7 @@ const UpdateTimeDivider = () => {
 					{mode === doneMode ? '취소' : '완료하기'}
 				</Button>
 			</ToolBar>
+			<Text>완료 할 일을 선택하세요.</Text>
 			<TimerArea mode={mode}>
 				{Object.entries(timers).map(([id, { time, name, disabled }], index) => (
 					<Timer
