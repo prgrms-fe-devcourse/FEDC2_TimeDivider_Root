@@ -2,7 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { addMode, defaultMode, doneMode, modeState, originIdState, timerState } from 'atom'
+import {
+	addMode,
+	defaultMode,
+	doneMode,
+	mergeMode,
+	modeState,
+	originIdState,
+	timerState,
+} from 'atom'
 
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
@@ -10,6 +18,7 @@ import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
 import MergeFormModal from 'shared/components/MergeFormModal'
 import { themeColors } from '../shared/constants/colors'
+import DoneFormModal from '../shared/components/DoneFormModal'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -95,8 +104,9 @@ const UpdateTimeDivider = () => {
 						),
 				)}
 			</TimerArea>
-			<AddFormModal />
-			<MergeFormModal />
+			{mode === addMode && <AddFormModal />}
+			{mode === doneMode && <DoneFormModal />}
+			{mode === mergeMode && <MergeFormModal />}
 		</Wrapper>
 	)
 }

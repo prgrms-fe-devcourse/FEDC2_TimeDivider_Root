@@ -1,7 +1,7 @@
 import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { doneMode, modeState, originIdState, timerState } from 'atom'
+import { mergeMode, modeState, originIdState, timerState } from 'atom'
 
 const MergeFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -20,15 +20,6 @@ const MergeFormModal = () => {
 		setOriginId(null)
 		setTimers(newTimers)
 	}
-	const makeTimerDone = id => {
-		const newTimers = Object.assign({}, timers)
-		newTimers[id] = {
-			...newTimers[id],
-			isRunning: false,
-			disabled: true,
-		}
-		setTimers(newTimers)
-	}
 
 	const onMergeEvent = e => {
 		e.preventDefault()
@@ -36,17 +27,11 @@ const MergeFormModal = () => {
 		mergeTimer(originId, e.target.targetId.value)
 	}
 
-	const onCancelEvent = e => {
-		if (!originId) return
-		makeTimerDone(originId)
-		setOriginId(null)
-	}
-
 	return (
 		<FormModal
-			id={'doneForm'}
+			id={'mergeForm'}
 			height={32.3}
-			visible={mode === doneMode && originId}
+			visible={mode === mergeMode && originId !== null}
 			onClose={() => setOriginId(null)}
 			onSubmit={e => onMergeEvent(e)}
 			onCancel={e => setOriginId(null)}
