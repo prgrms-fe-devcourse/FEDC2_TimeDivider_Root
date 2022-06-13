@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from 'shared/constants/colors'
 
 const Input = ({ ...props }) => {
 	return <StyledInput {...props} />
@@ -7,11 +8,10 @@ const Input = ({ ...props }) => {
 export default Input
 
 const StyledInput = styled.input`
-	width: 13rem;
-	height: 2rem;
-	font-size: 1.5rem;
+	width: 20rem;
+	font-size: 2.5rem;
 	border: none;
-	border-bottom: 1px solid #00dfab;
+	border-bottom: 1px solid ${colors.tossBlue};
 	outline: none;
 	text-align: center;
 `
