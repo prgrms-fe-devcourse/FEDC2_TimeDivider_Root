@@ -11,9 +11,6 @@ const Select = ({
 	wrapperProps,
 	...props
 }) => {
-	// 1. String
-	// 2. Object { label: string, value: string }
-
 	const formattedData = data.map(item =>
 		typeof item === 'string' ? { label: item, value: item } : item,
 	)
@@ -24,13 +21,13 @@ const Select = ({
 		</option>
 	))
 
-	if (placeholder) {
-		options.unshift(
-			<option key="placeholder" value="" hidden>
-				{placeholder}
-			</option>,
-		)
-	}
+	if (!placeholder) return
+
+	options.unshift(
+		<option key="placeholder" value="" hidden>
+			{placeholder}
+		</option>,
+	)
 
 	return (
 		<Wrapper block={block} {...wrapperProps}>
