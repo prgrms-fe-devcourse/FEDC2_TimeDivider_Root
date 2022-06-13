@@ -2,14 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { addMode, defaultMode, doneMode, modeState, originIdState, timerState } from 'atom'
+import {
+	addMode,
+	defaultMode,
+	doneMode,
+	mergeMode,
+	modeState,
+	originIdState,
+	timerState,
+} from 'atom'
 
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
-import DoneFormModal from 'shared/components/DoneFormModal'
+import MergeFormModal from 'shared/components/MergeFormModal'
 import { themeColors } from '../shared/constants/colors'
+import DoneFormModal from '../shared/components/DoneFormModal'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -49,8 +58,8 @@ const UpdateTimeDivider = () => {
 					width={6.3}
 					height={2.7}
 					fontSize={1.3}
-					backgroundColor={themeColors.background}
-					fontColor={themeColors.primary}
+					backgroundColor={mode === doneMode ? themeColors.primary : themeColors.background}
+					fontColor={mode === doneMode ? themeColors.fontReversed : themeColors.primary}
 					style={{ lineHeight: '1rem' }}
 					onClick={() => {
 						toggleTimerRunning()
@@ -60,23 +69,44 @@ const UpdateTimeDivider = () => {
 					{mode === doneMode ? '취소' : '완료'}
 				</Button>
 			</ToolBar>
-			<Description>일을 클릭하여 시작하세요.</Description>
-			<TimerArea mode={mode}>
-				{Object.entries(timers).map(([id, { time, name, disabled }], index) => (
-					<Timer
-						key={id}
-						id={id}
-						name={name}
-						expiryTimestamp={timeToExpiryTime(time)}
-						onClick={() => {
-							if (timers[id].disabled) return
-							mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
-						}}
-					/>
-				))}
+			<Description>
+				{mode === doneMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
+			</Description>
+			<TimerArea>
+				{Object.entries(timers).map(
+					([id, { time, name, disabled }], index) =>
+						!disabled && (
+							<Timer
+								key={id}
+								id={id}
+								name={name}
+								expiryTimestamp={timeToExpiryTime(time)}
+								onClick={() => {
+									if (timers[id].disabled) return
+									mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
+								}}
+							/>
+						),
+				)}
+				{Object.entries(timers).map(
+					([id, { time, name, disabled }], index) =>
+						disabled && (
+							<Timer
+								key={id}
+								id={id}
+								name={name}
+								expiryTimestamp={timeToExpiryTime(time)}
+								onClick={() => {
+									if (timers[id].disabled) return
+									mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
+								}}
+							/>
+						),
+				)}
 			</TimerArea>
-			<AddFormModal />
-			<DoneFormModal />
+			{mode === addMode && <AddFormModal />}
+			{mode === doneMode && <DoneFormModal />}
+			{mode === mergeMode && <MergeFormModal />}
 		</Wrapper>
 	)
 }
@@ -96,9 +126,8 @@ const Wrapper = styled.div`
 `
 const TimerArea = styled.div`
 	display: flex;
-	background-color: ${props => (props.mode === 'doneMode' ? 'skyblue' : 'none')};
 	flex-wrap: wrap;
-	width: 90%;
+	width: 31.6rem;
 	margin: auto;
 	gap: 0.5rem;
 `
@@ -108,15 +137,16 @@ const ToolBar = styled.div`
 	justify-content: end;
 	width: 100%;
 	height: 3rem;
-	padding-right: 1rem;
-	padding-top: 1rem;
+	padding-right: 7rem;
+	padding-top: 10rem;
+	padding-bottom: 2rem;
 `
 const Description = styled.div`
 	display: flex;
 	width: 90%;
 	align-items: start;
 	color: ${themeColors.fontDescription};
-	font-size: 0.6rem;
-	padding-left: 1rem;
+	font-size: 1.3rem;
+	padding-left: 2rem;
 	margin-bottom: 1rem;
 `

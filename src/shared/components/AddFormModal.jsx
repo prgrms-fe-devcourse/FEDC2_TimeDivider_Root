@@ -27,6 +27,7 @@ const AddFormModal = () => {
 		<FormModal
 			id={'addForm'}
 			visible={mode === addMode}
+			height={38.1}
 			onClose={() => setMode(defaultMode)}
 			onSubmit={e => {
 				onAddEvent(e)
@@ -35,7 +36,7 @@ const AddFormModal = () => {
 			onCancel={e => {
 				setMode(defaultMode)
 			}}
-			titleText={'추가하기'}
+			titleText={'새로운 할일에 대해서 알려주세요'}
 			cancelText={'취소'}
 			confirmText={'확인'}
 		>

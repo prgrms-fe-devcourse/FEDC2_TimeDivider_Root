@@ -1,71 +1,48 @@
 import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { doneMode, modeState, originIdState, timerState } from 'atom'
+import { doneMode, mergeMode, modeState, originIdState, timerState } from 'atom'
 
-const DoneFormModal = () => {
+const MergeFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [mode, setMode] = useRecoilState(modeState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
 
-	const mergeTimer = (originId, targetId) => {
-		const newTimers = {
-			...timers,
-			[targetId]: {
-				...timers[targetId],
-				time: timers[targetId].time + timers[originId].time,
-			},
-		}
-		delete newTimers[originId]
-		setOriginId(null)
-		setTimers(newTimers)
-	}
-
-	const deleteTimer = id => {
+	const makeTimerDone = id => {
 		const newTimers = Object.assign({}, timers)
-		delete newTimers[id]
+		newTimers[id] = {
+			...newTimers[id],
+			isRunning: false,
+			disabled: true,
+		}
 		setTimers(newTimers)
 	}
 
-	const onMergeEvent = e => {
-		e.preventDefault()
+	const onDoneEvent = e => {
 		if (!originId) return
-		mergeTimer(originId, e.target.targetId.value)
-	}
-
-	const onDeleteEvent = e => {
-		if (!originId) return
-		deleteTimer(originId)
+		makeTimerDone(originId)
 		setOriginId(null)
 	}
 
 	return (
 		<FormModal
 			id={'doneForm'}
-			visible={mode === doneMode && originId}
-			onClose={() => setOriginId(null)}
-			onSubmit={e => onMergeEvent(e)}
-			onCancel={e => onDeleteEvent(e)}
-			titleText={'남은 시간을 어느 항목에 합치시겠습니까?'}
-			cancelText={'시간버리기'}
+			height={21.1}
+			visible={mode === doneMode && originId !== null}
+			onClose={() => {
+				setOriginId(null)
+			}}
+			onSubmit={e => {
+				setMode(mergeMode)
+			}}
+			onCancel={e => onDoneEvent(e)}
+			titleText={'남은 시간을 다른 일에 합칠까요?'}
+			cancelText={'합치지 않고 완료하기'}
 			confirmText={'합치기'}
 		>
-			<>
-				{originId && timers[originId].name}
-				에서
-				<select name={'targetId'}>
-					{Object.entries(timers).map(
-						([optionId, { time, name }]) =>
-							optionId !== originId && (
-								<option key={optionId} value={optionId}>
-									{name}
-								</option>
-							),
-					)}
-				</select>
-			</>
+			{' '}
 		</FormModal>
 	)
 }
 
-export default DoneFormModal
+export default MergeFormModal

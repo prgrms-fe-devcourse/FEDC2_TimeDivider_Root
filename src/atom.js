@@ -15,7 +15,12 @@ const localStorageEffect =
 export const timerObject = (time, name, isRunning = false, disabled = false) => {
 	return { time, name, isRunning, disabled }
 }
-export const [defaultMode, addMode, doneMode] = ['defaultMode', 'addMode', 'doneMode']
+export const [defaultMode, addMode, doneMode, mergeMode] = [
+	'defaultMode',
+	'addMode',
+	'doneMode',
+	'mergeMode',
+]
 
 export const timerState = atom({
 	key: 'timer',
