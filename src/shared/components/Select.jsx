@@ -1,15 +1,16 @@
+import { colors } from 'shared/constants/colors'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Select = ({
 	data,
 	label,
-	style,
+	fontSize = 2.4,
 	placeholder,
 	block = false,
 	invalid = false,
 	required = false,
 	disabled = false,
-	wrapperProps,
 	...props
 }) => {
 	const formattedData = data.map(item =>
@@ -31,14 +32,15 @@ const Select = ({
 	}
 
 	return (
-		<Wrapper block={block} {...wrapperProps}>
+		<Wrapper block={block}>
 			<Label>{label}</Label>
 			<StyledSelect
-				style={style}
+				{...props}
+				{...props.style}
+				fontSize={fontSize}
 				invalid={invalid}
 				required={required}
 				disabled={disabled}
-				{...props}
 			>
 				{options}
 			</StyledSelect>
@@ -46,10 +48,21 @@ const Select = ({
 	)
 }
 
+Select.propTypes = {
+	fontSize: PropTypes.number,
+	backgroundColor: PropTypes.string,
+	placeholder: PropTypes.string,
+	block: PropTypes.bool,
+	invalid: PropTypes.bool,
+	required: PropTypes.bool,
+	disabled: PropTypes.bool,
+}
+
 export default Select
 
 const Wrapper = styled.div`
 	display: ${({ block }) => (block ? 'block' : 'inline-block')};
+	border-bottom: 1px solid ${colors.tossBlue};
 `
 
 const Label = styled.label`
@@ -58,10 +71,16 @@ const Label = styled.label`
 `
 
 const StyledSelect = styled.select`
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+	font-size: ${props => `${props.fontSize}rem`};
 	width: 100%;
-	padding: 0.5rem 0.8rem;
-	margin: 0.5rem 0;
-	border: ${({ invalid }) => (invalid ? '0.1rem solid red' : '0.1rem solid #00dfab')};
+	padding: 0.8rem 1rem;
+	outline: none;
+	border-radius: 0;
+	margin: 0;
 	border-radius: 4px;
 	box-sizing: border-box;
 `
