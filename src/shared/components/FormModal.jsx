@@ -32,10 +32,18 @@ const FormModal = ({
 						width={12.8}
 						height={4.41}
 						onClick={onCancel}
+						style={{ wordBreak: 'keep-all' }}
 					>
 						{cancelText}
 					</Button>
-					<Button width={12.8} height={4.41} fontSize={1.3} form={id} type={'submit'}>
+					<Button
+						width={12.8}
+						height={4.41}
+						fontSize={1.3}
+						form={id}
+						type={'submit'}
+						style={{ wordBreak: 'keep-all' }}
+					>
 						{confirmText}
 					</Button>
 				</Buttons>
