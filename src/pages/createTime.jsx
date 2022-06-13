@@ -31,8 +31,7 @@ const CreateTime = () => {
 
 	const handleSpareTime = e => {
 		const { name, value } = e.target
-		const newSpareTime = { ...spareTime, [name]: value }
-		setSpareTime(newSpareTime)
+		setSpareTime({ ...spareTime, [name]: value })
 	}
 
 	const handleIsValidSpareTime = spareTime => {
