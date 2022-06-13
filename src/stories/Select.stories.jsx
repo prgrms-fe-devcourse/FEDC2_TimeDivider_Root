@@ -1,4 +1,4 @@
-import Select from '../components/Select'
+import Select from 'shared/components/Select'
 
 export default {
 	title: 'Component/Select',
