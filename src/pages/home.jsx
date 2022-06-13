@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -11,14 +9,14 @@ const Home = () => {
 	return (
 		<>
 			<Title>
-				<Text style={{ fontSize: '2rem' }}>일 모래시계</Text>
+				<Text size={2}>일 모래시계</Text>
 			</Title>
 
 			<HourGlass>
 				<IoIosHourglass></IoIosHourglass>
 			</HourGlass>
 
-			<Text style={{ fontSize: '2rem' }}>시간을 관리해보세요!</Text>
+			<Text size={2}>시간을 관리해보세요!</Text>
 
 			<ButtonArea>
 				<Link to="/createTime">
