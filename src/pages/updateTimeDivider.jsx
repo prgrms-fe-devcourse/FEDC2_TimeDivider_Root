@@ -32,22 +32,32 @@ const UpdateTimeDivider = () => {
 			<NavBar>제목 미정 </NavBar>
 			<ToolBar>
 				<Button
-					size={'md'}
+					width={6.3}
+					height={2.7}
+					fontSize={1.3}
+					backgroundColor={themeColors.background}
+					fontColor={themeColors.primary}
+					style={{ lineHeight: '1rem' }}
 					onClick={() => {
 						toggleTimerRunning()
 						setMode(addMode)
 					}}
 				>
-					{'추가하기'}
+					{'추가'}
 				</Button>
 				<Button
-					size={'md'}
+					width={6.3}
+					height={2.7}
+					fontSize={1.3}
+					backgroundColor={themeColors.background}
+					fontColor={themeColors.primary}
+					style={{ lineHeight: '1rem' }}
 					onClick={() => {
 						toggleTimerRunning()
 						mode === doneMode ? setMode(defaultMode) : setMode(doneMode)
 					}}
 				>
-					{mode === doneMode ? '취소' : '완료하기'}
+					{mode === doneMode ? '취소' : '완료'}
 				</Button>
 			</ToolBar>
 			<Description>일을 클릭하여 시작하세요.</Description>

@@ -59,10 +59,12 @@ const StyledButton = styled.button`
 
 	&:hover {
 		background-color: #2880ee;
+		color: white;
 	}
 
 	&:active {
 		background-color: #0070ee;
+		color: white;
 	}
 
 	&:disabled {
