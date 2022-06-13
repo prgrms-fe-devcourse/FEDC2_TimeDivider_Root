@@ -20,7 +20,7 @@ const Home = () => {
 
 			<ButtonArea>
 				<Link to="/createTime">
-					<Button size={'lg'}>시작하기</Button>
+					<Button>시작하기</Button>
 				</Link>
 			</ButtonArea>
 		</>
@@ -42,6 +42,8 @@ const HourGlass = styled.span`
 `
 
 const ButtonArea = styled.div`
+	display: flex;
+	justify-content: center;
 	position: absolute;
 	margin: 2rem 2rem;
 	width: 100%;
