@@ -2,10 +2,10 @@ import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
-import NavBar from '../components/NavBar'
-import Text from '../components/Text'
-import Button from '../components/Button'
-import Select from '../components/Select'
+import NavBar from '../shared/components/NavBar'
+import Text from '../shared/components/Text'
+import Button from '../shared/components/Button'
+import Select from '../shared/components/Select'
 
 const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
 	return { label: `${i}`, value: i }

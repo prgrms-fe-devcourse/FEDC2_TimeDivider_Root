@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Button from '../components/Button'
+import Button from '../shared/components/Button'
 
 const NotFound = () => {
 	return (

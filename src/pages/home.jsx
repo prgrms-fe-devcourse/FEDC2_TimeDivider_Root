@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
-import Button from '../components/Button'
-import Text from '../components/Text'
+import Button from '../shared/components/Button'
+import Text from '../shared/components/Text'
 import { IoIosHourglass } from 'react-icons/io'
 
 const Home = () => {

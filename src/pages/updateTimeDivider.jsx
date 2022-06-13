@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import NavBar from '../components/NavBar'
+import NavBar from '../shared/components/NavBar'
 import { useRecoilState } from 'recoil'
 import { timerState } from '../atom'
-import Timer from '../components/Timer'
-import Button from '../components/Button'
-import Select from '../components/Select'
-import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../components/TimeSelectForm'
-import FormModal from '../components/FormModal'
+import Timer from '../shared/components/Timer'
+import Button from '../shared/components/Button'
+import Select from '../shared/components/Select'
+import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../shared/components/TimeSelectForm'
+import FormModal from '../shared/components/FormModal'
 
 const UpdateTimeDivider = () => {
 	const [updateMode, addMode, doneMode] = ['updateMode', 'addMode', 'doneMode']

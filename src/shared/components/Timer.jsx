@@ -1,6 +1,6 @@
 import { useTimer } from 'react-timer-hook'
 import { useRecoilState } from 'recoil'
-import { timerState } from '../atom'
+import { timerState } from '../../atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Text from './Text'

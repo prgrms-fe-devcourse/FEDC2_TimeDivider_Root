@@ -1,4 +1,4 @@
-import SignUpForm from '../components/SignUpForm'
+import SignUpForm from '../shared/components/SignUpForm'
 const SignUp = () => {
 	const handleSubmit = inputData => {}
 
