@@ -3,6 +3,7 @@ import Button from './Button'
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { colors, themeColors } from '../constants/colors'
 
 const FormModal = ({
 	id,
@@ -24,8 +25,17 @@ const FormModal = ({
 					{children}
 				</Form>
 				<Buttons>
-					<Button onClick={onCancel}>{cancelText}</Button>
-					<Button form={id} type={'submit'}>
+					<Button
+						backgroundColor={colors.white}
+						fontColor={themeColors.primary}
+						fontSize={1.3}
+						width={12.8}
+						height={4.41}
+						onClick={onCancel}
+					>
+						{cancelText}
+					</Button>
+					<Button width={12.8} height={4.41} fontSize={1.3} form={id} type={'submit'}>
 						{confirmText}
 					</Button>
 				</Buttons>
@@ -73,4 +83,5 @@ const Form = styled.form`
 `
 const Buttons = styled.div`
 	display: flex;
+	column-gap: 1rem;
 `
