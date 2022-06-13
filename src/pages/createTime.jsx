@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -26,9 +26,6 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 const CreateTime = () => {
-	const hourInput = useRef()
-	const minuteInput = useRef()
-
 	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '0', [TIME_TYPE.MINUTE]: '0' })
 	const [isValidSpareTime, setIsValidSpareTime] = useState(false)
 
@@ -56,20 +53,8 @@ const CreateTime = () => {
 			<SubTitleArea>
 				<Text size={1.3}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>
 			</SubTitleArea>
-			<Select
-				ref={hourInput}
-				name={'hour'}
-				data={HOUR_NUMBERS}
-				label={'시간'}
-				onChange={handleSpareTime}
-			/>
-			<Select
-				ref={minuteInput}
-				name={'minute'}
-				data={MINUTE_NUMBERS}
-				label={'분'}
-				onChange={handleSpareTime}
-			/>
+			<Select name={'hour'} data={HOUR_NUMBERS} label={'시간'} onChange={handleSpareTime} />
+			<Select name={'minute'} data={MINUTE_NUMBERS} label={'분'} onChange={handleSpareTime} />
 			<ButtonArea>
 				<Link to="/createTask" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>
