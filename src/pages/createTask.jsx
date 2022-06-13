@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -37,7 +37,7 @@ export const CreateTask = () => {
 		setTasks(filteredTasks)
 	}
 
-	const handleIsValidTask = () => {
+	const handleIsValidTask = tasks => {
 		if (tasks.length > 0) {
 			setIsValidTasks(true)
 			return
@@ -45,17 +45,17 @@ export const CreateTask = () => {
 		setIsValidTasks(false)
 	}
 
-	useEffect(() => {
+	useMemo(() => {
 		try {
 			const { spareTime } = location.state
 			setSpareTime(spareTime)
 		} catch {
 			navigate('/home')
 		}
-	}, [location])
+	}, [location, navigate])
 
 	useMemo(() => {
-		handleIsValidTask()
+		handleIsValidTask(tasks)
 	}, [tasks])
 
 	return (
