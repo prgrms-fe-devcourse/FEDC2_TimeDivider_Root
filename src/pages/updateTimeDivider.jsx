@@ -9,7 +9,7 @@ import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
 import DoneFormModal from 'shared/components/DoneFormModal'
-import Text from '../shared/components/Text'
+import { themeColors } from '../shared/constants/colors'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -29,7 +29,7 @@ const UpdateTimeDivider = () => {
 
 	return (
 		<Wrapper>
-			<NavBar>모래시계 편집하기</NavBar>
+			<NavBar>제목 미정 </NavBar>
 			<ToolBar>
 				<Button
 					size={'md'}
@@ -50,7 +50,7 @@ const UpdateTimeDivider = () => {
 					{mode === doneMode ? '취소' : '완료하기'}
 				</Button>
 			</ToolBar>
-			<Text>완료 할 일을 선택하세요.</Text>
+			<Description>일을 클릭하여 시작하세요.</Description>
 			<TimerArea mode={mode}>
 				{Object.entries(timers).map(([id, { time, name, disabled }], index) => (
 					<Timer
@@ -88,8 +88,8 @@ const TimerArea = styled.div`
 	display: flex;
 	background-color: ${props => (props.mode === 'doneMode' ? 'skyblue' : 'none')};
 	flex-wrap: wrap;
-	width: 100%;
-	margin-left: 1rem;
+	width: 90%;
+	margin: auto;
 	gap: 0.5rem;
 `
 const ToolBar = styled.div`
@@ -100,4 +100,13 @@ const ToolBar = styled.div`
 	height: 3rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
+`
+const Description = styled.div`
+	display: flex;
+	width: 90%;
+	align-items: start;
+	color: ${themeColors.fontDescription};
+	font-size: 0.6rem;
+	padding-left: 1rem;
+	margin-bottom: 1rem;
 `

@@ -20,7 +20,7 @@ const Home = () => {
 
 			<ButtonArea>
 				<Link to="/createTime">
-					<Button>시작하기</Button>
+					<Button size={'lg'}>시작하기</Button>
 				</Link>
 			</ButtonArea>
 		</>

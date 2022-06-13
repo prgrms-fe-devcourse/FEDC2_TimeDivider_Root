@@ -3,8 +3,8 @@ import { useRecoilState } from 'recoil'
 import { timerState } from 'atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import Text from './Text'
 import PropTypes from 'prop-types'
+import { colors, themeColors } from '../constants/colors'
 
 const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -44,11 +44,24 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 	}, [timers])
 	return (
 		<TimerWrapper id={id} onClick={onClick} isRunning={isRunning} disabled={timers[id].disabled}>
-			<Name>
-				<Text>{name}</Text>
+			<Name isRunning={isRunning} disabled={timers[id].disabled}>
+				{name}
 			</Name>
-			<Time>
-				<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+			<Time isRunning={isRunning} disabled={timers[id].disabled}>
+				<span>
+					{hours < 10 && 0}
+					{hours}{' '}
+				</span>{' '}
+				:{' '}
+				<span>
+					{minutes < 10 && 0}
+					{minutes}
+				</span>{' '}
+				:{' '}
+				<span>
+					{seconds < 10 && 0}
+					{seconds}
+				</span>
 			</Time>
 		</TimerWrapper>
 	)
@@ -64,13 +77,19 @@ Timer.propType = {
 	onExpire: PropTypes.func,
 }
 const TimerWrapper = styled.div`
-	width: 8rem;
-	height: 8rem;
+	box-sizing: border-box;
+	width: 6.5rem;
+	height: 6.5rem;
+	padding: 1rem;
+	font-size: 0.8rem;
 	background-color: ${props =>
-		props.disabled ? '#D6D5A8' : props.isRunning ? '#94B49F' : '#FCF8E8'};
-	border: 1px solid #94b49f;
+		props.disabled
+			? `${colors.timeoutDarkGray}`
+			: props.isRunning
+			? `${themeColors.primary}`
+			: `${themeColors.labelBackground}`};
+	border-radius: 1rem;
 	text-align: center;
-	color: ${props => (props.disabled ? 'inherit' : props.isRunning ? 'white' : 'inherit')};
 `
 const Time = styled.div`
 	display: flex;
@@ -78,11 +97,23 @@ const Time = styled.div`
 	justify-content: center;
 	width: 100%;
 	height: 50%;
+	color: ${props =>
+		props.disabled
+			? `${themeColors.fontReversed}`
+			: props.isRunning
+			? `${themeColors.fontReversed}`
+			: `${themeColors.font}`};
 `
-const Name = styled.div`
+const Name = styled.span`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: ${props =>
+		props.disabled
+			? `${themeColors.fontReversed}`
+			: props.isRunning
+			? `${themeColors.fontReversed}`
+			: `${themeColors.primary}`};
 	width: 100%;
 	height: 50%;
 `

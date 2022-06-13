@@ -20,7 +20,7 @@ const StyledButton = styled.button`
 			case 'sm':
 				return css`
 					width: 3.5rem;
-					hegiht: 1.25rem;
+					height: 1.25rem;
 				`
 			case 'md':
 				return css`
@@ -35,7 +35,7 @@ const StyledButton = styled.button`
 			default:
 				return css`
 					width: 100%;
-					hegiht: 2rem;
+					height: 2rem;
 				`
 		}
 	}}
