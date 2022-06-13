@@ -6,20 +6,23 @@ import styled from 'styled-components'
 import Text from './Text'
 import PropTypes from 'prop-types'
 
-const Timer = ({
-	expiryTimestamp,
-	autoStart = false,
-	id,
-	name,
-	onClick = () => {},
-	onExpire = () => console.warn('onExpire called'),
-}) => {
+const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) => {
+	const [timers, setTimers] = useRecoilState(timerState)
+
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
-		onExpire,
+		onExpire: () => {
+			const newTimers = Object.assign({}, timers)
+			newTimers[id] = {
+				...newTimers[id],
+				name: newTimers[id].name + '-완료',
+				isRunning: false,
+				disabled: true,
+			}
+			setTimers(newTimers)
+		},
 		autoStart,
 	})
-	const [timers, setTimers] = useRecoilState(timerState)
 
 	useEffect(() => {
 		restart(expiryTimestamp, false)
@@ -40,7 +43,7 @@ const Timer = ({
 		}
 	}, [timers])
 	return (
-		<TimerWrapper id={id} onClick={onClick} isRunning={isRunning}>
+		<TimerWrapper id={id} onClick={onClick} isRunning={isRunning} disabled={timers[id].disabled}>
 			<Name>
 				<Text>{name}</Text>
 			</Name>
@@ -63,9 +66,11 @@ Timer.propType = {
 const TimerWrapper = styled.div`
 	width: 8rem;
 	height: 8rem;
-	background-color: ${props => (props.isRunning ? '#94B49F' : '#FCF8E8')};
+	background-color: ${props =>
+		props.disabled ? '#D6D5A8' : props.isRunning ? '#94B49F' : '#FCF8E8'};
 	border: 1px solid #94b49f;
 	text-align: center;
+	color: ${props => (props.disabled ? 'inherit' : props.isRunning ? 'white' : 'inherit')};
 `
 const Time = styled.div`
 	display: flex;

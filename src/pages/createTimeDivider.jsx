@@ -8,7 +8,7 @@ import Text from '../components/Text'
 import TimeSelectForm from '../components/TimeSelectForm'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from '../utils/convertTime'
 import { useSetRecoilState } from 'recoil'
-import { timerState } from '../atom'
+import { timerObject, timerState } from '../atom'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -71,7 +71,7 @@ export const CreateTimeDivider = () => {
 
 	const handleNextPageClick = () => {
 		const newTimers = {}
-		tasks.forEach(({ id, task, time }) => (newTimers[id] = { name: task, time, isRunning: false }))
+		tasks.forEach(({ id, task, time }) => (newTimers[id] = timerObject(time, task)))
 		setTimers(newTimers)
 	}
 
