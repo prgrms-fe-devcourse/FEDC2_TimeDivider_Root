@@ -1,4 +1,4 @@
-import TimeSelectForm from '../components/TimeSelectForm'
+import TimeSelectForm from 'shared/components/TimeSelectForm'
 
 export default {
 	title: 'Component/TimeSelectForm',
