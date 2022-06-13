@@ -11,7 +11,7 @@ const NotFound = () => {
 						<h2> 🚨 Not Found 🚨 </h2>
 					</span>
 				</h2>
-				<Button size="lg" style={{ 'font-size': '1rem' }}>
+				<Button>
 					<Link to="home">일 모래시계 만들기</Link>
 				</Button>
 			</ErrorSection>

@@ -1,14 +1,19 @@
-import Button from '../components/Button'
+import { colors } from 'shared/constants/colors'
+import Button from '../shared/components/Button'
 
 export default {
 	title: 'Component/Button',
 	component: Button,
 	argTypes: {
 		children: { defaultValue: 'Button', control: { type: 'text' } },
-		size: { control: { type: 'text' } },
-		disabled: { control: { type: 'boolean' } },
+		width: { defaultValue: 33, control: { type: 'number' } },
+		height: { defaultValue: 5.8, control: { type: 'number' } },
+		backgroundColor: { defaultValue: colors.tossBlue, control: { type: 'color' } },
+		fontSize: { control: { type: 'number' } },
+		fontColor: { defaultValue: colors.white, control: { type: 'color' } },
+		borderColor: { control: { type: 'color' } },
+		disabled: { defaultValue: false, control: { type: 'boolean' } },
 		inline: { control: { type: 'boolean' } },
-		rect: { control: { type: 'boolean' } },
 	},
 }
 
