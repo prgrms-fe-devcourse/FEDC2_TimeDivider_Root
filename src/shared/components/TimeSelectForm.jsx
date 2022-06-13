@@ -48,7 +48,7 @@ const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
 				label="분"
 				onChange={handleChange}
 			/>
-			<Button size="sm" rect style={{ height: '1.75rem' }}>
+			<Button width={7.9} height={3.9} fontSize={1.6}>
 				Set
 			</Button>
 		</Form>
