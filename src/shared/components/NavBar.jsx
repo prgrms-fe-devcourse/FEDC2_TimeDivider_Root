@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { IoIosArrowBack } from 'react-icons/io'
 import Text from './Text'
 
-const NavBar = ({ children = '시간 분배', backIcon, ...props }) => {
+const NavBar = ({ children = '', backIcon, ...props }) => {
 	return (
 		<NavBarContainer {...props}>
 			{backIcon && (
@@ -11,7 +11,8 @@ const NavBar = ({ children = '시간 분배', backIcon, ...props }) => {
 					<IoIosArrowBack />
 				</GoBackIcon>
 			)}
-			<Text size={2}>{children}</Text>
+			<Text size={2.2}>{children}</Text>
+			<div></div>
 		</NavBarContainer>
 	)
 }
@@ -25,19 +26,21 @@ Text.propTypes = {
 export default NavBar
 
 const NavBarContainer = styled.div`
+	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+	height: 8.6rem;
 	position: relative;
 	padding: 1.25rem;
-	border-bottom: 0.05rem solid #999;
 `
 
 const GoBackIcon = styled.a`
-	font-size: 2rem;
+	display: inline-block;
+	font-size: 2.5rem;
 	position: absolute;
 	left: 1.5rem;
-	top: 1.25rem;
+	top: 3.1rem;
 	cursor: pointer;
 `
