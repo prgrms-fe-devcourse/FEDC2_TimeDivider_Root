@@ -8,7 +8,7 @@ import Text from 'shared/components/Text'
 import TimeSelectForm from 'shared/components/TimeSelectForm'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { useSetRecoilState } from 'recoil'
-import { timerObject, timerState } from '../atom'
+import { timerObject, timerState } from 'atom'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { addMode, defaultMode, doneMode, modeState, originIdState, timerState } from '../atom'
+import { addMode, defaultMode, doneMode, modeState, originIdState, timerState } from 'atom'
 
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
