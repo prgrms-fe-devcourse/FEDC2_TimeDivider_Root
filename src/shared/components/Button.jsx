@@ -6,7 +6,7 @@ const Button = ({
 	children,
 	width = 33,
 	height = 5.8,
-	fontSize = 2.2,
+	fontSize = 2.0,
 	fontColor = colors.white,
 	backgroundColor = colors.tossBlue,
 	borderColor = colors.tossBlue,

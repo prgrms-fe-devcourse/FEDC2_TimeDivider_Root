@@ -43,6 +43,8 @@ const HourGlass = styled.span`
 
 const ButtonArea = styled.div`
 	position: absolute;
+	display: flex;
+	justify-content: center;
 	margin: 2rem 2rem;
 	width: 100%;
 	bottom: 1rem;
