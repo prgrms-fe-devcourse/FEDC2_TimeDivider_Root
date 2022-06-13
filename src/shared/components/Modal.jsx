@@ -49,11 +49,10 @@ const BackgroundDim = styled.div`
 `
 const ModalContainer = styled.div`
 	position: fixed;
-	top: 50%;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 3rem;
-	border-radius: 0.5rem;
 	background-color: white;
 	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;

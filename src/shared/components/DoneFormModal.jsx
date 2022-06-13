@@ -42,28 +42,25 @@ const DoneFormModal = () => {
 	return (
 		<FormModal
 			id={'doneForm'}
+			height={32.3}
 			visible={mode === doneMode && originId}
 			onClose={() => setOriginId(null)}
 			onSubmit={e => onMergeEvent(e)}
 			onCancel={e => onDeleteEvent(e)}
-			titleText={'남은 시간을 어느 항목에 합치시겠습니까?'}
+			titleText={timers[originId]?.name + '을 어느 항목에 합치시겠습니까?'}
 			cancelText={'시간버리기'}
 			confirmText={'합치기'}
 		>
-			<>
-				{originId && timers[originId].name}
-				에서
-				<select name={'targetId'}>
-					{Object.entries(timers).map(
-						([optionId, { time, name }]) =>
-							optionId !== originId && (
-								<option key={optionId} value={optionId}>
-									{name}
-								</option>
-							),
-					)}
-				</select>
-			</>
+			<select name={'targetId'}>
+				{Object.entries(timers).map(
+					([optionId, { time, name }]) =>
+						optionId !== originId && (
+							<option key={optionId} value={optionId}>
+								{name}
+							</option>
+						),
+				)}
+			</select>
 		</FormModal>
 	)
 }

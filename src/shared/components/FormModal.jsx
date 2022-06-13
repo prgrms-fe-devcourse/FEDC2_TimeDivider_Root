@@ -10,13 +10,14 @@ const FormModal = ({
 	titleText,
 	cancelText = '닫기',
 	confirmText = '확인',
+	height,
 	visible,
 	onCancel,
 	onClose,
 	onSubmit,
 }) => {
 	return (
-		<Modal visible={visible} onClose={onClose} height={18.75}>
+		<Modal visible={visible} onClose={onClose} height={height}>
 			<Wrapper>
 				<Title>{titleText}</Title>
 				<Form id={id} onSubmit={onSubmit}>
@@ -41,6 +42,7 @@ FormModal.propTypes = {
 	titleText: PropTypes.string,
 	cancelText: PropTypes.string,
 	confirmText: PropTypes.string,
+	height: PropTypes.number,
 	visible: PropTypes.bool.isRequired,
 	onCancel: PropTypes.func,
 	onClose: PropTypes.func,
@@ -56,13 +58,18 @@ const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+	width: 80%;
+	text-align: center;
+	word-break: keep-all;
+	line-height: 1.5;
+	font-size: 2rem;
+	margin: auto;
 `
 const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	padding-top: 2rem;
 `
 const Buttons = styled.div`
 	display: flex;
