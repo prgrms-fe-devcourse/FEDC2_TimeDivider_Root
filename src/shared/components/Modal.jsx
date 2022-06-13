@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ReactDOM from 'react-dom'
 import useClickAway from '../hooks/useClickAway'
 
-const Modal = ({ children, width = 18.75, height, visible = false, onClose, ...props }) => {
+const Modal = ({ children, width = 31.6, height, visible = false, onClose, ...props }) => {
 	const ref = useClickAway(() => {
 		if (visible) onClose && onClose()
 	})
@@ -28,7 +28,7 @@ const Modal = ({ children, width = 18.75, height, visible = false, onClose, ...p
 	return ReactDOM.createPortal(
 		<BackgroundDim style={{ display: visible ? 'block' : 'none' }}>
 			<ModalContainer ref={ref} {...props} style={{ ...props.style, ...containerStyle }}>
-				<CloseButton onClick={onClose}>x</CloseButton>
+				{/*<CloseButton onClick={onClose}>x</CloseButton>*/}
 				{children}
 			</ModalContainer>
 		</BackgroundDim>,
@@ -52,7 +52,7 @@ const ModalContainer = styled.div`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 0.5rem;
+	padding: 3rem;
 	border-radius: 0.5rem;
 	background-color: white;
 	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
