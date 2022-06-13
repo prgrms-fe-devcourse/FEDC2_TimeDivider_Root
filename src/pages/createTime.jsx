@@ -47,53 +47,66 @@ const CreateTime = () => {
 	}, [spareTime])
 
 	return (
-		<>
-			<NavBar backIcon>오늘의 시간</NavBar>
-			<SubTitleArea>
-				<Text size={1.3}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>
-			</SubTitleArea>
-			<Select
-				name={'hour'}
-				data={HOUR_NUMBERS}
-				style={{ width: '10rem' }}
-				label={'시간'}
-				onChange={handleSpareTime}
-				placeholder={'시간 선택하기'}
-			/>
-			<Select
-				name={'minute'}
-				data={MINUTE_NUMBERS}
-				style={{ width: '10rem' }}
-				label={'분'}
-				onChange={handleSpareTime}
-				placeholder={'분 선택하기'}
-			/>
-			<ButtonArea>
-				<Link to="/createTask" state={{ spareTime }}>
-					<Button disabled={!isValidSpareTime}>
-						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
-					</Button>
-				</Link>
-			</ButtonArea>
-		</>
+		<Wrapper>
+			<NavBar backIcon />
+
+			<SubTitle>
+				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '2rem' }}>
+					오늘 사용할 수 시간은 얼마인가요?
+				</Text>
+			</SubTitle>
+
+			<Section>
+				<Select
+					name={'hour'}
+					data={HOUR_NUMBERS}
+					style={{ width: '10rem' }}
+					onChange={handleSpareTime}
+				/>
+				<Text size={2}>시간</Text>
+				<Select
+					name={'minute'}
+					data={MINUTE_NUMBERS}
+					style={{ width: '10rem' }}
+					onChange={handleSpareTime}
+				/>
+				<Text size={2}>분</Text>
+			</Section>
+
+			<Link to="/createTask" state={{ spareTime }}>
+				<Button disabled={!isValidSpareTime}>
+					{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
+				</Button>
+			</Link>
+		</Wrapper>
 	)
 }
 
 export default CreateTime
 
-const SubTitleArea = styled.div`
-	height: 30vh;
+const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	width: 100%;
+	height: 100%;
 	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 3.3rem;
+`
+const SubTitle = styled.span`
+	position: relative;
+	left: -5rem;
+	display: flex;
+	align-items: left;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
 `
 
-const ButtonArea = styled.div`
+const Section = styled.section`
 	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
 	justify-content: center;
-	position: absolute;
-	margin: 2rem 2rem;
-	width: 100%;
-	bottom: 1rem;
 `
