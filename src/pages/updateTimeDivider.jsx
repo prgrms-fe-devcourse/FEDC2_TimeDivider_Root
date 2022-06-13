@@ -9,7 +9,7 @@ import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
 import DoneFormModal from 'shared/components/DoneFormModal'
-import { colors } from '../shared/constants/colors'
+import { themeColors } from '../shared/constants/colors'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -105,7 +105,7 @@ const Description = styled.div`
 	display: flex;
 	width: 90%;
 	align-items: start;
-	color: ${colors.fontDescription};
+	color: ${themeColors.fontDescription};
 	font-size: 0.6rem;
 	padding-left: 1rem;
 	margin-bottom: 1rem;

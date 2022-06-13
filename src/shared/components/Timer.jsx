@@ -4,7 +4,7 @@ import { timerState } from 'atom'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { colors, palette } from '../constants/colors'
+import { colors, themeColors } from '../constants/colors'
 
 const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -84,10 +84,10 @@ const TimerWrapper = styled.div`
 	font-size: 0.8rem;
 	background-color: ${props =>
 		props.disabled
-			? `${palette.timeoutDarkGray}`
+			? `${colors.timeoutDarkGray}`
 			: props.isRunning
-			? `${colors.primary}`
-			: `${colors.labelBackground}`};
+			? `${themeColors.primary}`
+			: `${themeColors.labelBackground}`};
 	border-radius: 1rem;
 	text-align: center;
 `
@@ -99,10 +99,10 @@ const Time = styled.div`
 	height: 50%;
 	color: ${props =>
 		props.disabled
-			? `${colors.fontReversed}`
+			? `${themeColors.fontReversed}`
 			: props.isRunning
-			? `${colors.fontReversed}`
-			: `${colors.font}`};
+			? `${themeColors.fontReversed}`
+			: `${themeColors.font}`};
 `
 const Name = styled.span`
 	display: flex;
@@ -110,10 +110,10 @@ const Name = styled.span`
 	justify-content: center;
 	color: ${props =>
 		props.disabled
-			? `${colors.fontReversed}`
+			? `${themeColors.fontReversed}`
 			: props.isRunning
-			? `${colors.fontReversed}`
-			: `${colors.primary}`};
+			? `${themeColors.fontReversed}`
+			: `${themeColors.primary}`};
 	width: 100%;
 	height: 50%;
 `

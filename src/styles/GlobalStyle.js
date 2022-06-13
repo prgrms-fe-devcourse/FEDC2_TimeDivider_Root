@@ -27,7 +27,6 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 10px;
-	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -73,7 +72,6 @@ table {
   overflow: hidden;
   box-shadow: 0 0 2rem 0.1rem rgba(0, 0, 0, 0.2);
   background-color: ${colors.background};
-}
-`
+}`
 
 export default GlobalStyle
