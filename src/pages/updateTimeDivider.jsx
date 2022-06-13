@@ -8,7 +8,7 @@ import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
-import DoneFormModal from 'shared/components/DoneFormModal'
+import MergeFormModal from 'shared/components/MergeFormModal'
 import { themeColors } from '../shared/constants/colors'
 
 const UpdateTimeDivider = () => {
@@ -64,21 +64,39 @@ const UpdateTimeDivider = () => {
 				{mode === doneMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
 			</Description>
 			<TimerArea>
-				{Object.entries(timers).map(([id, { time, name, disabled }], index) => (
-					<Timer
-						key={id}
-						id={id}
-						name={name}
-						expiryTimestamp={timeToExpiryTime(time)}
-						onClick={() => {
-							if (timers[id].disabled) return
-							mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
-						}}
-					/>
-				))}
+				{Object.entries(timers).map(
+					([id, { time, name, disabled }], index) =>
+						!disabled && (
+							<Timer
+								key={id}
+								id={id}
+								name={name}
+								expiryTimestamp={timeToExpiryTime(time)}
+								onClick={() => {
+									if (timers[id].disabled) return
+									mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
+								}}
+							/>
+						),
+				)}
+				{Object.entries(timers).map(
+					([id, { time, name, disabled }], index) =>
+						disabled && (
+							<Timer
+								key={id}
+								id={id}
+								name={name}
+								expiryTimestamp={timeToExpiryTime(time)}
+								onClick={() => {
+									if (timers[id].disabled) return
+									mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
+								}}
+							/>
+						),
+				)}
 			</TimerArea>
 			<AddFormModal />
-			<DoneFormModal />
+			<MergeFormModal />
 		</Wrapper>
 	)
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import { useRecoilState } from 'recoil'
 import { doneMode, modeState, originIdState, timerState } from 'atom'
 
-const DoneFormModal = () => {
+const MergeFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [mode, setMode] = useRecoilState(modeState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
@@ -68,4 +68,4 @@ const DoneFormModal = () => {
 	)
 }
 
-export default DoneFormModal
+export default MergeFormModal
