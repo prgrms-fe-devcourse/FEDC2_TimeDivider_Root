@@ -5,7 +5,6 @@ export default {
 	component: Select,
 	argTypes: {
 		label: {
-			defaultValue: 'Label',
 			control: 'text',
 		},
 		placeholder: {
@@ -32,5 +31,7 @@ export default {
 }
 
 export const Default = args => (
-	<Select data={['Item 1', 'Item 2', { label: 'Item 3', value: 'value' }]} {...args} />
+	<div>
+		<Select data={['Item 1', 'Item 2', { label: 'Item 3', value: 'value' }]} {...args} />
+	</div>
 )
