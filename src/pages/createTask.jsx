@@ -65,8 +65,13 @@ export const CreateTask = () => {
 			<NavBar backIcon />
 
 			<SubTitle>
-				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '3rem' }}>
+				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
 					오늘 해야할 일들은 무엇이 있나요?
+				</Text>
+				<Text
+					style={{ textAlign: 'start', fontSize: '1.3rem', color: '#919191', padding: '0 3rem' }}
+				>
+					클릭하여 삭제할 수 있습니다.
 				</Text>
 			</SubTitle>
 
@@ -117,6 +122,7 @@ const SubTitle = styled.span`
 	position: relative;
 	left: -5rem;
 	display: flex;
+	flex-direction: column;
 	align-items: left;
 	width: 24.5rem;
 	line-height: 3.2rem;
@@ -124,13 +130,13 @@ const SubTitle = styled.span`
 `
 
 const TaskArea = styled.div`
+	position: relative;
 	height: 20vh;
-	width: 100%;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	margin: 2rem 1rem 1rem 2rem;
+	margin: 2rem 3rem 1rem 3rem;
 	margin-bottom: 2rem;
 `
 

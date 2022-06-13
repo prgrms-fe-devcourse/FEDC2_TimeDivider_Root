@@ -51,8 +51,8 @@ const CreateTime = () => {
 			<NavBar backIcon />
 
 			<SubTitle>
-				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '2rem' }}>
-					오늘 사용할 수 시간은 얼마인가요?
+				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
+					오늘 사용할 수 있는 시간은 얼마인가요?
 				</Text>
 			</SubTitle>
 
@@ -73,11 +73,13 @@ const CreateTime = () => {
 				<Text size={2}>분</Text>
 			</Section>
 
-			<Link to="/createTask" state={{ spareTime }}>
-				<Button disabled={!isValidSpareTime}>
-					{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
-				</Button>
-			</Link>
+			<ButtonArea>
+				<Link to="/createTask" state={{ spareTime }}>
+					<Button disabled={!isValidSpareTime}>
+						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
+					</Button>
+				</Link>
+			</ButtonArea>
 		</Wrapper>
 	)
 }
@@ -90,7 +92,6 @@ const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
 	align-items: center;
-	justify-content: space-between;
 	padding-bottom: 3.3rem;
 `
 const SubTitle = styled.span`
@@ -105,8 +106,18 @@ const SubTitle = styled.span`
 
 const Section = styled.section`
 	display: flex;
+	height: 50vh;
 	gap: 1rem;
 	justify-content: space-between;
 	align-items: center;
 	justify-content: center;
+`
+
+const ButtonArea = styled.div`
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	margin: 2rem 2rem;
+	width: 100%;
+	bottom: 1rem;
 `

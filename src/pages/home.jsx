@@ -13,9 +13,11 @@ const Home = () => {
 				<Text size={3.2}>당신의 시간을 분배하세요</Text>
 			</SubTitle>
 
-			<Link to="/createTime">
-				<Button>시작하기</Button>
-			</Link>
+			<ButtonArea>
+				<Link to="/createTime">
+					<Button>시작하기</Button>
+				</Link>
+			</ButtonArea>
 		</Wrapper>
 	)
 }
@@ -41,10 +43,17 @@ const Logo = styled.img`
 `
 
 const SubTitle = styled.span`
-	display: flex;
-	align-items: center;
 	margin: 0 8rem;
 	line-height: 4.6rem;
 	text-align: center;
 	height: 23.2rem;
+`
+
+const ButtonArea = styled.div`
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	margin: 2rem 2rem;
+	width: 100%;
+	bottom: 1rem;
 `
