@@ -1,16 +1,16 @@
 import { colors } from 'shared/constants/colors'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Select = ({
 	data,
 	label,
-	style,
+	fontSize = 2.4,
 	placeholder,
 	block = false,
 	invalid = false,
 	required = false,
 	disabled = false,
-	wrapperProps,
 	...props
 }) => {
 	const formattedData = data.map(item =>
@@ -32,19 +32,30 @@ const Select = ({
 	}
 
 	return (
-		<Wrapper block={block} {...wrapperProps}>
+		<Wrapper block={block}>
 			<Label>{label}</Label>
 			<StyledSelect
-				style={style}
+				{...props}
+				{...props.style}
+				fontSize={fontSize}
 				invalid={invalid}
 				required={required}
 				disabled={disabled}
-				{...props}
 			>
 				{options}
 			</StyledSelect>
 		</Wrapper>
 	)
+}
+
+Select.propTypes = {
+	fontSize: PropTypes.number,
+	backgroundColor: PropTypes.string,
+	placeholder: PropTypes.string,
+	block: PropTypes.bool,
+	invalid: PropTypes.bool,
+	required: PropTypes.bool,
+	disabled: PropTypes.bool,
 }
 
 export default Select
@@ -64,6 +75,7 @@ const StyledSelect = styled.select`
 	-moz-appearance: none;
 	appearance: none;
 	border: none;
+	font-size: ${props => `${props.fontSize}rem`};
 	width: 100%;
 	padding: 0.8rem 1rem;
 	outline: none;
