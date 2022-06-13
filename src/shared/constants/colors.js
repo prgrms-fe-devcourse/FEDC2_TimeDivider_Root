@@ -1,4 +1,4 @@
-const palette = {
+export const palette = {
 	tossBlue: '#4880EE',
 	labelGray: '#F8F9FA',
 	completeGreen: '#5ABF83',
@@ -7,7 +7,7 @@ const palette = {
 	white: '#FFFFFF',
 }
 
-const colors = {
+export const colors = {
 	primary: palette.tossBlue,
 	background: palette.white,
 	font: palette.black,

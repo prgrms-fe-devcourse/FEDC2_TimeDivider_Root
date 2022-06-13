@@ -1,5 +1,6 @@
 import reset from 'styled-reset'
 import { createGlobalStyle } from 'styled-components'
+import { colors } from '../shared/constants/colors'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -64,12 +65,14 @@ table {
   box-sizing: border-box;
   align-items: center;
   width: 100%;
-  max-width: 420px;
-  height: 100vh;
+  max-width: 375px;
+  height: 812px;
   margin: auto;
+  margin-top: 2rem;
   padding: 0;
   overflow: hidden;
-  background-color: #f1f0f7;
+  box-shadow: 0 0 2rem 0.1rem rgba(0, 0, 0, 0.2);
+  background-color: ${colors.background};
 }
 `
 
