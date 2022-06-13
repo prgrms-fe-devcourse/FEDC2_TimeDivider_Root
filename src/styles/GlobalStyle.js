@@ -36,7 +36,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 a{
   color: inherit;
@@ -67,7 +67,6 @@ table {
   max-width: 375px;
   height: 812px;
   margin: auto;
-  margin-top: 2rem;
   padding: 0;
   overflow: hidden;
   box-shadow: 0 0 2rem 0.1rem rgba(0, 0, 0, 0.2);
