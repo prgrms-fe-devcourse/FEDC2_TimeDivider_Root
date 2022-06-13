@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Button from '../components/Button'
-import Input from '../components/Input'
+import Button from 'shared/components/Button'
+import Input from 'shared/components/Input'
 import Text from './Text'
 
 const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {

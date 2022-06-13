@@ -1,5 +1,5 @@
 import { colors } from 'shared/constants/colors'
-import Button from '../shared/components/Button'
+import Button from 'shared/components/Button'
 
 export default {
 	title: 'Component/Button',

@@ -1,4 +1,4 @@
-import Input from '../components/Input'
+import Input from 'shared/components/Input'
 
 export default {
 	title: 'Component/Input',
