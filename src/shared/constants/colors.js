@@ -11,5 +11,6 @@ export const colors = {
 	primary: palette.tossBlue,
 	background: palette.white,
 	font: palette.black,
+	fontReversed: palette.white,
 	labelBackground: palette.labelGray,
 }

@@ -29,7 +29,7 @@ const UpdateTimeDivider = () => {
 
 	return (
 		<Wrapper>
-			<NavBar>모래시계 편집하기</NavBar>
+			<NavBar>제목 미정 </NavBar>
 			<ToolBar>
 				<Button
 					size={'md'}
