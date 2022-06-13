@@ -1,4 +1,4 @@
-import LoginForm from '../shared/components/LoginForm'
+import LoginForm from 'shared/components/LoginForm'
 
 const Login = () => {
 	const handleSubmit = inputData => {}

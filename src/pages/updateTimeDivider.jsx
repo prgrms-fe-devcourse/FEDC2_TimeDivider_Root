@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { addMode, defaultMode, doneMode, modeState, originIdState, timerState } from '../atom'
 
-import NavBar from '../shared/components/NavBar'
-import Timer from '../shared/components/Timer'
-import Button from '../shared/components/Button'
-import AddFormModal from '../shared/components/AddFormModal'
-import DoneFormModal from '../shared/components/DoneFormModal'
+import NavBar from 'shared/components/NavBar'
+import Timer from 'shared/components/Timer'
+import Button from 'shared/components/Button'
+import AddFormModal from 'shared/components/AddFormModal'
+import DoneFormModal from 'shared/components/DoneFormModal'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
