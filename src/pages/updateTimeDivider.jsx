@@ -58,8 +58,8 @@ const UpdateTimeDivider = () => {
 					width={6.3}
 					height={2.7}
 					fontSize={1.3}
-					backgroundColor={themeColors.background}
-					fontColor={themeColors.primary}
+					backgroundColor={mode === doneMode ? themeColors.primary : themeColors.background}
+					fontColor={mode === doneMode ? themeColors.fontReversed : themeColors.primary}
 					style={{ lineHeight: '1rem' }}
 					onClick={() => {
 						toggleTimerRunning()
