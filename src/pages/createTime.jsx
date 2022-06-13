@@ -1,11 +1,11 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
-import NavBar from '../components/NavBar'
-import Text from '../components/Text'
-import Button from '../components/Button'
-import Select from '../components/Select'
+import NavBar from 'shared/components/NavBar'
+import Text from 'shared/components/Text'
+import Button from 'shared/components/Button'
+import Select from 'shared/components/Select'
 
 const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
 	return { label: `${i}`, value: i }
@@ -26,19 +26,15 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 const CreateTime = () => {
-	const hourInput = useRef()
-	const minuteInput = useRef()
-
 	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '0', [TIME_TYPE.MINUTE]: '0' })
 	const [isValidSpareTime, setIsValidSpareTime] = useState(false)
 
 	const handleSpareTime = e => {
 		const { name, value } = e.target
-		const newSpareTime = { ...spareTime, [name]: value }
-		setSpareTime(newSpareTime)
+		setSpareTime({ ...spareTime, [name]: value })
 	}
 
-	const handleIsValidSpareTime = () => {
+	const handleIsValidSpareTime = spareTime => {
 		if (spareTime.hour === '0' && spareTime.minute === '0') {
 			setIsValidSpareTime(false)
 			return
@@ -47,7 +43,7 @@ const CreateTime = () => {
 	}
 
 	useMemo(() => {
-		handleIsValidSpareTime()
+		handleIsValidSpareTime(spareTime)
 	}, [spareTime])
 
 	return (
@@ -57,18 +53,20 @@ const CreateTime = () => {
 				<Text size={1.3}>오늘 사용할 수 있는 시간은 얼마인가요?</Text>
 			</SubTitleArea>
 			<Select
-				ref={hourInput}
 				name={'hour'}
 				data={HOUR_NUMBERS}
+				style={{ width: '10rem' }}
 				label={'시간'}
 				onChange={handleSpareTime}
+				placeholder={'시간 선택하기'}
 			/>
 			<Select
-				ref={minuteInput}
 				name={'minute'}
 				data={MINUTE_NUMBERS}
+				style={{ width: '10rem' }}
 				label={'분'}
 				onChange={handleSpareTime}
+				placeholder={'분 선택하기'}
 			/>
 			<ButtonArea>
 				<Link to="/createTask" state={{ spareTime }}>

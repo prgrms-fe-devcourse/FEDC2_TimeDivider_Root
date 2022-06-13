@@ -3,7 +3,7 @@ import { HOUR_NUMBERS, MINUTE_NUMBERS } from './TimeSelectForm'
 import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { addMode, defaultMode, modeState, timerObject, timerState } from '../atom'
+import { addMode, defaultMode, modeState, timerObject, timerState } from 'atom'
 
 const AddFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)

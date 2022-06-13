@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import Button from '../components/Button'
-import NavBar from '../components/NavBar'
-import TaskBox from '../components/TaskBox'
-import Text from '../components/Text'
-import TimeSelectForm from '../components/TimeSelectForm'
-import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from '../utils/convertTime'
+import Button from 'shared/components/Button'
+import NavBar from 'shared/components/NavBar'
+import TaskBox from 'shared/components/TaskBox'
+import Text from 'shared/components/Text'
+import TimeSelectForm from 'shared/components/TimeSelectForm'
+import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { useSetRecoilState } from 'recoil'
-import { timerObject, timerState } from '../atom'
+import { timerObject, timerState } from 'atom'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',

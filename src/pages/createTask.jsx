@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import styled from 'styled-components'
-import NavBar from '../components/NavBar'
-import Text from '../components/Text'
-import Button from '../components/Button'
-import Input from '../components/Input'
+import NavBar from 'shared/components/NavBar'
+import Text from 'shared/components/Text'
+import Button from 'shared/components/Button'
+import Input from 'shared/components/Input'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -37,7 +37,7 @@ export const CreateTask = () => {
 		setTasks(filteredTasks)
 	}
 
-	const handleIsValidTask = () => {
+	const handleIsValidTask = tasks => {
 		if (tasks.length > 0) {
 			setIsValidTasks(true)
 			return
@@ -45,17 +45,17 @@ export const CreateTask = () => {
 		setIsValidTasks(false)
 	}
 
-	useEffect(() => {
+	useMemo(() => {
 		try {
 			const { spareTime } = location.state
 			setSpareTime(spareTime)
 		} catch {
 			navigate('/home')
 		}
-	}, [location])
+	}, [location, navigate])
 
 	useMemo(() => {
-		handleIsValidTask()
+		handleIsValidTask(tasks)
 	}, [tasks])
 
 	return (

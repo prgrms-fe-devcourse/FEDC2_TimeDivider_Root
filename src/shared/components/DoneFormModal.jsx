@@ -1,7 +1,7 @@
 import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { doneMode, modeState, originIdState, timerState } from '../atom'
+import { doneMode, modeState, originIdState, timerState } from 'atom'
 
 const DoneFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
