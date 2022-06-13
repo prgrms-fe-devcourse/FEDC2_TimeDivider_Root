@@ -11,23 +11,6 @@ import FormModal from '../components/FormModal'
 
 const UpdateTimeDivider = () => {
 	const [updateMode, addMode, doneMode] = ['updateMode', 'addMode', 'doneMode']
-	const formModalText = {
-		addMode: {
-			titleText: '추가하기',
-			cancelText: '취소',
-			confirmText: '확인',
-		},
-		doneMode: {
-			titleText: '남은 시간을 어느 항목에 합치시겠습니까?',
-			cancelText: '시간버리기',
-			confirmText: '합치기',
-		},
-	}
-	const modeButtonText = {
-		addMode: '추가하기',
-		doneMode: '완료하기',
-		doneModeToggled: '취소',
-	}
 
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [mode, setMode] = useState(updateMode)
@@ -94,7 +77,7 @@ const UpdateTimeDivider = () => {
 						setMode(addMode)
 					}}
 				>
-					{modeButtonText.addMode}
+					{'추가하기'}
 				</Button>
 				<Button
 					size={'md'}
@@ -103,7 +86,7 @@ const UpdateTimeDivider = () => {
 						mode === doneMode ? setMode(updateMode) : setMode(doneMode)
 					}}
 				>
-					{mode === doneMode ? modeButtonText.doneModeToggled : modeButtonText.doneMode}
+					{mode === doneMode ? '취소' : '완료하기'}
 				</Button>
 			</ToolBar>
 			<TimerArea mode={mode}>
@@ -131,9 +114,9 @@ const UpdateTimeDivider = () => {
 				onCancel={e => {
 					setMode(updateMode)
 				}}
-				titleText={formModalText.addMode.titleText}
-				cancelText={formModalText.addMode.cancelText}
-				confirmText={formModalText.addMode.confirmText}
+				titleText={'추가하기'}
+				cancelText={'취소'}
+				confirmText={'확인'}
 			>
 				<>
 					할 일: <input name={'name'} required={true} type={'text'} maxLength={10} />
@@ -147,9 +130,9 @@ const UpdateTimeDivider = () => {
 				onClose={() => setOriginId(null)}
 				onSubmit={e => onMergeEvent(e)}
 				onCancel={e => onDeleteEvent(e)}
-				titleText={formModalText.doneMode.titleText}
-				cancelText={formModalText.doneMode.cancelText}
-				confirmText={formModalText.doneMode.confirmText}
+				titleText={'남은 시간을 어느 항목에 합치시겠습니까?'}
+				cancelText={'시간버리기'}
+				confirmText={'합치기'}
 			>
 				<>
 					{originId && timers[originId].name}
