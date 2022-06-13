@@ -15,7 +15,6 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 			const newTimers = Object.assign({}, timers)
 			newTimers[id] = {
 				...newTimers[id],
-				name: newTimers[id].name + '-완료',
 				isRunning: false,
 				disabled: true,
 			}
@@ -48,20 +47,11 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 				{name}
 			</Name>
 			<Time isRunning={isRunning} disabled={timers[id].disabled}>
-				<span>
-					{hours < 10 && 0}
-					{hours}{' '}
-				</span>{' '}
-				:{' '}
-				<span>
-					{minutes < 10 && 0}
-					{minutes}
-				</span>{' '}
-				:{' '}
-				<span>
-					{seconds < 10 && 0}
-					{seconds}
-				</span>
+				{timers[id].disabled
+					? '완료'
+					: `${hours < 10 ? '0' + hours : hours} : ${minutes < 10 ? '0' + minutes : minutes} : ${
+							seconds < 10 ? '0' + seconds : seconds
+					  }`}
 			</Time>
 		</TimerWrapper>
 	)
@@ -78,10 +68,11 @@ Timer.propType = {
 }
 const TimerWrapper = styled.div`
 	box-sizing: border-box;
-	width: 6.5rem;
-	height: 6.5rem;
+	width: 10rem;
+	height: 10rem;
+
 	padding: 1rem;
-	font-size: 0.8rem;
+
 	background-color: ${props =>
 		props.disabled
 			? `${colors.timeoutDarkGray}`
@@ -95,6 +86,7 @@ const Time = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 1.3rem;
 	width: 100%;
 	height: 50%;
 	color: ${props =>
@@ -108,6 +100,7 @@ const Name = styled.span`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 1.3rem;
 	color: ${props =>
 		props.disabled
 			? `${themeColors.fontReversed}`

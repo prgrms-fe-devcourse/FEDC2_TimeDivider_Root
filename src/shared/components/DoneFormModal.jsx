@@ -20,10 +20,13 @@ const DoneFormModal = () => {
 		setOriginId(null)
 		setTimers(newTimers)
 	}
-
-	const deleteTimer = id => {
+	const makeTimerDone = id => {
 		const newTimers = Object.assign({}, timers)
-		delete newTimers[id]
+		newTimers[id] = {
+			...newTimers[id],
+			isRunning: false,
+			disabled: true,
+		}
 		setTimers(newTimers)
 	}
 
@@ -33,9 +36,9 @@ const DoneFormModal = () => {
 		mergeTimer(originId, e.target.targetId.value)
 	}
 
-	const onDeleteEvent = e => {
+	const onCancelEvent = e => {
 		if (!originId) return
-		deleteTimer(originId)
+		makeTimerDone(originId)
 		setOriginId(null)
 	}
 
@@ -46,9 +49,9 @@ const DoneFormModal = () => {
 			visible={mode === doneMode && originId}
 			onClose={() => setOriginId(null)}
 			onSubmit={e => onMergeEvent(e)}
-			onCancel={e => onDeleteEvent(e)}
+			onCancel={e => setOriginId(null)}
 			titleText={timers[originId]?.name + '을 어느 항목에 합치시겠습니까?'}
-			cancelText={'시간버리기'}
+			cancelText={'취소'}
 			confirmText={'합치기'}
 		>
 			<select name={'targetId'}>

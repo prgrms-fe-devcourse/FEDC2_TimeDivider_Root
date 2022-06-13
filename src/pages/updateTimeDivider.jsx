@@ -60,8 +60,10 @@ const UpdateTimeDivider = () => {
 					{mode === doneMode ? '취소' : '완료'}
 				</Button>
 			</ToolBar>
-			<Description>일을 클릭하여 시작하세요.</Description>
-			<TimerArea mode={mode}>
+			<Description>
+				{mode === doneMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
+			</Description>
+			<TimerArea>
 				{Object.entries(timers).map(([id, { time, name, disabled }], index) => (
 					<Timer
 						key={id}
@@ -96,9 +98,8 @@ const Wrapper = styled.div`
 `
 const TimerArea = styled.div`
 	display: flex;
-	background-color: ${props => (props.mode === 'doneMode' ? 'skyblue' : 'none')};
 	flex-wrap: wrap;
-	width: 90%;
+	width: 31.6rem;
 	margin: auto;
 	gap: 0.5rem;
 `
@@ -108,15 +109,16 @@ const ToolBar = styled.div`
 	justify-content: end;
 	width: 100%;
 	height: 3rem;
-	padding-right: 1rem;
-	padding-top: 1rem;
+	padding-right: 7rem;
+	padding-top: 10rem;
+	padding-bottom: 2rem;
 `
 const Description = styled.div`
 	display: flex;
 	width: 90%;
 	align-items: start;
 	color: ${themeColors.fontDescription};
-	font-size: 0.6rem;
-	padding-left: 1rem;
+	font-size: 1.3rem;
+	padding-left: 2rem;
 	margin-bottom: 1rem;
 `
