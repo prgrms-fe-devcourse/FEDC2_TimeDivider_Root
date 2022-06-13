@@ -55,16 +55,18 @@ const CreateTime = () => {
 			<Select
 				name={'hour'}
 				data={HOUR_NUMBERS}
-				placeholder={'시간 선택하기'}
+				style={{ width: '10rem' }}
 				label={'시간'}
 				onChange={handleSpareTime}
+				placeholder={'시간 선택하기'}
 			/>
 			<Select
 				name={'minute'}
-				placeholder={'분 선택하기'}
 				data={MINUTE_NUMBERS}
+				style={{ width: '10rem' }}
 				label={'분'}
 				onChange={handleSpareTime}
+				placeholder={'분 선택하기'}
 			/>
 			<ButtonArea>
 				<Link to="/createTask" state={{ spareTime }}>
