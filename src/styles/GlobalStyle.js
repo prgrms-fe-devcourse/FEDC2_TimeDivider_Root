@@ -65,7 +65,7 @@ table {
   align-items: center;
   width: 100%;
   max-width: 375px;
-  height: 812px;
+  height: 100vh;
   margin: auto;
   padding: 0;
   overflow: hidden;
