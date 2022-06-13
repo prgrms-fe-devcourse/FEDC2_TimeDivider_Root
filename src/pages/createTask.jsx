@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import styled from 'styled-components'
+import { colors } from 'shared/constants/colors'
+
 import NavBar from 'shared/components/NavBar'
 import Text from 'shared/components/Text'
 import Button from 'shared/components/Button'
@@ -59,34 +61,36 @@ export const CreateTask = () => {
 	}, [tasks])
 
 	return (
-		<>
-			<NavBar backIcon>오늘의 시간</NavBar>
+		<Wrapper>
+			<NavBar backIcon />
 
-			<SubTitleArea>
-				<Text size={1.5}>추가된 할 일들</Text>
-			</SubTitleArea>
+			<SubTitle>
+				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '3rem' }}>
+					오늘 해야할 일들은 무엇이 있나요?
+				</Text>
+			</SubTitle>
 
-			<TaskArea>
-				{tasks.map(({ id, task }) => (
-					<Task key={id}>
-						<span>{task}</span>
-						<DelBtn onClick={() => removeTask(id)} />
-					</Task>
-				))}
-			</TaskArea>
-
-			<Form onSubmit={e => handleSubmit(e)}>
-				<Input
-					type="text"
-					value={task}
-					onChange={e => setTask(e.target.value)}
-					autoFocus={true}
-					required
-				/>
-				<Button width={7.9} height={3.9} fontSize={1.6}>
-					추가
-				</Button>
-			</Form>
+			<Section>
+				<TaskArea>
+					{tasks.map(({ id, task }) => (
+						<Task key={id}>
+							<span onClick={() => removeTask(id)}>{task}</span>
+						</Task>
+					))}
+				</TaskArea>
+				<Form onSubmit={e => handleSubmit(e)}>
+					<Input
+						type="text"
+						value={task}
+						onChange={e => setTask(e.target.value)}
+						autoFocus={true}
+						required
+					/>
+					<Button width={7.9} height={3.9} fontSize={1.6}>
+						추가
+					</Button>
+				</Form>
+			</Section>
 
 			<ButtonArea>
 				<Link to="/createTimeDivider" state={{ spareTime, tasks }}>
@@ -95,18 +99,28 @@ export const CreateTask = () => {
 					</Button>
 				</Link>
 			</ButtonArea>
-		</>
+		</Wrapper>
 	)
 }
 
 export default CreateTask
-
-const SubTitleArea = styled.div`
+const Wrapper = styled.div`
 	display: flex;
-	justify-content: flex-start;
-	height: 3vh;
+	flex-direction: column;
 	width: 100%;
-	margin: 2rem 1rem 0 2rem;
+	height: 100%;
+	align-items: center;
+	padding-bottom: 3.3rem;
+`
+
+const SubTitle = styled.span`
+	position: relative;
+	left: -5rem;
+	display: flex;
+	align-items: left;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
 `
 
 const TaskArea = styled.div`
@@ -129,19 +143,9 @@ const Task = styled.div`
 	height: 2rem;
 	margin: 0.3rem;
 	padding: 0 1.5rem;
-	background-color: #999;
-`
-
-const DelBtn = styled.a`
-	position: absolute;
-	right: 0.3rem;
-	top: 0.4rem;
-	color: #fff;
-	border-radius: 50%;
-	font-size: 1.2rem;
-	::before {
-		content: 'x';
-	}
+	color: ${colors.tossBlue};
+	background-color: #fff;
+	cursor: grab;
 `
 
 const ButtonArea = styled.div`
@@ -156,4 +160,13 @@ const ButtonArea = styled.div`
 const Form = styled.form`
 	display: flex;
 	gap: 2rem;
+`
+
+const Section = styled.section`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	justify-content: center;
 `
