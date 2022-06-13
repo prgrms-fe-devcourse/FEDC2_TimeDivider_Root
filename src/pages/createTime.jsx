@@ -38,7 +38,7 @@ const CreateTime = () => {
 		setSpareTime(newSpareTime)
 	}
 
-	const handleIsValidSpareTime = () => {
+	const handleIsValidSpareTime = spareTime => {
 		if (spareTime.hour === '0' && spareTime.minute === '0') {
 			setIsValidSpareTime(false)
 			return
@@ -47,7 +47,7 @@ const CreateTime = () => {
 	}
 
 	useMemo(() => {
-		handleIsValidSpareTime()
+		handleIsValidSpareTime(spareTime)
 	}, [spareTime])
 
 	return (
