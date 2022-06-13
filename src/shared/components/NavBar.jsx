@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { IoIosArrowBack } from 'react-icons/io'
 import Text from './Text'
 
-const NavBar = ({ children = '시간 분배', backIcon, ...props }) => {
+const NavBar = ({ children = '', backIcon, ...props }) => {
 	return (
 		<NavBarContainer {...props}>
 			{backIcon && (
