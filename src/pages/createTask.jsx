@@ -83,7 +83,9 @@ export const CreateTask = () => {
 					autoFocus={true}
 					required
 				/>
-				<Button size="md">추가</Button>
+				<Button width={7.9} height={3.9} fontSize={1.6}>
+					추가
+				</Button>
 			</Form>
 
 			<ButtonArea>
@@ -143,6 +145,8 @@ const DelBtn = styled.a`
 `
 
 const ButtonArea = styled.div`
+	display: flex;
+	justify-content: center;
 	position: absolute;
 	margin: 2rem 2rem;
 	width: 100%;

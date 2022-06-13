@@ -107,6 +107,8 @@ export const CreateTimeDivider = () => {
 export default CreateTimeDivider
 
 const ButtonArea = styled.div`
+	display: flex;
+	justify-content: center;
 	position: absolute;
 	margin: 2rem 2rem;
 	width: 100%;
