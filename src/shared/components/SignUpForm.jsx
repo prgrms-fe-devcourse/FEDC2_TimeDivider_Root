@@ -29,8 +29,11 @@ const SignUpForm = ({ onSubmit }) => {
 				<Text size={2}>Sign up</Text>
 				<Input type="email" name="email" placeholder="Email" onChange={handleChange} />
 				{errors.email && <Text style={{ color: 'red', margin: '0.2rem' }}>{errors.email}</Text>}
+				<Input type="text" name="fullName" placeholder="name" onChange={handleChange} />
+				{errors.namel && <Text style={{ color: 'red', margin: '0.2rem' }}>{errors.namel}</Text>}
 				<Input
 					type="password"
+					name="password"
 					email="password"
 					placeholder="Password"
 					onChange={handleChange}
