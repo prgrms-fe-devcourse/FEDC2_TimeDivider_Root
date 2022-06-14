@@ -9,6 +9,7 @@ import TimeSelectForm from 'shared/components/TimeSelectForm'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { useSetRecoilState } from 'recoil'
 import { timerObject, timerState } from 'atom'
+import { themeColors } from 'shared/constants/colors'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -77,22 +78,35 @@ export const CreateTimeDivider = () => {
 
 	return (
 		<>
-			<NavBar backIcon>시간을 분배해요</NavBar>
-			<Text size={3.5}>
-				{convertSecondsToHourMinute(totalTime).hour} :{' '}
-				{convertSecondsToHourMinute(totalTime).minute}
-			</Text>
-			<BoxContainer>
-				{tasks.map(task => (
-					<TaskBox
-						key={task.id}
-						task={task}
-						onClick={() => {
-							handleTaskBoxClick(task)
-						}}
-					/>
-				))}
-			</BoxContainer>
+			<NavBar backIcon />
+			<SubTitle>
+				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
+					오늘 해야할 일들에 시간을 분배하세요.
+				</Text>
+			</SubTitle>
+			<TimeSection>
+				<Text size={2.2} color={themeColors.primary}>
+					남은 분배 가능 시간
+				</Text>
+				<Text size={3.5}>
+					{convertSecondsToHourMinute(totalTime).hour} :{' '}
+					{convertSecondsToHourMinute(totalTime).minute}
+				</Text>
+			</TimeSection>
+			<TaskArea>
+				<BoxContainer>
+					{tasks.map(task => (
+						<TaskBox
+							key={task.id}
+							task={task}
+							onClick={() => {
+								handleTaskBoxClick(task)
+							}}
+						/>
+					))}
+				</BoxContainer>
+			</TaskArea>
+
 			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 			{isTimeOver && <Text color="red">남은 시간이 부족합니다.</Text>}
 			<ButtonArea>
@@ -119,4 +133,37 @@ const BoxContainer = styled.div`
 	display: flex;
 	width: 100%;
 	flex-wrap: wrap;
+`
+
+const SubTitle = styled.span`
+	position: relative;
+	left: -5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
+`
+
+const TimeSection = styled.section`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
+	margin-top: 2.4rem;
+`
+const TaskArea = styled.div`
+	position: relative;
+	width: 100%;
+	height: 20vh;
+	overflow-y: scroll;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	margin: 2rem 3rem 1rem 3rem;
+	margin-bottom: 2rem;
 `
