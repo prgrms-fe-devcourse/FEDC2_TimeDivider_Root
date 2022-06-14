@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import React, { useMemo, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { colors } from 'shared/constants/colors'
@@ -123,7 +123,7 @@ const SubTitle = styled.span`
 	left: -5rem;
 	display: flex;
 	flex-direction: column;
-	align-items: left;
+	align-items: flex-start;
 	width: 24.5rem;
 	line-height: 3.2rem;
 	text-align: center;
@@ -132,7 +132,7 @@ const SubTitle = styled.span`
 const TaskArea = styled.div`
 	position: relative;
 	width: 100%;
-	height: 20vh;
+	height: 20rem;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;
