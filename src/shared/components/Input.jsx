@@ -11,7 +11,7 @@ const StyledInput = styled.input`
 	width: 20rem;
 	font-size: 2.5rem;
 	border: none;
-	border-bottom: 1px solid ${colors.tossBlue};
+	border-bottom: 1px solid ${colors.blue};
 	outline: none;
 	text-align: center;
 `

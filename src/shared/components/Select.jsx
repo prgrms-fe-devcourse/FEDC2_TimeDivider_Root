@@ -62,7 +62,7 @@ export default Select
 
 const Wrapper = styled.div`
 	display: ${({ block }) => (block ? 'block' : 'inline-block')};
-	border-bottom: 1px solid ${colors.tossBlue};
+	border-bottom: 1px solid ${colors.blue};
 `
 
 const Label = styled.label`

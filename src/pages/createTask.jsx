@@ -10,7 +10,7 @@ import Button from 'shared/components/Button'
 import Input from 'shared/components/Input'
 
 const BUTTON_TEXT = Object.freeze({
-	VALID: '다음 단계',
+	VALID: '계속 진행하기',
 	INVALID: '할 일을 입력해주세요',
 })
 
@@ -131,6 +131,7 @@ const SubTitle = styled.span`
 
 const TaskArea = styled.div`
 	position: relative;
+	width: 100%;
 	height: 20vh;
 	overflow-y: scroll;
 	display: flex;
@@ -149,7 +150,7 @@ const Task = styled.div`
 	height: 2rem;
 	margin: 0.3rem;
 	padding: 0 1.5rem;
-	color: ${colors.tossBlue};
+	color: ${colors.blue};
 	background-color: #fff;
 	cursor: grab;
 `

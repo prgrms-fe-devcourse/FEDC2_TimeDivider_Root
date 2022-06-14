@@ -8,7 +8,7 @@ export default {
 		children: { defaultValue: 'Button', control: { type: 'text' } },
 		width: { defaultValue: 33, control: { type: 'number' } },
 		height: { defaultValue: 5.8, control: { type: 'number' } },
-		backgroundColor: { defaultValue: colors.tossBlue, control: { type: 'color' } },
+		backgroundColor: { defaultValue: colors.blue, control: { type: 'color' } },
 		fontSize: { control: { type: 'number' } },
 		fontColor: { defaultValue: colors.white, control: { type: 'color' } },
 		borderColor: { control: { type: 'color' } },
