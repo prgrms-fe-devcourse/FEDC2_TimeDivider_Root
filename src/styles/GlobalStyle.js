@@ -65,7 +65,10 @@ table {
   align-items: center;
   width: 100%;
   max-width: 375px;
-  height: 100vh;
+  height: 812px;
+  @media screen and (max-height: 100px){
+    height: 100vh;
+  }
   margin: auto;
   padding: 0;
   overflow: hidden;

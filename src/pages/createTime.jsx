@@ -98,7 +98,7 @@ const SubTitle = styled.span`
 	position: relative;
 	left: -5rem;
 	display: flex;
-	align-items: left;
+	align-items: flex-start;
 	width: 24.5rem;
 	line-height: 3.2rem;
 	text-align: center;
@@ -106,7 +106,7 @@ const SubTitle = styled.span`
 
 const Section = styled.section`
 	display: flex;
-	height: 50vh;
+	height: 50rem;
 	gap: 1rem;
 	justify-content: space-between;
 	align-items: center;
