@@ -4,6 +4,9 @@ import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { addMode, defaultMode, modeState, timerObject, timerState } from 'atom'
+import Input from './Input'
+import styled from 'styled-components'
+import Text from './Text'
 
 const AddFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -41,9 +44,21 @@ const AddFormModal = () => {
 			confirmText={'확인'}
 		>
 			<>
-				할 일: <input name={'name'} required={true} type={'text'} maxLength={10} />
-				몇 시간 : <Select name={'hour'} data={HOUR_NUMBERS} />
-				몇 분: <Select name={'minute'} data={MINUTE_NUMBERS} />
+				<Input
+					placeholder={'할 일을 적어주세요'}
+					width={25}
+					fontSize={1.6}
+					name={'name'}
+					required={true}
+					type={'text'}
+					maxLength={10}
+				/>
+				<Section>
+					<Select name={'hour'} data={HOUR_NUMBERS} style={{ width: '8rem' }} />
+					<Text size={1.6}>시간</Text>
+					<Select name={'minute'} data={MINUTE_NUMBERS} style={{ width: '8rem' }} />
+					<Text size={1.6}>분</Text>
+				</Section>
 			</>
 		</FormModal>
 	)
@@ -54,3 +69,10 @@ export default AddFormModal
 const hmsToTime = (hour = 0, minute = 0, seconds = 0) => {
 	return hour * 60 * 60 + minute * 60 + seconds
 }
+const Section = styled.section`
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 3rem;
+`
