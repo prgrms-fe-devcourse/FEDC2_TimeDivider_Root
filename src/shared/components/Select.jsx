@@ -18,7 +18,7 @@ const Select = ({
 	)
 
 	const options = formattedData.map(item => (
-		<option key={item.value} value={item.value}>
+		<option style={{ fontSize: '1.5rem' }} key={item.value} value={item.value}>
 			{item.label}
 		</option>
 	))

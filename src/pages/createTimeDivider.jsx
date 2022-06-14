@@ -9,6 +9,7 @@ import TimeSelectForm from 'shared/components/TimeSelectForm'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { useSetRecoilState } from 'recoil'
 import { timerObject, timerState } from 'atom'
+import { themeColors } from 'shared/constants/colors'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -45,6 +46,12 @@ export const CreateTimeDivider = () => {
 		return totalTime + currentTime - inputTime >= 0 ? true : false
 	}
 
+	const addZero = () => {
+		return convertSecondsToHourMinute(totalTime).hour.length === 1
+			? `0${convertSecondsToHourMinute(totalTime).hour}`
+			: convertSecondsToHourMinute(totalTime).hour
+	}
+
 	const handleSubmit = time => {
 		const { hour, minute } = time
 		const inputTime = convertHourMinuteToSeconds(time)
@@ -77,24 +84,48 @@ export const CreateTimeDivider = () => {
 
 	return (
 		<>
-			<NavBar backIcon>시간을 분배해요</NavBar>
-			<Text size={3.5}>
-				{convertSecondsToHourMinute(totalTime).hour} :{' '}
-				{convertSecondsToHourMinute(totalTime).minute}
-			</Text>
-			<BoxContainer>
-				{tasks.map(task => (
-					<TaskBox
-						key={task.id}
-						task={task}
-						onClick={() => {
-							handleTaskBoxClick(task)
-						}}
-					/>
-				))}
-			</BoxContainer>
-			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
-			{isTimeOver && <Text color="red">남은 시간이 부족합니다.</Text>}
+			<NavBar backIcon />
+			<SubTitle>
+				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
+					오늘 해야할 일들에 시간을 분배하세요.
+				</Text>
+			</SubTitle>
+			<TimeSection>
+				<Text
+					size={2.0}
+					color={themeColors.primary}
+					style={{ color: themeColors.primary, fontSize: '2.0rem', marginBottom: '1rem' }}
+				>
+					남은 분배 가능 시간
+				</Text>
+				<Text size={3.5}>
+					{addZero()} :{' '}
+					{convertSecondsToHourMinute(totalTime).minute === '0'
+						? '00'
+						: convertSecondsToHourMinute(totalTime).minute}
+				</Text>
+			</TimeSection>
+			<TaskArea>
+				<BoxContainer>
+					{tasks.map(task => (
+						<TaskBox
+							key={task.id}
+							task={task}
+							onClick={() => {
+								handleTaskBoxClick(task)
+							}}
+						/>
+					))}
+				</BoxContainer>
+			</TaskArea>
+			<FormSection>
+				{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+				{isTimeOver && (
+					<Text color="red" size={1.4}>
+						남은 시간이 부족합니다.
+					</Text>
+				)}
+			</FormSection>
 			<ButtonArea>
 				<Link to="/updateTimeDivider" state={{ tasks }}>
 					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
@@ -119,4 +150,55 @@ const BoxContainer = styled.div`
 	display: flex;
 	width: 100%;
 	flex-wrap: wrap;
+	justify-content: center;
+`
+
+const SubTitle = styled.span`
+	position: relative;
+	left: -5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
+`
+
+const TimeSection = styled.section`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
+	margin-top: 2.4rem;
+	margin-bottom: 2.4rem;
+`
+
+const FormSection = styled.section`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 26rem;
+	line-height: 3.2rem;
+	text-align: center;
+	margin-top: 4.8rem;
+	margin-bottom: 2.4rem;
+`
+
+const TaskArea = styled.div`
+	position: relative;
+	width: 100%;
+	height: 20vh;
+	overflow-y: scroll;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	padding: 1rem;
+	box-sizing: border-box;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
 `
