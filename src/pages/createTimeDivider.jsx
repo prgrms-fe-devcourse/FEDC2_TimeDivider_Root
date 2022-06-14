@@ -46,6 +46,12 @@ export const CreateTimeDivider = () => {
 		return totalTime + currentTime - inputTime >= 0 ? true : false
 	}
 
+	const addZero = () => {
+		return convertSecondsToHourMinute(totalTime).hour.length === 1
+			? `0${convertSecondsToHourMinute(totalTime).hour}`
+			: convertSecondsToHourMinute(totalTime).hour
+	}
+
 	const handleSubmit = time => {
 		const { hour, minute } = time
 		const inputTime = convertHourMinuteToSeconds(time)
@@ -93,8 +99,10 @@ export const CreateTimeDivider = () => {
 					남은 분배 가능 시간
 				</Text>
 				<Text size={3.5}>
-					{convertSecondsToHourMinute(totalTime).hour} :{' '}
-					{convertSecondsToHourMinute(totalTime).minute}
+					{addZero()} :{' '}
+					{convertSecondsToHourMinute(totalTime).minute === '0'
+						? '00'
+						: convertSecondsToHourMinute(totalTime).minute}
 				</Text>
 			</TimeSection>
 			<TaskArea>

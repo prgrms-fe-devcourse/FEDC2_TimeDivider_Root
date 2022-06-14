@@ -1,17 +1,18 @@
-import { colors, themeColors } from 'shared/constants/colors'
+import { themeColors } from 'shared/constants/colors'
 import styled from 'styled-components'
 import Text from './Text'
 
 const TaskBox = ({ task, ...props }) => {
 	const { hour, minute } = task
+
 	return (
 		<BoxContainer {...props}>
 			<BoxWrapper>
-				<Text size={1.3} color={themeColors.primary}>
+				<Text size={1.4} color={themeColors.primary}>
 					{task.task}
 				</Text>
-				<Text size={1.3}>
-					{hour} : {minute}
+				<Text style={{ marginTop: '0.8rem', fontSize: '1.4rem' }}>
+					{hour.length === 1 ? `0${hour}` : hour} : {minute === '0' ? '00' : minute}
 				</Text>
 			</BoxWrapper>
 		</BoxContainer>

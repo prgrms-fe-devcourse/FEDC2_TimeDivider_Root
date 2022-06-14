@@ -33,7 +33,7 @@ const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
 
 	return (
 		<Form {...props} onSubmit={handleSubmit}>
-			<Text size={2.2} block>
+			<Text size={2.2} strong block>
 				{targetTask.task}
 			</Text>
 			<Content>
