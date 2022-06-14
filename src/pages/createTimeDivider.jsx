@@ -85,7 +85,11 @@ export const CreateTimeDivider = () => {
 				</Text>
 			</SubTitle>
 			<TimeSection>
-				<Text size={2.2} color={themeColors.primary}>
+				<Text
+					size={2.0}
+					color={themeColors.primary}
+					style={{ color: themeColors.primary, fontSize: '2.0rem', marginBottom: '1rem' }}
+				>
 					남은 분배 가능 시간
 				</Text>
 				<Text size={3.5}>
@@ -106,9 +110,14 @@ export const CreateTimeDivider = () => {
 					))}
 				</BoxContainer>
 			</TaskArea>
-
-			{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
-			{isTimeOver && <Text color="red">남은 시간이 부족합니다.</Text>}
+			<FormSection>
+				{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+				{isTimeOver && (
+					<Text color="red" size={1.4}>
+						남은 시간이 부족합니다.
+					</Text>
+				)}
+			</FormSection>
 			<ButtonArea>
 				<Link to="/updateTimeDivider" state={{ tasks }}>
 					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
@@ -133,6 +142,7 @@ const BoxContainer = styled.div`
 	display: flex;
 	width: 100%;
 	flex-wrap: wrap;
+	justify-content: center;
 `
 
 const SubTitle = styled.span`
@@ -155,7 +165,20 @@ const TimeSection = styled.section`
 	line-height: 3.2rem;
 	text-align: center;
 	margin-top: 2.4rem;
+	margin-bottom: 2.4rem;
 `
+
+const FormSection = styled.section`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 26rem;
+	line-height: 3.2rem;
+	text-align: center;
+	margin-top: 4.8rem;
+	margin-bottom: 2.4rem;
+`
+
 const TaskArea = styled.div`
 	position: relative;
 	width: 100%;
@@ -164,6 +187,10 @@ const TaskArea = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	margin: 2rem 3rem 1rem 3rem;
-	margin-bottom: 2rem;
+	padding: 1rem;
+	box-sizing: border-box;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
 `

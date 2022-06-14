@@ -33,32 +33,29 @@ const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
 
 	return (
 		<Form {...props} onSubmit={handleSubmit}>
-			<Text>{targetTask.task}</Text>
-			<Select
-				name="hour"
-				value={time.hour}
-				data={HOUR_NUMBERS}
-				label="시간"
-				onChange={handleChange}
-			/>
-			<Select
-				name="minute"
-				value={time.minute}
-				data={MINUTE_NUMBERS}
-				label="분"
-				onChange={handleChange}
-			/>
-			<Button width={7.9} height={3.9} fontSize={1.6}>
-				Set
-			</Button>
+			<Text size={2.2} block>
+				{targetTask.task}
+			</Text>
+			<Content>
+				<Select name="hour" value={time.hour} data={HOUR_NUMBERS} onChange={handleChange} />
+				<Text size={1.4}>시간</Text>
+				<Select name="minute" value={time.minute} data={MINUTE_NUMBERS} onChange={handleChange} />
+				<Text size={1.4}>분</Text>
+				<Button width={7.9} height={3.9} fontSize={1.6}>
+					Set
+				</Button>
+			</Content>
 		</Form>
 	)
 }
 
 export default TimeSelectForm
 
-const Form = styled.form`
+const Form = styled.form``
+
+const Content = styled.div`
 	display: flex;
 	align-items: flex-end;
+	justify-content: center;
 	gap: 1rem;
 `
