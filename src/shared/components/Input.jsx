@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 import { colors } from 'shared/constants/colors'
 
-const Input = ({ ...props }) => {
-	return <StyledInput {...props} />
+const Input = ({ width = 20, fontSize = 2.5, ...props }) => {
+	return <StyledInput width={width} fontSize={fontSize} {...props} />
 }
 
 export default Input
 
 const StyledInput = styled.input`
-	width: 20rem;
-	font-size: 2.5rem;
+	width: ${props => `${props.width}rem`};
+	font-size: ${props => `${props.fontSize}rem`};
 	border: none;
 	border-bottom: 1px solid ${colors.blue};
 	outline: none;
