@@ -2,12 +2,18 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { IoIosArrowBack } from 'react-icons/io'
 import Text from './Text'
+import { useNavigate } from 'react-router-dom'
 
 const NavBar = ({ children = '', backIcon, ...props }) => {
+	const navigate = useNavigate()
+
+	const handleGoBack = () => {
+		navigate(-1)
+	}
 	return (
 		<NavBarContainer {...props}>
 			{backIcon && (
-				<GoBackIcon>
+				<GoBackIcon onClick={handleGoBack}>
 					<IoIosArrowBack />
 				</GoBackIcon>
 			)}
