@@ -1,4 +1,5 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import useCreateTasks from 'shared/hooks/useCreateTasks'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -17,27 +18,8 @@ const BUTTON_TEXT = Object.freeze({
 export const CreateTask = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
-
-	const [spareTime, setSpareTime] = useState({ hour: 0, minute: 0 })
-	const [task, setTask] = useState('')
-	const [tasks, setTasks] = useState([])
-	const isValidTasks = useMemo(() => tasks.length > 0, [tasks])
-
-	const handleSubmit = e => {
-		e.preventDefault()
-		const trimmedTask = task.trim()
-
-		if (trimmedTask) {
-			setTasks([...tasks, { id: `${Date.now()}${tasks.length}`, task: trimmedTask }])
-		}
-
-		setTask('')
-	}
-
-	const removeTask = removeId => {
-		const filteredTasks = tasks.filter(({ id }) => removeId !== id)
-		setTasks(filteredTasks)
-	}
+	const { tasks, task, spareTime, setSpareTime, setTask, removeTask, handleSubmit, isValidTasks } =
+		useCreateTasks()
 
 	useEffect(() => {
 		try {
