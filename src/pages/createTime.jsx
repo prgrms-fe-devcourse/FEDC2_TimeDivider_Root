@@ -27,24 +27,15 @@ const BUTTON_TEXT = Object.freeze({
 
 const CreateTime = () => {
 	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '0', [TIME_TYPE.MINUTE]: '0' })
-	const [isValidSpareTime, setIsValidSpareTime] = useState(false)
+	const isValidSpareTime = useMemo(
+		() => spareTime.hour !== '0' || spareTime.minute !== '0',
+		[spareTime],
+	)
 
 	const handleSpareTime = e => {
 		const { name, value } = e.target
 		setSpareTime({ ...spareTime, [name]: value })
 	}
-
-	const handleIsValidSpareTime = spareTime => {
-		if (spareTime.hour === '0' && spareTime.minute === '0') {
-			setIsValidSpareTime(false)
-			return
-		}
-		setIsValidSpareTime(true)
-	}
-
-	useMemo(() => {
-		handleIsValidSpareTime(spareTime)
-	}, [spareTime])
 
 	return (
 		<Wrapper>

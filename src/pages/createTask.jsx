@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -21,7 +21,7 @@ export const CreateTask = () => {
 	const [spareTime, setSpareTime] = useState({ hour: 0, minute: 0 })
 	const [task, setTask] = useState('')
 	const [tasks, setTasks] = useState([])
-	const [isValidTasks, setIsValidTasks] = useState(false)
+	const isValidTasks = useMemo(() => tasks.length > 0, [tasks])
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -39,15 +39,7 @@ export const CreateTask = () => {
 		setTasks(filteredTasks)
 	}
 
-	const handleIsValidTask = tasks => {
-		if (tasks.length > 0) {
-			setIsValidTasks(true)
-			return
-		}
-		setIsValidTasks(false)
-	}
-
-	useMemo(() => {
+	useEffect(() => {
 		try {
 			const { spareTime } = location.state
 			setSpareTime(spareTime)
@@ -55,10 +47,6 @@ export const CreateTask = () => {
 			navigate('/home')
 		}
 	}, [location, navigate])
-
-	useMemo(() => {
-		handleIsValidTask(tasks)
-	}, [tasks])
 
 	return (
 		<Wrapper>
