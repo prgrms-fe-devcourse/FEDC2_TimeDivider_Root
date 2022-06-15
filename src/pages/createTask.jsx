@@ -71,7 +71,7 @@ export const CreateTask = () => {
 						</Task>
 					))}
 				</TaskArea>
-				<Form onSubmit={e => handleSubmit(e)}>
+				<Form onSubmit={handleSubmit}>
 					<Input
 						type="text"
 						value={task}
