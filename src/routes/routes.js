@@ -2,12 +2,14 @@ import Home from '../pages/home'
 
 import Login from '../pages/login'
 import Signup from '../pages/signUp'
+import MyPage from '../pages/myPage'
 
 import CreateTime from '../pages/createTime'
 import CreateTask from '../pages/createTask'
 import CreateTimeDivider from '../pages/createTimeDivider'
 import UpdateTimeDivider from '../pages/updateTimeDivider'
 import NotFound from '../pages/notFound'
+import ShareTask from '../pages/shareTask'
 
 const routes = [
 	{ path: 'login', view: Login },
@@ -41,6 +43,16 @@ const routes = [
 		path: '*',
 		view: NotFound,
 		title: '404',
+	},
+	{
+		path: 'myPage',
+		view: MyPage,
+		title: '마이페이지',
+	},
+	{
+		path: 'shareTask',
+		view: ShareTask,
+		title: '할일 공유 게시판',
 	},
 ]
 
