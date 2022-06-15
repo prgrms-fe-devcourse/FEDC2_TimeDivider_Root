@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import useCreateTasks from 'shared/hooks/useCreateTasks'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import useNavigation from 'shared/hooks/useNavigation'
+import { Link, useLocation } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { colors } from 'shared/constants/colors'
@@ -16,19 +16,16 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 export const CreateTask = () => {
-	const navigate = useNavigate()
 	const location = useLocation()
 	const { tasks, task, spareTime, setSpareTime, setTask, removeTask, handleSubmit, isValidTasks } =
 		useCreateTasks()
 
-	useEffect(() => {
-		try {
-			const { spareTime } = location.state
-			setSpareTime(spareTime)
-		} catch {
-			navigate('/home')
-		}
-	}, [location, navigate])
+	const navigationValidator = () => {
+		const { spareTime } = location.state
+		setSpareTime(spareTime)
+	}
+
+	useNavigation(navigationValidator)
 
 	return (
 		<Wrapper>
