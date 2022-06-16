@@ -4,6 +4,7 @@ export const colors = {
 	completeGreen: '#5ABF83',
 	timeoutDarkGray: '#505866',
 	lightGray: '#919191',
+	brightGray: '#f5f5f5',
 	black: '#000000',
 	white: '#FFFFFF',
 }
