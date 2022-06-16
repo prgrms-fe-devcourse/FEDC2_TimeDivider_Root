@@ -3,14 +3,17 @@ import Avatar from './Avatar'
 import { IoMdHeart } from 'react-icons/io'
 import Text from './Text'
 import { themeColors } from 'shared/constants/colors'
+import useToggle from 'shared/hooks/useToggle'
 
 const TaskCard = ({ width = 33, height = 22.5, tasks = [], ...props }) => {
+	const [state, toggle] = useToggle()
+
 	return (
 		<CardContainer width={width} height={height} {...props}>
 			<CardHeader>
 				<Avatar src="https://picsum.photos/200" alt="avatar" size={4.5} />
 				<Text size={1.4}>김경현님의 할일</Text>
-				<IoMdHeart fontSize={'3rem'} />
+				<IoMdHeart onClick={toggle} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
 			</CardHeader>
 			<ContentWrapper>
 				{tasks.map(task => (
