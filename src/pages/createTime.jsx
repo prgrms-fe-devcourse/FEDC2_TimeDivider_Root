@@ -27,31 +27,22 @@ const BUTTON_TEXT = Object.freeze({
 
 const CreateTime = () => {
 	const [spareTime, setSpareTime] = useState({ [TIME_TYPE.HOUR]: '0', [TIME_TYPE.MINUTE]: '0' })
-	const [isValidSpareTime, setIsValidSpareTime] = useState(false)
+	const isValidSpareTime = useMemo(
+		() => spareTime.hour !== '0' || spareTime.minute !== '0',
+		[spareTime],
+	)
 
 	const handleSpareTime = e => {
 		const { name, value } = e.target
 		setSpareTime({ ...spareTime, [name]: value })
 	}
 
-	const handleIsValidSpareTime = spareTime => {
-		if (spareTime.hour === '0' && spareTime.minute === '0') {
-			setIsValidSpareTime(false)
-			return
-		}
-		setIsValidSpareTime(true)
-	}
-
-	useMemo(() => {
-		handleIsValidSpareTime(spareTime)
-	}, [spareTime])
-
 	return (
 		<Wrapper>
 			<NavBar backIcon />
 
 			<SubTitle>
-				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
+				<Text size={2.2} textAlign={'start'}>
 					오늘 사용할 수 있는 시간은 얼마인가요?
 				</Text>
 			</SubTitle>
@@ -96,7 +87,7 @@ const Wrapper = styled.div`
 `
 const SubTitle = styled.span`
 	position: relative;
-	left: -5rem;
+	left: -2.5rem;
 	display: flex;
 	align-items: flex-start;
 	width: 24.5rem;

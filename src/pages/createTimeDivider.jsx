@@ -80,7 +80,7 @@ export const CreateTimeDivider = () => {
 		<>
 			<NavBar backIcon />
 			<SubTitle>
-				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
+				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들에 시간을 분배하세요.
 				</Text>
 			</SubTitle>
@@ -88,7 +88,7 @@ export const CreateTimeDivider = () => {
 				<Text
 					size={2.0}
 					color={themeColors.primary}
-					style={{ color: themeColors.primary, fontSize: '2.0rem', marginBottom: '1rem' }}
+					style={{ fontSize: '2.0rem', marginBottom: '1rem' }}
 				>
 					남은 분배 가능 시간
 				</Text>
@@ -147,7 +147,7 @@ const BoxContainer = styled.div`
 
 const SubTitle = styled.span`
 	position: relative;
-	left: -5rem;
+	left: -2.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: left;
