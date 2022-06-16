@@ -4,6 +4,7 @@ const AvatarWrapper = styled.div`
 	position: relative;
 	overflow: hidden;
 	border-radius: 50%;
+	border: 1px solid #666;
 `
 
 const Image = styled.img`
