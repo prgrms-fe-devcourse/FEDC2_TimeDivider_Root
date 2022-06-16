@@ -4,8 +4,28 @@ import { IoMdHeart } from 'react-icons/io'
 import Text from './Text'
 import { themeColors } from 'shared/constants/colors'
 
+const TaskCard = ({ width = 33, height = 22.5, tasks = [], ...props }) => {
+	return (
+		<CardContainer width={width} height={height} {...props}>
+			<CardHeader>
+				<Avatar src="https://picsum.photos/200" alt="avatar" size={4.5} />
+				<Text size={1.4}>김경현님의 할일</Text>
+				<IoMdHeart fontSize={'3rem'} />
+			</CardHeader>
+			<ContentWrapper>
+				{tasks.map(task => (
+					<Text size={2.2} key={task.id}>
+						{task.name}
+					</Text>
+				))}
+			</ContentWrapper>
+		</CardContainer>
+	)
+}
+
+export default TaskCard
+
 const CardContainer = styled.div`
-	display: flex;
 	width: ${({ width }) => `${width}rem`};
 	height: ${({ height }) => `${height}rem`};
 	background-color: ${themeColors.labelBackground};
@@ -25,16 +45,10 @@ const CardHeader = styled.div`
 	box-sizing: border-box;
 `
 
-const TaskCard = ({ width = 33, height = 22.5, ...props }) => {
-	return (
-		<CardContainer width={width} height={height} {...props}>
-			<CardHeader>
-				<Avatar src="https://picsum.photos/200" alt="avatar" size={4.5} />
-				<Text size={1.4}>김경현님의 할일</Text>
-				<IoMdHeart fontSize={'3rem'} />
-			</CardHeader>
-		</CardContainer>
-	)
-}
-
-export default TaskCard
+const ContentWrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1rem;
+	gap: 3rem 3rem;
+	margin-top: 1rem;
+`
