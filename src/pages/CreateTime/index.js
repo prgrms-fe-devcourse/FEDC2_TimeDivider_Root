@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import styled from 'styled-components'
+import * as S from './style'
 import NavBar from 'shared/components/NavBar'
 import Text from 'shared/components/Text'
 import Button from 'shared/components/Button'
@@ -38,16 +38,16 @@ const CreateTime = () => {
 	}
 
 	return (
-		<Wrapper>
+		<S.Wrapper>
 			<NavBar backIcon />
 
-			<SubTitle>
+			<S.SubTitle>
 				<Text size={2.2} textAlign={'start'}>
 					오늘 사용할 수 있는 시간은 얼마인가요?
 				</Text>
-			</SubTitle>
+			</S.SubTitle>
 
-			<Section>
+			<S.Section>
 				<Select
 					name={'hour'}
 					data={HOUR_NUMBERS}
@@ -62,53 +62,17 @@ const CreateTime = () => {
 					onChange={handleSpareTime}
 				/>
 				<Text size={2}>분</Text>
-			</Section>
+			</S.Section>
 
-			<ButtonArea>
+			<S.ButtonArea>
 				<Link to="/createTask" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>
 						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
 				</Link>
-			</ButtonArea>
-		</Wrapper>
+			</S.ButtonArea>
+		</S.Wrapper>
 	)
 }
 
 export default CreateTime
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	align-items: center;
-	padding-bottom: 3.3rem;
-`
-const SubTitle = styled.span`
-	position: relative;
-	left: -2.5rem;
-	display: flex;
-	align-items: flex-start;
-	width: 24.5rem;
-	line-height: 3.2rem;
-	text-align: center;
-`
-
-const Section = styled.section`
-	display: flex;
-	height: 50rem;
-	gap: 1rem;
-	justify-content: space-between;
-	align-items: center;
-	justify-content: center;
-`
-
-const ButtonArea = styled.div`
-	display: flex;
-	justify-content: center;
-	position: absolute;
-	margin: 2rem 2rem;
-	width: 100%;
-	bottom: 1rem;
-`
