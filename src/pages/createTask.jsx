@@ -36,7 +36,7 @@ export const CreateTask = () => {
 				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들은 무엇이 있나요?
 				</Text>
-				<Text size={1.3} textAlign={'start'} color={'#919191'}>
+				<Text size={1.3} textAlign={'start'} color={colors.lightGray}>
 					클릭하여 삭제할 수 있습니다.
 				</Text>
 			</SubTitle>
