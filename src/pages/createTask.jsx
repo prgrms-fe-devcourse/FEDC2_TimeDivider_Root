@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import useCreateTasks from 'shared/hooks/useCreateTasks'
+import useNavigation from 'shared/hooks/useNavigation'
+import { Link, useLocation } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { colors } from 'shared/constants/colors'
@@ -15,62 +16,26 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 export const CreateTask = () => {
-	const navigate = useNavigate()
 	const location = useLocation()
+	const { tasks, task, spareTime, setSpareTime, setTask, removeTask, handleSubmit, isValidTasks } =
+		useCreateTasks()
 
-	const [spareTime, setSpareTime] = useState({ hour: 0, minute: 0 })
-	const [task, setTask] = useState('')
-	const [tasks, setTasks] = useState([])
-	const [isValidTasks, setIsValidTasks] = useState(false)
-
-	const handleSubmit = e => {
-		e.preventDefault()
-		const trimmedTask = task.trim()
-
-		if (trimmedTask) {
-			setTasks([...tasks, { id: `${Date.now()}${tasks.length}`, task: trimmedTask }])
-		}
-
-		setTask('')
+	const navigationValidator = () => {
+		const { spareTime } = location.state
+		setSpareTime(spareTime)
 	}
 
-	const removeTask = removeId => {
-		const filteredTasks = tasks.filter(({ id }) => removeId !== id)
-		setTasks(filteredTasks)
-	}
-
-	const handleIsValidTask = tasks => {
-		if (tasks.length > 0) {
-			setIsValidTasks(true)
-			return
-		}
-		setIsValidTasks(false)
-	}
-
-	useMemo(() => {
-		try {
-			const { spareTime } = location.state
-			setSpareTime(spareTime)
-		} catch {
-			navigate('/home')
-		}
-	}, [location, navigate])
-
-	useMemo(() => {
-		handleIsValidTask(tasks)
-	}, [tasks])
+	useNavigation(navigationValidator)
 
 	return (
 		<Wrapper>
 			<NavBar backIcon />
 
 			<SubTitle>
-				<Text style={{ textAlign: 'start', fontSize: '2.2rem', padding: '0 3rem' }}>
+				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들은 무엇이 있나요?
 				</Text>
-				<Text
-					style={{ textAlign: 'start', fontSize: '1.3rem', color: '#919191', padding: '0 3rem' }}
-				>
+				<Text size={1.3} textAlign={'start'} color={'#919191'}>
 					클릭하여 삭제할 수 있습니다.
 				</Text>
 			</SubTitle>
@@ -83,7 +48,7 @@ export const CreateTask = () => {
 						</Task>
 					))}
 				</TaskArea>
-				<Form onSubmit={e => handleSubmit(e)}>
+				<Form onSubmit={handleSubmit}>
 					<Input
 						type="text"
 						value={task}
@@ -120,7 +85,7 @@ const Wrapper = styled.div`
 
 const SubTitle = styled.span`
 	position: relative;
-	left: -5rem;
+	left: -2.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;

@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 
-const Text = ({ children, block, size, strong, color, ...props }) => {
+const Text = ({ children, block, size, strong, color, textAlign, ...props }) => {
 	const Tag = block ? 'div' : 'span'
 	const fontStyle = {
 		fontWeight: strong ? 'bold' : undefined,
 		fontSize: `${typeof size === 'number' ? `${size}rem` : size}`,
-		color: color,
+		color,
+		textAlign,
 	}
 
 	return (
