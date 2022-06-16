@@ -9,13 +9,7 @@ const Badge = ({ children, text, ...props }) => {
 export default Badge
 
 Badge.propTypes = {
-	width: PropTypes.number,
-	height: PropTypes.number,
-	fontSize: PropTypes.number,
-	fontColor: PropTypes.string,
-	backgroundColor: PropTypes.string,
-	borderColor: PropTypes.string,
-	inline: PropTypes.bool,
+	text: PropTypes.string,
 }
 
 const StyledBadge = styled.div`
