@@ -9,6 +9,7 @@ import NavBar from 'shared/components/NavBar'
 import Text from 'shared/components/Text'
 import Button from 'shared/components/Button'
 import Input from 'shared/components/Input'
+import Badge from 'shared/components/Badge'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '계속 진행하기',
@@ -35,7 +36,7 @@ export const CreateTask = () => {
 				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들은 무엇이 있나요?
 				</Text>
-				<Text size={1.3} textAlign={'start'} color={'#919191'}>
+				<Text size={1.3} textAlign={'start'} color={colors.lightGray}>
 					클릭하여 삭제할 수 있습니다.
 				</Text>
 			</SubTitle>
@@ -43,9 +44,7 @@ export const CreateTask = () => {
 			<Section>
 				<TaskArea>
 					{tasks.map(({ id, task }) => (
-						<Task key={id}>
-							<span onClick={() => removeTask(id)}>{task}</span>
-						</Task>
+						<Badge text={task} key={id} onClick={() => removeTask(id)} />
 					))}
 				</TaskArea>
 				<Form onSubmit={handleSubmit}>
@@ -96,28 +95,14 @@ const SubTitle = styled.span`
 
 const TaskArea = styled.div`
 	position: relative;
-	width: 100%;
+	width: 30rem;
 	height: 20rem;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	margin: 2rem 3rem 1rem 3rem;
+	justify-content: start;
 	margin-bottom: 2rem;
-`
-
-const Task = styled.div`
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	height: 2rem;
-	margin: 0.3rem;
-	padding: 0 1.5rem;
-	color: ${colors.blue};
-	background-color: #fff;
-	cursor: grab;
 `
 
 const ButtonArea = styled.div`
