@@ -14,10 +14,10 @@ import {
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
-import AddFormModal from 'shared/components/AddFormModal'
-import MergeFormModal from 'shared/components/MergeFormModal'
+import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
+import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import { themeColors } from 'shared/constants/colors'
-import DoneFormModal from 'shared/components/DoneFormModal'
+import DoneFormModal from 'pages/UpdateTimeDivider/components/DoneFormModal'
 import { BottomBar } from '../../shared/components/BottomBar'
 import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
 
