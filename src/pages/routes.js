@@ -31,7 +31,7 @@ const routes = [
 		title: '오늘의 시간',
 	},
 	{
-		path: 'CreateTask',
+		path: 'createTask',
 		view: CreateTask,
 		title: '해야 할 일을 적어요',
 	},
