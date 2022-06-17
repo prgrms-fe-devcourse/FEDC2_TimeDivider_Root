@@ -30,7 +30,7 @@ const SignUpForm = ({ onSubmit }) => {
 	return (
 		<Wrapper>
 			<CardForm onSubmit={handleSubmit}>
-				<Text size={3}>Sign up</Text>
+				<Text size={3}>회원가입</Text>
 				<Input type="email" name="email" placeholder="이메일" onChange={handleChange} />
 				{errors.email && <Text color="red">{errors.email}</Text>}
 				<Input type="password" name="password" placeholder="비밀번호" onChange={handleChange} />

@@ -22,9 +22,9 @@ const LoginForm = ({ onSubmit }) => {
 	})
 
 	return (
-		<Container>
+		<Wrapper>
 			<CardForm onSubmit={handleSubmit}>
-				<Text size={2}>Login</Text>
+				<Text size={3}>로그인</Text>
 				<Input type="email" name="email" placeholder="Email" onChange={handleChange} />
 				{errors.email && <Text color="red">{errors.email}</Text>}
 				<Input type="password" name="password" placeholder="Password" onChange={handleChange} />
@@ -33,16 +33,16 @@ const LoginForm = ({ onSubmit }) => {
 					Login
 				</Button>
 			</CardForm>
-		</Container>
+		</Wrapper>
 	)
 }
 
 export default LoginForm
 
-const Container = styled.div`
+const Wrapper = styled.div`
 	display: flex;
+	gap: 2rem;
 	justify-content: center;
 	align-items: center;
-	width: 80%;
 	height: 100%;
 `
