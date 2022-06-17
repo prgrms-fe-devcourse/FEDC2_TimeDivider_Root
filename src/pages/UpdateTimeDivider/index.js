@@ -43,36 +43,24 @@ const UpdateTimeDivider = () => {
 				{mode === doneMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
 			</Description>
 			<TimerArea>
-				{Object.entries(timers).map(
-					([id, { time, name, disabled }], index) =>
-						!disabled && (
-							<Timer
-								key={id}
-								id={id}
-								name={name}
-								expiryTimestamp={timeToExpiryTime(time)}
-								onClick={() => {
-									if (timers[id].disabled) return
-									mode === doneMode ? setOriginId(id) : toggleRunning(id)
-								}}
-							/>
-						),
-				)}
-				{Object.entries(timers).map(
-					([id, { time, name, disabled }], index) =>
-						disabled && (
-							<Timer
-								key={id}
-								id={id}
-								name={name}
-								expiryTimestamp={timeToExpiryTime(time)}
-								onClick={() => {
-									if (timers[id].disabled) return
-									mode === doneMode ? setOriginId(id) : toggleRunning(id)
-								}}
-							/>
-						),
-				)}
+				{Object.entries(timers)
+					.sort((a, b) => {
+						if (a[1].disabled) return 1
+						if (b[1].disabled) return -1
+						return 0
+					})
+					.map(([id, { time, name, disabled }], index) => (
+						<Timer
+							key={id}
+							id={id}
+							name={name}
+							expiryTimestamp={timeToExpiryTime(time)}
+							onClick={() => {
+								if (timers[id].disabled) return
+								mode === doneMode ? setOriginId(id) : toggleRunning(id)
+							}}
+						/>
+					))}
 			</TimerArea>
 			{mode === addMode && <AddFormModal />}
 			{mode === doneMode && <DoneFormModal />}
