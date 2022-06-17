@@ -2,7 +2,7 @@ import useCreateTasks from 'shared/hooks/useCreateTasks'
 import useNavigation from 'shared/hooks/useNavigation'
 import { Link, useLocation } from 'react-router-dom'
 
-import styled from 'styled-components'
+import * as S from './style'
 import { colors } from 'shared/constants/colors'
 
 import NavBar from 'shared/components/NavBar'
@@ -16,7 +16,7 @@ const BUTTON_TEXT = Object.freeze({
 	INVALID: '할 일을 입력해주세요',
 })
 
-export const CreateTask = () => {
+const CreateTask = () => {
 	const location = useLocation()
 	const { tasks, task, spareTime, setSpareTime, setTask, removeTask, handleSubmit, isValidTasks } =
 		useCreateTasks()
@@ -29,25 +29,25 @@ export const CreateTask = () => {
 	useNavigation(navigationValidator)
 
 	return (
-		<Wrapper>
+		<S.Wrapper>
 			<NavBar backIcon />
 
-			<SubTitle>
+			<S.SubTitle>
 				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들은 무엇이 있나요?
 				</Text>
 				<Text size={1.3} textAlign={'start'} color={colors.lightGray}>
 					클릭하여 삭제할 수 있습니다.
 				</Text>
-			</SubTitle>
+			</S.SubTitle>
 
-			<Section>
-				<TaskArea>
+			<S.Section>
+				<S.TaskArea>
 					{tasks.map(({ id, task }) => (
 						<Badge text={task} key={id} onClick={() => removeTask(id)} />
 					))}
-				</TaskArea>
-				<Form onSubmit={handleSubmit}>
+				</S.TaskArea>
+				<S.Form onSubmit={handleSubmit}>
 					<Input
 						type="text"
 						value={task}
@@ -58,72 +58,18 @@ export const CreateTask = () => {
 					<Button width={7.9} height={3.9} fontSize={1.6}>
 						추가
 					</Button>
-				</Form>
-			</Section>
+				</S.Form>
+			</S.Section>
 
-			<ButtonArea>
+			<S.ButtonArea>
 				<Link to="/createTimeDivider" state={{ spareTime, tasks }}>
 					<Button disabled={!isValidTasks}>
 						{!isValidTasks ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
 				</Link>
-			</ButtonArea>
-		</Wrapper>
+			</S.ButtonArea>
+		</S.Wrapper>
 	)
 }
 
 export default CreateTask
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	align-items: center;
-	padding-bottom: 3.3rem;
-`
-
-const SubTitle = styled.span`
-	position: relative;
-	left: -2.5rem;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 24.5rem;
-	line-height: 3.2rem;
-	text-align: center;
-`
-
-const TaskArea = styled.div`
-	position: relative;
-	width: 30rem;
-	height: 20rem;
-	overflow-y: scroll;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	justify-content: start;
-	margin-bottom: 2rem;
-`
-
-const ButtonArea = styled.div`
-	display: flex;
-	justify-content: center;
-	position: absolute;
-	margin: 2rem 2rem;
-	width: 100%;
-	bottom: 1rem;
-`
-
-const Form = styled.form`
-	display: flex;
-	gap: 2rem;
-`
-
-const Section = styled.section`
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	justify-content: space-between;
-	align-items: center;
-	justify-content: center;
-`

@@ -1,27 +1,6 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import Button from 'shared/components/Button'
 
-const NotFound = () => {
-	return (
-		<>
-			<ErrorSection>
-				<h2>
-					<span>
-						<h2> 🚨 Not Found 🚨 </h2>
-					</span>
-				</h2>
-				<Link to="home">
-					<Button>일 모래시계 만들기</Button>
-				</Link>
-			</ErrorSection>
-		</>
-	)
-}
-
-export default NotFound
-
-const ErrorSection = styled.section`
+export const ErrorSection = styled.section`
 	background-color: rgba(0, 0, 0, 0.9);
 	display: flex;
 	flex-direction: column;

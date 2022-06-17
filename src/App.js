@@ -1,5 +1,5 @@
-import GlobalStyle from './styles/GlobalStyle'
-import AppRouter from './routes/router'
+import GlobalStyle from 'styles/GlobalStyle'
+import AppRouter from 'pages/router'
 import { RecoilRoot } from 'recoil'
 
 const App = () => (

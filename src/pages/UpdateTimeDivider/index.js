@@ -17,8 +17,8 @@ import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
 import AddFormModal from 'shared/components/AddFormModal'
 import MergeFormModal from 'shared/components/MergeFormModal'
-import { themeColors } from '../shared/constants/colors'
-import DoneFormModal from '../shared/components/DoneFormModal'
+import { themeColors } from 'shared/constants/colors'
+import DoneFormModal from 'shared/components/DoneFormModal'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)

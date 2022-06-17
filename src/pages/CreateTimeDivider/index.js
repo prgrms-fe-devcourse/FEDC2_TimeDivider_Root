@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+
+import * as S from './style'
+
 import Button from 'shared/components/Button'
 import NavBar from 'shared/components/NavBar'
 import TaskBox from 'shared/components/TaskBox'
@@ -16,7 +18,7 @@ const BUTTON_TEXT = Object.freeze({
 	INVALID: '시간을 입력해주세요',
 })
 
-export const CreateTimeDivider = () => {
+const CreateTimeDivider = () => {
 	const location = useLocation()
 	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
 
@@ -79,12 +81,12 @@ export const CreateTimeDivider = () => {
 	return (
 		<>
 			<NavBar backIcon />
-			<SubTitle>
+			<S.SubTitle>
 				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들에 시간을 분배하세요.
 				</Text>
-			</SubTitle>
-			<TimeSection>
+			</S.SubTitle>
+			<S.TimeSection>
 				<Text
 					size={2.0}
 					color={themeColors.primary}
@@ -96,9 +98,9 @@ export const CreateTimeDivider = () => {
 					{convertSecondsToHourMinute(totalTime).hour} :{' '}
 					{convertSecondsToHourMinute(totalTime).minute}
 				</Text>
-			</TimeSection>
-			<TaskArea>
-				<BoxContainer>
+			</S.TimeSection>
+			<S.TaskArea>
+				<S.BoxContainer>
 					{tasks.map(task => (
 						<TaskBox
 							key={task.id}
@@ -108,89 +110,23 @@ export const CreateTimeDivider = () => {
 							}}
 						/>
 					))}
-				</BoxContainer>
-			</TaskArea>
-			<FormSection>
+				</S.BoxContainer>
+			</S.TaskArea>
+			<S.FormSection>
 				{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 				{isTimeOver && (
 					<Text color="red" size={1.4}>
 						남은 시간이 부족합니다.
 					</Text>
 				)}
-			</FormSection>
-			<ButtonArea>
+			</S.FormSection>
+			<S.ButtonArea>
 				<Link to="/updateTimeDivider" state={{ tasks }}>
 					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
 				</Link>
-			</ButtonArea>
+			</S.ButtonArea>
 		</>
 	)
 }
 
 export default CreateTimeDivider
-
-const ButtonArea = styled.div`
-	display: flex;
-	justify-content: center;
-	position: absolute;
-	margin: 2rem 2rem;
-	width: 100%;
-	bottom: 1rem;
-`
-
-const BoxContainer = styled.div`
-	display: flex;
-	width: 100%;
-	flex-wrap: wrap;
-	justify-content: center;
-`
-
-const SubTitle = styled.span`
-	position: relative;
-	left: -2.5rem;
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	width: 24.5rem;
-	line-height: 3.2rem;
-	text-align: center;
-`
-
-const TimeSection = styled.section`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	width: 24.5rem;
-	line-height: 3.2rem;
-	text-align: center;
-	margin-top: 2.4rem;
-	margin-bottom: 2.4rem;
-`
-
-const FormSection = styled.section`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	width: 26rem;
-	line-height: 3.2rem;
-	text-align: center;
-	margin-top: 4.8rem;
-	margin-bottom: 2.4rem;
-`
-
-const TaskArea = styled.div`
-	position: relative;
-	width: 100%;
-	height: 20rem;
-	overflow-y: scroll;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	padding: 1rem;
-	box-sizing: border-box;
-
-	::-webkit-scrollbar {
-		display: none;
-	}
-`
