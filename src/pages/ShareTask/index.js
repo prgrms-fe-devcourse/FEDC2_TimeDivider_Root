@@ -3,6 +3,7 @@ import NavBar from 'shared/components/NavBar'
 import TaskCard from 'shared/components/TaskCard'
 import styled from 'styled-components'
 
+//채널의 포스트리스트 및 좋아요를 받아서 대체
 const tasks = [
 	{
 		id: 1,

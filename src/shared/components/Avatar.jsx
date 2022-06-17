@@ -1,23 +1,18 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-const AvatarWrapper = styled.div`
-	position: relative;
-	overflow: hidden;
+const Avatar = styled.div`
+	width: ${props => props.size}rem;
+	height: ${props => props.size}rem;
+	background: ${({ isLoading, src }) => (isLoading ? `gray` : `no-repeat top center url(${src})`)};
+	background-size: cover;
 	border-radius: 50%;
-	border: 1px solid #666;
 `
 
-const Image = styled.img`
-	width: ${({ size }) => `${size}rem`};
-	height: ${({ size }) => `${size}rem`};
-`
-
-const Avatar = ({ src, size = 2, alt, ...props }) => {
-	return (
-		<AvatarWrapper {...props}>
-			<Image size={size} src={src} alt={alt} />
-		</AvatarWrapper>
-	)
+Avatar.propTypes = {
+	size: PropTypes.number,
+	isLoading: PropTypes.bool,
+	src: PropTypes.string,
 }
 
 export default Avatar
