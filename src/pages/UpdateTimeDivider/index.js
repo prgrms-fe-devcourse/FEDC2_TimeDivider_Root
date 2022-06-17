@@ -17,50 +17,49 @@ const UpdateTimeDivider = () => {
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
+	const handleTimerClick = id => {
+		if (timers[id].disabled) return
+		completeMode ? setOriginId(id) : toggleRunning(id)
+	}
+	const handleAddButtonClick = e => {
+		toggleRunning()
+		setMode(addMode)
+		setCompleteMode(false)
+	}
+	const handleCompleteButtonClick = e => {
+		toggleRunning()
+		setCompleteMode(x => !x)
+		mode === doneMode ? setMode(defaultMode) : setMode(doneMode)
+	}
+	const timerEntries = timers =>
+		Object.entries(timers).sort((a, b) => {
+			if (a[1].disabled) return 1
+			if (b[1].disabled) return -1
+			return 0
+		})
+
 	return (
 		<Wrapper>
 			<NavBar>제목 미정 </NavBar>
 			<ToolBar>
-				<ToolBarButton
-					onClick={() => {
-						toggleRunning()
-						setMode(addMode)
-					}}
-				>
-					{'추가'}
-				</ToolBarButton>
-				<ToolBarButton
-					reversed={mode === doneMode}
-					onClick={() => {
-						toggleRunning()
-						mode === doneMode ? setMode(defaultMode) : setMode(doneMode)
-					}}
-				>
-					{mode === doneMode ? '취소' : '완료'}
+				<ToolBarButton onClick={handleAddButtonClick}>{'추가'}</ToolBarButton>
+				<ToolBarButton reversed={completeMode} onClick={handleCompleteButtonClick}>
+					{completeMode ? '취소' : '완료'}
 				</ToolBarButton>
 			</ToolBar>
 			<Description>
-				{mode === doneMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
+				{completeMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
 			</Description>
 			<TimerArea>
-				{Object.entries(timers)
-					.sort((a, b) => {
-						if (a[1].disabled) return 1
-						if (b[1].disabled) return -1
-						return 0
-					})
-					.map(([id, { time, name, disabled }], index) => (
-						<Timer
-							key={id}
-							id={id}
-							name={name}
-							expiryTimestamp={timeToExpiryTime(time)}
-							onClick={() => {
-								if (timers[id].disabled) return
-								mode === doneMode ? setOriginId(id) : toggleRunning(id)
-							}}
-						/>
-					))}
+				{timerEntries(timers).map(([id, { time, name }], index) => (
+					<Timer
+						key={id}
+						id={id}
+						name={name}
+						expiryTimestamp={timeToExpiryTime(time)}
+						onClick={() => handleTimerClick(id)}
+					/>
+				))}
 			</TimerArea>
 			{mode === addMode && <AddFormModal />}
 			{mode === doneMode && <DoneFormModal />}

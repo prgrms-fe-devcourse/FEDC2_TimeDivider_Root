@@ -6,7 +6,6 @@ import { colors, themeColors } from '../constants/colors'
 import { useTimers } from '../hooks/useTimers'
 
 const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) => {
-
 	const { timers, changeTime, completeTimer } = useTimers()
 
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
@@ -20,7 +19,7 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 	}, [expiryTimestamp])
 
 	useEffect(() => {
-		changeTime(id, hours * 60 * 60 + minutes * 60 + seconds)
+		changeTime(id, hmsToTime(hours, minutes, seconds))
 	}, [hours, minutes, seconds])
 
 	useEffect(() => {
@@ -48,6 +47,7 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 }
 
 export default Timer
+
 Timer.propType = {
 	expiryTimestamp: PropTypes.object.isRequired,
 	autoStart: PropTypes.bool,
@@ -56,6 +56,10 @@ Timer.propType = {
 	onClick: PropTypes.func,
 	onExpire: PropTypes.func,
 }
+const hmsToTime = (hour = 0, minute = 0, seconds = 0) => {
+	return hour * 60 * 60 + minute * 60 + seconds
+}
+
 const TimerWrapper = styled.div`
 	box-sizing: border-box;
 	width: 10rem;
