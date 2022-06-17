@@ -7,6 +7,7 @@ export const ToggleButton = ({ width = 10, height = 5, onToggle, ...props }) => 
 
 	return (
 		<Wrapper
+			{...props}
 			onClick={() => {
 				setToggled(toggled => !toggled)
 				onToggle(!toggled)
