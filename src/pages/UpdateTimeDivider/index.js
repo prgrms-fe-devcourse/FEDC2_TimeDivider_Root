@@ -10,7 +10,7 @@ import {
 	modeState,
 	originIdState,
 	timerState,
-} from 'atom'
+} from 'state/timer'
 
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'

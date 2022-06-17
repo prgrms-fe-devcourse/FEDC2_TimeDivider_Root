@@ -1,7 +1,7 @@
 import LoginForm from './components/LoginForm'
 import apis from 'shared/api'
 import { useSetRecoilState } from 'recoil'
-import { loginUserState } from 'atom'
+import { loginUserState } from 'state/user'
 
 const Login = () => {
 	const setUserInfo = useSetRecoilState(loginUserState)
@@ -11,7 +11,7 @@ const Login = () => {
 	}
 	return (
 		<>
-			<LoginForm onSubmit={handleLogin}></LoginForm>
+			<LoginForm onSubmit={handleLogin} />
 		</>
 	)
 }
