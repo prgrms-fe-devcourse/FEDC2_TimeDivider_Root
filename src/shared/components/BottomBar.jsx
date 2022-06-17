@@ -43,6 +43,6 @@ const NavItem = styled.div`
 	padding-top: 1.5rem;
 	background: no-repeat center center url('${props => props.src}');
 	background-size: 3rem 3rem;
-	border-bottom: 3px solid
+	border-top: 3px solid
 		${props => (props.to === props.currentpath ? themeColors.primary : 'transparent')};
 `
