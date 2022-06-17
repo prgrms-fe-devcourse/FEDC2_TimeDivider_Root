@@ -7,11 +7,12 @@ import CardForm from 'shared/components/CardForm'
 import styled from 'styled-components'
 
 const LoginForm = ({ onSubmit }) => {
+	const initialValues = {
+		email: '',
+		password: '',
+	}
 	const { errors, isLoading, handleChange, handleSubmit } = useForm({
-		initialValues: {
-			email: '',
-			password: '',
-		},
+		 initialValues,
 		onSubmit,
 		validate: ({ email, password }) => {
 			const newErrors = {}

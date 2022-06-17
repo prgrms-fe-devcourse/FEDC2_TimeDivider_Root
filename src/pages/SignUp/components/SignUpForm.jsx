@@ -13,7 +13,7 @@ const SignUpForm = ({ onSubmit }) => {
 		passwordConfirm: '',
 	}
 
-	const validate = ({ email, password, passwordConfirm }) => {
+	const validateSignUp = ({ email, password, passwordConfirm }) => {
 		const newErrors = {}
 		if (!email) newErrors.email = '이메일을 입력해주세요.'
 		if (!password) newErrors.password = '비밀번호를 입력해주세요.'
@@ -24,7 +24,7 @@ const SignUpForm = ({ onSubmit }) => {
 	const { errors, isLoading, handleChange, handleSubmit } = useForm({
 		initialValues,
 		onSubmit,
-		validate,
+		validate: validateSignUp,
 	})
 
 	return (
