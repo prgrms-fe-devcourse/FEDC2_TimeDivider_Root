@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors } from 'shared/constants/colors'
 
-const Badge = ({ children, text, ...props }) => {
-	return <StyledBadge {...props}>{text}</StyledBadge>
+//원래 쓰든 안쓰든 잇는 prop
+const Badge = ({ ...props }) => {
+	return <StyledBadge {...props} />
 }
-
 export default Badge
 
 Badge.propTypes = {
