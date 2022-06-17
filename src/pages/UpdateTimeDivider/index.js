@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import {
@@ -19,6 +18,8 @@ import AddFormModal from 'shared/components/AddFormModal'
 import MergeFormModal from 'shared/components/MergeFormModal'
 import { themeColors } from 'shared/constants/colors'
 import DoneFormModal from 'shared/components/DoneFormModal'
+import { BottomBar } from '../../shared/components/BottomBar'
+import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
 
 const UpdateTimeDivider = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
@@ -107,6 +108,9 @@ const UpdateTimeDivider = () => {
 			{mode === addMode && <AddFormModal />}
 			{mode === doneMode && <DoneFormModal />}
 			{mode === mergeMode && <MergeFormModal />}
+			<BottomBarArea>
+				<BottomBar />
+			</BottomBarArea>
 		</Wrapper>
 	)
 }
@@ -116,37 +120,3 @@ export default UpdateTimeDivider
 const timeToExpiryTime = time => {
 	return new Date(new Date().getTime() + time * 1000)
 }
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-`
-const TimerArea = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	width: 31.6rem;
-	margin: auto;
-	gap: 0.5rem;
-`
-const ToolBar = styled.div`
-	display: flex;
-	column-gap: 1rem;
-	justify-content: end;
-	width: 100%;
-	height: 3rem;
-	padding-right: 7rem;
-	padding-top: 10rem;
-	padding-bottom: 2rem;
-`
-const Description = styled.div`
-	display: flex;
-	width: 90%;
-	align-items: start;
-	color: ${themeColors.fontDescription};
-	font-size: 1.3rem;
-	padding-left: 2rem;
-	margin-bottom: 1rem;
-`
