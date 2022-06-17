@@ -1,16 +1,16 @@
-import Home from 'pages/home'
+import Home from 'pages/Home'
 
-import Login from 'pages/login'
-import Signup from 'pages/signUp'
-import MyPage from 'pages/myPage'
+import Login from 'pages/Login'
+import Signup from 'pages/SignUp'
+import MyPage from 'pages/MyPage'
 
-import CreateTime from 'pages/createTime'
-import CreateTask from 'pages/createTask'
-import CreateTimeDivider from 'pages/createTimeDivider'
-import UpdateTimeDivider from 'pages/updateTimeDivider'
-import ShareTask from 'pages/shareTask'
+import CreateTime from 'pages/CreateTime'
+import CreateTask from 'pages/CreateTask'
+import CreateTimeDivider from 'pages/CreateTimeDivider'
+import UpdateTimeDivider from 'pages/UpdateTimeDivider'
+import ShareTask from 'pages/ShareTask'
 
-import NotFound from 'pages/notFound'
+import NotFound from 'pages/NotFound'
 
 const routes = [
 	{ path: 'login', view: Login },
