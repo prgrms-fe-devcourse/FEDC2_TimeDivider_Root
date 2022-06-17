@@ -3,6 +3,7 @@ import { colors, themeColors } from '../../shared/constants/colors'
 import Text from '../../shared/components/Text'
 
 export const Wrapper = styled.div`
+	position: relative;
 	width: 100%;
 	height: 100%;
 	padding-top: 8.6rem;
@@ -47,4 +48,10 @@ export const Icon = styled(Text)`
 export const Title = styled(Text)`
 	display: block;
 	flex: 1;
+`
+export const BottomBarArea = styled.div`
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
 `
