@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { themeColors } from '../../shared/constants/colors'
 import Text from '../../shared/components/Text'
 import { ToggleButton } from '../../shared/components/ToggleButton'
-import { Avatar, Icon, Profiles, Setting, Settings, Title, Wrapper } from './style'
+import { Avatar, BottomBarArea, Icon, Profiles, Setting, Settings, Title, Wrapper } from './style'
+import { BottomBar } from '../../shared/components/BottomBar'
 
 const dummyUser = {
 	profileImg: 'https://tva1.sinaimg.cn/large/e6c9d24egy1h3bief308rj20dw0dwwem.jpg',
@@ -33,6 +34,9 @@ const MyPage = () => {
 					<ToggleButton width={4.8} height={2.5} onToggle={handleToggle} />
 				</Setting>
 			</Settings>
+			<BottomBarArea>
+				<BottomBar />
+			</BottomBarArea>
 		</Wrapper>
 	)
 }
