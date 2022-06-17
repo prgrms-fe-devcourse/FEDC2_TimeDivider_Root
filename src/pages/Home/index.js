@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import logo from 'assets/images/logoTimeDivider.png'
 
 import * as S from './style'
 
+import logo from 'shared/images/logoTimeDivider.png'
 import Button from 'shared/components/Button'
 import Text from 'shared/components/Text'
 
