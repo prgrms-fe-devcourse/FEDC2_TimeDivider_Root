@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
 	const navigate = useNavigate()
-	const handleSubmit = userInfo => {
+	const handleSignUpSubmit = userInfo => {
 		apis.signup(userInfo)
 		navigate('/home')
 	}
 
 	return (
 		<>
-			<SignUpForm onSubmit={handleSubmit}></SignUpForm>
+			<SignUpForm onSubmit={handleSignUpSubmit}></SignUpForm>
 		</>
 	)
 }
