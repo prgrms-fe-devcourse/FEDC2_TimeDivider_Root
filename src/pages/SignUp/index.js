@@ -1,9 +1,12 @@
-import SignUpForm from 'shared/components/SignUpForm'
+import SignUpForm from './components/SignUpForm'
 import apis from 'shared/api'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
+	const navigate = useNavigate()
 	const handleSubmit = userInfo => {
-		apis.authSignupUser(userInfo)
+		apis.signup(userInfo)
+		navigate('/home')
 	}
 
 	return (
