@@ -5,10 +5,17 @@ export const useTimers = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
 
+	const changeTime = (id, time) => {
+		setTimers({
+			...timers,
+			[id]: { ...timers[id], time },
+		})
+	}
+
 	const addTimer = (name, time, id) => {
 		setTimers({ ...timers, [id]: timerObject(time, name) })
 	}
-	const makeTimerDone = id => {
+	const completeTimer = id => {
 		const newTimers = Object.assign({}, timers)
 		newTimers[id] = {
 			...newTimers[id],
@@ -31,8 +38,9 @@ export const useTimers = () => {
 	}
 	return {
 		timers,
+		changeTime,
 		addTimer,
-		makeTimerDone,
+		completeTimer,
 		mergeTimer,
 	}
 }

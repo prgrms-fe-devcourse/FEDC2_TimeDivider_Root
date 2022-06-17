@@ -1,25 +1,17 @@
 import { useTimer } from 'react-timer-hook'
-import { useRecoilState } from 'recoil'
-import { timerState } from 'state/timer'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { colors, themeColors } from '../constants/colors'
+import { useTimers } from '../hooks/useTimers'
 
 const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) => {
-	const [timers, setTimers] = useRecoilState(timerState)
+
+	const { timers, changeTime, completeTimer } = useTimers()
 
 	const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
 		expiryTimestamp,
-		onExpire: () => {
-			const newTimers = Object.assign({}, timers)
-			newTimers[id] = {
-				...newTimers[id],
-				isRunning: false,
-				disabled: true,
-			}
-			setTimers(newTimers)
-		},
+		onExpire: () => completeTimer(id),
 		autoStart,
 	})
 
@@ -28,10 +20,7 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 	}, [expiryTimestamp])
 
 	useEffect(() => {
-		setTimers({
-			...timers,
-			[id]: { ...timers[id], time: hours * 60 * 60 + minutes * 60 + seconds },
-		})
+		changeTime(id, hours * 60 * 60 + minutes * 60 + seconds)
 	}, [hours, minutes, seconds])
 
 	useEffect(() => {
@@ -41,6 +30,7 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 			pause()
 		}
 	}, [timers])
+
 	return (
 		<TimerWrapper id={id} onClick={onClick} isRunning={isRunning} disabled={timers[id].disabled}>
 			<Name isRunning={isRunning} disabled={timers[id].disabled}>

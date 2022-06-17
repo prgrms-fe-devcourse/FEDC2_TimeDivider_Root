@@ -4,14 +4,15 @@ import { useRecoilState } from 'recoil'
 import { doneMode, mergeMode, modeState, originIdState } from 'state/timer'
 import { useTimers } from '../../../shared/hooks/useTimers'
 
-const MergeFormModal = () => {
-	const { makeTimerDone } = useTimers()
+const DoneFormModal = () => {
+	const { completeTimer } = useTimers()
+
 	const [mode, setMode] = useRecoilState(modeState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
 
 	const onDoneEvent = e => {
 		if (!originId) return
-		makeTimerDone(originId)
+		completeTimer(originId)
 		setOriginId(null)
 	}
 
@@ -36,4 +37,4 @@ const MergeFormModal = () => {
 	)
 }
 
-export default MergeFormModal
+export default DoneFormModal
