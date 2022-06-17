@@ -1,7 +1,7 @@
 import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { doneMode, mergeMode, modeState, originIdState, timerState } from 'atom'
+import { doneMode, mergeMode, modeState, originIdState, timerState } from 'state/timer'
 
 const MergeFormModal = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
