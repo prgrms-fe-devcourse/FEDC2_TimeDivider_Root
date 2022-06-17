@@ -26,18 +26,10 @@ const LoginForm = ({ onSubmit }) => {
 			<CardForm onSubmit={handleSubmit}>
 				<Text size={2}>Login</Text>
 				<Input type="email" name="email" placeholder="Email" onChange={handleChange} />
-				{errors.email && <Text style={{ color: 'red', margin: '0.2rem' }}>{errors.email}</Text>}
-				<Input
-					type="password"
-					name="password"
-					placeholder="Password"
-					onChange={handleChange}
-					style={{ marginTop: 8 }}
-				/>
-				{errors.password && (
-					<Text style={{ color: 'red', margin: '0.2rem' }}>{errors.password}</Text>
-				)}
-				<Button type="submit" disabled={isLoading} style={{ marginTop: 16 }}>
+				{errors.email && <Text color="red">{errors.email}</Text>}
+				<Input type="password" name="password" placeholder="Password" onChange={handleChange} />
+				{errors.password && <Text color="red">{errors.password}</Text>}
+				<Button type="submit" disabled={isLoading}>
 					Login
 				</Button>
 			</CardForm>
