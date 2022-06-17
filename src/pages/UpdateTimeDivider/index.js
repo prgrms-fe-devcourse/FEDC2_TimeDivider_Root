@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { addMode, defaultMode, doneMode, mergeMode, modeState, originIdState } from 'state/timer'
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
-import Button from 'shared/components/Button'
 import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
 import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
-import { themeColors } from 'shared/constants/colors'
 import DoneFormModal from 'pages/UpdateTimeDivider/components/DoneFormModal'
 import { BottomBar } from 'shared/components/BottomBar'
 import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
 import { useTimers } from 'shared/hooks/useTimers'
+import { ToolBarButton } from './components/ToolBarButton'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()
+	const [completeMode, setCompleteMode] = useState(false)
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
@@ -21,34 +21,23 @@ const UpdateTimeDivider = () => {
 		<Wrapper>
 			<NavBar>제목 미정 </NavBar>
 			<ToolBar>
-				<Button
-					width={6.3}
-					height={2.7}
-					fontSize={1.3}
-					backgroundColor={themeColors.background}
-					fontColor={themeColors.primary}
-					style={{ lineHeight: '1rem' }}
+				<ToolBarButton
 					onClick={() => {
 						toggleRunning()
 						setMode(addMode)
 					}}
 				>
 					{'추가'}
-				</Button>
-				<Button
-					width={6.3}
-					height={2.7}
-					fontSize={1.3}
-					backgroundColor={mode === doneMode ? themeColors.primary : themeColors.background}
-					fontColor={mode === doneMode ? themeColors.fontReversed : themeColors.primary}
-					style={{ lineHeight: '1rem' }}
+				</ToolBarButton>
+				<ToolBarButton
+					reversed={mode === doneMode}
 					onClick={() => {
 						toggleRunning()
 						mode === doneMode ? setMode(defaultMode) : setMode(doneMode)
 					}}
 				>
 					{mode === doneMode ? '취소' : '완료'}
-				</Button>
+				</ToolBarButton>
 			</ToolBar>
 			<Description>
 				{mode === doneMode ? '완료 할 일을 선택하세요.' : '일을 클릭하여 시작하세요.'}
