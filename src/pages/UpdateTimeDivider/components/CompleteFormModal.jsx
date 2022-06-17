@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil'
 import { doneMode, mergeMode, modeState, originIdState } from 'state/timer'
 import { useTimers } from '../../../shared/hooks/useTimers'
 
-const DoneFormModal = () => {
+const CompleteFormModal = () => {
 	const { completeTimer } = useTimers()
 
 	const [mode, setMode] = useRecoilState(modeState)
@@ -39,4 +39,4 @@ const DoneFormModal = () => {
 	)
 }
 
-export default DoneFormModal
+export default CompleteFormModal
