@@ -5,7 +5,7 @@ import { ToggleButton } from '../../shared/components/ToggleButton'
 import { Avatar, Icon, Profiles, Setting, Settings, Title, Wrapper } from './style'
 
 const dummyUser = {
-	profileImg: 'https://tva1.sinaimg.cn/large/e6c9d24egy1h3bez4iy87j20cs0csq3t.jpg',
+	profileImg: 'https://tva1.sinaimg.cn/large/e6c9d24egy1h3bief308rj20dw0dwwem.jpg',
 	name: '김경현',
 	email: 'codeisneverodd@gmail.com',
 	shareAllowed: false,

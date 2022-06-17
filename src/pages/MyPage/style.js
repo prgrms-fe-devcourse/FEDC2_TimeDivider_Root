@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 export const Profiles = styled.div`
 	display: flex;
 	width: 100%;
-	height: 40%;
+	height: 24rem;
 	flex-direction: column;
 	align-items: center;
 	row-gap: 1rem;
