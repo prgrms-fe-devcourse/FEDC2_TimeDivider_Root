@@ -1,15 +1,7 @@
 import React from 'react'
 
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import {
-	addMode,
-	defaultMode,
-	doneMode,
-	mergeMode,
-	modeState,
-	originIdState,
-	timerState,
-} from 'state/timer'
+import { addMode, defaultMode, doneMode, mergeMode, modeState, originIdState } from 'state/timer'
 
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
@@ -20,22 +12,12 @@ import { themeColors } from 'shared/constants/colors'
 import DoneFormModal from 'pages/UpdateTimeDivider/components/DoneFormModal'
 import { BottomBar } from '../../shared/components/BottomBar'
 import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
+import { useTimers } from '../../shared/hooks/useTimers'
 
 const UpdateTimeDivider = () => {
-	const [timers, setTimers] = useRecoilState(timerState)
+	const { timers, toggleRunning } = useTimers()
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
-
-	const toggleTimerRunning = (id = '') => {
-		const newTimers = Object.assign({}, timers)
-		for (const timerId in newTimers) {
-			newTimers[timerId] = {
-				...newTimers[timerId],
-				isRunning: timerId === id ? !newTimers[id].isRunning : false,
-			}
-		}
-		setTimers(newTimers)
-	}
 
 	return (
 		<Wrapper>
@@ -49,7 +31,7 @@ const UpdateTimeDivider = () => {
 					fontColor={themeColors.primary}
 					style={{ lineHeight: '1rem' }}
 					onClick={() => {
-						toggleTimerRunning()
+						toggleRunning()
 						setMode(addMode)
 					}}
 				>
@@ -63,7 +45,7 @@ const UpdateTimeDivider = () => {
 					fontColor={mode === doneMode ? themeColors.fontReversed : themeColors.primary}
 					style={{ lineHeight: '1rem' }}
 					onClick={() => {
-						toggleTimerRunning()
+						toggleRunning()
 						mode === doneMode ? setMode(defaultMode) : setMode(doneMode)
 					}}
 				>
@@ -84,7 +66,7 @@ const UpdateTimeDivider = () => {
 								expiryTimestamp={timeToExpiryTime(time)}
 								onClick={() => {
 									if (timers[id].disabled) return
-									mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
+									mode === doneMode ? setOriginId(id) : toggleRunning(id)
 								}}
 							/>
 						),
@@ -99,7 +81,7 @@ const UpdateTimeDivider = () => {
 								expiryTimestamp={timeToExpiryTime(time)}
 								onClick={() => {
 									if (timers[id].disabled) return
-									mode === doneMode ? setOriginId(id) : toggleTimerRunning(id)
+									mode === doneMode ? setOriginId(id) : toggleRunning(id)
 								}}
 							/>
 						),

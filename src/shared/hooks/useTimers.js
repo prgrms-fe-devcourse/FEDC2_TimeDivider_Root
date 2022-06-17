@@ -11,7 +11,16 @@ export const useTimers = () => {
 			[id]: { ...timers[id], time },
 		})
 	}
-
+	const toggleRunning = (id = '') => {
+		const newTimers = Object.assign({}, timers)
+		Object.keys(newTimers).forEach(timerId => {
+			newTimers[timerId] = {
+				...newTimers[timerId],
+				isRunning: timerId === id ? !newTimers[id].isRunning : false,
+			}
+		})
+		setTimers(newTimers)
+	}
 	const addTimer = (name, time, id) => {
 		setTimers({ ...timers, [id]: timerObject(time, name) })
 	}
@@ -39,6 +48,7 @@ export const useTimers = () => {
 	return {
 		timers,
 		changeTime,
+		toggleRunning,
 		addTimer,
 		completeTimer,
 		mergeTimer,
