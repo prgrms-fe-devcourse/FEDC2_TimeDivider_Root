@@ -3,16 +3,34 @@ import NavBar from 'shared/components/NavBar'
 import TaskCard from 'shared/components/TaskCard'
 import styled from 'styled-components'
 
+const tasks = [
+	{
+		id: 1,
+		task: 'gogo',
+	},
+	{
+		id: 2,
+		task: 'gogo',
+	},
+	{
+		id: 3,
+		task: 'gogo',
+	},
+	{
+		id: 4,
+		task: 'gogo',
+	},
+]
 const ShareTask = () => {
 	return (
 		<div>
 			<NavBar>할 일 공유</NavBar>
 			<CardArea>
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
+				<TaskCard tasks={tasks} />
+				<TaskCard tasks={tasks} />
+				<TaskCard tasks={tasks} />
+				<TaskCard tasks={tasks} />
+				<TaskCard tasks={tasks} />
 			</CardArea>
 
 			<ButtonArea>

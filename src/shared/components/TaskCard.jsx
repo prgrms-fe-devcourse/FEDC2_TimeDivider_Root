@@ -4,6 +4,7 @@ import { IoMdHeart } from 'react-icons/io'
 import Text from './Text'
 import { themeColors } from 'shared/constants/colors'
 import useToggle from 'shared/hooks/useToggle'
+import Badge from './Badge'
 
 const TaskCard = ({ width = 33, height = 22.5, tasks = [], ...props }) => {
 	const [state, toggle] = useToggle()
@@ -17,9 +18,7 @@ const TaskCard = ({ width = 33, height = 22.5, tasks = [], ...props }) => {
 			</CardHeader>
 			<ContentWrapper>
 				{tasks.map(task => (
-					<Text size={2.2} key={task.id}>
-						{task.name}
-					</Text>
+					<Badge key={task.id}>{task.task}</Badge>
 				))}
 			</ContentWrapper>
 		</CardContainer>
