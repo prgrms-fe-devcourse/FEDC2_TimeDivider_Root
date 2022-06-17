@@ -44,7 +44,9 @@ const CreateTask = () => {
 			<S.Section>
 				<S.TaskArea>
 					{tasks.map(({ id, task }) => (
-						<Badge text={task} key={id} onClick={() => removeTask(id)} />
+						<Badge key={id} onClick={() => removeTask(id)}>
+							{task}
+						</Badge>
 					))}
 				</S.TaskArea>
 				<S.Form onSubmit={handleSubmit}>
