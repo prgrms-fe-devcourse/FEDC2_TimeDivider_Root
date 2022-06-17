@@ -3,18 +3,15 @@ import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../../../shared/components/TimeSel
 import FormModal from '../../../shared/components/FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { addMode, defaultMode, modeState, timerObject, timerState } from 'state/timer'
+import { addMode, defaultMode, modeState } from 'state/timer'
 import Input from '../../../shared/components/Input'
 import styled from 'styled-components'
 import Text from '../../../shared/components/Text'
+import { useTimers } from '../../../shared/hooks/useTimers'
 
 const AddFormModal = () => {
-	const [timers, setTimers] = useRecoilState(timerState)
+	const { addTimer } = useTimers()
 	const [mode, setMode] = useRecoilState(modeState)
-
-	const addTimer = (name, time, id) => {
-		setTimers({ ...timers, [id]: timerObject(time, name) })
-	}
 
 	const onAddEvent = e => {
 		e.preventDefault()

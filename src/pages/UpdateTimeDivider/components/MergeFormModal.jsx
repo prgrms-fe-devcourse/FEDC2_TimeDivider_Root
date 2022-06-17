@@ -1,25 +1,13 @@
 import FormModal from '../../../shared/components/FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { mergeMode, modeState, originIdState, timerState } from 'state/timer'
+import { mergeMode, modeState, originIdState } from 'state/timer'
+import { useTimers } from '../../../shared/hooks/useTimers'
 
 const MergeFormModal = () => {
-	const [timers, setTimers] = useRecoilState(timerState)
+	const { timers, mergeTimer } = useTimers()
 	const [mode, setMode] = useRecoilState(modeState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
-
-	const mergeTimer = (originId, targetId) => {
-		const newTimers = {
-			...timers,
-			[targetId]: {
-				...timers[targetId],
-				time: timers[targetId].time + timers[originId].time,
-			},
-		}
-		delete newTimers[originId]
-		setOriginId(null)
-		setTimers(newTimers)
-	}
 
 	const onMergeEvent = e => {
 		e.preventDefault()
