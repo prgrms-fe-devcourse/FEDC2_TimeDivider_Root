@@ -16,7 +16,7 @@ const BUTTON_TEXT = Object.freeze({
 	INVALID: '할 일을 입력해주세요',
 })
 
-export const CreateTask = () => {
+const CreateTask = () => {
 	const location = useLocation()
 	const { tasks, task, spareTime, setSpareTime, setTask, removeTask, handleSubmit, isValidTasks } =
 		useCreateTasks()

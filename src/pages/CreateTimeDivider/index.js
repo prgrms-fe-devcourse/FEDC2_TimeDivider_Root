@@ -18,7 +18,7 @@ const BUTTON_TEXT = Object.freeze({
 	INVALID: '시간을 입력해주세요',
 })
 
-export const CreateTimeDivider = () => {
+const CreateTimeDivider = () => {
 	const location = useLocation()
 	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
 
