@@ -1,8 +1,6 @@
 import React from 'react'
-
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { addMode, defaultMode, doneMode, mergeMode, modeState, originIdState } from 'state/timer'
-
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
 import Button from 'shared/components/Button'
@@ -10,9 +8,9 @@ import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
 import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import { themeColors } from 'shared/constants/colors'
 import DoneFormModal from 'pages/UpdateTimeDivider/components/DoneFormModal'
-import { BottomBar } from '../../shared/components/BottomBar'
+import { BottomBar } from 'shared/components/BottomBar'
 import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
-import { useTimers } from '../../shared/hooks/useTimers'
+import { useTimers } from 'shared/hooks/useTimers'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()

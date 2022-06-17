@@ -10,7 +10,13 @@ const DoneFormModal = () => {
 	const [mode, setMode] = useRecoilState(modeState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
 
-	const onDoneEvent = e => {
+	const handleClose = e => {
+		setOriginId(null)
+	}
+	const handleSubmit = e => {
+		setMode(mergeMode)
+	}
+	const handleCancel = e => {
 		if (!originId) return
 		completeTimer(originId)
 		setOriginId(null)
@@ -21,13 +27,9 @@ const DoneFormModal = () => {
 			id={'doneForm'}
 			height={21.1}
 			visible={mode === doneMode && originId !== null}
-			onClose={() => {
-				setOriginId(null)
-			}}
-			onSubmit={e => {
-				setMode(mergeMode)
-			}}
-			onCancel={e => onDoneEvent(e)}
+			onClose={handleClose}
+			onSubmit={handleSubmit}
+			onCancel={handleCancel}
 			titleText={'남은 시간을 다른 일에 합칠까요?'}
 			cancelText={'합치지 않고 완료하기'}
 			confirmText={'합치기'}
