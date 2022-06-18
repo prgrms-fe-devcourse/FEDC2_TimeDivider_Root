@@ -1,19 +1,22 @@
-import Select from '../../../shared/components/Select'
-import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../../../shared/components/TimeSelectForm'
-import FormModal from '../../../shared/components/FormModal'
+import Select from './Select'
+import { HOUR_NUMBERS, MINUTE_NUMBERS } from './TimeSelectForm'
+import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { addMode, defaultMode, modeState } from 'state/timer'
-import Input from '../../../shared/components/Input'
+import { addMode, defaultMode, modeState, timerObject, timerState } from 'state/timer'
+import Input from './Input'
 import styled from 'styled-components'
-import Text from '../../../shared/components/Text'
-import { useTimers } from '../../../shared/hooks/useTimers'
+import Text from './Text'
 
 const AddFormModal = () => {
-	const { addTimer } = useTimers()
+	const [timers, setTimers] = useRecoilState(timerState)
 	const [mode, setMode] = useRecoilState(modeState)
 
-	const handleSubmit = e => {
+	const addTimer = (name, time, id) => {
+		setTimers({ ...timers, [id]: timerObject(time, name) })
+	}
+
+	const onAddEvent = e => {
 		e.preventDefault()
 		const [name, time, id] = [
 			e.target.name.value,
@@ -21,22 +24,21 @@ const AddFormModal = () => {
 			'' + Date.now(),
 		]
 		addTimer(name, time, id)
-		setMode(defaultMode)
 	}
-	const handleCancel = e => {
-		setMode(defaultMode)
-	}
-	const handleClose = e => {
-		setMode(defaultMode)
-	}
+
 	return (
 		<FormModal
 			id={'addForm'}
 			visible={mode === addMode}
 			height={38.1}
-			onClose={handleClose}
-			onSubmit={handleSubmit}
-			onCancel={handleCancel}
+			onClose={() => setMode(defaultMode)}
+			onSubmit={e => {
+				onAddEvent(e)
+				setMode(defaultMode)
+			}}
+			onCancel={e => {
+				setMode(defaultMode)
+			}}
 			titleText={'새로운 할일에 대해서 알려주세요'}
 			cancelText={'취소'}
 			confirmText={'확인'}
