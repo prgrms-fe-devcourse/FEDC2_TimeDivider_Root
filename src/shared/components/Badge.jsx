@@ -22,8 +22,9 @@ const StyledBadge = styled.div`
 	border-radius: 2rem;
 	height: 2rem;
 	margin: 0.3rem;
-	padding: 0.5rem 1.5rem;
+	padding: 1.5rem 1.5rem;
 	color: ${colors.blue};
-	background-color: ${colors.brightGray};
-	cursor: grab;
+	background-color: ${colors.badgeGray};
+	box-sizing: border-box;
+	cursor: pointer;
 `
