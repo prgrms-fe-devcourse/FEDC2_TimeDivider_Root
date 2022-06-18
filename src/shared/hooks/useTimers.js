@@ -1,10 +1,9 @@
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { originIdState, timerObject, timerState } from '../../state/timer'
 
 export const useTimers = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
-	const [originId, setOriginId] = useRecoilState(originIdState)
-
+	const resetOriginId = useResetRecoilState(originIdState)
 	const changeTime = (id, time) => {
 		setTimers({
 			...timers,
@@ -25,13 +24,7 @@ export const useTimers = () => {
 		setTimers({ ...timers, [id]: timerObject(time, name) })
 	}
 	const completeTimer = id => {
-		const newTimers = Object.assign({}, timers)
-		newTimers[id] = {
-			...newTimers[id],
-			isRunning: false,
-			disabled: true,
-		}
-		setTimers(newTimers)
+		setTimers({ ...timers, [id]: { ...timers[id], isRunning: false, disabled: true } })
 	}
 	const mergeTimer = (originId, targetId) => {
 		const newTimers = {
@@ -42,7 +35,7 @@ export const useTimers = () => {
 			},
 		}
 		delete newTimers[originId]
-		setOriginId(null)
+		resetOriginId()
 		setTimers(newTimers)
 	}
 
