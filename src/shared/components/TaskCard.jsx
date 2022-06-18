@@ -18,7 +18,9 @@ const TaskCard = ({ width = 33, height = 22.5, author, tasks = [], ...props }) =
 			</CardHeader>
 			<ContentWrapper>
 				{tasks.map(task => (
-					<Badge key={task.id}>{task.name}</Badge>
+					<Badge key={task.id} fontSize={1.6}>
+						{task.name}
+					</Badge>
 				))}
 			</ContentWrapper>
 		</CardContainer>
