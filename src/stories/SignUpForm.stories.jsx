@@ -1,4 +1,4 @@
-import SignUpForm from 'shared/components/SignUpForm'
+import SignUpForm from 'pages/SignUp/components/SignUpForm'
 
 export default {
 	title: 'Component/SignUpForm',

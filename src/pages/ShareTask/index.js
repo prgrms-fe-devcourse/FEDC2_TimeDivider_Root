@@ -1,4 +1,5 @@
 import React from 'react'
+import { BottomBar } from 'shared/components/BottomBar'
 import NavBar from 'shared/components/NavBar'
 import TaskCard from 'shared/components/TaskCard'
 import styled from 'styled-components'
@@ -96,7 +97,7 @@ const ShareTask = () => {
 			</CardArea>
 
 			<ButtonArea>
-				<TempMenu />
+				<BottomBar />
 			</ButtonArea>
 		</div>
 	)
@@ -118,12 +119,6 @@ const CardArea = styled.div`
 	::-webkit-scrollbar {
 		display: none;
 	}
-`
-
-const TempMenu = styled.div`
-	width: 100%;
-	height: 10rem;
-	background-color: gray;
 `
 
 const ButtonArea = styled.div`

@@ -9,6 +9,10 @@ export default {
 			defaultValue: 3,
 			control: { type: 'number' },
 		},
+		isLoading: {
+			defaultValue: false,
+			control: { type: 'boolean' },
+		},
 	},
 }
 

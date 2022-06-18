@@ -12,7 +12,7 @@ const TaskCard = ({ width = 33, height = 22.5, author, tasks = [], ...props }) =
 	return (
 		<CardContainer width={width} height={height} {...props}>
 			<CardHeader>
-				<Avatar src="https://picsum.photos/200" alt="avatar" size={4.5} />
+				<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
 				<Text size={1.4}>{author}님의 할일</Text>
 				<IoMdHeart onClick={toggle} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
 			</CardHeader>
