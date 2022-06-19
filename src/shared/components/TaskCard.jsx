@@ -6,13 +6,13 @@ import { themeColors } from 'shared/constants/colors'
 import useToggle from 'shared/hooks/useToggle'
 import Badge from './Badge'
 
-const TaskCard = ({ width = 33, height = 22.5, tasks = [], ...props }) => {
+const TaskCard = ({ width = 33, height = 22.5, tasks = [], isLoading, ...props }) => {
 	const [state, toggle] = useToggle()
 
 	return (
 		<CardContainer width={width} height={height} {...props}>
 			<CardHeader>
-				<Avatar src="https://picsum.photos/200" alt="avatar" size={4.5} />
+				<Avatar isLoading={isLoading} src="https://picsum.photos/200" alt="avatar" size={4.5} />
 				<Text size={1.4}>김경현님의 할일</Text>
 				<IoMdHeart onClick={toggle} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
 			</CardHeader>
