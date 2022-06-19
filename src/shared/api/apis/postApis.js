@@ -12,9 +12,9 @@ export const createPost = async (
 	}
 }
 
-export const getPosts = async (channelId = TEST_CHANNEL_ID) => {
+export const getPosts = async (channelId = TEST_CHANNEL_ID, offset = 0, limit = 5) => {
 	try {
-		const { data } = await API.get(`/posts/channel/${channelId}`)
+		const { data } = await API.get(`/posts/channel/${channelId}?offset=${offset}&limit=${limit}`)
 		return data
 	} catch (error) {
 		return error

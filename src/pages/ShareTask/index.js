@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import apis from 'shared/api'
 import { BottomBar } from 'shared/components/BottomBar'
 import NavBar from 'shared/components/NavBar'
@@ -89,13 +91,39 @@ const postsList = [
 ]
 
 const ShareTask = () => {
+	const [posts, setPosts] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		const fetchPosts = async () => {
+			setIsLoading(true)
+			const data = await apis.getPosts(TEST_CHANNEL_ID)
+
+			const fetchData = data.map(post => {
+				if (post.title !== 'Test') {
+					const { title, tasks } = JSON.parse(post.title)
+					return { ...post, title, tasks }
+				}
+				return post
+			})
+			setPosts(fetchData)
+			setIsLoading(false)
+		}
+
+		fetchPosts()
+	}, [])
+
 	return (
 		<div>
 			<NavBar>할 일 공유</NavBar>
 			<CardArea>
-				{postsList.map(post => (
-					<TaskCard key={post._id} author={post.author} tasks={post.tasks} />
-				))}
+				{isLoading ? (
+					<div>로딩중</div>
+				) : (
+					posts.map(post => (
+						<TaskCard key={post._id} author={post.author.fullName} tasks={post.tasks || []} />
+					))
+				)}
 			</CardArea>
 			<ButtonArea>
 				<BottomBar />
