@@ -5,6 +5,6 @@ export const getToken = () => {
 			return JSON.parse(userInfo).token
 		}
 	} catch (e) {
-		console.log(e)
+		return null
 	}
 }

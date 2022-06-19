@@ -1,20 +1,29 @@
-import { authorizedInstance, axiosInstance } from '../API'
+import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
+import API from '../API'
 
 export const createPost = async (
-	postInfo = { title: 'Test', image: null, channelId: '62aef0cb0c40db04a896388f' },
+	postInfo = { title: 'Test', image: null, channelId: TEST_CHANNEL_ID },
 ) => {
 	try {
-		await authorizedInstance.post('/posts/create', postInfo)
+		await API.post('/posts/create', postInfo)
 		return
 	} catch (error) {
 		return error
 	}
 }
 
-export const getPosts = async (channelId = '62aef0cb0c40db04a896388f') => {
+export const getPosts = async (channelId = TEST_CHANNEL_ID) => {
 	try {
-		const { data } = await axiosInstance.get(`/posts/channel/${channelId}`)
+		const { data } = await API.get(`/posts/channel/${channelId}`)
 		return data
+	} catch (error) {
+		return error
+	}
+}
+
+export const deletePost = async (id = '') => {
+	try {
+		await API.delete(`/posts/delete`, { id })
 	} catch (error) {
 		return error
 	}
