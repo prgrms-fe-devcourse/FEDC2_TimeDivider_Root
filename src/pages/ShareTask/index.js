@@ -95,7 +95,6 @@ const ShareTask = () => {
 					<TaskCard key={post._id} author={post.author} tasks={post.tasks} />
 				))}
 			</CardArea>
-
 			<ButtonArea>
 				<BottomBar />
 			</ButtonArea>
@@ -108,7 +107,7 @@ export default ShareTask
 const CardArea = styled.div`
 	position: relative;
 	width: 100%;
-	height: 60rem;
+	height: 66.5rem;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;
