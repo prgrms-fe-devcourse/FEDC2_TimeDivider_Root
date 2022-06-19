@@ -6,16 +6,16 @@ export const createPost = async (
 	try {
 		await authorizedInstance.post('/posts/create', postInfo)
 		return
-	} catch (err) {
-		console.log(err)
+	} catch (error) {
+		return error
 	}
 }
 
-export const getChannels = async () => {
+export const getPosts = async (channelId = '62aef0cb0c40db04a896388f') => {
 	try {
-		const { data } = await axiosInstance.get('/channels')
+		const { data } = await axiosInstance.get(`/posts/channel/${channelId}`)
 		return data
-	} catch (err) {
-		console.log(err)
+	} catch (error) {
+		return error
 	}
 }

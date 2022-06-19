@@ -28,8 +28,8 @@ const ShareTask = () => {
 	const handleClick = () => {
 		apis.createPost()
 	}
-	const channelList = async () => {
-		const data = await apis.getChannels()
+	const getPosts = async () => {
+		const data = await apis.getPosts()
 		console.log(data)
 	}
 	const createChannel = async () => {
@@ -43,7 +43,7 @@ const ShareTask = () => {
 	return (
 		<div>
 			<button onClick={handleClick}>포스트 등록</button>
-			<button onClick={channelList}>보자보자</button>
+			<button onClick={getPosts}>보자보자</button>
 			<button onClick={createChannel}>채널 1 생성</button>
 			<button onClick={getChannels}>채널 봐봐</button>
 			<NavBar>할 일 공유</NavBar>
