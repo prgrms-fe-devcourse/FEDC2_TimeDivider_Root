@@ -6,8 +6,8 @@ export const createChannel = async (
 	try {
 		await authorizedInstance.post('/channels/create', channelInfo)
 		return
-	} catch (err) {
-		console.log(err)
+	} catch (error) {
+		return error
 	}
 }
 
@@ -15,7 +15,7 @@ export const getChannels = async () => {
 	try {
 		const { data } = await authorizedInstance.get('/channels')
 		return data
-	} catch (err) {
-		console.log(err)
+	} catch (error) {
+		return error
 	}
 }
