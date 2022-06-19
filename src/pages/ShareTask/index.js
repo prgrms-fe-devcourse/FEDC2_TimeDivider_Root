@@ -16,13 +16,9 @@ const ShareTask = () => {
 		const fetchPosts = async () => {
 			setIsLoading(true)
 			const data = await apis.getPosts(TEST_CHANNEL_ID)
-
 			const fetchData = data.map(post => {
-				if (post.title !== 'Test') {
-					const { title, tasks } = JSON.parse(post.title)
-					return { ...post, title, tasks }
-				}
-				return post
+				const { title, tasks } = JSON.parse(post.title)
+				return { ...post, title, tasks }
 			})
 			setPosts(fetchData)
 			setIsLoading(false)

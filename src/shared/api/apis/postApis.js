@@ -23,7 +23,7 @@ export const getPosts = async (channelId = TEST_CHANNEL_ID, offset = 0, limit = 
 
 export const deletePost = async (id = '') => {
 	try {
-		await API.delete(`/posts/delete`, { id })
+		await API.delete(`/posts/delete`, { data: { id } })
 	} catch (error) {
 		return error
 	}
