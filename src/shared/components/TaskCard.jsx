@@ -1,35 +1,59 @@
 import styled from 'styled-components'
 import Avatar from './Avatar'
-import { IoMdHeart } from 'react-icons/io'
+import { IoIosArrowDown, IoIosArrowUp, IoMdHeart } from 'react-icons/io'
 import Text from './Text'
 import { themeColors } from 'shared/constants/colors'
 import useToggle from 'shared/hooks/useToggle'
 import Badge from './Badge'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
-const TaskCard = ({ width = 33, height = 22.5, tasks = [], isLoading, ...props }) => {
+const TaskCard = ({ width = 33, height = 22.5, author, tasks = [], ...props }) => {
 	const [state, toggle] = useToggle()
+	const [loadMore, toggleLoadMore] = useToggle()
+	const wrapper = useRef(null)
+
+	useEffect(() => {
+		wrapper.current.style.height = loadMore ? 'auto' : '10.5rem'
+	}, [loadMore])
 
 	return (
 		<CardContainer width={width} height={height} {...props}>
 			<CardHeader>
-				<Avatar isLoading={isLoading} src="https://picsum.photos/200" alt="avatar" size={4.5} />
-				<Text size={1.4}>김경현님의 할일</Text>
+				<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
+				<Text size={1.4}>{author}님의 할일</Text>
 				<IoMdHeart onClick={toggle} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
 			</CardHeader>
-			<ContentWrapper>
+			<ContentWrapper ref={wrapper}>
 				{tasks.map(task => (
-					<Badge key={task.id}>{task.task}</Badge>
+					<Badge key={task.id} fontSize={1.6}>
+						{task.name}
+					</Badge>
 				))}
 			</ContentWrapper>
+			<LoadMore
+				onClick={() => {
+					toggleLoadMore(!loadMore)
+					wrapper.current.style.height = 'auto'
+				}}
+			>
+				{loadMore ? <IoIosArrowUp fontSize={'4rem'} /> : <IoIosArrowDown fontSize={'4rem'} />}
+			</LoadMore>
 		</CardContainer>
 	)
 }
 
 export default TaskCard
 
+const LoadMore = styled.div`
+	width: 100%;
+	height: 4rem;
+	text-align: center;
+	cursor: pointer;
+`
+
 const CardContainer = styled.div`
 	width: ${({ width }) => `${width}rem`};
-	height: ${({ height }) => `${height}rem`};
 	background-color: ${themeColors.labelBackground};
 	box-shadow: 0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);
 	border-radius: 1rem;
@@ -50,7 +74,10 @@ const CardHeader = styled.div`
 const ContentWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
+	overflow: hidden;
+	height: 10.5rem;
 	padding: 1rem;
-	gap: 3rem 3rem;
-	margin-top: 1rem;
+	gap: 1.5rem;
+	margin-top: 2rem;
+	box-sizing: border-box;
 `
