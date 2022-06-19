@@ -12,7 +12,7 @@ const LoginForm = ({ onSubmit }) => {
 		password: '',
 	}
 	const { errors, isLoading, handleChange, handleSubmit } = useForm({
-		 initialValues,
+		initialValues,
 		onSubmit,
 		validate: ({ email, password }) => {
 			const newErrors = {}
