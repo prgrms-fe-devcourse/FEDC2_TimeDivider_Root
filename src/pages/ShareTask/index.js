@@ -1,4 +1,5 @@
 import React from 'react'
+import apis from 'shared/api'
 import NavBar from 'shared/components/NavBar'
 import TaskCard from 'shared/components/TaskCard'
 import styled from 'styled-components'
@@ -24,8 +25,27 @@ const tasks = [
 	},
 ]
 const ShareTask = () => {
+	const handleClick = () => {
+		apis.createPost()
+	}
+	const channelList = async () => {
+		const data = await apis.getChannels()
+		console.log(data)
+	}
+	const createChannel = async () => {
+		const data = await apis.createChannel()
+		console.log(data)
+	}
+	const getChannels = async () => {
+		const data = await apis.getChannels()
+		console.log(data)
+	}
 	return (
 		<div>
+			<button onClick={handleClick}>포스트 등록</button>
+			<button onClick={channelList}>보자보자</button>
+			<button onClick={createChannel}>채널 1 생성</button>
+			<button onClick={getChannels}>채널 봐봐</button>
 			<NavBar>할 일 공유</NavBar>
 			<CardArea>
 				<TaskCard tasks={tasks} />
