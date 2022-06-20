@@ -17,31 +17,41 @@ const TaskCard = ({
 	author,
 	like,
 	tasks = [],
+	onLikeClick,
 	...props
 }) => {
-	const [state, toggle] = useToggle(like)
+	const [likeState, toggleLikeState] = useToggle(like)
 	const [loadMore, toggleLoadMore] = useToggle()
 	const wrapper = useRef(null)
-	const handleClick = async () => {
-		toggle()
-		if (state) {
-			console.log(likeId)
+
+	useEffect(() => {
+		wrapper.current.style.height = loadMore ? 'auto' : '10.5rem'
+	}, [loadMore])
+
+	const handleLikeClick = async () => {
+		toggleLikeState()
+		if (likeState) {
 			await apis.cancelPostLike(likeId)
 		} else {
 			await apis.addPostLike(id)
 		}
 	}
 
-	useEffect(() => {
-		wrapper.current.style.height = loadMore ? 'auto' : '10.5rem'
-	}, [loadMore])
+	const handleLoadMoreClick = () => {
+		toggleLoadMore(!loadMore)
+		wrapper.current.style.height = 'auto'
+	}
 
 	return (
 		<CardContainer width={width} height={height} {...props}>
 			<CardHeader>
 				<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
 				<Text size={1.4}>{author}님의 할일</Text>
-				<IoMdHeart onClick={handleClick} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
+				<IoMdHeart
+					onClick={handleLikeClick}
+					color={likeState ? '#E95721' : 'gray'}
+					fontSize={'3rem'}
+				/>
 			</CardHeader>
 			<ContentWrapper ref={wrapper}>
 				{tasks.map(task => (
@@ -50,12 +60,7 @@ const TaskCard = ({
 					</Badge>
 				))}
 			</ContentWrapper>
-			<LoadMore
-				onClick={() => {
-					toggleLoadMore(!loadMore)
-					wrapper.current.style.height = 'auto'
-				}}
-			>
+			<LoadMore onClick={handleLoadMoreClick}>
 				{loadMore ? <IoIosArrowUp fontSize={'4rem'} /> : <IoIosArrowDown fontSize={'4rem'} />}
 			</LoadMore>
 		</CardContainer>

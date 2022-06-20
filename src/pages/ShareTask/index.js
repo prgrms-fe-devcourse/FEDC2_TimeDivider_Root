@@ -6,6 +6,7 @@ import { BottomBar } from 'shared/components/BottomBar'
 import NavBar from 'shared/components/NavBar'
 import TaskCard from 'shared/components/TaskCard'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
+import { getSessionStorageUserInfo } from 'shared/utils/storage'
 import styled from 'styled-components'
 
 const ShareTask = () => {
@@ -18,10 +19,9 @@ const ShareTask = () => {
 			const data = await apis.getPosts(TEST_CHANNEL_ID)
 			const fetchData = data.map(post => {
 				const { title, tasks } = JSON.parse(post.title)
-				const user = sessionStorage.getItem('loginUser')
-				const userId = JSON.parse(user).user._id
+				const user = getSessionStorageUserInfo()
+				const userId = user._id
 				const like = post.likes.find(like => like.user === userId)
-
 				const likeId = like ? like._id : null
 				return { ...post, title, tasks, like, likeId }
 			})
