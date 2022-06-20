@@ -1,5 +1,8 @@
 # 시간 분배기
 
+## 바로가기
+[Project 바로가기](https://github.com/prgrms-fe-devcourse/FEDC2_TimeDivider_Root/projects?type=classic)
+
 ## 커밋 컨벤션
 예시) feat: 타이머 기능 추가, chore: 주석 삭제
 prefix | 설명 | 추가 설명
