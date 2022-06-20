@@ -7,4 +7,21 @@ const axiosInstance = axios.create({
 	headers: { Authorization: `bearer ${getToken()}`, 'Content-Type': 'application/json' },
 })
 
+axiosInstance.interceptors.response.use(
+	response => {
+		return {
+			isSuccess: response.status === 200,
+			...response,
+		}
+	},
+	error => {
+		const { status } = error
+		return {
+			...error,
+			isSuccess: status === 200,
+			message: error.response.data || '알 수 없는 문제가 발생했습니다.',
+		}
+	},
+)
+
 export default axiosInstance

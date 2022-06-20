@@ -9,13 +9,15 @@ import styled from 'styled-components'
 const SignUpForm = ({ onSubmit }) => {
 	const initialValues = {
 		email: '',
+		fullName: '',
 		password: '',
 		passwordConfirm: '',
 	}
 
-	const validateSignUp = ({ email, password, passwordConfirm }) => {
+	const validateSignUp = ({ email, fullName, password, passwordConfirm }) => {
 		const newErrors = {}
 		if (!email) newErrors.email = '이메일을 입력해주세요.'
+		if (!fullName) newErrors.fullName = '닉네임을 입력해주세요.'
 		if (!password) newErrors.password = '비밀번호를 입력해주세요.'
 		if (password !== passwordConfirm) newErrors.passwordConfirm = '비밀번호가 일치하지 않습니다.'
 		return newErrors
@@ -33,6 +35,8 @@ const SignUpForm = ({ onSubmit }) => {
 				<Text size={3}>회원가입</Text>
 				<Input type="email" name="email" placeholder="이메일" onChange={handleChange} />
 				{errors.email && <Text color="red">{errors.email}</Text>}
+				<Input type="text" name="fullName" placeholder="닉네임" onChange={handleChange} />
+				{errors.fullName && <Text color="red">{errors.fullName}</Text>}
 				<Input type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
 				{errors.password && <Text color="red">{errors.password}</Text>}
 				<Input

@@ -3,6 +3,7 @@ import Home from 'pages/Home'
 import Login from 'pages/Login'
 import Signup from 'pages/SignUp'
 import MyPage from 'pages/MyPage'
+import SelectUserType from 'pages/SelectUserType'
 
 import CreateTime from 'pages/CreateTime'
 import CreateTask from 'pages/CreateTask'
@@ -11,8 +12,12 @@ import UpdateTimeDivider from 'pages/UpdateTimeDivider'
 import ShareTask from 'pages/ShareTask'
 
 import NotFound from 'pages/NotFound'
+import MyPageEdit from 'pages/MyPageEdit'
 
 const routes = [
+	{ path: 'myPageEdit', view: MyPageEdit },
+	{ path: '', view: SelectUserType },
+	{ path: 'signup', view: Signup },
 	{ path: 'login', view: Login },
 	{ path: 'signup', view: Signup },
 	{

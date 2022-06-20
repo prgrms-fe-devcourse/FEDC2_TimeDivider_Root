@@ -8,6 +8,7 @@ export const colors = {
 	brightGray: '#F5F5F5',
 	black: '#000000',
 	white: '#FFFFFF',
+	red: '#DA5157',
 }
 
 export const themeColors = {
