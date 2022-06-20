@@ -1,6 +1,4 @@
-import useCreateTasks from './hooks/useCreateTasks'
-import useNavigation from 'shared/hooks/useNavigation'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import * as S from './style'
 import { colors } from 'shared/constants/colors'
@@ -10,23 +8,20 @@ import Text from 'shared/components/Text'
 import Button from 'shared/components/Button'
 import Input from 'shared/components/Input'
 import Badge from 'shared/components/Badge'
+import { useCreatingTimers } from '../../shared/hooks/useCreatingTimers'
+import { useMemo } from 'react'
+import useNameTags from './hooks/useNameTag'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '계속 진행하기',
 	INVALID: '할 일을 입력해주세요',
 })
 
-const CreateTask = () => {
-	const location = useLocation()
-	const { tasks, task, spareTime, setSpareTime, setTask, removeTask, handleSubmit, isValidTasks } =
-		useCreateTasks()
+const CreateNameIds = () => {
+	const { nameIds } = useCreatingTimers()
+	const { nameTag, setNameTag, removeNameTag, handleNameTagSubmit } = useNameTags()
 
-	const navigationValidator = () => {
-		const { spareTime } = location.state
-		setSpareTime(spareTime)
-	}
-
-	useNavigation(navigationValidator)
+	const isValidNames = useMemo(() => nameIds.length > 0, [nameIds])
 
 	return (
 		<S.Wrapper>
@@ -43,17 +38,17 @@ const CreateTask = () => {
 
 			<S.Section>
 				<S.TaskArea>
-					{tasks.map(({ id, task }) => (
-						<Badge key={id} onClick={() => removeTask(id)}>
-							{task}
+					{nameIds.map(({ id, name }) => (
+						<Badge key={id} onClick={() => removeNameTag(id)}>
+							{name}
 						</Badge>
 					))}
 				</S.TaskArea>
-				<S.Form onSubmit={handleSubmit}>
+				<S.Form onSubmit={handleNameTagSubmit}>
 					<Input
 						type="text"
-						value={task}
-						onChange={e => setTask(e.target.value)}
+						value={nameTag}
+						onChange={e => setNameTag(e.target.value)}
 						autoFocus={true}
 						required
 					/>
@@ -64,9 +59,9 @@ const CreateTask = () => {
 			</S.Section>
 
 			<S.ButtonArea>
-				<Link to="/createTimeDivider" state={{ spareTime, tasks }}>
-					<Button disabled={!isValidTasks}>
-						{!isValidTasks ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
+				<Link to="/divideTime">
+					<Button disabled={!isValidNames}>
+						{!isValidNames ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
 				</Link>
 			</S.ButtonArea>
@@ -74,4 +69,4 @@ const CreateTask = () => {
 	)
 }
 
-export default CreateTask
+export default CreateNameIds

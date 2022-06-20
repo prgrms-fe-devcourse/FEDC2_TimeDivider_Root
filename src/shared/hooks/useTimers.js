@@ -45,7 +45,9 @@ export const useTimers = () => {
 		setOriginId(null)
 		setTimers(newTimers)
 	}
-
+	const resetTimers = (newTimers = {}) => {
+		setTimers(newTimers)
+	}
 	return {
 		timers,
 		changeTime,
@@ -53,5 +55,6 @@ export const useTimers = () => {
 		addTimer,
 		completeTimer,
 		mergeTimer,
+		resetTimers,
 	}
 }
