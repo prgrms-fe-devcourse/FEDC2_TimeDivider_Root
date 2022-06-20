@@ -1,23 +1,27 @@
 import API from '../API'
 
 export const login = async (userInfo = { email: null, password: null }) => {
-	try {
-		const { data } = await API.post('/login', userInfo)
+	const { isSuccess, message, data = {} } = await API.post('/login', userInfo)
+
+	if (isSuccess) {
 		const { user, token } = data
-		alert('로그인에 성공했습니다.')
-		return { user, token }
-	} catch (error) {
-		return error
+		return { isSuccess, user, token, message: '로그인에 성공했습니다.' }
+	}
+
+	if (!isSuccess) {
+		return { isSuccess, message }
 	}
 }
 
 export const signup = async (userInfo = { email: null, fullName: 'unknown', password: null }) => {
-	try {
-		const { data } = await API.post('/signup', userInfo)
+	const { isSuccess, message, data = {} } = await API.post('/signup', userInfo)
+
+	if (isSuccess) {
 		const { user, token } = data
-		alert('회원가입에 성공했습니다.')
-		return { user, token }
-	} catch (error) {
-		return error
+		return { isSuccess: false, user, token, message: '회원가입에 성공했습니다.' }
+	}
+
+	if (!isSuccess) {
+		return { isSuccess, message }
 	}
 }

@@ -6,9 +6,17 @@ import NavBar from 'shared/components/NavBar'
 
 const SignUp = () => {
 	const navigate = useNavigate()
-	const handleSignUpSubmit = userInfo => {
-		apis.signup(userInfo)
-		navigate('/')
+	const handleSignUpSubmit = async userInfo => {
+		const { isSuccess, message } = await apis.signup(userInfo)
+
+		if (isSuccess) {
+			alert(message)
+			navigate('/home')
+		}
+
+		if (!isSuccess) {
+			alert(message)
+		}
 	}
 
 	return (

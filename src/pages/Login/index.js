@@ -10,9 +10,17 @@ const Login = () => {
 	const navigate = useNavigate()
 	const setUserInfo = useSetRecoilState(loginUserState)
 	const handleLogInSubmit = async loginInfo => {
-		const result = await apis.login(loginInfo)
-		setUserInfo(result)
-		navigate('/myPage')
+		const { isSuccess, message, ...loginedInfo } = await apis.login(loginInfo)
+
+		if (isSuccess) {
+			setUserInfo(loginedInfo)
+			alert(message)
+			navigate('/myPage')
+		}
+
+		if (!isSuccess) {
+			alert(message)
+		}
 	}
 	return (
 		<>
