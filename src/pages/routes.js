@@ -5,14 +5,14 @@ import Signup from 'pages/SignUp'
 import MyPage from 'pages/MyPage'
 import SelectUserType from 'pages/SelectUserType'
 
-import CreateTime from 'pages/CreateTime'
-import CreateTask from 'pages/CreateTask'
-import CreateTimeDivider from 'pages/CreateTimeDivider'
+import CreateSpareTime from 'pages/CreateSpareTime'
+import DivideTime from 'pages/DivideTime'
 import UpdateTimeDivider from 'pages/UpdateTimeDivider'
 import ShareTask from 'pages/ShareTask'
 
 import NotFound from 'pages/NotFound'
 import MyPageEdit from 'pages/MyPageEdit'
+import CreateNameIds from './CreateNameIds'
 
 const routes = [
 	{ path: 'myPageEdit', view: MyPageEdit },
@@ -31,18 +31,18 @@ const routes = [
 		title: '첫 화면',
 	},
 	{
-		path: 'createTime',
-		view: CreateTime,
+		path: 'createSpareTime',
+		view: CreateSpareTime,
 		title: '오늘의 시간',
 	},
 	{
-		path: 'createTask',
-		view: CreateTask,
+		path: 'createNameIds',
+		view: CreateNameIds,
 		title: '해야 할 일을 적어요',
 	},
 	{
-		path: 'createTimeDivider',
-		view: CreateTimeDivider,
+		path: 'divideTime',
+		view: DivideTime,
 		title: '시간을 분배해요',
 	},
 	{
