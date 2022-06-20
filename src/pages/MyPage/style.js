@@ -76,4 +76,5 @@ export const LogOut = styled.div`
 	font-size: 1.3rem;
 	background-color: ${colors.white};
 	color: ${colors.red};
+	cursor: pointer;
 `

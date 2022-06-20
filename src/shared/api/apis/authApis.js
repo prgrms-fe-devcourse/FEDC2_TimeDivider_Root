@@ -25,3 +25,9 @@ export const signup = async (userInfo = { email: null, fullName: 'unknown', pass
 		return { isSuccess, message }
 	}
 }
+
+export const requestLogout = async () => {
+	const { isSuccess, data } = await API.post('/logout')
+
+	return { isSuccess, message: data }
+}
