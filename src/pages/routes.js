@@ -12,8 +12,10 @@ import UpdateTimeDivider from 'pages/UpdateTimeDivider'
 import ShareTask from 'pages/ShareTask'
 
 import NotFound from 'pages/NotFound'
+import MyPageEdit from 'pages/MyPageEdit'
 
 const routes = [
+	{ path: 'myPageEdit', view: MyPageEdit },
 	{ path: '', view: SelectUserType },
 	{ path: 'signup', view: Signup },
 	{ path: 'login', view: Login },

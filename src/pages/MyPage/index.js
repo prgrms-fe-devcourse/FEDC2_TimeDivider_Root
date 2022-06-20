@@ -16,7 +16,6 @@ import {
 } from './style'
 import { BottomBar } from '../../shared/components/BottomBar'
 import { IoIosArrowForward } from 'react-icons/io'
-import Button from '../../shared/components/Button'
 import { Link } from 'react-router-dom'
 
 const dummyUser = {
@@ -38,7 +37,7 @@ const MyPage = () => {
 	return (
 		<Wrapper>
 			<LogOutWrapper>
-				<LogOut as={Link} onClick={handleLogOut} to={'/selectUserType'}>
+				<LogOut as={Link} onClick={handleLogOut} to={'/'}>
 					로그아웃
 				</LogOut>
 			</LogOutWrapper>
@@ -55,7 +54,7 @@ const MyPage = () => {
 					<Title size={1.5}>게시판 공유 허용</Title>
 					<ToggleButton width={4.8} height={2.5} onToggle={handleToggle} />
 				</Setting>
-				<Setting>
+				<Setting as={Link} to={'/myPageEdit'}>
 					<Icon size={2}>😎</Icon>
 					<Title size={1.5}>개인정보 수정</Title>
 					<IoIosArrowForward size={'2rem'} />
