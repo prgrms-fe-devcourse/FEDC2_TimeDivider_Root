@@ -18,7 +18,12 @@ const ShareTask = () => {
 			const data = await apis.getPosts(TEST_CHANNEL_ID)
 			const fetchData = data.map(post => {
 				const { title, tasks } = JSON.parse(post.title)
-				return { ...post, title, tasks }
+				const user = sessionStorage.getItem('loginUser')
+				const userId = JSON.parse(user).user._id
+				const like = post.likes.find(like => like.user === userId)
+
+				const likeId = like ? like._id : null
+				return { ...post, title, tasks, like, likeId }
 			})
 			setPosts(fetchData)
 			setIsLoading(false)
@@ -35,7 +40,14 @@ const ShareTask = () => {
 					<div>로딩중</div>
 				) : (
 					posts.map(post => (
-						<TaskCard key={post._id} author={post.author.fullName} tasks={post.tasks || []} />
+						<TaskCard
+							key={post._id}
+							id={post._id}
+							author={post.author.fullName}
+							tasks={post.tasks || []}
+							like={post.like}
+							likeId={post.likeId}
+						/>
 					))
 				)}
 			</CardArea>

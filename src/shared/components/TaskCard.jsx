@@ -7,11 +7,30 @@ import useToggle from 'shared/hooks/useToggle'
 import Badge from './Badge'
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import apis from 'shared/api'
 
-const TaskCard = ({ width = 33, height = 22.5, author, tasks = [], ...props }) => {
-	const [state, toggle] = useToggle()
+const TaskCard = ({
+	width = 33,
+	height = 22.5,
+	id,
+	likeId,
+	author,
+	like,
+	tasks = [],
+	...props
+}) => {
+	const [state, toggle] = useToggle(like)
 	const [loadMore, toggleLoadMore] = useToggle()
 	const wrapper = useRef(null)
+	const handleClick = async () => {
+		toggle()
+		if (state) {
+			console.log(likeId)
+			await apis.cancelPostLike(likeId)
+		} else {
+			await apis.addPostLike(id)
+		}
+	}
 
 	useEffect(() => {
 		wrapper.current.style.height = loadMore ? 'auto' : '10.5rem'
@@ -22,7 +41,7 @@ const TaskCard = ({ width = 33, height = 22.5, author, tasks = [], ...props }) =
 			<CardHeader>
 				<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
 				<Text size={1.4}>{author}님의 할일</Text>
-				<IoMdHeart onClick={toggle} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
+				<IoMdHeart onClick={handleClick} color={state ? 'hotpink' : 'gray'} fontSize={'3rem'} />
 			</CardHeader>
 			<ContentWrapper ref={wrapper}>
 				{tasks.map(task => (
