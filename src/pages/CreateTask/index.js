@@ -1,4 +1,4 @@
-import useCreateTasks from 'shared/hooks/useCreateTasks'
+import useCreateTasks from './hooks/useCreateTasks'
 import useNavigation from 'shared/hooks/useNavigation'
 import { Link, useLocation } from 'react-router-dom'
 
