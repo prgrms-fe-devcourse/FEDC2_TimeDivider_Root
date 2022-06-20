@@ -1,99 +1,43 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import apis from 'shared/api'
 import { BottomBar } from 'shared/components/BottomBar'
 import NavBar from 'shared/components/NavBar'
 import TaskCard from 'shared/components/TaskCard'
+import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import styled from 'styled-components'
 
-//Post get 요청 채널의 모든게시물
-const postsList = [
-	{
-		//"likes": Like[],
-		//"comments": Comment[],
-		_id: '1',
-		image: 'Optional',
-		imagePublicId: 'Optional',
-		title: 'String',
-		tasks: [
-			{
-				id: 1,
-				name: '타입스크립트 부시기',
-			},
-			{
-				id: 2,
-				name: '1일 1CSS',
-			},
-			{
-				id: 3,
-				name: '로그인 페이지',
-			},
-		],
-		channel: 'Channel',
-		author: '신다혜',
-		createdAt: 'String',
-		updatedAt: 'String',
-	},
-	{
-		//"likes": Like[],
-		//"comments": Comment[],
-		_id: '2',
-		image: 'Optional',
-		imagePublicId: 'Optional',
-		title: 'String',
-		tasks: [
-			{
-				id: 1,
-				name: '졸업 프로젝트',
-			},
-			{
-				id: 2,
-				name: 'Timer Component 만들기',
-			},
-			{
-				id: 3,
-				name: '제로베이스 과제',
-			},
-		],
-		channel: 'Channel',
-		author: '김경현',
-		createdAt: 'String',
-		updatedAt: 'String',
-	},
-	{
-		//"likes": Like[],
-		//"comments": Comment[],
-		_id: '3',
-		image: 'Optional',
-		imagePublicId: 'Optional',
-		title: 'String',
-		tasks: [
-			{
-				id: 1,
-				name: '놀기',
-			},
-			{
-				id: 2,
-				name: '쉬기',
-			},
-			{
-				id: 3,
-				name: '잠자기',
-			},
-		],
-		channel: 'Channel',
-		author: '이지원',
-		createdAt: 'String',
-		updatedAt: 'String',
-	},
-]
-
 const ShareTask = () => {
+	const [posts, setPosts] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		const fetchPosts = async () => {
+			setIsLoading(true)
+			const data = await apis.getPosts(TEST_CHANNEL_ID)
+			const fetchData = data.map(post => {
+				const { title, tasks } = JSON.parse(post.title)
+				return { ...post, title, tasks }
+			})
+			setPosts(fetchData)
+			setIsLoading(false)
+		}
+
+		fetchPosts()
+	}, [])
+
 	return (
 		<div>
 			<NavBar>할 일 공유</NavBar>
 			<CardArea>
-				{postsList.map(post => (
-					<TaskCard key={post._id} author={post.author} tasks={post.tasks} />
-				))}
+				{isLoading ? (
+					<div>로딩중</div>
+				) : (
+					posts.map(post => (
+						<TaskCard key={post._id} author={post.author.fullName} tasks={post.tasks || []} />
+					))
+				)}
 			</CardArea>
 			<ButtonArea>
 				<BottomBar />
