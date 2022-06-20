@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { colors, themeColors } from '../../shared/constants/colors'
 import Text from '../../shared/components/Text'
 import { ToggleButton } from '../../shared/components/ToggleButton'
 import {
-	Avatar,
 	BottomBarArea,
 	Icon,
 	LogOut,
@@ -17,6 +16,9 @@ import {
 import { BottomBar } from '../../shared/components/BottomBar'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link } from 'react-router-dom'
+import { useUser } from '../../shared/hooks/useUser'
+import Avatar from '../../shared/components/Avatar'
+import { useNavigate } from 'react-router-dom'
 
 const dummyUser = {
 	profileImg: 'https://tva1.sinaimg.cn/large/e6c9d24egy1h3bief308rj20dw0dwwem.jpg',
@@ -25,25 +27,29 @@ const dummyUser = {
 	shareAllowed: false,
 }
 const MyPage = () => {
-	const [user, setUser] = useState(dummyUser)
+	const { user, logout } = useUser()
+	const navigate = useNavigate()
+	// const [user, setUser] = useState(dummyUser)
 	const handleToggle = toggled => {
-		const newUser = Object.assign({}, user)
-		newUser.shareAllowed = toggled
-		setUser(newUser)
+		// const newUser = Object.assign({}, user)
+		// newUser.shareAllowed = toggled
+		// setUser(newUser)
 	}
-	const handleLogOut = () => {
-		//로그아웃 액션
+	const handleLogOut = async () => {
+		const { isSuccess, message } = await logout()
+		if (isSuccess) {
+			alert(message)
+			navigate('/')
+		}
 	}
 	return (
 		<Wrapper>
 			<LogOutWrapper>
-				<LogOut as={Link} onClick={handleLogOut} to={'/'}>
-					로그아웃
-				</LogOut>
+				<LogOut onClick={handleLogOut}>로그아웃</LogOut>
 			</LogOutWrapper>
 			<Profiles>
-				<Avatar src={user.profileImg} alt="avatar" size={10.5} />
-				<Text size={2.2}>{user.name}</Text>
+				<Avatar src={user?.profileImg} alt="avatar" size={10.5} />
+				<Text size={2.2}>{user.fullName}</Text>
 				<Text size={1.3} color={themeColors.fontDescription}>
 					{user.email}
 				</Text>
