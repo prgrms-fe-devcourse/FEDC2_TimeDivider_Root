@@ -26,7 +26,7 @@ const routes = [
 		title: '마이페이지',
 	},
 	{
-		path: 'home',
+		path: '',
 		view: Home,
 		title: '첫 화면',
 	},
