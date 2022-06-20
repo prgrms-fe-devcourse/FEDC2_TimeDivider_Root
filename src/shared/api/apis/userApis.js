@@ -1,13 +1,10 @@
 import API from '../API'
 
-export const getAllUserList = () => {
-	API.get('/users/get-users')
-		.then(res => {
-			return {
-				users: res.data,
-			}
-		})
-		.catch(err => {
-			console.log(err)
-		})
+export const getAllUserList = async () => {
+	try {
+		const { data } = await API.get('/users/get-users')
+		return data
+	} catch (error) {
+		return error
+	}
 }
