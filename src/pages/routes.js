@@ -15,8 +15,8 @@ import ShareTask from 'pages/ShareTask'
 import NotFound from 'pages/NotFound'
 
 const routes = [
+	{ path: '', view: SelectUserType },
 	{ path: 'myPageLogin', view: MyPageLogin },
-	{ path: 'selectUserType', view: SelectUserType },
 	{ path: 'signup', view: Signup },
 	{ path: 'login', view: Login },
 	{ path: 'signup', view: Signup },
@@ -26,7 +26,7 @@ const routes = [
 		title: '마이페이지',
 	},
 	{
-		path: '',
+		path: 'home',
 		view: Home,
 		title: '첫 화면',
 	},
