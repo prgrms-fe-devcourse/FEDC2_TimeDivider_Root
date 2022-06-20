@@ -14,7 +14,7 @@ import ShareTask from 'pages/ShareTask'
 import NotFound from 'pages/NotFound'
 
 const routes = [
-	{ path: 'selectUserType', view: SelectUserType },
+	{ path: '', view: SelectUserType },
 	{ path: 'signup', view: Signup },
 	{ path: 'login', view: Login },
 	{ path: 'signup', view: Signup },
