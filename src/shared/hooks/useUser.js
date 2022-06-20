@@ -1,24 +1,29 @@
 import { useState } from 'react'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { loginUserState } from '../../state/user'
+import { requestLogout } from '../api/apis/authApis'
 
-const dummyUser = {
-	profileImg: 'https://tva1.sinaimg.cn/large/e6c9d24egy1h3bief308rj20dw0dwwem.jpg',
-	name: '김경현',
-	email: 'codeisneverodd@gmail.com',
-	shareAllowed: false,
-}
 export const useUser = () => {
-	const [user, setUser] = useState(dummyUser)
+	const loginData = useRecoilValue(loginUserState)
+	const removeLoginData = useResetRecoilState(loginUserState)
+	const [user, setUser] = useState(loginData.user)
 
-	const changeName = name => {
-		setUser({ ...user, name })
+	const changeName = fullName => {
+		setUser({ ...user, fullName })
 	}
 	const changeEmail = email => {
 		setUser({ ...user, email })
+	}
+	const logout = async () => {
+		const response = await requestLogout()
+		removeLoginData()
+		return response
 	}
 
 	return {
 		user,
 		changeName,
 		changeEmail,
+		logout,
 	}
 }
