@@ -8,6 +8,8 @@ export const useUser = () => {
 	const removeLoginData = useResetRecoilState(loginUserState)
 	const [user, setUser] = useState(loginData.user)
 
+	const isLoggedIn = loginData.token !== null
+
 	const changeName = fullName => {
 		setUser({ ...user, fullName })
 	}
@@ -22,6 +24,7 @@ export const useUser = () => {
 
 	return {
 		user,
+		isLoggedIn,
 		changeName,
 		changeEmail,
 		logout,
