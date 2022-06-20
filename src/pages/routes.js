@@ -3,7 +3,6 @@ import Home from 'pages/Home'
 import Login from 'pages/Login'
 import Signup from 'pages/SignUp'
 import MyPage from 'pages/MyPage'
-import MyPageLogin from 'pages/MyPageLogin'
 import SelectUserType from 'pages/SelectUserType'
 
 import CreateTime from 'pages/CreateTime'
@@ -15,7 +14,6 @@ import ShareTask from 'pages/ShareTask'
 import NotFound from 'pages/NotFound'
 
 const routes = [
-	{ path: 'myPageLogin', view: MyPageLogin },
 	{ path: 'selectUserType', view: SelectUserType },
 	{ path: 'signup', view: Signup },
 	{ path: 'login', view: Login },
