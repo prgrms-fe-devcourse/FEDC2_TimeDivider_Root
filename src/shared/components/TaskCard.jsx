@@ -27,6 +27,7 @@ const TaskCard = ({
 	const [loadMore, toggleLoadMore] = useToggle()
 	const [commentList, setCommentList] = useState([])
 	const wrapper = useRef(null)
+
 	useEffect(() => {
 		setCommentList(
 			comments.map(comment => {
@@ -37,6 +38,7 @@ const TaskCard = ({
 			}),
 		)
 	}, [])
+
 	useEffect(() => {
 		wrapper.current.style.height = loadMore ? 'auto' : '10.5rem'
 	}, [loadMore])
@@ -77,20 +79,21 @@ const TaskCard = ({
 						{task.name}
 					</Badge>
 				))}
-
-				<CommentsList>
-					{loadMore &&
-						commentList.map((comment, idx) => (
-							<CommentItem key={idx}>
-								<Text block size={1.5}>
-									{comment.author}
-								</Text>
-								<Text block size={2}>
-									{comment.comment}
-								</Text>
-							</CommentItem>
-						))}
-				</CommentsList>
+				{loadMore && (
+					<CommentContainer>
+						<CommentLabel>Comments</CommentLabel>
+						<CommentsList>
+							{commentList.map((comment, idx) => (
+								<CommentItem key={idx}>
+									<CommentAuthor>{comment.author}</CommentAuthor>
+									<Text block size={2}>
+										{comment.comment}
+									</Text>
+								</CommentItem>
+							))}
+						</CommentsList>
+					</CommentContainer>
+				)}
 
 				{loadMore && <Comment onSubmit={handleCommentSubmit} />}
 			</ContentWrapper>
@@ -103,11 +106,34 @@ const TaskCard = ({
 
 export default TaskCard
 
-const CommentsList = styled.ul`
-	text-decoration: none;
+const CommentContainer = styled.div`
+	width: 100%;
 `
 
-const CommentItem = styled.li``
+const CommentLabel = styled.div`
+	font-size: 2rem;
+	color: ${colors.lightGray};
+	padding: 1rem;
+	box-sizing: border-box;
+`
+
+const CommentsList = styled.ul`
+	text-decoration: none;
+	width: 100%;
+`
+
+const CommentItem = styled.li`
+	border-top: 1px solid lightgray;
+	width: 100%;
+	height: 6rem;
+	padding: 1rem;
+	box-sizing: border-box;
+`
+
+const CommentAuthor = styled.div`
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+`
 
 const LoadMore = styled.div`
 	width: 100%;
