@@ -17,6 +17,7 @@ const ShareTask = () => {
 		const fetchPosts = async () => {
 			setIsLoading(true)
 			const data = await apis.getPosts(TEST_CHANNEL_ID)
+			console.log(data)
 			const fetchData = data.map(post => {
 				const { title, tasks } = JSON.parse(post.title)
 				const user = getSessionStorageUserInfo()
@@ -47,6 +48,7 @@ const ShareTask = () => {
 							tasks={post.tasks || []}
 							like={post.like}
 							likeId={post.likeId}
+							comments={post.comments}
 						/>
 					))
 				)}

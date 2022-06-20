@@ -2,12 +2,14 @@ import styled from 'styled-components'
 import Avatar from './Avatar'
 import { IoIosArrowDown, IoIosArrowUp, IoMdHeart } from 'react-icons/io'
 import Text from './Text'
-import { themeColors } from 'shared/constants/colors'
+import { colors, themeColors } from 'shared/constants/colors'
 import useToggle from 'shared/hooks/useToggle'
 import Badge from './Badge'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 import apis from 'shared/api'
+import Comment from './Comment'
+import { getSessionStorageUserInfo } from 'shared/utils/storage'
 
 const TaskCard = ({
 	width = 33,
@@ -16,14 +18,25 @@ const TaskCard = ({
 	likeId,
 	author,
 	like,
+	comments,
 	tasks = [],
 	onLikeClick,
 	...props
 }) => {
 	const [likeState, toggleLikeState] = useToggle(like)
 	const [loadMore, toggleLoadMore] = useToggle()
+	const [commentList, setCommentList] = useState([])
 	const wrapper = useRef(null)
-
+	useEffect(() => {
+		setCommentList(
+			comments.map(comment => {
+				return {
+					author: comment.author.fullName,
+					comment: comment.comment,
+				}
+			}),
+		)
+	}, [])
 	useEffect(() => {
 		wrapper.current.style.height = loadMore ? 'auto' : '10.5rem'
 	}, [loadMore])
@@ -40,6 +53,11 @@ const TaskCard = ({
 	const handleLoadMoreClick = () => {
 		toggleLoadMore(!loadMore)
 		wrapper.current.style.height = 'auto'
+	}
+
+	const handleCommentSubmit = async comment => {
+		setCommentList([...commentList, { author: getSessionStorageUserInfo().fullName, comment }])
+		await apis.createComment(comment, id)
 	}
 
 	return (
@@ -59,6 +77,22 @@ const TaskCard = ({
 						{task.name}
 					</Badge>
 				))}
+
+				<CommentsList>
+					{loadMore &&
+						commentList.map((comment, idx) => (
+							<CommentItem key={idx}>
+								<Text block size={1.5}>
+									{comment.author}
+								</Text>
+								<Text block size={2}>
+									{comment.comment}
+								</Text>
+							</CommentItem>
+						))}
+				</CommentsList>
+
+				{loadMore && <Comment onSubmit={handleCommentSubmit} />}
 			</ContentWrapper>
 			<LoadMore onClick={handleLoadMoreClick}>
 				{loadMore ? <IoIosArrowUp fontSize={'4rem'} /> : <IoIosArrowDown fontSize={'4rem'} />}
@@ -68,6 +102,12 @@ const TaskCard = ({
 }
 
 export default TaskCard
+
+const CommentsList = styled.ul`
+	text-decoration: none;
+`
+
+const CommentItem = styled.li``
 
 const LoadMore = styled.div`
 	width: 100%;
