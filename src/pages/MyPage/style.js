@@ -6,13 +6,12 @@ export const Wrapper = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
-	padding-top: 8.6rem;
 	background-color: ${themeColors.labelBackground};
 `
 export const Profiles = styled.div`
 	display: flex;
 	width: 100%;
-	height: 24rem;
+	margin-bottom: 2.7rem;
 	flex-direction: column;
 	align-items: center;
 	row-gap: 1rem;
@@ -26,7 +25,10 @@ export const Avatar = styled.div`
 `
 export const Settings = styled.div`
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
+	row-gap: 1rem;
 	width: 100%;
 `
 export const Setting = styled.div`
@@ -54,4 +56,24 @@ export const BottomBarArea = styled.div`
 	position: absolute;
 	bottom: 0;
 	left: 0;
+`
+export const LogOutWrapper = styled.div`
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	justify-content: end;
+	margin-top: 2.4rem;
+	margin-bottom: 3.6rem;
+	padding-right: 2.1rem;
+`
+export const LogOut = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 8.2rem;
+	height: 2.6rem;
+	border-radius: 0.6rem;
+	font-size: 1.3rem;
+	background-color: ${colors.white};
+	color: ${colors.red};
 `
