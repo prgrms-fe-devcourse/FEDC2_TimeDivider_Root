@@ -16,7 +16,7 @@ import MyPageEdit from 'pages/MyPageEdit'
 
 const routes = [
 	{ path: 'myPageEdit', view: MyPageEdit },
-	{ path: 'selectUserType', view: SelectUserType },
+	{ path: '', view: SelectUserType },
 	{ path: 'signup', view: Signup },
 	{ path: 'login', view: Login },
 	{ path: 'signup', view: Signup },

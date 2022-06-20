@@ -12,7 +12,7 @@ const NotFound = () => {
 						<h2> 🚨 Not Found 🚨 </h2>
 					</span>
 				</h2>
-				<Link to="home">
+				<Link to="">
 					<Button>일 모래시계 만들기</Button>
 				</Link>
 			</S.ErrorSection>

@@ -1,7 +1,15 @@
 import React from 'react'
 
-export const MypageLogin = () => {
-	return <div>MypageLogin</div>
+import NavBar from 'shared/components/NavBar'
+import SelectUserTypeForm from './components/SelectUserTypeForm'
+
+const SelectUserType = () => {
+	return (
+		<>
+			<NavBar backIcon />
+			<SelectUserTypeForm />
+		</>
+	)
 }
 
-export default MypageLogin
+export default SelectUserType
