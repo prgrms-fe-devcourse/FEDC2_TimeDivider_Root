@@ -8,7 +8,7 @@ const SignUp = () => {
 	const navigate = useNavigate()
 	const handleSignUpSubmit = userInfo => {
 		apis.signup(userInfo)
-		navigate('/home')
+		navigate('/')
 	}
 
 	return (
