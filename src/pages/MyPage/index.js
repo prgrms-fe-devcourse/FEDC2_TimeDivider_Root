@@ -37,7 +37,7 @@ const MyPage = () => {
 	return (
 		<Wrapper>
 			<LogOutWrapper>
-				<LogOut as={Link} onClick={handleLogOut} to={'/selectUserType'}>
+				<LogOut as={Link} onClick={handleLogOut} to={'/'}>
 					로그아웃
 				</LogOut>
 			</LogOutWrapper>
