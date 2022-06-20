@@ -4,9 +4,11 @@ import Text from '../../shared/components/Text'
 import { ToggleButton } from '../../shared/components/ToggleButton'
 import {
 	BottomBarArea,
+	Description,
 	Icon,
 	LogOut,
 	LogOutWrapper,
+	NotLoggedInWrapper,
 	Profiles,
 	Setting,
 	Settings,
@@ -18,11 +20,11 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../../shared/hooks/useUser'
 import Avatar from '../../shared/components/Avatar'
+import Button from '../../shared/components/Button'
 
 const MyPage = () => {
-	const { user, logout } = useUser()
+	const { user, isLoggedIn, logout } = useUser()
 	const navigate = useNavigate()
-
 	const handleToggle = toggled => {}
 	const handleLogOut = async () => {
 		const { isSuccess, message } = await logout()
@@ -31,30 +33,45 @@ const MyPage = () => {
 			navigate('/')
 		}
 	}
+	const handleLogin = () => {
+		navigate('/')
+	}
 	return (
 		<Wrapper>
-			<LogOutWrapper>
-				<LogOut onClick={handleLogOut}>로그아웃</LogOut>
-			</LogOutWrapper>
-			<Profiles>
-				<Avatar src={user?.profileImg} alt="avatar" size={10.5} />
-				<Text size={2.2}>{user.fullName}</Text>
-				<Text size={1.3} color={themeColors.fontDescription}>
-					{user.email}
-				</Text>
-			</Profiles>
-			<Settings>
-				<Setting>
-					<Icon size={2}>📋</Icon>
-					<Title size={1.5}>게시판 공유 허용</Title>
-					<ToggleButton width={4.8} height={2.5} onToggle={handleToggle} />
-				</Setting>
-				<Setting as={Link} to={'/myPageEdit'}>
-					<Icon size={2}>😎</Icon>
-					<Title size={1.5}>개인정보 수정</Title>
-					<IoIosArrowForward size={'2rem'} />
-				</Setting>
-			</Settings>
+			{!isLoggedIn && (
+				<NotLoggedInWrapper>
+					<Description>
+						<Text size={2.2}>마이페이지를 이용하려면 로그인 하여야합니다.</Text>
+					</Description>
+					<Button onClick={handleLogin}>로그인 페이지로 이동</Button>
+				</NotLoggedInWrapper>
+			)}
+			{isLoggedIn && (
+				<>
+					<LogOutWrapper>
+						<LogOut onClick={handleLogOut}>로그아웃</LogOut>
+					</LogOutWrapper>
+					<Profiles>
+						<Avatar src={user?.profileImg} alt="avatar" size={10.5} />
+						<Text size={2.2}>{user.fullName}</Text>
+						<Text size={1.3} color={themeColors.fontDescription}>
+							{user.email}
+						</Text>
+					</Profiles>
+					<Settings>
+						<Setting>
+							<Icon size={2}>📋</Icon>
+							<Title size={1.5}>게시판 공유 허용</Title>
+							<ToggleButton width={4.8} height={2.5} onToggle={handleToggle} />
+						</Setting>
+						<Setting as={Link} to={'/myPageEdit'}>
+							<Icon size={2}>😎</Icon>
+							<Title size={1.5}>개인정보 수정</Title>
+							<IoIosArrowForward size={'2rem'} />
+						</Setting>
+					</Settings>
+				</>
+			)}
 			<BottomBarArea>
 				<BottomBar />
 			</BottomBarArea>
