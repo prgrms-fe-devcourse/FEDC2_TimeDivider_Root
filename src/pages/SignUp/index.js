@@ -2,6 +2,8 @@ import SignUpForm from './components/SignUpForm'
 import apis from 'shared/api'
 import { useNavigate } from 'react-router-dom'
 
+import NavBar from 'shared/components/NavBar'
+
 const SignUp = () => {
 	const navigate = useNavigate()
 	const handleSignUpSubmit = userInfo => {
@@ -11,6 +13,7 @@ const SignUp = () => {
 
 	return (
 		<>
+			<NavBar backIcon />
 			<SignUpForm onSubmit={handleSignUpSubmit}></SignUpForm>
 		</>
 	)
