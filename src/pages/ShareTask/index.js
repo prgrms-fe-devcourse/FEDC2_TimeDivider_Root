@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil'
 import apis from 'shared/api'
 import { BottomBar } from 'shared/components/BottomBar'
 import NavBar from 'shared/components/NavBar'
-import TaskCard from 'shared/components/TaskCard'
+import PostCard from 'shared/components/PostCard'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { getSessionStorageUserInfo } from 'shared/utils/storage'
 import { timerState } from 'state/timer'
@@ -91,7 +91,7 @@ const ShareTask = () => {
 					<div>로딩중</div>
 				) : (
 					posts.map(post => (
-						<TaskCard
+						<PostCard
 							key={post._id}
 							id={post._id}
 							author={post.author.fullName}
