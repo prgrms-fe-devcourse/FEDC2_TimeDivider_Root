@@ -6,7 +6,7 @@ import MyPage from 'pages/MyPage'
 import SelectUserType from 'pages/SelectUserType'
 
 import CreateSpareTime from 'pages/CreateSpareTime'
-import CreateTask from 'pages/CreateTask'
+import CreateTimerName from 'pages/CreateTimerName'
 import CreateTimeDivider from 'pages/CreateTimeDivider'
 import UpdateTimeDivider from 'pages/UpdateTimeDivider'
 import ShareTask from 'pages/ShareTask'
@@ -36,8 +36,8 @@ const routes = [
 		title: '오늘의 시간',
 	},
 	{
-		path: 'createTask',
-		view: CreateTask,
+		path: 'createTimerName',
+		view: CreateTimerName,
 		title: '해야 할 일을 적어요',
 	},
 	{
