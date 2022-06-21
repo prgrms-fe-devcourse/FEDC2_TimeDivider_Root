@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
+import { Link } from 'react-router-dom'
 
 import * as S from './style'
 
@@ -8,10 +9,12 @@ import NavBar from 'shared/components/NavBar'
 import TaskBox from 'shared/components/TaskBox'
 import Text from 'shared/components/Text'
 import TimeSelectForm from 'shared/components/TimeSelectForm'
+
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
-import { useSetRecoilState } from 'recoil'
 import { timerObject, timerState } from 'state/timer'
 import { themeColors } from 'shared/constants/colors'
+
+import useCreatingTimers from 'shared/hooks/useCreatingTimers'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -19,8 +22,8 @@ const BUTTON_TEXT = Object.freeze({
 })
 
 const CreateTimeDivider = () => {
-	const location = useLocation()
-	const initialTotal = convertHourMinuteToSeconds(location.state.spareTime)
+	const { spareTime, timerNames } = useCreatingTimers()
+	const initialTotal = convertHourMinuteToSeconds(spareTime)
 
 	const setTimers = useSetRecoilState(timerState)
 
@@ -30,14 +33,13 @@ const CreateTimeDivider = () => {
 	const [selectedTask, setSelectedTask] = useState(null)
 
 	useEffect(() => {
-		const { tasks, spareTime } = location.state
 		setTasks(
-			tasks.map(task => {
+			timerNames.map(task => {
 				return { ...task, time: 0, hour: '0', minute: '0' }
 			}),
 		)
 		setTotalTime(convertHourMinuteToSeconds(spareTime))
-	}, [location])
+	}, [])
 
 	useEffect(() => {
 		const nextTotalTime = initialTotal - tasks.reduce((acc, task) => acc + task.time, 0)
@@ -74,7 +76,7 @@ const CreateTimeDivider = () => {
 
 	const handleNextPageClick = () => {
 		const newTimers = {}
-		tasks.forEach(({ id, task, time }) => (newTimers[id] = timerObject(time, task)))
+		tasks.forEach(({ id, name, time }) => (newTimers[id] = timerObject(time, name)))
 		setTimers(newTimers)
 	}
 
@@ -121,7 +123,7 @@ const CreateTimeDivider = () => {
 				)}
 			</S.FormSection>
 			<S.ButtonArea>
-				<Link to="/updateTimeDivider" state={{ tasks }}>
+				<Link to="/updateTimeDivider">
 					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
 				</Link>
 			</S.ButtonArea>
