@@ -1,8 +1,8 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 import { sessionStorageEffect } from './utils/storage'
 
-export const loginUserState = atom({
-	key: 'loginUser',
+export const loginDataState = atom({
+	key: 'loginDataState',
 	default: {
 		token: null,
 		user: {
@@ -12,4 +12,14 @@ export const loginUserState = atom({
 		},
 	},
 	effects: [sessionStorageEffect('loginUser')],
+})
+export const userState = selector({
+	key: 'userState',
+	get: ({ get }) => {
+		const loginData = get(loginDataState)
+		return loginData.user
+	},
+	set: ({ get, set }, newUserState) => {
+		set(loginDataState, { ...get(loginDataState), user: newUserState })
+	},
 })

@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { themeColors } from '../../shared/constants/colors'
 import Text from '../../shared/components/Text'
-import { ToggleButton } from '../../shared/components/ToggleButton'
 import {
 	BottomBarArea,
 	Description,
@@ -23,9 +22,13 @@ import Avatar from '../../shared/components/Avatar'
 import Button from '../../shared/components/Button'
 
 const MyPage = () => {
-	const { user, isLoggedIn, logout } = useUser()
+	const { user, isLoggedIn, logout, refreshUser, changeImage } = useUser()
 	const navigate = useNavigate()
-	const handleToggle = toggled => {}
+
+	useEffect(() => {
+		refreshUser()
+	}, [])
+
 	const handleLogOut = async () => {
 		const { isSuccess, message } = await logout()
 		if (isSuccess) {
@@ -52,18 +55,13 @@ const MyPage = () => {
 						<LogOut onClick={handleLogOut}>로그아웃</LogOut>
 					</LogOutWrapper>
 					<Profiles>
-						<Avatar src={user?.profileImg} alt="avatar" size={10.5} />
+						<Avatar src={user.image} alt="avatar" size={10.5} />
 						<Text size={2.2}>{user.fullName}</Text>
 						<Text size={1.3} color={themeColors.fontDescription}>
 							{user.email}
 						</Text>
 					</Profiles>
 					<Settings>
-						<Setting>
-							<Icon size={2}>📋</Icon>
-							<Title size={1.5}>게시판 공유 허용</Title>
-							<ToggleButton width={4.8} height={2.5} onToggle={handleToggle} />
-						</Setting>
 						<Setting as={Link} to={'/myPageEdit'}>
 							<Icon size={2}>😎</Icon>
 							<Title size={1.5}>개인정보 수정</Title>
