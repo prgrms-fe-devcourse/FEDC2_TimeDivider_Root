@@ -19,7 +19,7 @@ const TaskCard = ({
 	author,
 	like,
 	comments,
-	tasks = [],
+	timers = [],
 	onLikeClick,
 	...props
 }) => {
@@ -74,7 +74,7 @@ const TaskCard = ({
 				/>
 			</CardHeader>
 			<ContentWrapper ref={wrapper}>
-				{tasks.map(task => (
+				{timers.map(task => (
 					<Badge key={task.id} fontSize={1.6}>
 						{task.name}
 					</Badge>
@@ -144,6 +144,7 @@ const LoadMore = styled.div`
 
 const CardContainer = styled.div`
 	width: ${({ width }) => `${width}rem`};
+	height: ${({ height }) => `${height}rem`};
 	background-color: ${themeColors.labelBackground};
 	box-shadow: 0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);
 	border-radius: 1rem;
