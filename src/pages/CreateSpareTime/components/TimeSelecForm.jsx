@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import Button from 'shared/components/Button'
 import Select from 'shared/components/Select'
 import Text from 'shared/components/Text'
 
