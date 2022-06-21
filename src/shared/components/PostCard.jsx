@@ -6,13 +6,7 @@ import Text from './Text'
 import { themeColors } from 'shared/constants/colors'
 import useToggle from 'shared/hooks/useToggle'
 import Badge from './Badge'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import apis from 'shared/api'
-import Comment from './Comment'
-import { getSessionStorageUserInfo } from 'shared/utils/storage'
-import CommentForm from './Comment'
-import CommentList from './CommentList'
 
 const PostCard = ({
 	width = 37.5,
@@ -24,23 +18,10 @@ const PostCard = ({
 	comments,
 	timers = [],
 	onLikeClick,
-	contentOverflow,
+	isLargeCard = false,
 	...props
 }) => {
 	const [likeState, toggleLikeState] = useToggle(like)
-	const [commentList, setCommentList] = useState([])
-
-	useEffect(() => {
-		setCommentList(
-			comments.map(comment => {
-				return {
-					author: comment.author.fullName,
-					comment: comment.comment,
-				}
-			}),
-		)
-	}, [])
-
 	const handleLikeClick = async () => {
 		toggleLikeState()
 		if (likeState) {
@@ -48,11 +29,6 @@ const PostCard = ({
 		} else {
 			await apis.addPostLike(id)
 		}
-	}
-
-	const handleCommentSubmit = async comment => {
-		setCommentList([...commentList, { author: getSessionStorageUserInfo().fullName, comment }])
-		await apis.createComment(comment, id)
 	}
 
 	return (
@@ -63,14 +39,12 @@ const PostCard = ({
 					{author}
 				</Text>
 			</CardHeader>
-			<ContentWrapper>
+			<ContentWrapper isLargeCard={isLargeCard}>
 				{timers.map(task => (
 					<CardTag key={task.id} fontSize={1.6}>
 						{task.name}
 					</CardTag>
 				))}
-				{/* <CommentList comments={commentList} />
-				<CommentForm onSubmit={handleCommentSubmit} /> */}
 			</ContentWrapper>
 			<CardFooter>
 				{likeState ? (
@@ -130,7 +104,7 @@ const CardHeader = styled.div`
 const ContentWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	height: 15rem;
+	height: ${({ isLargeCard }) => (isLargeCard ? '26rem' : '15rem')};
 	background-color: ${themeColors.labelBackground};
 	padding: 1rem;
 	gap: 1.5rem;

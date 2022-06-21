@@ -20,7 +20,9 @@ const ShareTask = () => {
 		setIsLoading(true)
 		const data = await apis.getPosts(TEST_CHANNEL_ID)
 		const filteredData = data.filter(post => {
+			if (post.title === 'Test') return false
 			const { share } = JSON.parse(post.title)
+
 			return share === 'PUBLIC'
 		})
 		const fetchData = filteredData.map(post => {
@@ -36,7 +38,6 @@ const ShareTask = () => {
 		setIsLoading(false)
 	}
 	useEffect(() => {
-		console.log(getToken())
 		fetchPosts()
 	}, [])
 
@@ -52,7 +53,6 @@ const ShareTask = () => {
 			timers: timersData,
 		})
 		const postId = getSessionStorageUserInfo().posts[0]._id
-		console.log(postId, data)
 		await apis.modifyPost({ postId, title: data, image: null, channelId: TEST_CHANNEL_ID })
 		await fetchPosts()
 	}
@@ -84,7 +84,7 @@ const ShareTask = () => {
 				</ButtonArea>
 				<AvatarListArea>
 					{posts.map(post => {
-						return <AvatarItem username={post.author.fullName} />
+						return <AvatarItem key={post._id} username={post.author.fullName} />
 					})}
 				</AvatarListArea>
 			</Header>
@@ -101,6 +101,7 @@ const ShareTask = () => {
 							timers={post.timers || []}
 							like={post.like}
 							likeId={post.likeId}
+							size={'md'}
 							comments={post.comments}
 						/>
 					))
