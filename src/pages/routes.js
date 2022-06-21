@@ -3,7 +3,6 @@ import Home from 'pages/Home'
 import Login from 'pages/Login'
 import Signup from 'pages/SignUp'
 import MyPage from 'pages/MyPage'
-import SelectUserType from 'pages/SelectUserType'
 
 import CreateSpareTime from 'pages/CreateSpareTime'
 import CreateTimerName from 'pages/CreateTimerName'
@@ -17,9 +16,8 @@ import DeatailPost from './DeatailPost'
 
 const routes = [
 	{ path: 'myPageEdit', view: MyPageEdit },
-	{ path: '', view: SelectUserType },
 	{ path: 'signup', view: Signup },
-	{ path: 'login', view: Login },
+	{ path: '', view: Login },
 	{ path: 'signup', view: Signup },
 	{
 		path: 'myPage',

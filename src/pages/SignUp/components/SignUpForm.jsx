@@ -1,7 +1,6 @@
 import useForm from 'shared/hooks/useForm'
 import Button from 'shared/components/Button'
 import Text from 'shared/components/Text'
-import Input from 'shared/components/Input'
 import CardForm from 'shared/components/CardForm'
 
 import styled from 'styled-components'
@@ -62,4 +61,13 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100%;
+`
+
+const Input = styled.input`
+	padding: 0;
+	margin: 0;
+	border: none;
+	outline: none;
+	align-items: center;
+	font-size: 2.5rem;
 `
