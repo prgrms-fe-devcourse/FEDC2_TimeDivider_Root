@@ -15,7 +15,7 @@ const Login = () => {
 		if (isSuccess) {
 			setUserInfo(loginedInfo)
 			alert(message)
-			navigate('/myPage')
+			navigate('/updateTimeDivider')
 		}
 
 		if (!isSuccess) {

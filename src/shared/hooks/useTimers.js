@@ -1,9 +1,10 @@
-import { useRecoilState } from 'recoil'
-import { originIdState, timerObject, timerState } from '../../state/timer'
+import { useRecoilState, useResetRecoilState } from 'recoil'
+import { originIdState, timerObject, timerState } from 'state/timer'
 
 export const useTimers = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
+	const resetTimers = useResetRecoilState(timerState)
 
 	const changeTime = (id, time) => {
 		setTimers({
@@ -53,5 +54,6 @@ export const useTimers = () => {
 		addTimer,
 		completeTimer,
 		mergeTimer,
+		resetTimers,
 	}
 }
