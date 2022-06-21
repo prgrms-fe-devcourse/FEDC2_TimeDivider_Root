@@ -2,7 +2,11 @@ import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import API from '../API'
 
 export const createPost = async (
-	postInfo = { title: 'Test', image: null, channelId: TEST_CHANNEL_ID },
+	postInfo = {
+		title: JSON.stringify({ share: 'PRIVATE', timers: [] }),
+		image: null,
+		channelId: TEST_CHANNEL_ID,
+	},
 ) => {
 	try {
 		await API.post('/posts/create', postInfo)
