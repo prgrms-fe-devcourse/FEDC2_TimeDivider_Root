@@ -7,6 +7,7 @@ import Button from 'shared/components/Button'
 import PostCard from 'shared/components/PostCard'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { getSessionStorageUserInfo } from 'shared/utils/storage'
+import { getToken } from 'shared/utils/token'
 import { timerState } from 'state/timer'
 import AvatarItem from './components/AvatarItem'
 import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
@@ -15,7 +16,6 @@ const ShareTask = () => {
 	const [posts, setPosts] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [timers] = useRecoilState(timerState)
-
 	const fetchPosts = async () => {
 		setIsLoading(true)
 		const data = await apis.getPosts(TEST_CHANNEL_ID)
@@ -35,8 +35,8 @@ const ShareTask = () => {
 		setPosts(fetchData)
 		setIsLoading(false)
 	}
-
 	useEffect(() => {
+		console.log(getToken())
 		fetchPosts()
 	}, [])
 
@@ -52,6 +52,7 @@ const ShareTask = () => {
 			timers: timersData,
 		})
 		const postId = getSessionStorageUserInfo().posts[0]._id
+		console.log(postId, data)
 		await apis.modifyPost({ postId, title: data, image: null, channelId: TEST_CHANNEL_ID })
 		await fetchPosts()
 	}

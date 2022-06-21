@@ -32,6 +32,7 @@ export const deletePost = async (id = '') => {
 export const modifyPost = async (
 	postInfo = { postId: '', title: {}, image: null, channelId: TEST_CHANNEL_ID },
 ) => {
+	console.log(postInfo)
 	const { isSuccess, message, data = {} } = await API.put('/posts/update', postInfo)
 
 	if (isSuccess) {
