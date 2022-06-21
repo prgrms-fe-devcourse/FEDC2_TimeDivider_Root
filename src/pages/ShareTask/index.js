@@ -69,7 +69,7 @@ const ShareTask = () => {
 		await fetchPosts()
 	}
 
-	const handleClick = postId => {
+	const handleNavigate = postId => {
 		navigate(`/detailPost/${postId}`)
 	}
 
@@ -97,7 +97,7 @@ const ShareTask = () => {
 						return (
 							<AvatarItem
 								onClick={() => {
-									handleClick(post._id)
+									handleNavigate(post._id)
 								}}
 								key={post._id}
 								postId={post._id}
@@ -122,6 +122,7 @@ const ShareTask = () => {
 							like={post.like}
 							likeId={post.likeId}
 							size={'md'}
+							onComentClick={handleNavigate}
 							imageSrc={post.imageSrc}
 							comments={post.comments}
 						/>

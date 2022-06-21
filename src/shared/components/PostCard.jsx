@@ -18,6 +18,7 @@ const PostCard = ({
 	comments,
 	timers = [],
 	onLikeClick,
+	onComentClick,
 	imageSrc,
 	isLargeCard = false,
 	...props
@@ -30,6 +31,9 @@ const PostCard = ({
 		} else {
 			await apis.addPostLike(id)
 		}
+	}
+	const handleCommentClick = () => {
+		onComentClick(id)
 	}
 
 	return (
@@ -58,7 +62,7 @@ const PostCard = ({
 				) : (
 					<IoMdHeartEmpty onClick={handleLikeClick} fontSize={'4rem'} />
 				)}
-				<IoChatbubbleOutline cursor={'pointer'} fontSize={'3.5rem'} />
+				<IoChatbubbleOutline onClick={handleCommentClick} cursor={'pointer'} fontSize={'3.5rem'} />
 			</CardFooter>
 		</CardContainer>
 	)

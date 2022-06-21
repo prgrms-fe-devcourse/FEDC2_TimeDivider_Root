@@ -21,7 +21,6 @@ const DetailPost = () => {
 	const fetchData = async () => {
 		setIsLoading(true)
 		const data = await apis.getPostDetail(postId)
-
 		const { timers } = JSON.parse(data.title)
 		const author = data.author
 		const imageSrc = author.image
@@ -34,6 +33,7 @@ const DetailPost = () => {
 			data.comments.map(comment => {
 				return {
 					author: comment.author.fullName,
+					imageSrc: comment.author.image,
 					comment: comment.comment,
 				}
 			}),
@@ -47,7 +47,7 @@ const DetailPost = () => {
 	}, [])
 
 	const handleCommentSubmit = async comment => {
-		setCommentList([...commentList, { author: user.fullName, comment }])
+		setCommentList([...commentList, { author: user.fullName, comment, imageSrc: user.image }])
 		await apis.createComment(comment, postId)
 	}
 
