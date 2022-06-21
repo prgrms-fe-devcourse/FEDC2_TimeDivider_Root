@@ -18,6 +18,8 @@ const PostCard = ({
 	comments,
 	timers = [],
 	onLikeClick,
+	onComentClick,
+	imageSrc,
 	isLargeCard = false,
 	...props
 }) => {
@@ -30,11 +32,14 @@ const PostCard = ({
 			await apis.addPostLike(id)
 		}
 	}
+	const handleCommentClick = () => {
+		onComentClick(id)
+	}
 
 	return (
-		<CardContainer width={width} height={height} {...props}>
+		<CardContainer width={width} isLargeCard={isLargeCard} {...props}>
 			<CardHeader>
-				<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
+				<Avatar isLoading={false} src={imageSrc} alt="avatar" size={4.5} />
 				<Text size={1.6} strong>
 					{author}
 				</Text>
@@ -57,7 +62,7 @@ const PostCard = ({
 				) : (
 					<IoMdHeartEmpty onClick={handleLikeClick} fontSize={'4rem'} />
 				)}
-				<IoChatbubbleOutline cursor={'pointer'} fontSize={'3.5rem'} />
+				<IoChatbubbleOutline onClick={handleCommentClick} cursor={'pointer'} fontSize={'3.5rem'} />
 			</CardFooter>
 		</CardContainer>
 	)
@@ -83,7 +88,7 @@ const CardTag = styled(Badge)`
 
 const CardContainer = styled.div`
 	width: 100%;
-	height: ${({ height }) => `${height}rem`};
+	height: ${({ isLargeCard }) => (isLargeCard ? '40rem' : '29rem')};
 	background-color: white;
 	box-shadow: 0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);
 	box-sizing: border-box;

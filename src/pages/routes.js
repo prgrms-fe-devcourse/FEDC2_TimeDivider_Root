@@ -12,7 +12,7 @@ import ShareTask from 'pages/ShareTask'
 
 import NotFound from 'pages/NotFound'
 import MyPageEdit from 'pages/MyPageEdit'
-import DeatailPost from './DeatailPost'
+import DetailPost from 'pages/DetailPost'
 
 const routes = [
 	{ path: 'myPageEdit', view: MyPageEdit },
@@ -55,9 +55,8 @@ const routes = [
 		title: '할일 공유 게시판',
 	},
 	{
-		path: 'detailPost',
-		view: DeatailPost,
-		title: '게시물 상세 보기',
+		path: 'detailPost/:postId',
+		view: DetailPost,
 	},
 	{
 		path: '*',

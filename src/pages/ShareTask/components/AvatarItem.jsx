@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import Avatar from 'shared/components/Avatar'
 import Text from 'shared/components/Text'
 
-const AvatarItem = ({ username, ...props }) => {
+const AvatarItem = ({ username, imageSrc, size = 5, ...props }) => {
 	return (
 		<Wrapper {...props}>
-			<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={5} />
+			<Avatar isLoading={false} src={imageSrc} alt="avatar" size={size} />
 			<AvatarName size={1.4}>{username}</AvatarName>
 		</Wrapper>
 	)
@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
 export const AvatarName = styled(Text)`
 	width: 6rem;
 	overflow: hidden;
+	text-align: center;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	word-break: break-all;
