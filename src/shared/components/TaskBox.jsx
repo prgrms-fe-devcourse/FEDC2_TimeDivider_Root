@@ -9,7 +9,7 @@ const TaskBox = ({ task, ...props }) => {
 		<BoxContainer {...props}>
 			<BoxWrapper>
 				<Text size={1.4} color={themeColors.primary}>
-					{task.task}
+					{task.name}
 				</Text>
 				<Text style={{ marginTop: '0.8rem', fontSize: '1.4rem' }}>
 					{hour.length === 1 ? `0${hour}` : hour} : {minute === '0' ? '00' : minute}

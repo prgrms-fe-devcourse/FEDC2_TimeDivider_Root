@@ -16,7 +16,7 @@ const Home = () => {
 			</S.SubTitle>
 
 			<S.ButtonArea>
-				<Link to="/createTime">
+				<Link to="/createSpareTime">
 					<Button>시작하기</Button>
 				</Link>
 			</S.ButtonArea>
