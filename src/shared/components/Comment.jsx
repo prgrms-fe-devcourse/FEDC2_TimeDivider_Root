@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 
-const Comment = ({ onSubmit, ...props }) => {
+const CommentForm = ({ onSubmit, ...props }) => {
 	const [comment, setComment] = useState('')
 
 	const handleSubmit = e => {
@@ -25,7 +25,7 @@ const Comment = ({ onSubmit, ...props }) => {
 	)
 }
 
-export default Comment
+export default CommentForm
 
 const Form = styled.form`
 	display: flex;
