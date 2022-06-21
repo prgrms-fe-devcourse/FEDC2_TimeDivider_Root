@@ -108,7 +108,7 @@ const CardTag = styled(Badge)`
 `
 
 const CardContainer = styled.div`
-	width: ${({ width }) => `${width}rem`};
+	width: 100%;
 	height: ${({ height }) => `${height}rem`};
 	background-color: white;
 	box-shadow: 0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);

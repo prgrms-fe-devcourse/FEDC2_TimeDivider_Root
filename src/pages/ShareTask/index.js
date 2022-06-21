@@ -3,9 +3,12 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import apis from 'shared/api'
+import Avatar from 'shared/components/Avatar'
 import { BottomBar } from 'shared/components/BottomBar'
+import Button from 'shared/components/Button'
 import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
+import Text from 'shared/components/Text'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { getSessionStorageUserInfo } from 'shared/utils/storage'
 import { timerState } from 'state/timer'
@@ -66,26 +69,33 @@ const ShareTask = () => {
 		await fetchPosts()
 	}
 
-	const handleAddButtonClick = async () => {
-		const timersData = Object.keys(timers).map((key, idx) => {
-			return {
-				id: idx,
-				name: timers[key].name,
-			}
-		})
-		const data = JSON.stringify({
-			share: 'PUBLIC',
-			timers: timersData,
-		})
-		await apis.createPost({ title: data, image: null, channelId: TEST_CHANNEL_ID })
-	}
-
 	return (
 		<div>
-			<NavBar>할 일 공유</NavBar>
-			<button onClick={handleAddButtonClick}>게시물 추가</button>
-			<button onClick={handleNotShareButtonClick}>공유 안해</button>
-			<button onClick={handleUpdateButtonClick}>포스트 업데이트</button>
+			<Header>
+				<ButtonArea>
+					<Button
+						width={8}
+						height={3}
+						fontSize={1.3}
+						backgroundColor={'white'}
+						fontColor={'black'}
+						borderColor={'black'}
+						onClick={handleNotShareButtonClick}
+					>
+						공유중지
+					</Button>
+					<Button width={8} height={3} fontSize={1.3} onClick={handleUpdateButtonClick}>
+						업데이트
+					</Button>
+				</ButtonArea>
+				<AvatarListArea>
+					<AvatarItem>
+						<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
+						<Text size={1.4}>이지원</Text>
+					</AvatarItem>
+				</AvatarListArea>
+			</Header>
+
 			<CardArea>
 				{isLoading ? (
 					<div>로딩중</div>
@@ -103,32 +113,61 @@ const ShareTask = () => {
 					))
 				)}
 			</CardArea>
-			<ButtonArea>
+			<Footer>
 				<BottomBar />
-			</ButtonArea>
+			</Footer>
 		</div>
 	)
 }
 
 export default ShareTask
 
+const Header = styled.div`
+	width: 37rem;
+	height: 18rem;
+`
+const AvatarItem = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	box-sizing: border-box;
+`
+const AvatarListArea = styled.div`
+	display: flex;
+	width: 100%;
+	overflow-x: scroll;
+	height: 10rem;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+`
+const ButtonArea = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	padding: 2rem;
+	gap: 1rem;
+	box-sizing: border-box;
+`
+
 const CardArea = styled.div`
 	position: relative;
 	width: 100%;
-	height: 66.5rem;
+	height: 55rem;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding: 1rem;
-	box-sizing: border-box;
 
 	::-webkit-scrollbar {
 		display: none;
 	}
 `
 
-const ButtonArea = styled.div`
+const Footer = styled.div`
 	position: absolute;
 	width: 100%;
 	left: 0;
