@@ -1,10 +1,8 @@
 import useForm from 'shared/hooks/useForm'
 import Button from 'shared/components/Button'
 import Text from 'shared/components/Text'
-import Input from 'shared/components/Input'
-import CardForm from 'shared/components/CardForm'
 
-import styled from 'styled-components'
+import * as S from '../style'
 
 const LoginForm = ({ onSubmit }) => {
 	const initialValues = {
@@ -23,27 +21,19 @@ const LoginForm = ({ onSubmit }) => {
 	})
 
 	return (
-		<Wrapper>
-			<CardForm onSubmit={handleSubmit}>
-				<Text size={3}>로그인</Text>
-				<Input type="email" name="email" placeholder="Email" onChange={handleChange} />
+		<S.Wrapper>
+			<Text size={3}>로그인</Text>
+			<S.CardForm onSubmit={handleSubmit}>
+				<S.Input type="email" name="email" placeholder="이메일 주소" onChange={handleChange} />
 				{errors.email && <Text color="red">{errors.email}</Text>}
-				<Input type="password" name="password" placeholder="Password" onChange={handleChange} />
+				<S.Input type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
 				{errors.password && <Text color="red">{errors.password}</Text>}
 				<Button type="submit" disabled={isLoading}>
 					Login
 				</Button>
-			</CardForm>
-		</Wrapper>
+			</S.CardForm>
+		</S.Wrapper>
 	)
 }
 
 export default LoginForm
-
-const Wrapper = styled.div`
-	display: flex;
-	gap: 2rem;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-`
