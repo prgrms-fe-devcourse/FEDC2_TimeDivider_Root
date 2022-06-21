@@ -33,7 +33,7 @@ const PostCard = ({
 	}
 
 	return (
-		<CardContainer width={width} height={height} {...props}>
+		<CardContainer width={width} isLargeCard={isLargeCard} {...props}>
 			<CardHeader>
 				<Avatar isLoading={false} src={imageSrc} alt="avatar" size={4.5} />
 				<Text size={1.6} strong>
@@ -84,7 +84,7 @@ const CardTag = styled(Badge)`
 
 const CardContainer = styled.div`
 	width: 100%;
-	height: ${({ height }) => `${height}rem`};
+	height: ${({ isLargeCard }) => (isLargeCard ? '40rem' : '29rem')};
 	background-color: white;
 	box-shadow: 0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);
 	box-sizing: border-box;

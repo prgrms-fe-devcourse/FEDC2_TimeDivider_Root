@@ -8,6 +8,7 @@ import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
 import { useUser } from 'shared/hooks/useUser'
 import { getSessionStorageUserInfo } from 'shared/utils/storage'
+import styled from 'styled-components'
 import { Footer } from './style'
 
 const DetailPost = () => {
@@ -16,6 +17,7 @@ const DetailPost = () => {
 	const [post, setPost] = useState({})
 	const [commentList, setCommentList] = useState([])
 	const { user } = useUser()
+
 	const fetchData = async () => {
 		setIsLoading(true)
 		const data = await apis.getPostDetail(postId)
@@ -25,7 +27,9 @@ const DetailPost = () => {
 		const imageSrc = author.image
 		const like = data.likes.find(like => like.user === user._id)
 		const likeId = like ? like._id : null
+
 		setPost({ ...data, timers, like, likeId, imageSrc })
+
 		setCommentList(
 			data.comments.map(comment => {
 				return {
@@ -34,15 +38,19 @@ const DetailPost = () => {
 				}
 			}),
 		)
+
 		setIsLoading(false)
 	}
+
 	useEffect(() => {
 		fetchData()
 	}, [])
+
 	const handleCommentSubmit = async comment => {
-		setCommentList([...commentList, { author: getSessionStorageUserInfo().fullName, comment }])
-		await apis.createComment(comment)
+		setCommentList([...commentList, { author: user.fullName, comment }])
+		await apis.createComment(comment, postId)
 	}
+
 	return (
 		<>
 			<NavBar backIcon />
@@ -60,7 +68,10 @@ const DetailPost = () => {
 					isLargeCard
 				/>
 			)}
-			<CommentList comments={commentList} />
+			<CommentArea>
+				<CommentList comments={commentList} />
+			</CommentArea>
+
 			<Footer>
 				<CommentForm onSubmit={handleCommentSubmit} />
 			</Footer>
@@ -69,3 +80,12 @@ const DetailPost = () => {
 }
 
 export default DetailPost
+
+const CommentArea = styled.div`
+	width: 100%;
+	overflow: scroll;
+	height: 25.2rem;
+	::-webkit-scrollbar {
+		display: none;
+	}
+`

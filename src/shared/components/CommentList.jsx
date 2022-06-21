@@ -5,7 +5,6 @@ import Text from './Text'
 const CommentList = ({ comments, ...props }) => {
 	return (
 		<CommentContainer>
-			<CommentLabel>Comments</CommentLabel>
 			<CommentsList {...props}>
 				{comments.map((comment, idx) => (
 					<CommentItem key={idx}>
@@ -24,13 +23,6 @@ export default CommentList
 
 const CommentContainer = styled.div`
 	width: 100%;
-`
-
-const CommentLabel = styled.div`
-	font-size: 2rem;
-	color: ${colors.lightGray};
-	padding: 1rem;
-	box-sizing: border-box;
 `
 
 const CommentsList = styled.ul`

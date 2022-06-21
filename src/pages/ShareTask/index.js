@@ -13,6 +13,7 @@ import AvatarItem from './components/AvatarItem'
 import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
 
 const ShareTask = () => {
+	const navigate = useNavigate()
 	const [posts, setPosts] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [timers] = useRecoilState(timerState)
@@ -68,7 +69,6 @@ const ShareTask = () => {
 		await fetchPosts()
 	}
 
-	const navigate = useNavigate()
 	const handleClick = postId => {
 		navigate(`/detailPost/${postId}`)
 	}
