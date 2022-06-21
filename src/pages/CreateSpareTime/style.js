@@ -8,15 +8,6 @@ export const Wrapper = styled.div`
 	align-items: center;
 	padding-bottom: 3.3rem;
 `
-export const SubTitle = styled.span`
-	position: relative;
-	left: -2.5rem;
-	display: flex;
-	align-items: flex-start;
-	width: 24.5rem;
-	line-height: 3.2rem;
-	text-align: center;
-`
 
 export const Section = styled.section`
 	display: flex;
