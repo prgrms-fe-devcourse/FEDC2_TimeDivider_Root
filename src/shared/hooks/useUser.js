@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { loginUserState } from '../../state/user'
 import { requestLogout } from '../api/apis/authApis'
 import { useTimers } from 'shared/hooks/useTimers'
+
 export const useUser = () => {
 	const { resetTimers } = useTimers()
-	const loginData = useRecoilValue(loginUserState)
+	const [loginData, setLoginData] = useRecoilState(loginUserState)
 	const removeLoginData = useResetRecoilState(loginUserState)
 	const [user, setUser] = useState(loginData.user)
 
@@ -17,6 +18,7 @@ export const useUser = () => {
 	const changeEmail = email => {
 		setUser({ ...user, email })
 	}
+
 	const logout = async () => {
 		const response = await requestLogout()
 		removeLoginData()
@@ -26,6 +28,7 @@ export const useUser = () => {
 
 	return {
 		user,
+		setLoginData,
 		isLoggedIn,
 		changeName,
 		changeEmail,
