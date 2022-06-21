@@ -1,34 +1,43 @@
-import { useState } from 'react'
-import { useRecoilValue, useResetRecoilState } from 'recoil'
-import { loginUserState } from '../../state/user'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { loginDataState, userState } from '../../state/user'
 import { requestLogout } from '../api/apis/authApis'
 import { useTimers } from 'shared/hooks/useTimers'
+import { getUser, requestChangeFullName, uploadImage } from '../api/apis/userApis'
+
 export const useUser = () => {
 	const { resetTimers } = useTimers()
-	const loginData = useRecoilValue(loginUserState)
-	const removeLoginData = useResetRecoilState(loginUserState)
-	const [user, setUser] = useState(loginData.user)
+	const loginData = useRecoilValue(loginDataState)
+	const [user, setUser] = useRecoilState(userState)
+	const removeLoginData = useResetRecoilState(loginDataState)
 
 	const isLoggedIn = loginData.token !== null
 
-	const changeName = fullName => {
-		setUser({ ...user, fullName })
+	const changeName = async fullName => {
+		await requestChangeFullName(fullName)
 	}
-	const changeEmail = email => {
-		setUser({ ...user, email })
-	}
+
 	const logout = async () => {
 		const response = await requestLogout()
 		removeLoginData()
 		resetTimers()
 		return response
 	}
-
+	const changeImage = async image => {
+		const formData = new FormData()
+		formData.append('image', image)
+		formData.append('isCover', false)
+		await uploadImage(formData)
+	}
+	const refreshUser = async () => {
+		const response = await getUser(user._id)
+		setUser(response.data)
+	}
 	return {
 		user,
 		isLoggedIn,
 		changeName,
-		changeEmail,
+		changeImage,
+		refreshUser,
 		logout,
 	}
 }
