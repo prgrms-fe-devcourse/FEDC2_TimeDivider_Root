@@ -9,17 +9,6 @@ export const Wrapper = styled.div`
 	padding-bottom: 3.3rem;
 `
 
-export const SubTitle = styled.span`
-	position: relative;
-	left: -2.5rem;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 24.5rem;
-	line-height: 3.2rem;
-	text-align: center;
-`
-
 export const TaskArea = styled.div`
 	position: relative;
 	width: 30rem;
