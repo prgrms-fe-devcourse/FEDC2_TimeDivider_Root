@@ -60,20 +60,27 @@ table {
 #root{
   position: relative;
   display: flex;
+  flex: 1;
   flex-direction: column;
   box-sizing: border-box;
   align-items: center;
-  width: 100%;
+  padding: 0;
+  overflow: hidden;  
   max-width: 375px;
   height: 812px;
-  @media screen and (max-height: 100px){
-    height: 100vh;
-  }
-  margin: auto;
-  padding: 0;
-  overflow: hidden;
   box-shadow: 0 0 2rem 0.1rem rgba(0, 0, 0, 0.2);
   background-color: ${colors.background};
+  
+  @media screen and (max-width: 700px){
+    max-width: 100vw;
+    height: 100vh;
+  }
+  @media screen and (max-height: 812px) {
+    margin:0;
+    height: 100vh;
+    box-shadow: none;
+  }
+  
 }`
 
 export default GlobalStyle

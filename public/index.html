@@ -11,14 +11,71 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <title>%REACT_APP_TITLE%</title>
+    <style>
+        .wrapper{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 20rem;
+        }
+        #info{
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            height: 50rem
+        }
+        .download{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFFFFF;
+            border: 1px solid #4880EE;
+            width: 17rem;
+            height: 5rem;
+            margin-top: 3rem;
+            color: #4880EE;
+            font-size: 1.5rem;
+            border-radius: 1rem;
+
+        }
+        .download:hover{
+            background-color: #4880EE;
+            color: #FFFFFF;
+        }
+        @media screen and (max-width: 1200px){
+            #info{
+                display: none;
+            }
+        }
+        @media screen and (max-height: 812px) {
+            #info{
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+<!--    인라인 스타일로 짠 건 우리 모두의 비밀!-->
+    <div class="wrapper">
+        <div id="info">
+            <img style="width: 15rem; height: 15rem" src="https://tva1.sinaimg.cn/large/e6c9d24egy1h3gat8uk05j206c06h0su.jpg">
+            <div style="line-height: 1.2; font-size: 2.2rem; margin-bottom: 1rem; margin-top: 3rem; font-weight: 200">
+                당신의 하루를 <br>분배하고 나눠요
+            </div>
+            <div style="font-size: 3rem; font-weight: 700; margin-top: 1rem;">
+                일 모래시계
+            </div>
+            <a href="https://github.com/prgrms-fe-devcourse/FEDC2_TimeDivider_Root"><div  class="download">다운로드</div></a>
+        </div>
+        <div id="root"></div>
+    </div>
 
 </body>
 
