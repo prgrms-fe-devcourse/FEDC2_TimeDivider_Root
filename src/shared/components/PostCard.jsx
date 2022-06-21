@@ -18,6 +18,7 @@ const PostCard = ({
 	comments,
 	timers = [],
 	onLikeClick,
+	imageSrc,
 	isLargeCard = false,
 	...props
 }) => {
@@ -34,7 +35,7 @@ const PostCard = ({
 	return (
 		<CardContainer width={width} height={height} {...props}>
 			<CardHeader>
-				<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
+				<Avatar isLoading={false} src={imageSrc} alt="avatar" size={4.5} />
 				<Text size={1.6} strong>
 					{author}
 				</Text>

@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import Avatar from 'shared/components/Avatar'
 import Text from 'shared/components/Text'
 
-const AvatarItem = ({ username, ...props }) => {
+const AvatarItem = ({ username, imageSrc, ...props }) => {
 	return (
 		<Wrapper {...props}>
-			<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={5} />
+			<Avatar isLoading={false} src={imageSrc} alt="avatar" size={5} />
 			<AvatarName size={1.4}>{username}</AvatarName>
 		</Wrapper>
 	)
