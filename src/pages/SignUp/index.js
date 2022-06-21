@@ -1,6 +1,8 @@
+import styled from 'styled-components'
 import SignUpForm from './components/SignUpForm'
 import apis from 'shared/api'
 import { useNavigate } from 'react-router-dom'
+import Logo from 'shared/components/Logo'
 
 import NavBar from 'shared/components/NavBar'
 
@@ -11,6 +13,7 @@ const SignUp = () => {
 
 		if (isSuccess) {
 			alert(message)
+			await apis.createPost()
 			navigate('/')
 		}
 
@@ -22,9 +25,19 @@ const SignUp = () => {
 	return (
 		<>
 			<NavBar backIcon />
+			<Logo />
 			<SignUpForm onSubmit={handleSignUpSubmit}></SignUpForm>
 		</>
 	)
 }
 
 export default SignUp
+
+const Input = styled.input`
+	padding: 0;
+	margin: 0;
+	border: none;
+	outline: none;
+	align-items: center;
+	font-size: 2.5rem;
+`
