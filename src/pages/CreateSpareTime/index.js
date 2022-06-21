@@ -13,7 +13,7 @@ const BUTTON_TEXT = Object.freeze({
 	INVALID: '시간을 입력해주세요',
 })
 
-const CreateTime = () => {
+const CreateSpareTime = () => {
 	const { spareTime, updateSpareTime, isValidSpareTime } = useCreatingTimers()
 
 	return (
@@ -22,7 +22,7 @@ const CreateTime = () => {
 			<SubTitle>오늘 사용할 수 있는 시간은 얼마인가요?</SubTitle>
 			<TimeSelectForm intialTime={spareTime} handleChangeTime={updateSpareTime}></TimeSelectForm>
 			<S.ButtonArea>
-				<Link to="/createTask" state={{ spareTime }}>
+				<Link to="/createTimerName" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>
 						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
 					</Button>
@@ -32,4 +32,4 @@ const CreateTime = () => {
 	)
 }
 
-export default CreateTime
+export default CreateSpareTime
