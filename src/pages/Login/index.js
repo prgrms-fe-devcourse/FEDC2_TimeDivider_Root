@@ -12,69 +12,50 @@ import { colors } from 'shared/constants/colors'
 import { useUser } from 'shared/hooks/useUser'
 
 const Login = () => {
-    const { login } = useUser()
-    const navigate = useNavigate()
+	const { login } = useUser()
+	const navigate = useNavigate()
 
-    const handleLogInSubmit = async loginInfo => {
-        const { isSuccess, message } = await login(loginInfo)
+	const handleLogInSubmit = async loginInfo => {
+		const { isSuccess, message } = await login(loginInfo)
 
-        if (!isSuccess) {
-            alert(message)
-            return
-        }
+		if (!isSuccess) {
+			alert(message)
+			return
+		}
 
-        alert(message)
-        navigate('/updateTimeDivider')
-    }
-    return ( <
-        >
-        <
-        NavBar backIcon / >
-        <
-        Logo / >
-        <
-        Wrapper >
-        <
-        LoginForm onSubmit = { handleLogInSubmit }
-        />
-
-        <
-        Divider type = { 'horizontal' } > < /Divider>
-
-        <
-        ButtonArea >
-        <
-        Text block = { true }
-        size = { 1.3 }
-        textAlign = { 'start' }
-        color = { colors.lightGray } >
-        회원이 아니신가요 ?
-        <
-        /Text> <
-        Link to = "/signup" >
-        <
-        Button backgroundColor = { '#fff' }
-        fontColor = { colors.blue } >
-        회원가입 <
-        /Button> <
-        /Link> <
-        Link to = "/home" >
-        <
-        Button backgroundColor = { '#fff' }
-        borderColor = { '#505866' }
-        fontColor = { '#505866' } >
-        비회원으로 이용하기 <
-        /Button> <
-        /Link> <
-        /ButtonArea> <
-        /Wrapper> <
-        />
-    )
+		alert(message)
+		navigate('/updateTimeDivider')
+	}
+	return (
+		<>
+			<NavBar backIcon />
+			<Logo />
+			<Wrapper>
+				<LoginForm onSubmit={handleLogInSubmit} />
+				<Divider type={'horizontal'}> </Divider>
+				<ButtonArea>
+					<Text block={true} size={1.3} textAlign={'start'} color={colors.lightGray}>
+						회원이 아니신가요 ?
+					</Text>
+					<Link to="/signup">
+						<Button backgroundColor={'#fff'} fontColor={colors.blue}>
+							회원가입
+						</Button>
+					</Link>
+					<Link to="/home">
+						<Button backgroundColor={'#fff'} borderColor={'#505866'} fontColor={'#505866'}>
+							비회원으로 이용하기
+						</Button>
+					</Link>
+				</ButtonArea>
+			</Wrapper>
+		</>
+	)
 }
 
 export default Login
 
-const Wrapper = styled.div `
+const Wrapper = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -82,7 +63,7 @@ const Wrapper = styled.div `
 	align-items: center;
 `
 
-const ButtonArea = styled.div `
+const ButtonArea = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;

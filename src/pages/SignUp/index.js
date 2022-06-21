@@ -1,25 +1,22 @@
-import styled from 'styled-components'
 import SignUpForm from './components/SignUpForm'
-import apis from 'shared/api'
-import { useNavigate } from 'react-router-dom'
 import Logo from 'shared/components/Logo'
+import { useNavigate } from 'react-router-dom'
+import { useUser } from 'shared/hooks/useUser'
 
 import NavBar from 'shared/components/NavBar'
 
 const SignUp = () => {
+	const { signup } = useUser()
 	const navigate = useNavigate()
 	const handleSignUpSubmit = async userInfo => {
-		const { isSuccess, message } = await apis.signup(userInfo)
-
-		if (isSuccess) {
-			alert(message)
-			await apis.createPost()
-			navigate('/')
-		}
+		const { isSuccess, message } = await signup(userInfo)
 
 		if (!isSuccess) {
 			alert(message)
+			return
 		}
+		alert(message)
+		navigate('/updateTimeDivider')
 	}
 
 	return (
@@ -32,12 +29,3 @@ const SignUp = () => {
 }
 
 export default SignUp
-
-const Input = styled.input`
-	padding: 0;
-	margin: 0;
-	border: none;
-	outline: none;
-	align-items: center;
-	font-size: 2.5rem;
-`
