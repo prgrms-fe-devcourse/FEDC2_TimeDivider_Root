@@ -20,16 +20,10 @@ const ShareTask = () => {
 			console.log(data)
 			const fetchData = data.map(post => {
 				const { title, tasks } = JSON.parse(post.title)
-<<<<<<< HEAD
-				const user = sessionStorage.getItem('loginUser')
-				const userId = JSON.parse(user).user._id
-				const like = post.likes.find(like => like.user === userId)
-
-=======
 				const user = getSessionStorageUserInfo()
 				const userId = user._id
 				const like = post.likes.find(like => like.user === userId)
->>>>>>> 1782b46595d0a09086c51dbceb14c25a68305984
+
 				const likeId = like ? like._id : null
 				return { ...post, title, tasks, like, likeId }
 			})
@@ -55,10 +49,7 @@ const ShareTask = () => {
 							tasks={post.tasks || []}
 							like={post.like}
 							likeId={post.likeId}
-<<<<<<< HEAD
-=======
 							comments={post.comments}
->>>>>>> 1782b46595d0a09086c51dbceb14c25a68305984
 						/>
 					))
 				)}
