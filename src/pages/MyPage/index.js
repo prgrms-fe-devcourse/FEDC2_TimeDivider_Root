@@ -22,12 +22,13 @@ import Avatar from '../../shared/components/Avatar'
 import Button from '../../shared/components/Button'
 
 const MyPage = () => {
-	const { user, isLoggedIn, logout, refreshUser } = useUser()
+	const { user, isLoggedIn, logout, refreshUser, changeImage } = useUser()
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		refreshUser()
 	}, [])
+
 	const handleLogOut = async () => {
 		const { isSuccess, message } = await logout()
 		if (isSuccess) {
