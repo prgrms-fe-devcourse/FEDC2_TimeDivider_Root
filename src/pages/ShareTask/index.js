@@ -1,22 +1,15 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import apis from 'shared/api'
-import Avatar from 'shared/components/Avatar'
 import { BottomBar } from 'shared/components/BottomBar'
 import Button from 'shared/components/Button'
-import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
-import Text from 'shared/components/Text'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { getSessionStorageUserInfo } from 'shared/utils/storage'
 import { timerState } from 'state/timer'
-import styled from 'styled-components'
-
-//공유 누르면 전역 상태에서 API
-//취소 누르면? 내 게시물 이름을 바꿔서 보내
-//
+import AvatarItem from './components/AvatarItem'
+import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
 
 const ShareTask = () => {
 	const [posts, setPosts] = useState([])
@@ -89,10 +82,9 @@ const ShareTask = () => {
 					</Button>
 				</ButtonArea>
 				<AvatarListArea>
-					<AvatarItem>
-						<Avatar isLoading={false} src="https://picsum.photos/200" alt="avatar" size={4.5} />
-						<Text size={1.4}>이지원</Text>
-					</AvatarItem>
+					{posts.map(post => {
+						return <AvatarItem username={post.author.fullName} />
+					})}
 				</AvatarListArea>
 			</Header>
 
@@ -121,55 +113,3 @@ const ShareTask = () => {
 }
 
 export default ShareTask
-
-const Header = styled.div`
-	width: 37rem;
-	height: 18rem;
-`
-const AvatarItem = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	padding: 1rem;
-	box-sizing: border-box;
-`
-const AvatarListArea = styled.div`
-	display: flex;
-	width: 100%;
-	overflow-x: scroll;
-	height: 10rem;
-
-	::-webkit-scrollbar {
-		display: none;
-	}
-`
-const ButtonArea = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	padding: 2rem;
-	gap: 1rem;
-	box-sizing: border-box;
-`
-
-const CardArea = styled.div`
-	position: relative;
-	width: 100%;
-	height: 55rem;
-	overflow-y: scroll;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-
-	::-webkit-scrollbar {
-		display: none;
-	}
-`
-
-const Footer = styled.div`
-	position: absolute;
-	width: 100%;
-	left: 0;
-	bottom: 0;
-`
