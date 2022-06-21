@@ -4,7 +4,7 @@ const Divider = props => {
 	return <StyledDivider {...props} />
 }
 
-const StyledDivider = styled.hr`
+const StyledDivider = styled.div`
 	border: none;
 	background-color: #aaa;
 	${props =>
