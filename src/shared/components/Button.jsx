@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { colors } from 'shared/constants/colors'
+import { colors, themeColors } from 'shared/constants/colors'
 
 const Button = ({
 	children,
@@ -10,6 +10,7 @@ const Button = ({
 	fontColor = colors.white,
 	backgroundColor = colors.blue,
 	borderColor = colors.blue,
+	hoverColor = themeColors.primary,
 	inline = false,
 	...props
 }) => {
@@ -23,6 +24,7 @@ const Button = ({
 			fontColor={fontColor}
 			backgroundColor={backgroundColor}
 			borderColor={borderColor}
+			hoverColor={hoverColor}
 			inline={inline}
 		>
 			{children}
@@ -43,7 +45,9 @@ Button.propTypes = {
 export default Button
 
 const StyledButton = styled.button`
-	display: ${props => (props.inline ? 'inline' : 'block')};
+	display: ${props => (props.inline ? 'inline' : 'flex')};
+	justify-content: center;
+	align-items: center;
 	width: ${props => `${props.width}rem`};
 	height: ${props => `${props.height}rem`};
 	font-size: ${props => `${props.fontSize}rem`};
@@ -59,7 +63,7 @@ const StyledButton = styled.button`
 	box-shadow: 0 0.2rem 0.2rem ${colors.lightGray};
 
 	&:hover {
-		background-color: #2880ee;
+		background-color: ${props => props.hoverColor};
 		color: white;
 		border: transparent;
 	}

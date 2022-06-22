@@ -12,6 +12,7 @@ const MyPageEdit = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [edited, setEdited] = useState(false)
 	const [fullName, setFullName] = useState(user.fullName)
+
 	const navigate = useNavigate()
 	const [image, setImage] = useState({
 		file: '',

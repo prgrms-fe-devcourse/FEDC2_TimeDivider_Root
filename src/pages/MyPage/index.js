@@ -44,7 +44,9 @@ const MyPage = () => {
 			{!isLoggedIn && (
 				<NotLoggedInWrapper>
 					<Description>
-						<Text size={2.2}>마이페이지를 이용하려면 로그인 하여야합니다.</Text>
+						<Text style={{ wordBreak: 'keep-all', fontSize: '2.2rem', lineHeight: '1.5' }}>
+							마이페이지를 이용하려면 로그인하여야합니다.
+						</Text>
 					</Description>
 					<Button onClick={handleLogin}>로그인 페이지로 이동</Button>
 				</NotLoggedInWrapper>

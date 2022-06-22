@@ -22,13 +22,12 @@ const Login = () => {
 			alert(message)
 			return
 		}
-
 		alert(message)
 		navigate('/updateTimeDivider')
 	}
 	return (
 		<Wrapper>
-			<NavBar backIcon />
+			<NavBar />
 			<Logo size={'LOGIN'} />
 			<InnerWrapper>
 				<LoginForm onSubmit={handleLogInSubmit} />

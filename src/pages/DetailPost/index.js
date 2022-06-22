@@ -1,11 +1,13 @@
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import CommentForm from 'shared/components/CommentForm'
 import CommentList from 'shared/components/CommentList'
 import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
 import useDetailPost from 'shared/hooks/useDetailPost'
-import { CommentArea, Footer } from './style'
+import { CommentArea, Footer, Loading, TopBar } from './style'
+import Avatar from '../../shared/components/Avatar'
+import loadingImage from '../../shared/images/loading.gif'
 
 const DetailPost = () => {
 	const { postId } = useParams()
@@ -19,7 +21,14 @@ const DetailPost = () => {
 
 	return (
 		<>
-			<NavBar backIcon />
+			<TopBar>
+				<NavBar backIcon />
+				{isLoading && (
+					<Loading>
+						<Avatar src={loadingImage} size={3} />
+					</Loading>
+				)}
+			</TopBar>
 			{isLoading || (
 				<PostCard
 					key={post._id}

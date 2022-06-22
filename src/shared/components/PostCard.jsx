@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import Avatar from './Avatar'
-import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
+import { IoIosArrowForward, IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 import { IoChatbubbleOutline } from 'react-icons/io5'
 import Text from './Text'
 import { themeColors } from 'shared/constants/colors'
 import useToggle from 'shared/hooks/useToggle'
 import Badge from './Badge'
 import apis from 'shared/api'
+import React from 'react'
 
 const PostCard = ({
 	width = 37.5,
@@ -38,18 +39,20 @@ const PostCard = ({
 
 	return (
 		<CardContainer width={width} isLargeCard={isLargeCard} {...props}>
-			<CardHeader>
-				<Avatar isLoading={false} src={imageSrc} alt="avatar" size={4.5} />
-				<Text size={1.6} strong>
+			<CardHeader onClick={!isLargeCard && handleCommentClick}>
+				<Avatar isLoading={false} src={imageSrc} alt="avatar" size={3.5} />
+				<Text size={1.3} strong>
 					{author}
 				</Text>
 			</CardHeader>
-			<ContentWrapper isLargeCard={isLargeCard}>
-				{timers.map(task => (
-					<CardTag key={task.id} fontSize={1.6}>
-						{task.name}
-					</CardTag>
-				))}
+			<ContentWrapper isLargeCard={isLargeCard} onClick={!isLargeCard && handleCommentClick}>
+				<InnerWrapper>
+					{timers.map(task => (
+						<CardTag key={task.id} fontSize={1.6}>
+							{task.name}
+						</CardTag>
+					))}
+				</InnerWrapper>
 			</ContentWrapper>
 			<CardFooter>
 				{likeState ? (
@@ -57,12 +60,17 @@ const PostCard = ({
 						cursor={'pointer'}
 						onClick={handleLikeClick}
 						color={'#E95721'}
-						fontSize={'4rem'}
+						fontSize={'3rem'}
 					/>
 				) : (
-					<IoMdHeartEmpty onClick={handleLikeClick} fontSize={'4rem'} />
+					<IoMdHeartEmpty onClick={handleLikeClick} fontSize={'3rem'} />
 				)}
-				<IoChatbubbleOutline onClick={handleCommentClick} cursor={'pointer'} fontSize={'3.5rem'} />
+				<IoChatbubbleOutline onClick={handleCommentClick} cursor={'pointer'} fontSize={'2.7rem'} />
+				{!isLargeCard && (
+					<More onClick={handleCommentClick}>
+						<IoIosArrowForward size={'2.3rem'} />
+					</More>
+				)}
 			</CardFooter>
 		</CardContainer>
 	)
@@ -90,9 +98,9 @@ const CardContainer = styled.div`
 	width: 100%;
 	height: ${({ isLargeCard }) => (isLargeCard ? '40rem' : '29rem')};
 	background-color: white;
-	box-shadow: 0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);
+	// box-shadow: ${props => !props.isLargeCard && '0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);'}
 	box-sizing: border-box;
-	margin-top: 2rem;
+	//margin-top: 2rem;
 `
 
 const CardHeader = styled.div`
@@ -107,11 +115,21 @@ const CardHeader = styled.div`
 `
 
 const ContentWrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
+	overflow-y: scroll;
 	height: ${({ isLargeCard }) => (isLargeCard ? '26rem' : '15rem')};
 	background-color: ${themeColors.labelBackground};
 	padding: 1rem;
 	gap: 1.5rem;
 	box-sizing: border-box;
+`
+const InnerWrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`
+const More = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding-right: 1rem;
+	flex: 1;
 `
