@@ -8,6 +8,7 @@ import Button from 'shared/components/Button'
 import PostCard from 'shared/components/PostCard'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { useUser } from 'shared/hooks/useUser'
+import { parsePostData, stringifyPostData } from 'shared/utils/postData'
 import { timerState } from 'state/timer'
 import AvatarItem from './components/AvatarItem'
 import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
@@ -26,21 +27,19 @@ const ShareTask = () => {
 	const fetchPosts = async () => {
 		setIsLoading(true)
 
-		const data = await apis.getPosts(TEST_CHANNEL_ID, 0, 20)
+		const data = await apis.getPosts(TEST_CHANNEL_ID)
 
 		const filteredData = data.filter(post => {
 			if (post.title === 'Test') return false
-			const { share } = JSON.parse(post.title)
+			const { share } = parsePostData(post.title)
 			return share === 'PUBLIC'
 		})
 
 		const fetchData = filteredData.map(post => {
-			const { timers } = JSON.parse(post.title)
-			const author = post.author
-			const imageSrc = author.image
+			const { timers } = parsePostData(post.title)
 			const like = post.likes.find(like => like.user === user._id)
 			const likeId = like ? like._id : null
-			return { ...post, timers, like, likeId, imageSrc }
+			return { ...post, timers, like, likeId, imageSrc: post.author.image }
 		})
 
 		setPosts(fetchData)
@@ -54,18 +53,19 @@ const ShareTask = () => {
 				name: timers[key].name,
 			}
 		})
-		const data = JSON.stringify({
-			share: 'PUBLIC',
-			timers: timersData,
+		const data = stringifyPostData('PUBLIC', timersData)
+
+		await apis.modifyPost({
+			postId: user.posts[0]._id,
+			title: data,
+			image: null,
+			channelId: TEST_CHANNEL_ID,
 		})
-		const postId = user.posts[0]._id
-		await apis.modifyPost({ postId, title: data, image: null, channelId: TEST_CHANNEL_ID })
 		await fetchPosts()
 	}
 
 	const handleNotShareButtonClick = async () => {
-		const postId = user.posts[0]._id
-		await apis.disablePost(postId, TEST_CHANNEL_ID)
+		await apis.disablePost(user.posts[0]._id, TEST_CHANNEL_ID)
 		await fetchPosts()
 	}
 
