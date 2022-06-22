@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, themeColors } from '../../shared/constants/colors'
+import { themeColors } from '../../shared/constants/colors'
 
 export const Wrapper = styled.div`
 	height: 50rem;
@@ -32,15 +32,4 @@ export const CardForm = styled.form`
 	justify-content: flex-end;
 	gap: 1.5rem;
 	align-items: center;
-`
-export const Setting = styled.div`
-	box-sizing: border-box;
-	display: flex;
-	column-gap: 1rem;
-	width: 33.3rem;
-	height: 5rem;
-	border-radius: 1.1rem;
-	align-items: center;
-	padding: 1.5rem;
-	background-color: ${colors.white};
 `

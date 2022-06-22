@@ -30,10 +30,17 @@ const LoginForm = ({ onSubmit }) => {
 					placeholder="이메일 주소"
 					onChange={handleChange}
 					autoComplete={'off'}
+					required={true}
 				/>
-				{errors.email && <Text color="red">{errors.email}</Text>}
-				<S.Input type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
-				{errors.password && <Text color="red">{errors.password}</Text>}
+				{/*{errors.email && <Text color="red">{errors.email}</Text>}*/}
+				<S.Input
+					type="password"
+					name="password"
+					placeholder="비밀번호"
+					onChange={handleChange}
+					required={true}
+				/>
+				{/*{errors.password && <Text color="red">{errors.password}</Text>}*/}
 				<Button type="submit" disabled={isLoading}>
 					로그인
 				</Button>
