@@ -19,7 +19,7 @@ const StyledBadge = styled.div`
 	align-items: center;
 	font-size: ${({ fontSize }) => fontSize}rem;
 	text-align: center;
-	border-radius: 2rem;
+	border-radius: 1rem;
 	height: 2rem;
 	margin: 0.3rem;
 	padding: 1.5rem 1.5rem;

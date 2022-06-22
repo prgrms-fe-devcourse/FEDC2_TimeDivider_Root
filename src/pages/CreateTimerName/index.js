@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import * as S from './style'
+import { TaskAreaWrapper } from './style'
 
 import NavBar from 'shared/components/NavBar'
 import Button from 'shared/components/Button'
@@ -31,13 +32,16 @@ const CreateTimerNames = () => {
 			</SubTitle>
 
 			<S.Section>
-				<S.TaskArea>
-					{timerNames.map(({ id, name }) => (
-						<Badge key={id} onClick={() => removeNameTag(id)}>
-							{name}
-						</Badge>
-					))}
-				</S.TaskArea>
+				<TaskAreaWrapper>
+					<S.TaskArea>
+						{timerNames.map(({ id, name }) => (
+							<Badge key={id} onClick={() => removeNameTag(id)}>
+								{name}
+							</Badge>
+						))}
+					</S.TaskArea>
+				</TaskAreaWrapper>
+
 				<S.Form onSubmit={handleNameTagSubmit}>
 					<Input
 						type="text"

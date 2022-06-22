@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
 
 import * as S from './style'
+import { TitleWrapper } from './style'
 
 import Button from 'shared/components/Button'
 import NavBar from 'shared/components/NavBar'
@@ -17,7 +18,7 @@ import { themeColors } from 'shared/constants/colors'
 import useCreatingTimers from 'shared/hooks/useCreatingTimers'
 
 const BUTTON_TEXT = Object.freeze({
-	VALID: '다음 단계',
+	VALID: '완료',
 	INVALID: '시간을 입력해주세요',
 })
 
@@ -85,17 +86,19 @@ const CreateTimeDivider = () => {
 			<NavBar backIcon />
 			<S.SubTitle>
 				<Text size={2.2} textAlign={'start'}>
-					오늘 해야할 일들에 시간을 분배하세요.
+					오늘 해야할 일들에
+				</Text>
+				<Text size={2.2} textAlign={'start'}>
+					시간을 분배하세요.
 				</Text>
 			</S.SubTitle>
 			<S.TimeSection>
-				<Text
-					size={2.0}
-					color={themeColors.primary}
-					style={{ fontSize: '2.0rem', marginBottom: '1rem' }}
-				>
-					남은 분배 가능 시간
-				</Text>
+				<TitleWrapper>
+					<Text size={2.0} color={themeColors.primary}>
+						남은 분배 가능 시간
+					</Text>
+				</TitleWrapper>
+
 				<Text size={3.5}>
 					{convertSecondsToHourMinute(totalTime).hour} :{' '}
 					{convertSecondsToHourMinute(totalTime).minute}

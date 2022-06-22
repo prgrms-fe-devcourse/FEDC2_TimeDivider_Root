@@ -21,7 +21,7 @@ export const SubTitle = styled.span`
 	left: -2.5rem;
 	display: flex;
 	flex-direction: column;
-	align-items: left;
+
 	width: 24.5rem;
 	line-height: 3.2rem;
 	text-align: center;
@@ -31,7 +31,6 @@ export const TimeSection = styled.section`
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	align-items: left;
 	width: 24.5rem;
 	line-height: 3.2rem;
 	text-align: center;
@@ -64,4 +63,7 @@ export const TaskArea = styled.div`
 	::-webkit-scrollbar {
 		display: none;
 	}
+`
+export const TitleWrapper = styled.div`
+	margin-bottom: 1rem;
 `

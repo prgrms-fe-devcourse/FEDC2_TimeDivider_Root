@@ -12,12 +12,10 @@ export const Wrapper = styled.div`
 export const TaskArea = styled.div`
 	position: relative;
 	width: 30rem;
-	height: 20rem;
-	overflow-y: scroll;
+
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	justify-content: start;
 	margin-bottom: 2rem;
 `
 
@@ -42,4 +40,8 @@ export const Section = styled.section`
 	justify-content: space-between;
 	align-items: center;
 	justify-content: center;
+`
+export const TaskAreaWrapper = styled.div`
+	height: 20rem;
+	overflow-y: scroll;
 `

@@ -28,5 +28,5 @@ export const ButtonArea = styled.div`
 `
 
 export const FormWrapper = styled.div`
-	margin-top: 20rem;
+	margin-top: 22rem;
 `
