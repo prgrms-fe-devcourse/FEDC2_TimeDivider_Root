@@ -1,9 +1,9 @@
-import Modal from './Modal'
-import Button from './Button'
+import Modal from '../../../shared/components/Modal'
+import Button from '../../../shared/components/Button'
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { colors, themeColors } from '../constants/colors'
+import { colors, themeColors } from '../../../shared/constants/colors'
 
 const FormModal = ({
 	id,
@@ -32,7 +32,7 @@ const FormModal = ({
 						width={12.8}
 						height={4.41}
 						onClick={onCancel}
-						style={{ wordBreak: 'keep-all' }}
+						style={{ wordBreak: 'keep-all', boxShadow: 'none' }}
 					>
 						{cancelText}
 					</Button>
@@ -42,7 +42,7 @@ const FormModal = ({
 						fontSize={1.3}
 						form={id}
 						type={'submit'}
-						style={{ wordBreak: 'keep-all' }}
+						style={{ wordBreak: 'keep-all', boxShadow: 'none' }}
 					>
 						{confirmText}
 					</Button>

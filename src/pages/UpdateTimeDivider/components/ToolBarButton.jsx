@@ -8,7 +8,7 @@ export const ToolBarButton = ({ children, reversed = false, ...props }) => (
 		fontSize={1.3}
 		backgroundColor={reversed ? themeColors.primary : themeColors.background}
 		fontColor={reversed ? themeColors.fontReversed : themeColors.primary}
-		style={{ lineHeight: '1rem' }}
+		style={{ lineHeight: '1rem', boxShadow: 'none' }}
 		{...props}
 	>
 		{children}

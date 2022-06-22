@@ -5,11 +5,12 @@ export const timerObject = (time, name, isRunning = false, disabled = false) => 
 	return { time, name, isRunning, disabled }
 }
 
-export const [defaultMode, addMode, doneMode, mergeMode] = [
+export const [defaultMode, addMode, doneMode, mergeMode, resetMode] = [
 	'defaultMode',
 	'addMode',
 	'doneMode',
 	'mergeMode',
+	'resetMode',
 ]
 
 export const timerState = atom({

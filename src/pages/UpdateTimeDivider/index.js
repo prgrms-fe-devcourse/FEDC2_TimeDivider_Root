@@ -1,6 +1,14 @@
 import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { addMode, defaultMode, doneMode, mergeMode, modeState, originIdState } from 'state/timer'
+import {
+	addMode,
+	defaultMode,
+	doneMode,
+	mergeMode,
+	modeState,
+	originIdState,
+	resetMode,
+} from 'state/timer'
 import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
 import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
@@ -10,15 +18,19 @@ import { BottomBar } from 'shared/components/BottomBar'
 import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
 import { useTimers } from 'shared/hooks/useTimers'
 import { ToolBarButton } from './components/ToolBarButton'
+import ResetFormModal from './components/ResetFormModal'
 
 const UpdateTimeDivider = () => {
-	const { timers, toggleRunning } = useTimers()
+	const { timers, resetTimers, toggleRunning } = useTimers()
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
 	const handleTimerClick = id => {
 		if (timers[id].disabled) return
 		mode === doneMode ? setOriginId(id) : toggleRunning(id)
+	}
+	const handleResetButtonClick = e => {
+		setMode(resetMode)
 	}
 	const handleAddButtonClick = e => {
 		toggleRunning()
@@ -38,6 +50,7 @@ const UpdateTimeDivider = () => {
 		<Wrapper>
 			<NavBar>제목 미정 </NavBar>
 			<ToolBar>
+				<ToolBarButton onClick={handleResetButtonClick}>{'리셋'}</ToolBarButton>
 				<ToolBarButton onClick={handleAddButtonClick}>{'추가'}</ToolBarButton>
 				<ToolBarButton reversed={mode === doneMode} onClick={handleCompleteButtonClick}>
 					{mode === doneMode ? '취소' : '완료'}
@@ -57,6 +70,7 @@ const UpdateTimeDivider = () => {
 					/>
 				))}
 			</TimerArea>
+			{mode === resetMode && <ResetFormModal />}
 			{mode === addMode && <AddFormModal />}
 			{mode === doneMode && <CompleteFormModal />}
 			{mode === mergeMode && <MergeFormModal />}

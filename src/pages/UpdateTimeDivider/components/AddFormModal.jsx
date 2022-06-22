@@ -1,6 +1,6 @@
 import Select from '../../../shared/components/Select'
 import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../../../shared/components/TimeSelectForm'
-import FormModal from '../../../shared/components/FormModal'
+import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { addMode, defaultMode, modeState } from 'state/timer'
