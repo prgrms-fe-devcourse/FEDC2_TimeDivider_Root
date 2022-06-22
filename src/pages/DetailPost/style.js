@@ -15,3 +15,12 @@ export const CommentArea = styled.div`
 		display: none;
 	}
 `
+export const TopBar = styled.div`
+	position: relative;
+	width: 100%;
+`
+export const Loading = styled.div`
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+`

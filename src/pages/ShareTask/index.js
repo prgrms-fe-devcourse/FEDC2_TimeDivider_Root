@@ -5,11 +5,13 @@ import Button from 'shared/components/Button'
 import PostCard from 'shared/components/PostCard'
 import usePosts from 'shared/hooks/usePosts'
 import AvatarItem from './components/AvatarItem'
-import { AvatarListArea, ButtonArea, CardArea, Footer, Wrapper } from './style'
+import { AvatarListArea, ButtonArea, CardArea, Footer, Loading, Wrapper } from './style'
 import { colors } from '../../shared/constants/colors'
 import { Description, NotLoggedInWrapper } from '../MyPage/style'
 import Text from '../../shared/components/Text'
 import { useUser } from '../../shared/hooks/useUser'
+import loadingImage from 'shared/images/loading.gif'
+import Avatar from '../../shared/components/Avatar'
 
 const ShareTask = () => {
 	const navigate = useNavigate()
@@ -47,6 +49,7 @@ const ShareTask = () => {
 			{isLoggedIn && (
 				<>
 					<ButtonArea>
+						<Loading>{isLoading && <Avatar src={loadingImage} size={3} />}</Loading>
 						<Button
 							width={8}
 							height={3}
@@ -85,24 +88,20 @@ const ShareTask = () => {
 					</AvatarListArea>
 
 					<CardArea>
-						{isLoading ? (
-							<div>로딩중</div>
-						) : (
-							posts.map(post => (
-								<PostCard
-									key={post._id}
-									id={post._id}
-									author={post.author.fullName}
-									timers={post.timers || []}
-									like={post.like}
-									likeId={post.likeId}
-									size={'md'}
-									onComentClick={handleNavigate}
-									imageSrc={post.imageSrc}
-									comments={post.comments}
-								/>
-							))
-						)}
+						{posts.map(post => (
+							<PostCard
+								key={post._id}
+								id={post._id}
+								author={post.author.fullName}
+								timers={post.timers || []}
+								like={post.like}
+								likeId={post.likeId}
+								size={'md'}
+								onComentClick={handleNavigate}
+								imageSrc={post.imageSrc}
+								comments={post.comments}
+							/>
+						))}
 					</CardArea>
 				</>
 			)}

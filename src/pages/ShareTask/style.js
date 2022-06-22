@@ -41,7 +41,7 @@ export const AvatarListArea = styled.div`
 	column-gap: 2rem;
 	padding-left: 2rem;
 	overflow-x: scroll;
-	height: 12rem;
+	height: 11rem;
 
 	&:hover::-webkit-scrollbar {
 		height: 0.7rem;
@@ -85,4 +85,8 @@ export const Footer = styled.div`
 	width: 100%;
 	left: 0;
 	bottom: 0;
+`
+
+export const Loading = styled.div`
+	flex: 1;
 `
