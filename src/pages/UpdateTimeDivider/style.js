@@ -44,3 +44,18 @@ export const BottomBarArea = styled.div`
 	bottom: 0;
 	left: 0;
 `
+export const TopBar = styled.div`
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding-top: 2rem;
+`
+export const Title = styled.div`
+	display: flex;
+	padding-left: 7rem;
+	flex: 1;
+`
+export const AvatarWrapper = styled.div`
+	margin-left: 1rem;
+`

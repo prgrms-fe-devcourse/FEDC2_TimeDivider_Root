@@ -9,20 +9,21 @@ import {
 	originIdState,
 	resetMode,
 } from 'state/timer'
-import NavBar from 'shared/components/NavBar'
 import Timer from 'shared/components/Timer'
 import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
 import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import CompleteFormModal from 'pages/UpdateTimeDivider/components/CompleteFormModal'
 import { BottomBar } from 'shared/components/BottomBar'
-import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
+import { BottomBarArea, Description, TimerArea, ToolBar, TopBar, Wrapper } from './style'
 import { useTimers } from 'shared/hooks/useTimers'
 import { ToolBarButton } from './components/ToolBarButton'
 import ResetFormModal from './components/ResetFormModal'
+import { useUser } from '../../shared/hooks/useUser'
 import Logo from '../../shared/components/Logo'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()
+	const { user } = useUser()
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
@@ -49,9 +50,9 @@ const UpdateTimeDivider = () => {
 
 	return (
 		<Wrapper>
-			<NavBar>
+			<TopBar>
 				<Logo size={'NAVBAR'} />
-			</NavBar>
+			</TopBar>
 			<ToolBar>
 				<ToolBarButton onClick={handleResetButtonClick}>{'리셋'}</ToolBarButton>
 				<ToolBarButton onClick={handleAddButtonClick}>{'추가'}</ToolBarButton>
