@@ -19,9 +19,10 @@ import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style
 import { useTimers } from 'shared/hooks/useTimers'
 import { ToolBarButton } from './components/ToolBarButton'
 import ResetFormModal from './components/ResetFormModal'
+import Logo from '../../shared/components/Logo'
 
 const UpdateTimeDivider = () => {
-	const { timers, resetTimers, toggleRunning } = useTimers()
+	const { timers, toggleRunning } = useTimers()
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
@@ -48,7 +49,9 @@ const UpdateTimeDivider = () => {
 
 	return (
 		<Wrapper>
-			<NavBar>제목 미정 </NavBar>
+			<NavBar>
+				<Logo size={'NAVBAR'} />
+			</NavBar>
 			<ToolBar>
 				<ToolBarButton onClick={handleResetButtonClick}>{'리셋'}</ToolBarButton>
 				<ToolBarButton onClick={handleAddButtonClick}>{'추가'}</ToolBarButton>
