@@ -23,10 +23,22 @@ const TimeSelectForm = ({ intialTime, handleChangeTime }) => {
 	return (
 		<Wrapper>
 			<Content>
-				<Select name="hour" value={time.hour} data={HOUR_NUMBERS} onChange={handleChange} />
-				<Text size={1.4}>시간</Text>
-				<Select name="minute" value={time.minute} data={MINUTE_NUMBERS} onChange={handleChange} />
-				<Text size={1.4}>분</Text>
+				<Select
+					fontSize={3}
+					name="hour"
+					value={time.hour}
+					data={HOUR_NUMBERS}
+					onChange={handleChange}
+				/>
+				<Text size={2.6}>시간</Text>
+				<Select
+					fontSize={3}
+					name="minute"
+					value={time.minute}
+					data={MINUTE_NUMBERS}
+					onChange={handleChange}
+				/>
+				<Text size={2.6}>분</Text>
 			</Content>
 		</Wrapper>
 	)
@@ -36,7 +48,7 @@ export default TimeSelectForm
 
 const Content = styled.div`
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: center;
 	gap: 1rem;
 `

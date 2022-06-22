@@ -4,10 +4,11 @@ import boardImg from 'shared/images/board.png'
 import clockImg from 'shared/images/clock.png'
 import profileImg from 'shared/images/profile.png'
 import { Link, useLocation } from 'react-router-dom'
+import { useUser } from '../hooks/useUser'
 
 export const BottomBar = ({ ...props }) => {
 	const location = useLocation()
-
+	const { user } = useUser()
 	return (
 		<Wrapper>
 			<NavItems>

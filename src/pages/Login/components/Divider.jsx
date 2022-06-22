@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components' //css 추가
+import styled, { css } from 'styled-components'
+import { colors } from '../../../shared/constants/colors' //css 추가
 
 const Divider = props => {
 	return <StyledDivider {...props} />
@@ -6,7 +7,7 @@ const Divider = props => {
 
 const StyledDivider = styled.div`
 	border: none;
-	background-color: #aaa;
+	background-color: ${colors.timeoutDarkGray};
 	${props =>
 		(props.type === 'vertical' &&
 			css`
@@ -20,8 +21,10 @@ const StyledDivider = styled.div`
 		(props.type === 'horizontal' &&
 			css`
 				display: block;
-				width: 100%;
+				width: 33.3rem;
 				height: 1px;
+				margin-top: 2rem;
+				margin-bottom: 1.5rem;
 			`)}
 `
 

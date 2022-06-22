@@ -1,4 +1,4 @@
-import FormModal from '../../../shared/components/FormModal'
+import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { doneMode, mergeMode, modeState, originIdState } from 'state/timer'

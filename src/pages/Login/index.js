@@ -27,10 +27,10 @@ const Login = () => {
 		navigate('/updateTimeDivider')
 	}
 	return (
-		<>
+		<Wrapper>
 			<NavBar backIcon />
-			<Logo />
-			<Wrapper>
+			<Logo size={'LOGIN'} />
+			<InnerWrapper>
 				<LoginForm onSubmit={handleLogInSubmit} />
 				<Divider type={'horizontal'}> </Divider>
 				<ButtonArea>
@@ -38,28 +38,35 @@ const Login = () => {
 						회원이 아니신가요 ?
 					</Text>
 					<Link to="/signup">
-						<Button backgroundColor={'#fff'} fontColor={colors.blue}>
+						<Button backgroundColor={colors.white} fontColor={colors.blue}>
 							회원가입
 						</Button>
 					</Link>
 					<Link to="/home">
-						<Button backgroundColor={'#fff'} borderColor={'#505866'} fontColor={'#505866'}>
+						<Button
+							backgroundColor={colors.white}
+							borderColor={colors.timeoutDarkGray}
+							fontColor={colors.timeoutDarkGray}
+						>
 							비회원으로 이용하기
 						</Button>
 					</Link>
 				</ButtonArea>
-			</Wrapper>
-		</>
+			</InnerWrapper>
+		</Wrapper>
 	)
 }
 
 export default Login
 
 const Wrapper = styled.div`
-	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	align-items: center;
+`
+const InnerWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
 	align-items: center;
 `
 
@@ -67,7 +74,6 @@ const ButtonArea = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-between;
 	gap: 2rem;
 	align-items: center;
 `

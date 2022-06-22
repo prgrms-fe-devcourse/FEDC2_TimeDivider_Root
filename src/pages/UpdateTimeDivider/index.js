@@ -1,24 +1,38 @@
 import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { addMode, defaultMode, doneMode, mergeMode, modeState, originIdState } from 'state/timer'
-import NavBar from 'shared/components/NavBar'
+import {
+	addMode,
+	defaultMode,
+	doneMode,
+	mergeMode,
+	modeState,
+	originIdState,
+	resetMode,
+} from 'state/timer'
 import Timer from 'shared/components/Timer'
 import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
 import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import CompleteFormModal from 'pages/UpdateTimeDivider/components/CompleteFormModal'
 import { BottomBar } from 'shared/components/BottomBar'
-import { BottomBarArea, Description, TimerArea, ToolBar, Wrapper } from './style'
+import { BottomBarArea, Description, TimerArea, ToolBar, TopBar, Wrapper } from './style'
 import { useTimers } from 'shared/hooks/useTimers'
 import { ToolBarButton } from './components/ToolBarButton'
+import ResetFormModal from './components/ResetFormModal'
+import { useUser } from '../../shared/hooks/useUser'
+import Logo from '../../shared/components/Logo'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()
+	const { user } = useUser()
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
 	const handleTimerClick = id => {
 		if (timers[id].disabled) return
 		mode === doneMode ? setOriginId(id) : toggleRunning(id)
+	}
+	const handleResetButtonClick = e => {
+		setMode(resetMode)
 	}
 	const handleAddButtonClick = e => {
 		toggleRunning()
@@ -36,8 +50,11 @@ const UpdateTimeDivider = () => {
 
 	return (
 		<Wrapper>
-			<NavBar>제목 미정 </NavBar>
+			<TopBar>
+				<Logo size={'NAVBAR'} />
+			</TopBar>
 			<ToolBar>
+				<ToolBarButton onClick={handleResetButtonClick}>{'리셋'}</ToolBarButton>
 				<ToolBarButton onClick={handleAddButtonClick}>{'추가'}</ToolBarButton>
 				<ToolBarButton reversed={mode === doneMode} onClick={handleCompleteButtonClick}>
 					{mode === doneMode ? '취소' : '완료'}
@@ -57,6 +74,7 @@ const UpdateTimeDivider = () => {
 					/>
 				))}
 			</TimerArea>
+			{mode === resetMode && <ResetFormModal />}
 			{mode === addMode && <AddFormModal />}
 			{mode === doneMode && <CompleteFormModal />}
 			{mode === mergeMode && <MergeFormModal />}

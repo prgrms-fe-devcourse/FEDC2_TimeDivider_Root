@@ -7,15 +7,17 @@ export const Wrapper = styled.div`
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	justify-content: center;
+
 	align-items: center;
 `
 export const TimerArea = styled.div`
+	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	width: 31.6rem;
-	margin: 1rem auto auto;
+	width: 100%;
 	gap: 0.5rem;
+	padding-top: 1rem;
+	padding-left: 3.5rem;
 `
 export const ToolBar = styled.div`
 	display: flex;
@@ -33,7 +35,7 @@ export const Description = styled.div`
 	align-items: start;
 	color: ${themeColors.fontDescription};
 	font-size: 1.3rem;
-	padding-left: 2rem;
+	padding-left: 4rem;
 	margin-bottom: 1rem;
 `
 export const BottomBarArea = styled.div`
@@ -41,4 +43,19 @@ export const BottomBarArea = styled.div`
 	position: absolute;
 	bottom: 0;
 	left: 0;
+`
+export const TopBar = styled.div`
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding-top: 2rem;
+`
+export const Title = styled.div`
+	display: flex;
+	padding-left: 7rem;
+	flex: 1;
+`
+export const AvatarWrapper = styled.div`
+	margin-left: 1rem;
 `

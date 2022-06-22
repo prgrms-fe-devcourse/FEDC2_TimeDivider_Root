@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUser } from 'shared/hooks/useUser'
 
 import NavBar from 'shared/components/NavBar'
+import styled from 'styled-components'
 
 const SignUp = () => {
 	const { signup } = useUser()
@@ -20,12 +21,24 @@ const SignUp = () => {
 	}
 
 	return (
-		<>
+		<Wrapper>
 			<NavBar backIcon />
-			<Logo />
-			<SignUpForm onSubmit={handleSignUpSubmit}></SignUpForm>
-		</>
+			<Logo size={'LOGIN'} />
+			<InnerWrapper>
+				<SignUpForm onSubmit={handleSignUpSubmit}></SignUpForm>
+			</InnerWrapper>
+		</Wrapper>
 	)
 }
 
 export default SignUp
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
+const InnerWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
