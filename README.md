@@ -1,30 +1,14 @@
-# 시간 분배기
+# TIME DIVIDER
+<img src="https://user-images.githubusercontent.com/81891292/175041903-5ee8613e-9050-4e09-bfc4-86a75342e18a.png"></img>
 
-## 바로가기
-[Project 바로가기](https://github.com/prgrms-fe-devcourse/FEDC2_TimeDivider_Root/projects?type=classic)
+## 프로젝트 소개
 
-## 커밋 컨벤션
-예시) feat: 타이머 기능 추가, chore: 주석 삭제
-prefix | 설명 | 추가 설명
--- | -- | --
-feat | 기능추가/수정/삭제 | 제품 코드 수정 발생
-refactor | 리팩토링 | 제품 코드 수정 발생
-fix | 버그 수정 | 제품 코드 수정 발생
-docs | 문서 추가, 수정, 삭제 | 코드 수정 없음
-style | 스타일 수정 | 제품 코드 수정 발생
-chore | 그 외 모든 수정 | 유형이 혼재된 경우, 되도록이면 커밋 분리. 분리가 어려울 경우 위 순서 상 상위 항목의 유형으로 작성
- 
-### Merge commit sample
-- feat: 모달 컴포넌트 구현 (#PR_NUMBER)
- 
-## 브랜치
-### protected branch
-- main : 기준이 되는 브랜치로 제품을 배포하는 브랜치 입니다.
-- develop : 개발 브랜치로 개발자들이 이 브랜치를 기준으로 각자 작업한 기능들을 합(Merge)칩니다.
-- release : 배포를 위해 master 브랜치로 보내기 전에 먼저 QA(품질검사)를 하기위한 브랜치 입니다.
-### prefix branch
-`prefix-설명-이름` 의 형태로 사용합니다.
-아래의 단어를 prefix로 사용합니다. 
-예시) feature-timer-codeisneverodd, hotfix-tokenRevealed-codeisneverodd
-- feature : 단위 기능을 개발하는 브랜치로 기능 개발이 완료되면 develop 브랜치에 합칩니다.
-- hotfix : master 브랜치로 배포를 했는데 버그가 생겼을 떄 긴급 수정하는 브랜치 입니다.
+<img src="https://user-images.githubusercontent.com/81891292/175041896-5ed01287-e1a7-4156-9d28-2bcac3e8a3bd.png"></img>
+
+> 하루의 시간을 분배하고 공유하는 웹 서비스입니다.
+
+<center>하루의 시간을 잘 나누어 사용하고 있나요?</center>
+
+<center>당신의 사용가능한 시간을 분배하세요!</center>
+
+
