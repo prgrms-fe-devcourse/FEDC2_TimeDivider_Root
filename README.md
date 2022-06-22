@@ -50,7 +50,15 @@
 
 ![React](https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white) ![Recoil](https://img.shields.io/badge/recoil-f26b00?style=for-the-badge&logo={PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI1MDAiIHdpZHRoPSIyMzY4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMwIDExIDI3LjUgNzgiPjxyZWN0IGZpbGw9IiMwMDdhZjQiIGhlaWdodD0iOTUiIHJ4PSIxMCIgd2lkdGg9IjkwIi8+PGNpcmNsZSBjeD0iNDMuNSIgY3k9IjE4LjUiIGZpbGw9IiNmZmYiIHI9IjcuNSIvPjxjaXJjbGUgY3g9IjQzLjUiIGN5PSI4MS41IiBmaWxsPSIjZmZmIiByPSI3LjUiLz48ZyBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyI+PHBhdGggZD0iTTQzLjk5OSAyNUM0Mi41IDM3IDU3LjUgMzQgNTcuNSA0Mi41YzAgNS01Ljg3OCA2LjM2NS0xMy41MDEgN0MzNy45OTkgNTAgMzAgNTAgMzAgNThzMTYgNS41IDEzLjk5OSAxN00zNC4xMzIgMzMuMzUzYzAgMTUuMjg5IDIzLjE1IDE4LjI4OSAyMy4xNSAzMi42MiIvPjwvZz48L3N2Zz4=}) ![StyledComponents](https://img.shields.io/badge/StyledComponents-DB7093.svg?&style=for-the-badge&logo=styledcomponents&logoColor=white) ![storybook](https://img.shields.io/badge/storybook-FF4785.svg?&style=for-the-badge&logo=storybook&logoColor=white)
 
+## 📋 기획문서
 
+- [💡 아이디어 기획서(Notion)](https://rust-damselfly-7e5.notion.site/51954418603645efb4a2c53220321e02)
+- [🖌️ 디자인 및 흐름(Figma)](https://www.figma.com/file/55rLirP3Lt9mifvgfOLi6n/Time?node-id=0%3A1)
+
+## 🎥 발표영상
+
+ - [🌱 중간 발표 영상(Google Drive)](https://drive.google.com/file/d/1Src2INi5S8UuDIuatgUXmYkaZvMoQtKd/view)
+ - 최종 발표 영상: 준비중입니다!
 
 ## 👨‍👧‍👦 팀 소개
 
@@ -83,3 +91,5 @@
 </a>
 </tr>
 </table></center>
+
+> [📚 개인별 학습 목표](https://rust-damselfly-7e5.notion.site/001dae83311340bc8caa01cc3623ea4b)가 궁금하시면? [클릭](https://rust-damselfly-7e5.notion.site/001dae83311340bc8caa01cc3623ea4b)!
