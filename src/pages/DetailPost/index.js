@@ -7,9 +7,8 @@ import CommentList from 'shared/components/CommentList'
 import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
 import { useUser } from 'shared/hooks/useUser'
-import { getSessionStorageUserInfo } from 'shared/utils/storage'
-import styled from 'styled-components'
-import { Footer } from './style'
+import { parsePostData } from 'shared/utils/postData'
+import { CommentArea, Footer } from './style'
 
 const DetailPost = () => {
 	const { postId } = useParams()
@@ -18,33 +17,31 @@ const DetailPost = () => {
 	const [commentList, setCommentList] = useState([])
 	const { user } = useUser()
 
+	useEffect(() => {
+		fetchData()
+	}, [])
+
 	const fetchData = async () => {
 		setIsLoading(true)
 		const data = await apis.getPostDetail(postId)
-		const { timers } = JSON.parse(data.title)
-		const author = data.author
-		const imageSrc = author.image
+		const { timers } = parsePostData(data.title)
 		const like = data.likes.find(like => like.user === user._id)
 		const likeId = like ? like._id : null
-
-		setPost({ ...data, timers, like, likeId, imageSrc })
-
+		setPost({ ...data, timers, like, likeId, imageSrc: post.author.image })
 		setCommentList(
-			data.comments.map(comment => {
+			data.comments.map(commentData => {
+				const { fullName, image } = commentData.auhtor
+
 				return {
-					author: comment.author.fullName,
-					imageSrc: comment.author.image,
-					comment: comment.comment,
+					author: fullName,
+					imageSrc: image,
+					comment: commentData.comment,
 				}
 			}),
 		)
 
 		setIsLoading(false)
 	}
-
-	useEffect(() => {
-		fetchData()
-	}, [])
 
 	const handleCommentSubmit = async comment => {
 		setCommentList([...commentList, { author: user.fullName, comment, imageSrc: user.image }])
@@ -80,12 +77,3 @@ const DetailPost = () => {
 }
 
 export default DetailPost
-
-const CommentArea = styled.div`
-	width: 100%;
-	overflow: scroll;
-	height: 25.2rem;
-	::-webkit-scrollbar {
-		display: none;
-	}
-`

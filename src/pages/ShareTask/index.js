@@ -1,72 +1,32 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import apis from 'shared/api'
 import { BottomBar } from 'shared/components/BottomBar'
 import Button from 'shared/components/Button'
 import PostCard from 'shared/components/PostCard'
-import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
+import usePosts from 'shared/hooks/usePosts'
+import { useTimers } from 'shared/hooks/useTimers'
 import { useUser } from 'shared/hooks/useUser'
-import { parsePostData, stringifyPostData } from 'shared/utils/postData'
-import { timerState } from 'state/timer'
 import AvatarItem from './components/AvatarItem'
 import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
 
 const ShareTask = () => {
 	const navigate = useNavigate()
-	const [posts, setPosts] = useState([])
-	const [isLoading, setIsLoading] = useState(false)
-	const [timers] = useRecoilState(timerState)
+
+	const { timers } = useTimers()
 	const { user } = useUser()
+	const { posts, isLoading, getPosts, updateMyPost, makePrivateMyPost } = usePosts(user, timers)
 
 	useEffect(() => {
-		fetchPosts()
+		getPosts(user, timers)
 	}, [])
 
-	const fetchPosts = async () => {
-		setIsLoading(true)
-
-		const data = await apis.getPosts(TEST_CHANNEL_ID)
-
-		const filteredData = data.filter(post => {
-			if (post.title === 'Test') return false
-			const { share } = parsePostData(post.title)
-			return share === 'PUBLIC'
-		})
-
-		const fetchData = filteredData.map(post => {
-			const { timers } = parsePostData(post.title)
-			const like = post.likes.find(like => like.user === user._id)
-			const likeId = like ? like._id : null
-			return { ...post, timers, like, likeId, imageSrc: post.author.image }
-		})
-
-		setPosts(fetchData)
-		setIsLoading(false)
-	}
-
 	const handleUpdateButtonClick = async () => {
-		const timersData = Object.keys(timers).map((key, idx) => {
-			return {
-				id: idx,
-				name: timers[key].name,
-			}
-		})
-		const data = stringifyPostData('PUBLIC', timersData)
-
-		await apis.modifyPost({
-			postId: user.posts[0]._id,
-			title: data,
-			image: null,
-			channelId: TEST_CHANNEL_ID,
-		})
-		await fetchPosts()
+		updateMyPost()
 	}
 
 	const handleNotShareButtonClick = async () => {
-		await apis.disablePost(user.posts[0]._id, TEST_CHANNEL_ID)
-		await fetchPosts()
+		makePrivateMyPost()
 	}
 
 	const handleNavigate = postId => {
