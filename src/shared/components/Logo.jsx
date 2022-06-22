@@ -11,6 +11,7 @@ const SIZE_TYPE = Object.freeze({
 	LARGE: '30rem',
 	MEDIUM: '20rem',
 	SAMLL: '10rem',
+	LOGIN: '12.6rem',
 })
 
 export const StyledLogo = styled.img`

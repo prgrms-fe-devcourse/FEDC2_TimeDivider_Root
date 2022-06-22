@@ -56,15 +56,18 @@ const StyledButton = styled.button`
 	color: ${props => props.fontColor};
 	box-sizing: border-box;
 	cursor: pointer;
+	box-shadow: 0 0.2rem 0.2rem ${colors.lightGray};
 
 	&:hover {
 		background-color: #2880ee;
 		color: white;
+		border: transparent;
 	}
 
 	&:active {
 		background-color: #0070ee;
 		color: white;
+		border: transparent;
 	}
 
 	&:disabled {

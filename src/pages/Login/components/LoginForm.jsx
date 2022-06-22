@@ -24,12 +24,18 @@ const LoginForm = ({ onSubmit }) => {
 		<S.Wrapper>
 			<Text size={3}>로그인</Text>
 			<S.CardForm onSubmit={handleSubmit}>
-				<S.Input type="email" name="email" placeholder="이메일 주소" onChange={handleChange} />
+				<S.Input
+					type="email"
+					name="email"
+					placeholder="이메일 주소"
+					onChange={handleChange}
+					autoComplete={'off'}
+				/>
 				{errors.email && <Text color="red">{errors.email}</Text>}
 				<S.Input type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
 				{errors.password && <Text color="red">{errors.password}</Text>}
 				<Button type="submit" disabled={isLoading}>
-					Login
+					로그인
 				</Button>
 			</S.CardForm>
 		</S.Wrapper>

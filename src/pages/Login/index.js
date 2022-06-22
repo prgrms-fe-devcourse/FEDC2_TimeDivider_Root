@@ -29,7 +29,7 @@ const Login = () => {
 	return (
 		<>
 			<NavBar backIcon />
-			<Logo />
+			<Logo size={'LOGIN'} />
 			<Wrapper>
 				<LoginForm onSubmit={handleLogInSubmit} />
 				<Divider type={'horizontal'}> </Divider>
@@ -38,12 +38,16 @@ const Login = () => {
 						회원이 아니신가요 ?
 					</Text>
 					<Link to="/signup">
-						<Button backgroundColor={'#fff'} fontColor={colors.blue}>
+						<Button backgroundColor={colors.white} fontColor={colors.blue}>
 							회원가입
 						</Button>
 					</Link>
 					<Link to="/home">
-						<Button backgroundColor={'#fff'} borderColor={'#505866'} fontColor={'#505866'}>
+						<Button
+							backgroundColor={colors.white}
+							borderColor={colors.timeoutDarkGray}
+							fontColor={colors.timeoutDarkGray}
+						>
 							비회원으로 이용하기
 						</Button>
 					</Link>
@@ -67,7 +71,6 @@ const ButtonArea = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-between;
 	gap: 2rem;
 	align-items: center;
 `
