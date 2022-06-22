@@ -46,11 +46,13 @@ const PostCard = ({
 				</Text>
 			</CardHeader>
 			<ContentWrapper isLargeCard={isLargeCard} onClick={!isLargeCard && handleCommentClick}>
-				{timers.map(task => (
-					<CardTag key={task.id} fontSize={1.6}>
-						{task.name}
-					</CardTag>
-				))}
+				<InnerWrapper>
+					{timers.map(task => (
+						<CardTag key={task.id} fontSize={1.6}>
+							{task.name}
+						</CardTag>
+					))}
+				</InnerWrapper>
 			</ContentWrapper>
 			<CardFooter>
 				{likeState ? (
@@ -98,7 +100,7 @@ const CardContainer = styled.div`
 	background-color: white;
 	// box-shadow: ${props => !props.isLargeCard && '0 0.25rem 0.75rem rgba(55, 31, 31, 0.2);'}
 	box-sizing: border-box;
-	margin-top: 2rem;
+	//margin-top: 2rem;
 `
 
 const CardHeader = styled.div`
@@ -113,8 +115,6 @@ const CardHeader = styled.div`
 `
 
 const ContentWrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
 	overflow-y: scroll;
 	height: ${({ isLargeCard }) => (isLargeCard ? '26rem' : '15rem')};
 	background-color: ${themeColors.labelBackground};
@@ -122,7 +122,10 @@ const ContentWrapper = styled.div`
 	gap: 1.5rem;
 	box-sizing: border-box;
 `
-
+const InnerWrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`
 const More = styled.div`
 	display: flex;
 	align-items: center;

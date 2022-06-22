@@ -17,20 +17,20 @@ export default AvatarItem
 const Wrapper = styled.div`
 	box-sizing: border-box;
 	display: flex;
-	width: 6rem;
-	height: 10rem;
+	width: 7rem;
+	height: 15rem;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	row-gap: 1rem;
 	padding: 1rem;
-
 	cursor: pointer;
 `
 const NameWrapper = styled.div`
 	width: 100%;
 `
 const AvatarName = styled.p`
+	font-size: 1.2rem;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

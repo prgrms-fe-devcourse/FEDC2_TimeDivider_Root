@@ -74,7 +74,7 @@ export const CardArea = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-
+	row-gap: 2rem;
 	::-webkit-scrollbar {
 		display: none;
 	}
