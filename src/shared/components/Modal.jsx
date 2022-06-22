@@ -51,7 +51,10 @@ const ModalContainer = styled.div`
 	position: fixed;
 	top: 30%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(10%, -30%);
+	@media screen and (max-width: 1200px) {
+		transform: translate(-50%, -20%);
+	}
 	padding: 3rem;
 	background-color: white;
 	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
