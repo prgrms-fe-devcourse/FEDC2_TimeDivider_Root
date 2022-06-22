@@ -1,54 +1,20 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import apis from 'shared/api'
 import CommentForm from 'shared/components/CommentForm'
 import CommentList from 'shared/components/CommentList'
 import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
-import { useUser } from 'shared/hooks/useUser'
-import { getSessionStorageUserInfo } from 'shared/utils/storage'
-import styled from 'styled-components'
-import { Footer } from './style'
+import useDetailPost from 'shared/hooks/useDetailPost'
+import { CommentArea, Footer } from './style'
 
 const DetailPost = () => {
 	const { postId } = useParams()
-	const [isLoading, setIsLoading] = useState(true)
-	const [post, setPost] = useState({})
-	const [commentList, setCommentList] = useState([])
-	const { user } = useUser()
-
-	const fetchData = async () => {
-		setIsLoading(true)
-		const data = await apis.getPostDetail(postId)
-		const { timers } = JSON.parse(data.title)
-		const author = data.author
-		const imageSrc = author.image
-		const like = data.likes.find(like => like.user === user._id)
-		const likeId = like ? like._id : null
-
-		setPost({ ...data, timers, like, likeId, imageSrc })
-
-		setCommentList(
-			data.comments.map(comment => {
-				return {
-					author: comment.author.fullName,
-					imageSrc: comment.author.image,
-					comment: comment.comment,
-				}
-			}),
-		)
-
-		setIsLoading(false)
-	}
-
-	useEffect(() => {
-		fetchData()
-	}, [])
+	const { post, commentList, isLoading, createComment } = useDetailPost(postId)
+	const ref = useRef(null)
 
 	const handleCommentSubmit = async comment => {
-		setCommentList([...commentList, { author: user.fullName, comment, imageSrc: user.image }])
-		await apis.createComment(comment, postId)
+		await createComment(comment)
+		console.log(ref.current)
 	}
 
 	return (
@@ -68,7 +34,7 @@ const DetailPost = () => {
 					isLargeCard
 				/>
 			)}
-			<CommentArea>
+			<CommentArea ref={ref}>
 				<CommentList comments={commentList} />
 			</CommentArea>
 
@@ -80,12 +46,3 @@ const DetailPost = () => {
 }
 
 export default DetailPost
-
-const CommentArea = styled.div`
-	width: 100%;
-	overflow: scroll;
-	height: 25.2rem;
-	::-webkit-scrollbar {
-		display: none;
-	}
-`
