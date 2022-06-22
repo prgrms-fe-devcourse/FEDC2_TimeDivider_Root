@@ -33,19 +33,42 @@ const SignUpForm = ({ onSubmit }) => {
 		<Wrapper>
 			<Text size={3}>회원가입</Text>
 			<CardForm onSubmit={handleSubmit}>
-				<Input type="email" name="email" placeholder="이메일" onChange={handleChange} />
-				{errors.email && <Text color="red">{errors.email}</Text>}
-				<Input type="text" name="fullName" placeholder="닉네임" onChange={handleChange} />
-				{errors.fullName && <Text color="red">{errors.fullName}</Text>}
-				<Input type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
-				{errors.password && <Text color="red">{errors.password}</Text>}
+				<Input
+					type="email"
+					name="email"
+					placeholder="이메일"
+					onChange={handleChange}
+					required={true}
+				/>
+				{/*{errors.email && <Text color="red">{errors.email}</Text>}*/}
+				<Input
+					type="text"
+					name="fullName"
+					placeholder="닉네임"
+					onChange={handleChange}
+					required={true}
+				/>
+				{/*{errors.fullName && <Text color="red">{errors.fullName}</Text>}*/}
+				<Input
+					type="password"
+					name="password"
+					placeholder="비밀번호"
+					onChange={handleChange}
+					required={true}
+				/>
+				{/*{errors.password && <Text color="red">{errors.password}</Text>}*/}
 				<Input
 					type="password"
 					name="passwordConfirm"
 					placeholder="비밀번호 확인"
 					onChange={handleChange}
+					required={true}
 				/>
-				{errors.passwordConfirm && <Text color="red">{errors.passwordConfirm}</Text>}
+				{errors.passwordConfirm && (
+					<Text size={1.3} color="red">
+						{errors.passwordConfirm}
+					</Text>
+				)}
 
 				<ButtonWrapper>
 					<Button type="submit" disabled={isLoading}>
