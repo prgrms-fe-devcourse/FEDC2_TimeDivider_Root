@@ -1,34 +1,38 @@
 import styled from 'styled-components'
 import Avatar from 'shared/components/Avatar'
-import Text from 'shared/components/Text'
 
 const AvatarItem = ({ username, imageSrc, size = 5, ...props }) => {
 	return (
 		<Wrapper {...props}>
 			<Avatar isLoading={false} src={imageSrc} alt="avatar" size={size} />
-			<AvatarName size={1.4}>{username}</AvatarName>
+			<NameWrapper>
+				<AvatarName>{username}</AvatarName>
+			</NameWrapper>
 		</Wrapper>
 	)
 }
 
 export default AvatarItem
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
+	box-sizing: border-box;
 	display: flex;
-	flex-direction: column;
+	width: 6rem;
+	height: 10rem;
 	justify-content: center;
 	align-items: center;
-	gap: 1rem;
+	flex-direction: column;
+	row-gap: 1rem;
 	padding: 1rem;
-	box-sizing: border-box;
+
 	cursor: pointer;
 `
-
-export const AvatarName = styled(Text)`
-	width: 6rem;
-	overflow: hidden;
-	text-align: center;
+const NameWrapper = styled.div`
+	width: 100%;
+`
+const AvatarName = styled.p`
 	white-space: nowrap;
+	overflow: hidden;
 	text-overflow: ellipsis;
-	word-break: break-all;
+	text-align: center;
 `

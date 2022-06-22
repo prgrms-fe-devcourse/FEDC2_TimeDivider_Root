@@ -1,7 +1,18 @@
 import styled from 'styled-components'
+import { themeColors } from '../../shared/constants/colors'
+
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	background-color: ${themeColors.labelBackground};
+`
 
 export const Header = styled.div`
-	width: 37rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 	height: 18rem;
 `
 export const AvatarItem = styled.div`
@@ -23,36 +34,42 @@ export const AvatarName = styled(Text)`
 	word-break: break-all;
 `
 export const AvatarListArea = styled.div`
+	background-color: ${themeColors.background};
+	box-sizing: border-box;
 	display: flex;
 	width: 100%;
+	column-gap: 2rem;
+	padding-left: 2rem;
 	overflow-x: scroll;
-	height: 10rem;
+	height: 12rem;
 
-	::-webkit-scrollbar {
+	&:hover::-webkit-scrollbar {
 		height: 0.7rem;
 	}
 
-	::-webkit-scrollbar-track {
+	&:hover::-webkit-scrollbar-track {
 		background-color: white;
 	}
 
-	::-webkit-scrollbar-thumb {
+	&:hover::-webkit-scrollbar-thumb {
 		border-radius: 1.6rem;
 		background-color: lightgray;
 	}
 `
 export const ButtonArea = styled.div`
 	display: flex;
+	width: 100%;
+	box-sizing: border-box;
 	justify-content: flex-end;
 	padding: 2rem;
 	gap: 1rem;
-	box-sizing: border-box;
+	background-color: ${themeColors.background};
 `
 
 export const CardArea = styled.div`
 	position: relative;
 	width: 100%;
-	height: 55rem;
+	flex: 1;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;

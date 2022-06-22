@@ -4,6 +4,7 @@ import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { parsePostData, stringifyPostData } from 'shared/utils/postData'
 import { useTimers } from './useTimers'
 import { useUser } from './useUser'
+import dummyUserImage from 'shared/images/dummyUser.png'
 
 const usePosts = () => {
 	const { timers } = useTimers()
@@ -29,7 +30,7 @@ const usePosts = () => {
 			const { timers } = parsePostData(post.title)
 			const like = post.likes.find(like => like.user === user._id)
 			const likeId = like ? like._id : null
-			return { ...post, timers, like, likeId, imageSrc: post.author.image }
+			return { ...post, timers, like, likeId, imageSrc: post.author.image ?? dummyUserImage }
 		})
 
 		setPosts(fetchData)

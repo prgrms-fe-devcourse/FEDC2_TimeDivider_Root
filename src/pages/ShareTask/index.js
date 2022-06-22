@@ -5,7 +5,8 @@ import Button from 'shared/components/Button'
 import PostCard from 'shared/components/PostCard'
 import usePosts from 'shared/hooks/usePosts'
 import AvatarItem from './components/AvatarItem'
-import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
+import { AvatarListArea, ButtonArea, CardArea, Footer, Wrapper } from './style'
+import { colors } from '../../shared/constants/colors'
 
 const ShareTask = () => {
 	const navigate = useNavigate()
@@ -25,40 +26,44 @@ const ShareTask = () => {
 	}
 
 	return (
-		<div>
-			<Header>
-				<ButtonArea>
-					<Button
-						width={8}
-						height={3}
-						fontSize={1.3}
-						backgroundColor={'white'}
-						fontColor={'black'}
-						borderColor={'black'}
-						onClick={handleNotShareButtonClick}
-					>
-						공유중지
-					</Button>
-					<Button width={8} height={3} fontSize={1.3} onClick={handleUpdateButtonClick}>
-						업데이트
-					</Button>
-				</ButtonArea>
-				<AvatarListArea>
-					{posts.map(post => {
-						return (
-							<AvatarItem
-								onClick={() => {
-									handleNavigate(post._id)
-								}}
-								key={post._id}
-								postId={post._id}
-								imageSrc={post.imageSrc}
-								username={post.author.fullName}
-							/>
-						)
-					})}
-				</AvatarListArea>
-			</Header>
+		<Wrapper>
+			<ButtonArea>
+				<Button
+					width={8}
+					height={3}
+					fontSize={1.3}
+					backgroundColor={colors.white}
+					fontColor={colors.timeoutDarkGray}
+					borderColor={colors.timeoutDarkGray}
+					hoverColor={colors.red}
+					style={{ boxShadow: 'none' }}
+					onClick={handleNotShareButtonClick}
+				>
+					공유중지
+				</Button>
+				<Button
+					width={8}
+					height={3}
+					fontSize={1.3}
+					style={{ boxShadow: 'none' }}
+					onClick={handleUpdateButtonClick}
+				>
+					업데이트
+				</Button>
+			</ButtonArea>
+			<AvatarListArea>
+				{posts.map(post => (
+					<AvatarItem
+						onClick={() => {
+							handleNavigate(post._id)
+						}}
+						key={post._id}
+						postId={post._id}
+						imageSrc={post.imageSrc}
+						username={post.author.fullName}
+					/>
+				))}
+			</AvatarListArea>
 
 			<CardArea>
 				{isLoading ? (
@@ -83,7 +88,7 @@ const ShareTask = () => {
 			<Footer>
 				<BottomBar />
 			</Footer>
-		</div>
+		</Wrapper>
 	)
 }
 
