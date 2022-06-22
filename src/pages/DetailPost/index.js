@@ -6,46 +6,25 @@ import CommentForm from 'shared/components/CommentForm'
 import CommentList from 'shared/components/CommentList'
 import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
+import useDetailPost from 'shared/hooks/useDetailPost'
 import { useUser } from 'shared/hooks/useUser'
 import { parsePostData } from 'shared/utils/postData'
 import { CommentArea, Footer } from './style'
 
 const DetailPost = () => {
 	const { postId } = useParams()
-	const [isLoading, setIsLoading] = useState(true)
-	const [post, setPost] = useState({})
-	const [commentList, setCommentList] = useState([])
+	// const [isLoading, setIsLoading] = useState(true)
+	// const [post, setPost] = useState({})
+	// const [commentList, setCommentList] = useState([])
 	const { user } = useUser()
+	const { post, commentList, isLoading, getDetailPost, createComment } = useDetailPost(user, postId)
 
 	useEffect(() => {
-		fetchData()
+		getDetailPost()
 	}, [])
 
-	const fetchData = async () => {
-		setIsLoading(true)
-		const data = await apis.getPostDetail(postId)
-		const { timers } = parsePostData(data.title)
-		const like = data.likes.find(like => like.user === user._id)
-		const likeId = like ? like._id : null
-		setPost({ ...data, timers, like, likeId, imageSrc: post.author.image })
-		setCommentList(
-			data.comments.map(commentData => {
-				const { fullName, image } = commentData.auhtor
-
-				return {
-					author: fullName,
-					imageSrc: image,
-					comment: commentData.comment,
-				}
-			}),
-		)
-
-		setIsLoading(false)
-	}
-
 	const handleCommentSubmit = async comment => {
-		setCommentList([...commentList, { author: user.fullName, comment, imageSrc: user.image }])
-		await apis.createComment(comment, postId)
+		createComment(comment)
 	}
 
 	return (

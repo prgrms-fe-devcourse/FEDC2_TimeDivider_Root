@@ -43,12 +43,12 @@ const usePosts = (user, timers) => {
 			image: null,
 			channelId: TEST_CHANNEL_ID,
 		})
-		getPosts()
+		await getPosts()
 	}
 
 	const makePrivateMyPost = async () => {
 		await apis.disablePost(user.posts[0]._id, TEST_CHANNEL_ID)
-		getPosts()
+		await getPosts()
 	}
 
 	return { posts, isLoading, getPosts, updateMyPost, makePrivateMyPost }
