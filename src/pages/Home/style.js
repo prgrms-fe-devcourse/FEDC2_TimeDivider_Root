@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
 	align-items: center;
-	justify-content: flex-end;
 	padding: 3.3rem;
 `
 
@@ -19,7 +18,9 @@ export const Logo = styled.img`
 `
 
 export const SubTitle = styled.span`
-	margin: 0 8rem;
+	margin-top: 2rem;
+	width: 20rem;
+	font-weight: 300;
 	line-height: 4.6rem;
 	text-align: center;
 	height: 23.2rem;
@@ -32,4 +33,7 @@ export const ButtonArea = styled.div`
 	margin: 2rem 2rem;
 	width: 100%;
 	bottom: 1rem;
+`
+export const LogoWrapper = styled.div`
+	margin-top: 15rem;
 `
