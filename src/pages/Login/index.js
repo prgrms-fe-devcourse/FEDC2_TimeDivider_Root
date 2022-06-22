@@ -27,10 +27,10 @@ const Login = () => {
 		navigate('/updateTimeDivider')
 	}
 	return (
-		<>
+		<Wrapper>
 			<NavBar backIcon />
 			<Logo size={'LOGIN'} />
-			<Wrapper>
+			<InnerWrapper>
 				<LoginForm onSubmit={handleLogInSubmit} />
 				<Divider type={'horizontal'}> </Divider>
 				<ButtonArea>
@@ -52,18 +52,21 @@ const Login = () => {
 						</Button>
 					</Link>
 				</ButtonArea>
-			</Wrapper>
-		</>
+			</InnerWrapper>
+		</Wrapper>
 	)
 }
 
 export default Login
 
 const Wrapper = styled.div`
-	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	align-items: center;
+`
+const InnerWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
 	align-items: center;
 `
 

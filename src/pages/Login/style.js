@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { themeColors } from '../../shared/constants/colors'
 
 export const Wrapper = styled.div`
-	height: 50rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -22,7 +21,6 @@ export const Input = styled.input`
 	border-radius: 1.1rem;
 	background-color: ${themeColors.labelBackground};
 `
-
 export const CardForm = styled.form`
 	padding: 1.5rem;
 	width: 100%;
@@ -30,6 +28,7 @@ export const CardForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	gap: 1.5rem;
+	row-gap: 1rem;
 	align-items: center;
+	margin-top: 2rem;
 `

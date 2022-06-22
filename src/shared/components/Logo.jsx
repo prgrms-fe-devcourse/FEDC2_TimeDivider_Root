@@ -17,5 +17,5 @@ const SIZE_TYPE = Object.freeze({
 export const StyledLogo = styled.img`
 	height: ${props => SIZE_TYPE[props.size] || SIZE_TYPE['small']};
 	width: ${props => SIZE_TYPE[props.size] || SIZE_TYPE['small']};
-	margin: 3rem;
+	margin-bottom: 3rem;
 `

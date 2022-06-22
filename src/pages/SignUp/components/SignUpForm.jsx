@@ -1,9 +1,10 @@
 import useForm from 'shared/hooks/useForm'
 import Button from 'shared/components/Button'
 import Text from 'shared/components/Text'
-import CardForm from 'shared/components/CardForm'
 
 import styled from 'styled-components'
+import { themeColors } from '../../../shared/constants/colors'
+import { CardForm, Wrapper } from '../../Login/style'
 
 const SignUpForm = ({ onSubmit }) => {
 	const initialValues = {
@@ -30,8 +31,8 @@ const SignUpForm = ({ onSubmit }) => {
 
 	return (
 		<Wrapper>
+			<Text size={3}>회원가입</Text>
 			<CardForm onSubmit={handleSubmit}>
-				<Text size={3}>회원가입</Text>
 				<Input type="email" name="email" placeholder="이메일" onChange={handleChange} />
 				{errors.email && <Text color="red">{errors.email}</Text>}
 				<Input type="text" name="fullName" placeholder="닉네임" onChange={handleChange} />
@@ -45,9 +46,12 @@ const SignUpForm = ({ onSubmit }) => {
 					onChange={handleChange}
 				/>
 				{errors.passwordConfirm && <Text color="red">{errors.passwordConfirm}</Text>}
-				<Button type="submit" disabled={isLoading}>
-					가입하기
-				</Button>
+
+				<ButtonWrapper>
+					<Button type="submit" disabled={isLoading}>
+						회원가입
+					</Button>
+				</ButtonWrapper>
 			</CardForm>
 		</Wrapper>
 	)
@@ -55,19 +59,19 @@ const SignUpForm = ({ onSubmit }) => {
 
 export default SignUpForm
 
-const Wrapper = styled.div`
-	display: flex;
-	gap: 2rem;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-`
-
-const Input = styled.input`
-	padding: 0;
+export const Input = styled.input`
+	box-sizing: border-box;
+	width: 33.3rem;
+	height: 5rem;
+	padding: 1.5rem;
 	margin: 0;
 	border: none;
 	outline: none;
 	align-items: center;
-	font-size: 2.5rem;
+	font-size: 1.5rem;
+	border-radius: 1.1rem;
+	background-color: ${themeColors.labelBackground};
+`
+export const ButtonWrapper = styled.div`
+	margin-top: 2.2rem;
 `
