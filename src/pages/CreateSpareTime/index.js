@@ -20,7 +20,10 @@ const CreateSpareTime = () => {
 		<S.Wrapper>
 			<NavBar backIcon />
 			<SubTitle>오늘 사용할 수 있는 시간은 얼마인가요?</SubTitle>
-			<TimeSelectForm intialTime={spareTime} handleChangeTime={updateSpareTime}></TimeSelectForm>
+			<S.FormWrapper>
+				<TimeSelectForm intialTime={spareTime} handleChangeTime={updateSpareTime}></TimeSelectForm>
+			</S.FormWrapper>
+
 			<S.ButtonArea>
 				<Link to="/createTimerName" state={{ spareTime }}>
 					<Button disabled={!isValidSpareTime}>

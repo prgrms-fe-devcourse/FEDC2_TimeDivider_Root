@@ -26,3 +26,7 @@ export const ButtonArea = styled.div`
 	width: 100%;
 	bottom: 1rem;
 `
+
+export const FormWrapper = styled.div`
+	margin-top: 20rem;
+`

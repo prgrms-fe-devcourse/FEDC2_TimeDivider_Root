@@ -49,7 +49,7 @@ const StyledButton = styled.button`
 	font-size: ${props => `${props.fontSize}rem`};
 	padding: 0.8rem 0.8rem;
 	background-color: ${props => props.backgroundColor};
-	border: 0.1rem solid ${props => props.borderColor};
+	border: 0.1rem solid ${props => (props.disabled ? 'transparent' : props.borderColor)};
 	outline: none;
 	text-align: center;
 	border-radius: 0.8rem;

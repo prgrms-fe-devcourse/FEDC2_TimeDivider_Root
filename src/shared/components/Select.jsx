@@ -18,16 +18,16 @@ const Select = ({
 	)
 
 	const options = formattedData.map(item => (
-		<option style={{ fontSize: '1.5rem' }} key={item.value} value={item.value}>
+		<StyledOption key={item.value} value={item.value}>
 			{item.label}
-		</option>
+		</StyledOption>
 	))
 
 	if (placeholder) {
 		options.unshift(
-			<option key="placeholder" value="" hidden>
+			<StyledOption key="placeholder" value="" hidden>
 				{placeholder}
-			</option>,
+			</StyledOption>,
 		)
 	}
 
@@ -83,4 +83,9 @@ const StyledSelect = styled.select`
 	margin: 0;
 	border-radius: 4px;
 	box-sizing: border-box;
+	text-align: center;
+`
+
+const StyledOption = styled.option`
+	font-size: 1rem;
 `
