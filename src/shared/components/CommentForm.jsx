@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { IoPaperPlaneOutline } from 'react-icons/io5'
-import { colors, themeColors } from 'shared/constants/colors'
+import { colors } from 'shared/constants/colors'
+import useToggle from 'shared/hooks/useToggle'
 import styled from 'styled-components'
 import Button from './Button'
 
 const CommentForm = ({ onSubmit, ...props }) => {
 	const [comment, setComment] = useState('')
-
+	const [buttonState, setButtonState] = useState(true)
 	const handleSubmit = e => {
 		e.preventDefault()
 		onSubmit(comment)
@@ -15,12 +16,13 @@ const CommentForm = ({ onSubmit, ...props }) => {
 
 	const handleChange = e => {
 		const { value } = e.target
+		value.length > 0 ? setButtonState(false) : setButtonState(true)
 		setComment(value)
 	}
 	return (
 		<Form {...props} onSubmit={handleSubmit}>
 			<TextArea name="comment" value={comment} onChange={handleChange} fontSize={40} />
-			<CommentButton width={5} height={5}>
+			<CommentButton disabled={buttonState} width={5} height={5}>
 				<IoPaperPlaneOutline style={{ marginTop: '0.4rem' }} fontSize={'3rem'} />
 			</CommentButton>
 		</Form>
@@ -39,7 +41,7 @@ const CommentButton = styled(Button)`
 	border-radius: 0 0 0 0;
 `
 
-const TextArea = styled.textarea`
+const TextArea = styled.input`
 	width: 100%;
 	height: 5rem;
 	padding: 10px;

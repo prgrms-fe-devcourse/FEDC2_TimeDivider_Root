@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import apis from 'shared/api'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { parsePostData, stringifyPostData } from 'shared/utils/postData'
+import { useTimers } from './useTimers'
+import { useUser } from './useUser'
 
-const usePosts = (user, timers) => {
+const usePosts = () => {
+	const { timers } = useTimers()
+	const { user } = useUser()
 	const [posts, setPosts] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		getPosts()
+	}, [])
 
 	const getPosts = async () => {
 		setIsLoading(true)

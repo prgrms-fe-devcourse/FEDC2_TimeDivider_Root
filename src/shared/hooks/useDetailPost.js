@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import apis from 'shared/api'
 import { parsePostData } from 'shared/utils/postData'
+import { useUser } from './useUser'
 
-const useDetailPost = (user, postId) => {
+const useDetailPost = postId => {
+	const { user } = useUser()
 	const [post, setPost] = useState({})
 	const [commentList, setCommentList] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+		getDetailPost()
+	}, [])
 
 	const getDetailPost = async () => {
 		setIsLoading(true)

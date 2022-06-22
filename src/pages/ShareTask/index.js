@@ -1,25 +1,16 @@
 import React from 'react'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BottomBar } from 'shared/components/BottomBar'
 import Button from 'shared/components/Button'
 import PostCard from 'shared/components/PostCard'
 import usePosts from 'shared/hooks/usePosts'
-import { useTimers } from 'shared/hooks/useTimers'
-import { useUser } from 'shared/hooks/useUser'
 import AvatarItem from './components/AvatarItem'
 import { AvatarListArea, ButtonArea, CardArea, Footer, Header } from './style'
 
 const ShareTask = () => {
 	const navigate = useNavigate()
 
-	const { timers } = useTimers()
-	const { user } = useUser()
-	const { posts, isLoading, getPosts, updateMyPost, makePrivateMyPost } = usePosts(user, timers)
-
-	useEffect(() => {
-		getPosts(user, timers)
-	}, [])
+	const { posts, isLoading, updateMyPost, makePrivateMyPost } = usePosts()
 
 	const handleUpdateButtonClick = async () => {
 		updateMyPost()
