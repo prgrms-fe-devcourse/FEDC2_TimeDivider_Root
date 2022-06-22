@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import apis from 'shared/api'
 import { BottomBar } from 'shared/components/BottomBar'
@@ -26,7 +26,7 @@ const ShareTask = () => {
 	const fetchPosts = async () => {
 		setIsLoading(true)
 
-		const data = await apis.getPosts(TEST_CHANNEL_ID)
+		const data = await apis.getPosts(TEST_CHANNEL_ID, 0, 20)
 
 		const filteredData = data.filter(post => {
 			if (post.title === 'Test') return false
