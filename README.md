@@ -7,8 +7,8 @@
 ##  📌 프로젝트 소개
 
   
+![Banner2](https://user-images.githubusercontent.com/81891292/175070843-86b015e1-787a-4fb8-8d31-15f87b78dbc2.png)
 
-<img  src="https://user-images.githubusercontent.com/81891292/175041896-5ed01287-e1a7-4156-9d28-2bcac3e8a3bd.png"></img>
 
   
 
