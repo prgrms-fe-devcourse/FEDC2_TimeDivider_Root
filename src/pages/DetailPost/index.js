@@ -6,7 +6,7 @@ import NavBar from 'shared/components/NavBar'
 import PostCard from 'shared/components/PostCard'
 import useDetailPost from 'shared/hooks/useDetailPost'
 import { CommentArea, Footer, Loading, TopBar } from './style'
-import Avatar from '../../shared/components/Avatar'
+import { Avatar } from 'shared/components'
 import loadingImage from '../../shared/images/loading.gif'
 
 const DetailPost = () => {

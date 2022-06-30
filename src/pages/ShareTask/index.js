@@ -1,17 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BottomBar } from 'shared/components/BottomBar'
-import Button from 'shared/components/Button'
-import PostCard from 'shared/components/PostCard'
 import usePosts from 'shared/hooks/usePosts'
 import AvatarItem from './components/AvatarItem'
 import { AvatarListArea, ButtonArea, CardArea, Footer, Loading, Wrapper } from './style'
 import { colors } from '../../shared/constants/colors'
 import { Description, NotLoggedInWrapper } from '../MyPage/style'
-import Text from '../../shared/components/Text'
 import { useUser } from '../../shared/hooks/useUser'
 import loadingImage from 'shared/images/loading.gif'
-import Avatar from '../../shared/components/Avatar'
+import { Avatar, Button, BottomBar, Text, PostCard } from 'shared/components'
 
 const ShareTask = () => {
 	const navigate = useNavigate()
