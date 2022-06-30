@@ -21,8 +21,6 @@ const CommentList = ({ comments, ...props }) => {
 	)
 }
 
-export default CommentList
-
 const CommentContainer = styled.div`
 	width: 100%;
 `
@@ -63,3 +61,5 @@ const Name = styled.p`
 	text-overflow: ellipsis;
 	text-align: center;
 `
+
+export default CommentList

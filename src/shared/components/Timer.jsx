@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { colors, themeColors } from '../constants/colors'
-import { useTimers } from '../hooks/useTimers'
+import { useTimers } from 'shared/hooks/useTimers'
 
 const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {} }) => {
 	const { timers, changeTime, completeTimer } = useTimers()
@@ -45,8 +45,6 @@ const Timer = ({ expiryTimestamp, autoStart = false, id, name, onClick = () => {
 		</TimerWrapper>
 	)
 }
-
-export default Timer
 
 Timer.propType = {
 	expiryTimestamp: PropTypes.object.isRequired,
@@ -104,3 +102,5 @@ const Name = styled.span`
 	width: 100%;
 	height: 50%;
 `
+
+export default Timer

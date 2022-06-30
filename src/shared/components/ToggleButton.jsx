@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { colors, themeColors } from '../constants/colors'
 
-export const ToggleButton = ({ width = 10, height = 5, onToggle, ...props }) => {
+const ToggleButton = ({ width = 10, height = 5, onToggle, ...props }) => {
 	const [toggled, setToggled] = useState(false)
 
 	return (
@@ -37,3 +37,5 @@ const Switch = styled.div`
 	background-color: ${colors.white};
 	border-radius: 50%;
 `
+
+export default ToggleButton

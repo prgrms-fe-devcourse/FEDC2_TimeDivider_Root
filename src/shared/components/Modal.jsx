@@ -36,8 +36,6 @@ const Modal = ({ children, width = 31.6, height, visible = false, onClose, ...pr
 	)
 }
 
-export default Modal
-
 const BackgroundDim = styled.div`
 	position: fixed;
 	top: 0;
@@ -67,3 +65,5 @@ const CloseButton = styled.div`
 	right: 1rem;
 	cursor: pointer;
 `
+
+export default Modal

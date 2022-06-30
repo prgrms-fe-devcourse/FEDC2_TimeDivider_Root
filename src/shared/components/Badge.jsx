@@ -6,7 +6,6 @@ import { colors } from 'shared/constants/colors'
 const Badge = ({ fontSize, ...props }) => {
 	return <StyledBadge fontSize={fontSize} {...props} />
 }
-export default Badge
 
 Badge.propTypes = {
 	text: PropTypes.string,
@@ -28,3 +27,5 @@ const StyledBadge = styled.div`
 	box-sizing: border-box;
 	cursor: pointer;
 `
+
+export default Badge

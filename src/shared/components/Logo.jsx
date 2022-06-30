@@ -1,11 +1,9 @@
 import styled from 'styled-components'
-import logo from 'shared/images/logoTimeDivider.png'
+import { logoTimeDivider } from 'shared/images'
 
 const Logo = ({ size }) => {
-	return <StyledLogo size={size} src={logo} />
+	return <StyledLogo size={size} src={logoTimeDivider} />
 }
-
-export default Logo
 
 const SIZE_TYPE = Object.freeze({
 	LARGE: '30rem',
@@ -20,3 +18,5 @@ export const StyledLogo = styled.img`
 	width: ${props => SIZE_TYPE[props.size] || SIZE_TYPE['small']};
 	margin-bottom: ${props => props.size === 'LOGIN' && 3}rem;
 `
+
+export default Logo

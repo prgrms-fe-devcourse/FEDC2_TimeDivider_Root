@@ -19,8 +19,6 @@ const TaskBox = ({ task, ...props }) => {
 	)
 }
 
-export default TaskBox
-
 const BoxContainer = styled.div`
 	padding: 1.6rem 1.6rem;
 	background-color: ${themeColors.labelBackground};
@@ -37,3 +35,5 @@ const BoxWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 `
+
+export default TaskBox

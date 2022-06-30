@@ -29,8 +29,6 @@ Text.propTypes = {
 	link: PropTypes.string,
 }
 
-export default NavBar
-
 const NavBarContainer = styled.div`
 	box-sizing: border-box;
 	display: flex;
@@ -50,3 +48,5 @@ const GoBackIcon = styled.a`
 	top: 3.1rem;
 	cursor: pointer;
 `
+
+export default NavBar
