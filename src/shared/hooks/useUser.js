@@ -3,7 +3,7 @@ import { loginDataState, userState } from 'state/user'
 import { requestSignup, requestLogin, requestLogout } from 'shared/api/apis/authApis'
 import { getUser, requestChangeFullName, uploadImage } from 'shared/api/apis/userApis'
 import { createPost } from 'shared/api/apis/postApis'
-import { useTimers } from 'shared/hooks/useTimers'
+import { useTimers } from 'shared/hooks'
 
 const dummyUserImage = 'https://tva1.sinaimg.cn/large/e6c9d24egy1h3g25xp63rj20e80e8gm1.jpg'
 
@@ -76,3 +76,5 @@ export const useUser = () => {
 		logout,
 	}
 }
+
+export default useUser

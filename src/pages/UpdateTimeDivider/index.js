@@ -14,10 +14,9 @@ import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import CompleteFormModal from 'pages/UpdateTimeDivider/components/CompleteFormModal'
 import { BottomBar, Logo, Timer } from 'shared/components'
 import { BottomBarArea, Description, TimerArea, ToolBar, TopBar, Wrapper } from './style'
-import { useTimers } from 'shared/hooks/useTimers'
+import { useTimers, useUser } from 'shared/hooks'
 import { ToolBarButton } from './components/ToolBarButton'
 import ResetFormModal from './components/ResetFormModal'
-import { useUser } from '../../shared/hooks/useUser'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()

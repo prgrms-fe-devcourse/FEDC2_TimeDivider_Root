@@ -1,13 +1,11 @@
-import Select from '../../../shared/components/Select'
-import { HOUR_NUMBERS, MINUTE_NUMBERS } from '../../../shared/components/TimeSelectForm'
-import FormModal from './FormModal'
 import React from 'react'
+import { Input, Text, Select } from 'shared/components'
+import { HOUR_NUMBERS, MINUTE_NUMBERS } from 'shared/components/TimeSelectForm'
+import FormModal from './FormModal'
 import { useRecoilState } from 'recoil'
 import { addMode, defaultMode, modeState } from 'state/timer'
-import Input from '../../../shared/components/Input'
 import styled from 'styled-components'
-import Text from '../../../shared/components/Text'
-import { useTimers } from '../../../shared/hooks/useTimers'
+import { useTimers } from 'shared/hooks'
 
 const AddFormModal = () => {
 	const { addTimer } = useTimers()
