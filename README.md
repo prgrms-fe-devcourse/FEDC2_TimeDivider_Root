@@ -58,7 +58,7 @@
 ## 🎥 발표영상
 
  - [🌱 중간 발표 영상(Google Drive)](https://drive.google.com/file/d/1Src2INi5S8UuDIuatgUXmYkaZvMoQtKd/view)
- - 최종 발표 영상: 준비중입니다!
+ - [🌱 최종 발표 영상(Google Drive)](https://drive.google.com/file/d/1uAc6GpG4XmkWKTBHRt3eZNB1SX4svffB/view)
 
 ## 👨‍👧‍👦 팀 소개
 
