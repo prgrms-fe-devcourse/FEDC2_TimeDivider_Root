@@ -1,6 +1,6 @@
 import FormModal from './FormModal'
 import React from 'react'
-import { useTimers } from '../../../shared/hooks/useTimers'
+import { useTimers } from 'shared/hooks'
 import { useRecoilState } from 'recoil'
 import { defaultMode, modeState, resetMode } from '../../../state/timer'
 

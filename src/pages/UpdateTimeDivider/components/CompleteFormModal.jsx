@@ -2,7 +2,7 @@ import FormModal from './FormModal'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { doneMode, mergeMode, modeState, originIdState } from 'state/timer'
-import { useTimers } from '../../../shared/hooks/useTimers'
+import { useTimers } from 'shared/hooks'
 
 const CompleteFormModal = () => {
 	const { completeTimer } = useTimers()

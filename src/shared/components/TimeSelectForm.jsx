@@ -49,8 +49,6 @@ const TimeSelectForm = ({ targetTask, onSubmit, ...props }) => {
 	)
 }
 
-export default TimeSelectForm
-
 const Form = styled.form``
 
 const Content = styled.div`
@@ -59,3 +57,5 @@ const Content = styled.div`
 	justify-content: center;
 	gap: 1rem;
 `
+
+export default TimeSelectForm

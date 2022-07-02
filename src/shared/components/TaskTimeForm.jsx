@@ -51,10 +51,10 @@ const TaskTimeForm = ({ targetTask, onSubmit, ...props }) => {
 	)
 }
 
-export default TaskTimeForm
-
 const Form = styled.form`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 `
+
+export default TaskTimeForm

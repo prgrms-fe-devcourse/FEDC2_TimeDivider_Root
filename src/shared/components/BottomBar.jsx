@@ -6,7 +6,7 @@ import profileImg from 'shared/images/profile.png'
 import { Link, useLocation } from 'react-router-dom'
 import { useUser } from '../hooks/useUser'
 
-export const BottomBar = ({ ...props }) => {
+const BottomBar = ({ ...props }) => {
 	const location = useLocation()
 	const { user } = useUser()
 	return (
@@ -47,3 +47,5 @@ const NavItem = styled.div`
 	border-top: 3px solid
 		${props => (props.to === props.currentpath ? themeColors.primary : 'transparent')};
 `
+
+export default BottomBar

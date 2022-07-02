@@ -1,7 +1,7 @@
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import { originIdState, timerObject, timerState } from 'state/timer'
 
-export const useTimers = () => {
+const useTimers = () => {
 	const [timers, setTimers] = useRecoilState(timerState)
 	const [originId, setOriginId] = useRecoilState(originIdState)
 	const resetTimers = useResetRecoilState(timerState)
@@ -57,3 +57,5 @@ export const useTimers = () => {
 		resetTimers,
 	}
 }
+
+export default useTimers

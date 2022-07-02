@@ -38,8 +38,6 @@ const CommentForm = ({ onSubmit, ...props }) => {
 	)
 }
 
-export default CommentForm
-
 const Form = styled.form`
 	box-sizing: border-box;
 	display: flex;
@@ -63,3 +61,5 @@ const TextArea = styled.input`
 	font-family: sans-serif;
 	resize: none;
 `
+
+export default CommentForm

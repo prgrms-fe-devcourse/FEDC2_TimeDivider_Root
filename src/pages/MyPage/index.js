@@ -14,12 +14,10 @@ import {
 	Title,
 	Wrapper,
 } from './style'
-import { BottomBar } from '../../shared/components/BottomBar'
+import { Avatar, Button, BottomBar } from 'shared/components'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../../shared/hooks/useUser'
-import Avatar from '../../shared/components/Avatar'
-import Button from '../../shared/components/Button'
 
 const MyPage = () => {
 	const { user, isLoggedIn, logout, refreshUser, changeImage } = useUser()

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import apis from 'shared/api'
 import { TEST_CHANNEL_ID } from 'shared/constants/chanelId'
 import { parsePostData, stringifyPostData } from 'shared/utils/postData'
-import { useTimers } from './useTimers'
-import { useUser } from './useUser'
+import useTimers from 'shared/hooks/useTimers'
+import useUser from 'shared/hooks/useUser'
 import dummyUserImage from 'shared/images/dummyUser.png'
 
 const usePosts = () => {

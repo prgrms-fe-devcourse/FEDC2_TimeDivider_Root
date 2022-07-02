@@ -5,8 +5,6 @@ const Input = ({ width = 20, fontSize = 2.5, ...props }) => {
 	return <StyledInput width={width} fontSize={fontSize} {...props} />
 }
 
-export default Input
-
 const StyledInput = styled.input`
 	width: ${props => `${props.width}rem`};
 	font-size: ${props => `${props.fontSize}rem`};
@@ -15,3 +13,5 @@ const StyledInput = styled.input`
 	outline: none;
 	text-align: center;
 `
+
+export default Input
