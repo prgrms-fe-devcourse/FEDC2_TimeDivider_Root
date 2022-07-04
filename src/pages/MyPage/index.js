@@ -9,12 +9,12 @@ import { useUser } from '../../shared/hooks/useUser'
 import styled from 'styled-components'
 
 const MyPage = () => {
-	const { user, isLoggedIn, logout, refreshUser, changeImage } = useUser()
+	const { user, isLoggedIn, logout, refreshUser } = useUser()
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		refreshUser()
-	}, [])
+	}, [refreshUser])
 
 	const handleLogOut = async () => {
 		const { isSuccess, message } = await logout()

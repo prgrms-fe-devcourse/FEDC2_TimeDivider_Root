@@ -26,7 +26,7 @@ const MyPageEdit = () => {
 		} else {
 			setEdited(false)
 		}
-	}, [fullName, image])
+	}, [fullName, image, user.fullName, user.image])
 
 	const handleNameInput = e => {
 		setFullName(e.target.value)
