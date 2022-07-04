@@ -18,7 +18,7 @@ const usePosts = () => {
 
 	const getPosts = async () => {
 		setIsLoading(true)
-		const data = await apis.getPosts(TEST_CHANNEL_ID)
+		const { data } = await apis.getPosts(TEST_CHANNEL_ID)
 
 		const filteredData = data.filter(post => {
 			if (post.title === 'Test') return false
