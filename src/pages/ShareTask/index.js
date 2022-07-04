@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { colors, themeColors } from 'shared/constants/colors'
 import { useNavigate } from 'react-router-dom'
-import { usePosts } from 'shared/hooks'
+import { usePosts, useUser } from 'shared/hooks'
 import { Avatar, Button, BottomBar, Text, PostCard } from 'shared/components'
 import AvatarItem from './components/AvatarItem'
-import { useUser } from 'shared/hooks'
+import { Description, NotLoggedInWrapper } from '../MyPage'
 import loadingImage from 'shared/images/loading.gif'
 
 const ShareTask = () => {
