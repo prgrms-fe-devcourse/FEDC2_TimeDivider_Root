@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { Button, NavBar, TaskBox, Text, TimeSelectForm } from 'shared/components'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { timerObject, timerState } from 'state/timer'
-import { themeColors } from 'shared/constants'
+import { themeColors } from 'shared/constants/colors'
 
 import { useCreatingTimers } from 'shared/hooks'
 

@@ -1,13 +1,12 @@
 import React from 'react'
+import styled from 'styled-components'
+import { colors, themeColors } from 'shared/constants/colors'
 import { useNavigate } from 'react-router-dom'
-import usePosts from 'shared/hooks/usePosts'
-import AvatarItem from './components/AvatarItem'
-import { AvatarListArea, ButtonArea, CardArea, Footer, Loading, Wrapper } from './style'
-import { colors } from '../../shared/constants/colors'
-import { Description, NotLoggedInWrapper } from '../MyPage/style'
-import { useUser } from '../../shared/hooks/useUser'
-import loadingImage from 'shared/images/loading.gif'
+import { usePosts } from 'shared/hooks'
 import { Avatar, Button, BottomBar, Text, PostCard } from 'shared/components'
+import AvatarItem from './components/AvatarItem'
+import { useUser } from 'shared/hooks'
+import loadingImage from 'shared/images/loading.gif'
 
 const ShareTask = () => {
 	const navigate = useNavigate()
@@ -107,5 +106,102 @@ const ShareTask = () => {
 		</Wrapper>
 	)
 }
+
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	background-color: ${themeColors.labelBackground};
+`
+
+export const Header = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	height: 18rem;
+`
+
+export const AvatarName = styled(Text)`
+	width: 6rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: break-all;
+`
+
+export const AvatarListArea = styled.div`
+	background-color: ${themeColors.background};
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	column-gap: 2rem;
+	padding-left: 2rem;
+	overflow-x: scroll;
+	height: 11rem;
+
+	&:hover::-webkit-scrollbar {
+		height: 0.7rem;
+	}
+
+	&:hover::-webkit-scrollbar-track {
+		background-color: white;
+	}
+
+	&:hover::-webkit-scrollbar-thumb {
+		border-radius: 1.6rem;
+		background-color: lightgray;
+	}
+`
+
+export const ButtonArea = styled.div`
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	padding: 2rem;
+	gap: 1rem;
+	background-color: ${themeColors.background};
+`
+
+export const CardArea = styled.div`
+	position: relative;
+	width: 100%;
+	flex: 1;
+	overflow-y: scroll;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	row-gap: 2rem;
+	::-webkit-scrollbar {
+		display: none;
+	}
+`
+
+export const Footer = styled.div`
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+`
+
+export const Loading = styled.div`
+	flex: 1;
+`
+
+export const Description = styled.div`
+	width: 24.2rem;
+	height: 9rem;
+	text-align: center;
+	margin-top: 15.6rem;
+	margin-bottom: 13.6rem;
+`
+export const NotLoggedInWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+`
 
 export default ShareTask
