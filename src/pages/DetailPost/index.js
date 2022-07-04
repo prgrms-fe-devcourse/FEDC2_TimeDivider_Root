@@ -1,12 +1,8 @@
 import React, { useRef } from 'react'
+import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
-import CommentForm from 'shared/components/CommentForm'
-import CommentList from 'shared/components/CommentList'
-import NavBar from 'shared/components/NavBar'
-import PostCard from 'shared/components/PostCard'
-import useDetailPost from 'shared/hooks/useDetailPost'
-import { CommentArea, Footer, Loading, TopBar } from './style'
-import { Avatar } from 'shared/components'
+import { CommentForm, CommentList, NavBar, PostCard, Avatar } from 'shared/components'
+import { useDetailPost } from 'shared/hooks'
 import loadingImage from '../../shared/images/loading.gif'
 
 const DetailPost = () => {
@@ -16,7 +12,6 @@ const DetailPost = () => {
 
 	const handleCommentSubmit = async comment => {
 		await createComment(comment)
-		console.log(ref.current)
 	}
 
 	return (
@@ -53,5 +48,30 @@ const DetailPost = () => {
 		</>
 	)
 }
+
+export const Footer = styled.div`
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+`
+
+export const CommentArea = styled.div`
+	width: 100%;
+	overflow: scroll;
+	height: 25.2rem;
+	::-webkit-scrollbar {
+		display: none;
+	}
+`
+export const TopBar = styled.div`
+	position: relative;
+	width: 100%;
+`
+export const Loading = styled.div`
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+`
 
 export default DetailPost
