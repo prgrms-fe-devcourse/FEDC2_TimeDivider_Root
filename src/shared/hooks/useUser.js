@@ -34,10 +34,10 @@ export const useUser = () => {
 	}
 
 	const refreshUser = async () => {
-		const response = await getUser(user._id)
+		const data = await getUser(user._id)
 		setUser({
-			...response.data,
-			image: response.data.image ?? dummyUserImage,
+			...data,
+			image: data.image ?? dummyUserImage,
 		})
 	}
 
