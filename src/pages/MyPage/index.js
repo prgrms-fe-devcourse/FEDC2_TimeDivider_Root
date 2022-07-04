@@ -74,7 +74,7 @@ const Wrapper = styled.div`
 	height: 100%;
 	background-color: ${themeColors.labelBackground};
 `
-const Profiles = styled.div`
+export const Profiles = styled.div`
 	display: flex;
 	width: 100%;
 	margin-bottom: 2.7rem;
@@ -83,7 +83,7 @@ const Profiles = styled.div`
 	row-gap: 1rem;
 `
 
-const Settings = styled.div`
+export const Settings = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -91,7 +91,7 @@ const Settings = styled.div`
 	row-gap: 1rem;
 	width: 100%;
 `
-const Setting = styled.div`
+export const Setting = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	column-gap: 1rem;
@@ -139,14 +139,14 @@ const LogOut = styled.div`
 	cursor: pointer;
 `
 
-const Description = styled.div`
+export const Description = styled.div`
 	width: 24.2rem;
 	height: 9rem;
 	text-align: center;
 	margin-top: 15.6rem;
 	margin-bottom: 13.6rem;
 `
-const NotLoggedInWrapper = styled.div`
+export const NotLoggedInWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
