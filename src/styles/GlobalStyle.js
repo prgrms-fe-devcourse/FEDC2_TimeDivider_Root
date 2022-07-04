@@ -56,31 +56,6 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
-#root{
-  position: relative;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  box-sizing: border-box;
-  align-items: center;
-  padding: 0;
-  overflow: hidden;  
-  max-width: 375px;
-  height: 812px;
-  box-shadow: 0 0 2rem 0.1rem rgba(0, 0, 0, 0.2);
-  background-color: ${colors.background};
-  
-  @media screen and (max-width: 700px){
-    max-width: 100vw;
-    height: 100vh;
-  }
-  @media screen and (max-height: 812px) {
-    margin:0;
-    height: 100vh;
-    box-shadow: none;
-  }
-  
 }`
 
 export default GlobalStyle
