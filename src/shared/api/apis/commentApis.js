@@ -6,5 +6,5 @@ export const createComment = async (comment, postId) => {
 	if (!isSuccess) {
 		return { isSuccess, message }
 	}
-	return data
+	return { isSuccess, data, message: 'Comment Added' }
 }

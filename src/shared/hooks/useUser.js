@@ -34,7 +34,7 @@ export const useUser = () => {
 	}
 
 	const refreshUser = async () => {
-		const data = await getUser(user._id)
+		const { data } = await getUser(user._id)
 		setUser({
 			...data,
 			image: data.image ?? dummyUserImage,

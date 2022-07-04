@@ -5,7 +5,7 @@ export const addPostLike = async postId => {
 	if (!isSuccess) {
 		return { isSuccess, message }
 	}
-	return data
+	return { isSuccess, data, message: 'Successfully Add Like' }
 }
 
 export const cancelPostLike = async id => {
@@ -13,5 +13,5 @@ export const cancelPostLike = async id => {
 	if (!isSuccess) {
 		return { isSuccess, message }
 	}
-	return data
+	return { isSuccess, data, message: 'Successfully Cancel Like' }
 }

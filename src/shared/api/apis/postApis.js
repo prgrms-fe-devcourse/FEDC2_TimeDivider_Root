@@ -35,7 +35,7 @@ export const getPosts = async (channelId = TEST_CHANNEL_ID) => {
 		return { isSuccess, message }
 	}
 
-	return data
+	return { isSuccess, data, message: 'Succesfully Get Posts' }
 }
 
 export const getPostDetail = async postId => {
@@ -43,7 +43,7 @@ export const getPostDetail = async postId => {
 	if (!isSuccess) {
 		return { isSuccess, message }
 	}
-	return data
+	return { isSuccess, data, message: 'Succesfully Get DeatailPost' }
 }
 
 export const deletePost = async (id = '') => {
@@ -61,7 +61,7 @@ export const modifyPost = async (
 		return { isSuccess, message }
 	}
 
-	return data
+	return { isSuccess, data, message: 'Succesfully update Post' }
 }
 
 export const disablePost = async (postId, channelId) => {
@@ -80,5 +80,5 @@ export const disablePost = async (postId, channelId) => {
 		return { isSuccess, message }
 	}
 
-	return data
+	return { isSuccess, data, message: 'Succesfully disable Post' }
 }

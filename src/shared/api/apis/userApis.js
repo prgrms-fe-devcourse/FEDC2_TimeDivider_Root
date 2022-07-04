@@ -5,7 +5,7 @@ export const getAllUserList = async () => {
 	if (!isSuccess) {
 		return { isSuccess, message }
 	}
-	return data
+	return { isSuccess, data, message: 'Succesfully Get AllUserList' }
 }
 
 export const uploadImage = async formData => {
@@ -15,7 +15,7 @@ export const uploadImage = async formData => {
 		return { isSuccess, message }
 	}
 
-	return data
+	return { isSuccess, data, message: 'Succesfully Get AllUserList' }
 }
 
 export const requestChangeFullName = async fullName => {
@@ -28,7 +28,7 @@ export const requestChangeFullName = async fullName => {
 		return { isSuccess, message }
 	}
 
-	return data
+	return { isSuccess, data, message: 'Succesfully Change Fullname' }
 }
 
 export const getUser = async userId => {
@@ -37,5 +37,5 @@ export const getUser = async userId => {
 		return { isSuccess, message }
 	}
 
-	return data
+	return { isSuccess, data, message: 'Succesfully Get User' }
 }
