@@ -13,10 +13,12 @@ import AddFormModal from 'pages/UpdateTimeDivider/components/AddFormModal'
 import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import CompleteFormModal from 'pages/UpdateTimeDivider/components/CompleteFormModal'
 import { BottomBar, Logo, Timer } from 'shared/components'
-import { BottomBarArea, Description, TimerArea, ToolBar, TopBar, Wrapper } from './style'
+
 import { useTimers, useUser } from 'shared/hooks'
 import { ToolBarButton } from './components/ToolBarButton'
 import ResetFormModal from './components/ResetFormModal'
+import styled from 'styled-components'
+import { themeColors } from '../../shared/constants/colors'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()
@@ -87,3 +89,62 @@ export default UpdateTimeDivider
 const timeToExpiryTime = time => {
 	return new Date(new Date().getTime() + time * 1000)
 }
+
+const Wrapper = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+
+	align-items: center;
+`
+const TimerArea = styled.div`
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 0.5rem;
+	padding-top: 1rem;
+	padding-left: 3.5rem;
+`
+const ToolBar = styled.div`
+	display: flex;
+	column-gap: 1rem;
+	justify-content: end;
+	width: 100%;
+	height: 3rem;
+	padding-right: 7rem;
+	padding-top: 10rem;
+	padding-bottom: 2rem;
+`
+const Description = styled.div`
+	display: flex;
+	width: 90%;
+	align-items: start;
+	color: ${themeColors.fontDescription};
+	font-size: 1.3rem;
+	padding-left: 4rem;
+	margin-bottom: 1rem;
+`
+const BottomBarArea = styled.div`
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+`
+const TopBar = styled.div`
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding-top: 2rem;
+`
+const Title = styled.div`
+	display: flex;
+	padding-left: 7rem;
+	flex: 1;
+`
+const AvatarWrapper = styled.div`
+	margin-left: 1rem;
+`
