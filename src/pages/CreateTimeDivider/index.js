@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { useSetRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
-
-import * as S from './style'
-import { TitleWrapper } from './style'
-
-import Button from 'shared/components/Button'
-import NavBar from 'shared/components/NavBar'
-import TaskBox from 'shared/components/TaskBox'
-import Text from 'shared/components/Text'
-import TimeSelectForm from 'shared/components/TimeSelectForm'
-
+import { Button, NavBar, TaskBox, Text, TimeSelectForm } from 'shared/components'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { timerObject, timerState } from 'state/timer'
 import { themeColors } from 'shared/constants/colors'
 
-import useCreatingTimers from 'shared/hooks/useCreatingTimers'
+import { useCreatingTimers } from 'shared/hooks'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '완료',
@@ -84,15 +76,15 @@ const CreateTimeDivider = () => {
 	return (
 		<>
 			<NavBar backIcon />
-			<S.SubTitle>
+			<SubTitle>
 				<Text size={2.2} textAlign={'start'}>
 					오늘 해야할 일들에
 				</Text>
 				<Text size={2.2} textAlign={'start'}>
 					시간을 분배하세요.
 				</Text>
-			</S.SubTitle>
-			<S.TimeSection>
+			</SubTitle>
+			<TimeSection>
 				<TitleWrapper>
 					<Text size={2.0} color={themeColors.primary}>
 						남은 분배 가능 시간
@@ -103,9 +95,9 @@ const CreateTimeDivider = () => {
 					{convertSecondsToHourMinute(totalTime).hour} :{' '}
 					{convertSecondsToHourMinute(totalTime).minute}
 				</Text>
-			</S.TimeSection>
-			<S.TaskArea>
-				<S.BoxContainer>
+			</TimeSection>
+			<TaskArea>
+				<BoxContainer>
 					{tasks.map(task => (
 						<TaskBox
 							key={task.id}
@@ -115,23 +107,91 @@ const CreateTimeDivider = () => {
 							}}
 						/>
 					))}
-				</S.BoxContainer>
-			</S.TaskArea>
-			<S.FormSection>
+				</BoxContainer>
+			</TaskArea>
+			<FormSection>
 				{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
 				{isTimeOver && (
 					<Text color="red" size={1.4}>
 						남은 시간이 부족합니다.
 					</Text>
 				)}
-			</S.FormSection>
-			<S.ButtonArea>
+			</FormSection>
+			<ButtonArea>
 				<Link to="/updateTimeDivider">
 					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
 				</Link>
-			</S.ButtonArea>
+			</ButtonArea>
 		</>
 	)
 }
+
+export const ButtonArea = styled.div`
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	margin: 2rem 2rem;
+	width: 100%;
+	bottom: 1rem;
+`
+
+export const BoxContainer = styled.div`
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: center;
+`
+
+export const SubTitle = styled.span`
+	position: relative;
+	left: -2.5rem;
+	display: flex;
+	flex-direction: column;
+
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
+`
+
+export const TimeSection = styled.section`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 24.5rem;
+	line-height: 3.2rem;
+	text-align: center;
+	margin-top: 2.4rem;
+	margin-bottom: 2.4rem;
+`
+
+export const FormSection = styled.section`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 26rem;
+	line-height: 3.2rem;
+	text-align: center;
+	margin-top: 4.8rem;
+	margin-bottom: 2.4rem;
+`
+
+export const TaskArea = styled.div`
+	position: relative;
+	width: 100%;
+	height: 20rem;
+	overflow-y: scroll;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	padding: 1rem;
+	box-sizing: border-box;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+`
+export const TitleWrapper = styled.div`
+	margin-bottom: 1rem;
+`
 
 export default CreateTimeDivider

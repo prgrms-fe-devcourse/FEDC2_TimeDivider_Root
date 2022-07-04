@@ -16,7 +16,7 @@ const useDetailPost = postId => {
 	const getDetailPost = async () => {
 		setIsLoading(true)
 
-		const data = await apis.getPostDetail(postId)
+		const { data } = await apis.getPostDetail(postId)
 		const { timers } = parsePostData(data.title)
 		const like = data.likes.find(like => like.user === user._id)
 		const likeId = like ? like._id : null
