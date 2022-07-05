@@ -1,15 +1,15 @@
+import React from 'react'
 import { themeColors } from 'shared/constants/colors'
 import styled from 'styled-components'
-import useForm from 'shared/hooks/useForm'
-import Button from 'shared/components/Button'
-import Text from 'shared/components/Text'
+import { useForm } from 'shared/hooks'
+import { Button, Text } from 'shared/components'
 
 const LoginForm = ({ onSubmit }) => {
 	const initialValues = {
 		email: '',
 		password: '',
 	}
-	const { errors, isLoading, handleChange, handleSubmit } = useForm({
+	const { isLoading, handleChange, handleSubmit } = useForm({
 		initialValues,
 		onSubmit,
 		validate: ({ email, password }) => {
@@ -32,7 +32,6 @@ const LoginForm = ({ onSubmit }) => {
 					autoComplete={'off'}
 					required={true}
 				/>
-				{/*{errors.email && <Text color="red">{errors.email}</Text>}*/}
 				<Input
 					type="password"
 					name="password"
@@ -40,7 +39,6 @@ const LoginForm = ({ onSubmit }) => {
 					onChange={handleChange}
 					required={true}
 				/>
-				{/*{errors.password && <Text color="red">{errors.password}</Text>}*/}
 				<Button type="submit" disabled={isLoading}>
 					로그인
 				</Button>
