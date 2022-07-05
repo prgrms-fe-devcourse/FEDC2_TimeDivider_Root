@@ -2,11 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import NavBar from 'shared/components/NavBar'
-import Button from 'shared/components/Button'
-import SubTitle from 'shared/components/SubTitle'
+import { NavBar, Button, SubTitle } from 'shared/components'
 import TimeSelectForm from './components/TimeSelecForm'
-import useCreatingTimers from 'shared/hooks/useCreatingTimers'
+import { useCreatingTimers } from 'shared/hooks'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',

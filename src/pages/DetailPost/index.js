@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { CommentForm, CommentList, NavBar, PostCard, Avatar } from 'shared/components'
 import { useDetailPost } from 'shared/hooks'
-import loadingImage from '../../shared/images/loading.gif'
+import loadingImage from 'shared/images/loading.gif'
 
 const DetailPost = () => {
 	const { postId } = useParams()

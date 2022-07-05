@@ -1,9 +1,7 @@
+import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-
-import Button from 'shared/components/Button'
-import Text from 'shared/components/Text'
-import Logo from '../../shared/components/Logo'
+import { Button, Text, Logo } from 'shared/components'
 
 const Home = () => {
 	return (

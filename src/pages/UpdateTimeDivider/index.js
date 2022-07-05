@@ -18,7 +18,7 @@ import { useTimers, useUser } from 'shared/hooks'
 import { ToolBarButton } from './components/ToolBarButton'
 import ResetFormModal from './components/ResetFormModal'
 import styled from 'styled-components'
-import { themeColors } from '../../shared/constants/colors'
+import { themeColors } from 'shared/constants/colors'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()

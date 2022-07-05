@@ -1,8 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import Select from 'shared/components/Select'
-import Text from 'shared/components/Text'
+import { Select, Text } from 'shared/components'
 
 export const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
 	return { label: `${i}`, value: i }

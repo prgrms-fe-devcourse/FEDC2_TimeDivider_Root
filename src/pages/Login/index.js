@@ -1,15 +1,10 @@
+import React from 'react'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { themeColors } from 'shared/constants/colors'
-import Text from 'shared/components/Text'
-import NavBar from 'shared/components/NavBar'
-import Button from 'shared/components/Button'
-import Logo from 'shared/components/Logo'
-import LoginForm from './components/LoginForm'
-import Divider from './components/Divider'
+import { Button, Text, NavBar, Logo } from 'shared/components'
+import { Divider, LoginForm } from './components'
 import { colors } from 'shared/constants/colors'
-
 import { useUser } from 'shared/hooks/useUser'
 
 const Login = () => {

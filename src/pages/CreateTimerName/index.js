@@ -1,14 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
-import NavBar from 'shared/components/NavBar'
-import Button from 'shared/components/Button'
-import Input from 'shared/components/Input'
-import Badge from 'shared/components/Badge'
-import SubTitle from 'shared/components/SubTitle'
-import useCreatingTimers from 'shared/hooks/useCreatingTimers'
+import styled from 'styled-components'
+import { Badge, Button, NavBar, SubTitle, Input } from 'shared/components'
+import { useCreatingTimers } from 'shared/hooks'
 import useNameTags from './hooks/useNameTag'
 
 const BUTTON_TEXT = Object.freeze({

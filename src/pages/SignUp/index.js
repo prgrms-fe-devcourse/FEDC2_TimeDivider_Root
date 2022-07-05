@@ -1,10 +1,10 @@
-import SignUpForm from './components/SignUpForm'
-import Logo from 'shared/components/Logo'
-import { useNavigate } from 'react-router-dom'
-import { useUser } from 'shared/hooks/useUser'
-
-import NavBar from 'shared/components/NavBar'
+import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+
+import { NavBar, Logo } from 'shared/components'
+import SignUpForm from './components/SignUpForm'
+import { useUser } from 'shared/hooks'
 
 const SignUp = () => {
 	const { signup } = useUser()
