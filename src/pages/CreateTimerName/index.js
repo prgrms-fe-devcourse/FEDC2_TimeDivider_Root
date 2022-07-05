@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react'
-import { Link } from 'react-router-dom'
-
 import styled from 'styled-components'
-import { Badge, Button, NavBar, SubTitle, Input } from 'shared/components'
+import { Badge, Button, Input } from 'shared/components'
 import { useCreatingTimers } from 'shared/hooks'
 import useNameTags from './hooks/useNameTag'
+import CreateTimerLayout from 'shared/layout/CreatingTimerLayout'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '계속 진행하기',
@@ -16,15 +15,19 @@ const CreateTimerNames = () => {
 	const { nameTag, setNameTag, removeNameTag, handleNameTagSubmit } = useNameTags()
 
 	const isValidNames = useMemo(() => timerNames.length > 0, [timerNames])
+	const buttonText = useMemo(
+		() => (isValidNames ? BUTTON_TEXT.VALID : BUTTON_TEXT.INVALID),
+		[isValidNames],
+	)
 
 	return (
-		<Wrapper>
-			<NavBar backIcon />
-
-			<SubTitle description={'클릭하여 삭제할 수 있습니다.'}>
-				오늘 해야할 일들은 무엇이 있나요?
-			</SubTitle>
-
+		<CreateTimerLayout
+			subTitleText="오늘 해야할 일들은 무엇이 있나요?"
+			description="클릭하여 삭제할 수 있습니다."
+			nextStepLink="/createTimeDivider"
+			disabled={!isValidNames}
+			buttonText={buttonText}
+		>
 			<Section>
 				<TaskAreaWrapper>
 					<TaskArea>
@@ -49,28 +52,11 @@ const CreateTimerNames = () => {
 					</Button>
 				</Form>
 			</Section>
-
-			<ButtonArea>
-				<Link to="/createTimeDivider">
-					<Button disabled={!isValidNames}>
-						{!isValidNames ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
-					</Button>
-				</Link>
-			</ButtonArea>
-		</Wrapper>
+		</CreateTimerLayout>
 	)
 }
 
 export default CreateTimerNames
-
-export const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	align-items: center;
-	padding-bottom: 3.3rem;
-`
 
 export const TaskArea = styled.div`
 	position: relative;
@@ -80,15 +66,6 @@ export const TaskArea = styled.div`
 	flex-wrap: wrap;
 	align-items: flex-start;
 	margin-bottom: 2rem;
-`
-
-export const ButtonArea = styled.div`
-	display: flex;
-	justify-content: center;
-	position: absolute;
-	margin: 2rem 2rem;
-	width: 100%;
-	bottom: 1rem;
 `
 
 export const Form = styled.form`
