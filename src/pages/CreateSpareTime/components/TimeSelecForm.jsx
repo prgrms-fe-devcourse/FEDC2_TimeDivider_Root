@@ -9,8 +9,8 @@ export const MINUTE_NUMBERS = Array.from({ length: 6 }, (_, i) => {
 	return { label: `${i * 10}`, value: i * 10 }
 })
 
-const TimeSelectForm = ({ intialTime, handleChangeTime }) => {
-	const [time, setTime] = useState(intialTime)
+const TimeSelectForm = ({ initialTime, handleChangeTime }) => {
+	const [time, setTime] = useState(initialTime)
 
 	const handleChange = e => {
 		const { name, value } = e.target
