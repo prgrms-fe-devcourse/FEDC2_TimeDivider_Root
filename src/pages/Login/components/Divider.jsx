@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { colors } from '../../../shared/constants/colors' //css 추가
+import { colors } from 'shared/constants/colors' //css 추가
 
 const Divider = props => {
 	return <StyledDivider {...props} />

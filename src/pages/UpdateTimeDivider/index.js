@@ -14,7 +14,7 @@ import MergeFormModal from 'pages/UpdateTimeDivider/components/MergeFormModal'
 import CompleteFormModal from 'pages/UpdateTimeDivider/components/CompleteFormModal'
 import { BottomBar, Logo, Timer } from 'shared/components'
 
-import { useTimers, useUser } from 'shared/hooks'
+import { useTimers } from 'shared/hooks'
 import { ToolBarButton } from './components/ToolBarButton'
 import ResetFormModal from './components/ResetFormModal'
 import styled from 'styled-components'
@@ -22,7 +22,6 @@ import { themeColors } from 'shared/constants/colors'
 
 const UpdateTimeDivider = () => {
 	const { timers, toggleRunning } = useTimers()
-	const { user } = useUser()
 	const [mode, setMode] = useRecoilState(modeState)
 	const setOriginId = useSetRecoilState(originIdState)
 
@@ -139,12 +138,4 @@ const TopBar = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding-top: 2rem;
-`
-const Title = styled.div`
-	display: flex;
-	padding-left: 7rem;
-	flex: 1;
-`
-const AvatarWrapper = styled.div`
-	margin-left: 1rem;
 `
