@@ -1,10 +1,8 @@
-import useForm from 'shared/hooks/useForm'
-import Button from 'shared/components/Button'
-import Text from 'shared/components/Text'
-
 import styled from 'styled-components'
-import { themeColors } from '../../../shared/constants/colors'
-import { CardForm, Wrapper } from '../../Login/style'
+
+import { useForm } from 'shared/hooks'
+import { Button, Text } from 'shared/components'
+import { themeColors } from 'shared/constants/colors'
 
 const SignUpForm = ({ onSubmit }) => {
 	const initialValues = {
@@ -40,7 +38,6 @@ const SignUpForm = ({ onSubmit }) => {
 					onChange={handleChange}
 					required={true}
 				/>
-				{/*{errors.email && <Text color="red">{errors.email}</Text>}*/}
 				<Input
 					type="text"
 					name="fullName"
@@ -48,7 +45,6 @@ const SignUpForm = ({ onSubmit }) => {
 					onChange={handleChange}
 					required={true}
 				/>
-				{/*{errors.fullName && <Text color="red">{errors.fullName}</Text>}*/}
 				<Input
 					type="password"
 					name="password"
@@ -56,7 +52,6 @@ const SignUpForm = ({ onSubmit }) => {
 					onChange={handleChange}
 					required={true}
 				/>
-				{/*{errors.password && <Text color="red">{errors.password}</Text>}*/}
 				<Input
 					type="password"
 					name="passwordConfirm"
@@ -82,6 +77,16 @@ const SignUpForm = ({ onSubmit }) => {
 
 export default SignUpForm
 
+export const ButtonWrapper = styled.div`
+	margin-top: 2.2rem;
+`
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+`
+
 export const Input = styled.input`
 	box-sizing: border-box;
 	width: 33.3rem;
@@ -95,6 +100,14 @@ export const Input = styled.input`
 	border-radius: 1.1rem;
 	background-color: ${themeColors.labelBackground};
 `
-export const ButtonWrapper = styled.div`
-	margin-top: 2.2rem;
+export const CardForm = styled.form`
+	padding: 1.5rem;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	row-gap: 1rem;
+	align-items: center;
+	margin-top: 2rem;
 `

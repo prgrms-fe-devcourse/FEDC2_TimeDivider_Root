@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { themeColors } from 'shared/constants/colors'
 import Text from 'shared/components/Text'
 import NavBar from 'shared/components/NavBar'
 import Button from 'shared/components/Button'
@@ -75,4 +76,29 @@ const ButtonArea = styled.div`
 	flex-direction: column;
 	gap: 2rem;
 	align-items: center;
+`
+
+export const Input = styled.input`
+	box-sizing: border-box;
+	width: 33.3rem;
+	height: 5rem;
+	padding: 1.5rem;
+	margin: 0;
+	border: none;
+	outline: none;
+	align-items: center;
+	font-size: 1.5rem;
+	border-radius: 1.1rem;
+	background-color: ${themeColors.labelBackground};
+`
+export const CardForm = styled.form`
+	padding: 1.5rem;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	row-gap: 1rem;
+	align-items: center;
+	margin-top: 2rem;
 `
