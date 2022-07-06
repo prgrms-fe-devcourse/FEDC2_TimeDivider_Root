@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { Badge, Button, Input } from 'shared/components'
 import { useCreatingTimers } from 'shared/hooks'
 import useNameTags from './hooks/useNameTag'
 import CreateTimerLayout from 'shared/layout/CreatingTimerLayout'
+import { TimerNames, TimerNamesForm } from './components'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '계속 진행하기',
@@ -28,60 +28,25 @@ const CreateTimerNames = () => {
 			disabled={!isValidNames}
 			buttonText={buttonText}
 		>
-			<Section>
-				<TaskAreaWrapper>
-					<TaskArea>
-						{timerNames.map(({ id, name }) => (
-							<Badge key={id} onClick={() => removeNameTag(id)}>
-								{name}
-							</Badge>
-						))}
-					</TaskArea>
-				</TaskAreaWrapper>
-
-				<Form onSubmit={handleNameTagSubmit}>
-					<Input
-						type="text"
-						value={nameTag}
-						onChange={e => setNameTag(e.target.value)}
-						autoFocus={true}
-						required
-					/>
-					<Button width={7.9} height={3.9} fontSize={1.6}>
-						추가
-					</Button>
-				</Form>
-			</Section>
+			<Wrapper>
+				<TimerNames items={timerNames} remove={removeNameTag} />
+				<TimerNamesForm
+					onSubmit={handleNameTagSubmit}
+					value={nameTag}
+					onChange={setNameTag}
+				></TimerNamesForm>
+			</Wrapper>
 		</CreateTimerLayout>
 	)
 }
 
 export default CreateTimerNames
 
-export const TaskArea = styled.div`
-	position: relative;
-	width: 30rem;
-
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	margin-bottom: 2rem;
-`
-
-export const Form = styled.form`
-	display: flex;
-	gap: 2rem;
-`
-
-export const Section = styled.section`
+export const Wrapper = styled.section`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 	justify-content: space-between;
 	align-items: center;
 	justify-content: center;
-`
-export const TaskAreaWrapper = styled.div`
-	height: 20rem;
-	overflow-y: scroll;
 `
