@@ -189,19 +189,4 @@ export const Loading = styled.div`
 	flex: 1;
 `
 
-export const Description = styled.div`
-	width: 24.2rem;
-	height: 9rem;
-	text-align: center;
-	margin-top: 15.6rem;
-	margin-bottom: 13.6rem;
-`
-export const NotLoggedInWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	align-items: center;
-`
-
 export default ShareTask

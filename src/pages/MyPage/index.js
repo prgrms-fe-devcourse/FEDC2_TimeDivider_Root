@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
-import { colors, themeColors } from '../../shared/constants/colors'
-import Text from '../../shared/components/Text'
-
-import { Avatar, Button, BottomBar } from 'shared/components'
+import { colors, themeColors } from 'shared/constants/colors'
+import { Avatar, Button, BottomBar, Text } from 'shared/components'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUser } from '../../shared/hooks/useUser'
+import { useUser } from 'shared/hooks'
 import styled from 'styled-components'
 
 const MyPage = () => {

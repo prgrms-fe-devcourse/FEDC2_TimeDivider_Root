@@ -1,12 +1,10 @@
-import NavBar from '../../shared/components/NavBar'
-import { Profiles, Setting, Settings } from '../MyPage'
 import React, { useEffect, useState } from 'react'
-import { useUser } from '../../shared/hooks/useUser'
-import Avatar from '../../shared/components/Avatar'
-
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { colors, themeColors } from '../../shared/constants/colors'
+import { useNavigate } from 'react-router-dom'
+import { Avatar, NavBar } from 'shared/components'
+import { Profiles, Setting, Settings } from '../MyPage'
+import { useUser } from 'shared/hooks/useUser'
+import { colors, themeColors } from 'shared/constants/colors'
 
 const MyPageEdit = () => {
 	const { user, changeName, changeImage } = useUser()

@@ -1,8 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import Select from 'shared/components/Select'
-import Text from 'shared/components/Text'
+import { Select, Text } from 'shared/components'
 
 export const HOUR_NUMBERS = Array.from({ length: 24 }, (_, i) => {
 	return { label: `${i}`, value: i }
@@ -11,8 +9,8 @@ export const MINUTE_NUMBERS = Array.from({ length: 6 }, (_, i) => {
 	return { label: `${i * 10}`, value: i * 10 }
 })
 
-const TimeSelectForm = ({ intialTime, handleChangeTime }) => {
-	const [time, setTime] = useState(intialTime)
+const TimeSelectForm = ({ initialTime, handleChangeTime }) => {
+	const [time, setTime] = useState(initialTime)
 
 	const handleChange = e => {
 		const { name, value } = e.target

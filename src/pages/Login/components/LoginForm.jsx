@@ -1,15 +1,15 @@
-import useForm from 'shared/hooks/useForm'
-import Button from 'shared/components/Button'
-import Text from 'shared/components/Text'
-
-import * as S from '../style'
+import React from 'react'
+import { themeColors } from 'shared/constants/colors'
+import styled from 'styled-components'
+import { useForm } from 'shared/hooks'
+import { Button, Text } from 'shared/components'
 
 const LoginForm = ({ onSubmit }) => {
 	const initialValues = {
 		email: '',
 		password: '',
 	}
-	const { errors, isLoading, handleChange, handleSubmit } = useForm({
+	const { isLoading, handleChange, handleSubmit } = useForm({
 		initialValues,
 		onSubmit,
 		validate: ({ email, password }) => {
@@ -21,10 +21,10 @@ const LoginForm = ({ onSubmit }) => {
 	})
 
 	return (
-		<S.Wrapper>
+		<Wrapper>
 			<Text size={3}>로그인</Text>
-			<S.CardForm onSubmit={handleSubmit}>
-				<S.Input
+			<CardForm onSubmit={handleSubmit}>
+				<Input
 					type="email"
 					name="email"
 					placeholder="이메일 주소"
@@ -32,21 +32,51 @@ const LoginForm = ({ onSubmit }) => {
 					autoComplete={'off'}
 					required={true}
 				/>
-				{/*{errors.email && <Text color="red">{errors.email}</Text>}*/}
-				<S.Input
+				<Input
 					type="password"
 					name="password"
 					placeholder="비밀번호"
 					onChange={handleChange}
 					required={true}
 				/>
-				{/*{errors.password && <Text color="red">{errors.password}</Text>}*/}
 				<Button type="submit" disabled={isLoading}>
 					로그인
 				</Button>
-			</S.CardForm>
-		</S.Wrapper>
+			</CardForm>
+		</Wrapper>
 	)
 }
 
 export default LoginForm
+
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+`
+
+export const Input = styled.input`
+	box-sizing: border-box;
+	width: 33.3rem;
+	height: 5rem;
+	padding: 1.5rem;
+	margin: 0;
+	border: none;
+	outline: none;
+	align-items: center;
+	font-size: 1.5rem;
+	border-radius: 1.1rem;
+	background-color: ${themeColors.labelBackground};
+`
+export const CardForm = styled.form`
+	padding: 1.5rem;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	row-gap: 1rem;
+	align-items: center;
+	margin-top: 2rem;
+`

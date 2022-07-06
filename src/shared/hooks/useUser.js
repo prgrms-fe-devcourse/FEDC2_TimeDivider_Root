@@ -55,7 +55,7 @@ export const useUser = () => {
 	}
 
 	const signup = async (userInfo = { email: null, fullName: 'unknown', password: null }) => {
-		const { isSuccess, message, user, token, ...newLoginData } = await requestSignup(userInfo)
+		const { isSuccess, message, token } = await requestSignup(userInfo)
 		if (!isSuccess) {
 			return { isSuccess, message }
 		}

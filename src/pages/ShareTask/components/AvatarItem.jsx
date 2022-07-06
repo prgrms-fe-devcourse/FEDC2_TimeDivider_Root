@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Avatar from 'shared/components/Avatar'
+import { Avatar } from 'shared/components'
 
 const AvatarItem = ({ username, imageSrc, size = 5, ...props }) => {
 	return (

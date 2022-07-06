@@ -1,12 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useMemo } from 'react'
+import styled from 'styled-components'
 
-import * as S from './style'
-import NavBar from 'shared/components/NavBar'
-import Button from 'shared/components/Button'
-import SubTitle from 'shared/components/SubTitle'
-import TimeSelectForm from './components/TimeSelecForm'
-import useCreatingTimers from 'shared/hooks/useCreatingTimers'
+import TimeSelectForm from './components/TimeSelectForm'
+import { useCreatingTimers } from 'shared/hooks'
+import CreateTimerLayout from 'shared/layout/CreatingTimerLayout'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '다음 단계',
@@ -15,24 +12,27 @@ const BUTTON_TEXT = Object.freeze({
 
 const CreateSpareTime = () => {
 	const { spareTime, updateSpareTime, isValidSpareTime } = useCreatingTimers()
+	const buttonText = useMemo(
+		() => (isValidSpareTime ? BUTTON_TEXT.VALID : BUTTON_TEXT.INVALID),
+		[isValidSpareTime],
+	)
 
 	return (
-		<S.Wrapper>
-			<NavBar backIcon />
-			<SubTitle>오늘 사용할 수 있는 시간은 얼마인가요?</SubTitle>
-			<S.FormWrapper>
-				<TimeSelectForm intialTime={spareTime} handleChangeTime={updateSpareTime}></TimeSelectForm>
-			</S.FormWrapper>
-
-			<S.ButtonArea>
-				<Link to="/createTimerName" state={{ spareTime }}>
-					<Button disabled={!isValidSpareTime}>
-						{!isValidSpareTime ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
-					</Button>
-				</Link>
-			</S.ButtonArea>
-		</S.Wrapper>
+		<CreateTimerLayout
+			subTitleText="오늘 사용할 수 있는 시간은 얼마인가요?"
+			nextStepLink="/createTimerName"
+			disabled={!isValidSpareTime}
+			buttonText={buttonText}
+		>
+			<FormWrapper>
+				<TimeSelectForm initialTime={spareTime} handleChangeTime={updateSpareTime}></TimeSelectForm>
+			</FormWrapper>
+		</CreateTimerLayout>
 	)
 }
 
 export default CreateSpareTime
+
+export const FormWrapper = styled.div`
+	margin-top: 22rem;
+`

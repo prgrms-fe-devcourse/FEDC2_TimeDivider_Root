@@ -1,16 +1,9 @@
-import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
-
-import * as S from './style'
-import { TaskAreaWrapper } from './style'
-
-import NavBar from 'shared/components/NavBar'
-import Button from 'shared/components/Button'
-import Input from 'shared/components/Input'
-import Badge from 'shared/components/Badge'
-import SubTitle from 'shared/components/SubTitle'
-import useCreatingTimers from 'shared/hooks/useCreatingTimers'
+import React, { useMemo } from 'react'
+import styled from 'styled-components'
+import { useCreatingTimers } from 'shared/hooks'
 import useNameTags from './hooks/useNameTag'
+import CreateTimerLayout from 'shared/layout/CreatingTimerLayout'
+import { TimerNames, TimerNamesForm } from './components'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '계속 진행하기',
@@ -22,49 +15,38 @@ const CreateTimerNames = () => {
 	const { nameTag, setNameTag, removeNameTag, handleNameTagSubmit } = useNameTags()
 
 	const isValidNames = useMemo(() => timerNames.length > 0, [timerNames])
+	const buttonText = useMemo(
+		() => (isValidNames ? BUTTON_TEXT.VALID : BUTTON_TEXT.INVALID),
+		[isValidNames],
+	)
 
 	return (
-		<S.Wrapper>
-			<NavBar backIcon />
-
-			<SubTitle description={'클릭하여 삭제할 수 있습니다.'}>
-				오늘 해야할 일들은 무엇이 있나요?
-			</SubTitle>
-
-			<S.Section>
-				<TaskAreaWrapper>
-					<S.TaskArea>
-						{timerNames.map(({ id, name }) => (
-							<Badge key={id} onClick={() => removeNameTag(id)}>
-								{name}
-							</Badge>
-						))}
-					</S.TaskArea>
-				</TaskAreaWrapper>
-
-				<S.Form onSubmit={handleNameTagSubmit}>
-					<Input
-						type="text"
-						value={nameTag}
-						onChange={e => setNameTag(e.target.value)}
-						autoFocus={true}
-						required
-					/>
-					<Button width={7.9} height={3.9} fontSize={1.6}>
-						추가
-					</Button>
-				</S.Form>
-			</S.Section>
-
-			<S.ButtonArea>
-				<Link to="/createTimeDivider">
-					<Button disabled={!isValidNames}>
-						{!isValidNames ? BUTTON_TEXT.INVALID : BUTTON_TEXT.VALID}
-					</Button>
-				</Link>
-			</S.ButtonArea>
-		</S.Wrapper>
+		<CreateTimerLayout
+			subTitleText="오늘 해야할 일들은 무엇이 있나요?"
+			description="클릭하여 삭제할 수 있습니다."
+			nextStepLink="/createTimeDivider"
+			disabled={!isValidNames}
+			buttonText={buttonText}
+		>
+			<Wrapper>
+				<TimerNames items={timerNames} remove={removeNameTag} />
+				<TimerNamesForm
+					onSubmit={handleNameTagSubmit}
+					value={nameTag}
+					onChange={setNameTag}
+				></TimerNamesForm>
+			</Wrapper>
+		</CreateTimerLayout>
 	)
 }
 
 export default CreateTimerNames
+
+export const Wrapper = styled.section`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	justify-content: center;
+`
