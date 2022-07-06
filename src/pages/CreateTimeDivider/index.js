@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSetRecoilState } from 'recoil'
-import { Link } from 'react-router-dom'
-import { Button, NavBar, TaskBox, Text, TimeSelectForm } from 'shared/components'
+import { TaskBox, Text, TimeSelectForm } from 'shared/components'
 import { convertHourMinuteToSeconds, convertSecondsToHourMinute } from 'shared/utils/convertTime'
 import { timerObject, timerState } from 'state/timer'
 import { themeColors } from 'shared/constants/colors'
 
 import { useCreatingTimers } from 'shared/hooks'
+import CreatingTimerLayout from 'shared/layout/CreatingTimerLayout'
 
 const BUTTON_TEXT = Object.freeze({
 	VALID: '완료',
@@ -75,53 +75,47 @@ const CreateTimeDivider = () => {
 
 	return (
 		<>
-			<NavBar backIcon />
-			<SubTitle>
-				<Text size={2.2} textAlign={'start'}>
-					오늘 해야할 일들에
-				</Text>
-				<Text size={2.2} textAlign={'start'}>
-					시간을 분배하세요.
-				</Text>
-			</SubTitle>
-			<TimeSection>
-				<TitleWrapper>
-					<Text size={2.0} color={themeColors.primary}>
-						남은 분배 가능 시간
-					</Text>
-				</TitleWrapper>
+			<CreatingTimerLayout
+				subTitleText="오늘 해야할 일들에 시간을 분배하세요."
+				description
+				nextStepLink="/updateTimeDivider"
+				onButtonClick={handleNextPageClick}
+				buttonText={BUTTON_TEXT.VALID}
+			>
+				<TimeSection>
+					<TitleWrapper>
+						<Text size={2.0} color={themeColors.primary}>
+							남은 분배 가능 시간
+						</Text>
+					</TitleWrapper>
 
-				<Text size={3.5}>
-					{convertSecondsToHourMinute(totalTime).hour} :{' '}
-					{convertSecondsToHourMinute(totalTime).minute}
-				</Text>
-			</TimeSection>
-			<TaskArea>
-				<BoxContainer>
-					{tasks.map(task => (
-						<TaskBox
-							key={task.id}
-							task={task}
-							onClick={() => {
-								handleTaskBoxClick(task)
-							}}
-						/>
-					))}
-				</BoxContainer>
-			</TaskArea>
-			<FormSection>
-				{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
-				{isTimeOver && (
-					<Text color="red" size={1.4}>
-						남은 시간이 부족합니다.
+					<Text size={3.5}>
+						{convertSecondsToHourMinute(totalTime).hour} :{' '}
+						{convertSecondsToHourMinute(totalTime).minute}
 					</Text>
-				)}
-			</FormSection>
-			<ButtonArea>
-				<Link to="/updateTimeDivider">
-					<Button onClick={handleNextPageClick}>{BUTTON_TEXT.VALID}</Button>
-				</Link>
-			</ButtonArea>
+				</TimeSection>
+				<TaskArea>
+					<BoxContainer>
+						{tasks.map(task => (
+							<TaskBox
+								key={task.id}
+								task={task}
+								onClick={() => {
+									handleTaskBoxClick(task)
+								}}
+							/>
+						))}
+					</BoxContainer>
+				</TaskArea>
+				<FormSection>
+					{selectedTask && <TimeSelectForm targetTask={selectedTask} onSubmit={handleSubmit} />}
+					{isTimeOver && (
+						<Text color="red" size={1.4}>
+							남은 시간이 부족합니다.
+						</Text>
+					)}
+				</FormSection>
+			</CreatingTimerLayout>
 		</>
 	)
 }

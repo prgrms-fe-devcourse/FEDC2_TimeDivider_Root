@@ -10,6 +10,7 @@ const CreatingTimerLayout = ({
 	nextStepLink,
 	disabled,
 	buttonText,
+	onButtonClick,
 }) => {
 	return (
 		<Wrapper>
@@ -18,7 +19,9 @@ const CreatingTimerLayout = ({
 			{children}
 			<ButtonArea>
 				<Link to={nextStepLink}>
-					<Button disabled={disabled}>{buttonText}</Button>
+					<Button onClick={onButtonClick} disabled={disabled}>
+						{buttonText}
+					</Button>
 				</Link>
 			</ButtonArea>
 		</Wrapper>
